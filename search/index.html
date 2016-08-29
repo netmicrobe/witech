@@ -21,7 +21,8 @@ comments: false
       searchInput: document.getElementById('search-input'),
       resultsContainer: document.getElementById('results-container'),
       json: '{{site.url}}/search.json',
-      searchResultTemplate: '<li class="entry-title"><a href="{url}" title="{title}">{title}</a></li>'
+      searchResultTemplate: '<li class="entry-title"><a href="{url}" title="{title}">{title}</a></li>',
+      limit: 1000
     });
   }
 
