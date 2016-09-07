@@ -2,7 +2,6 @@
 layout: post
 title: "Testing Readability with a Bunch of Text"
 description: "A ton of text to test readability."
-tags: [sample post, readability, test, intro]
 categories: [blog_sample]
 ---
 

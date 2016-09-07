@@ -2,7 +2,6 @@
 layout: post
 title: Sample Post with Feature Image
 description: "Sample Post with Feature Image"
-tags: [sample post]
 categories: [blog_sample]
 image:
     feature: blog_sample/feature.jpg
