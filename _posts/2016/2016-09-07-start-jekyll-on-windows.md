@@ -100,6 +100,13 @@ bundle exec jekyll serve
 
 尖括号单个出现是，markdown 解释器还比较智能，能很好处理。
 
+#### 为url加链接
+
+\<url\> ，例如， \<http://www.google.com\>
+
+
+
+
 ### 为啥 textile 在windows上不支持
 
 使用 [*.textile](http://redcloth.org/textile) 需要 jekyll-textile-converter gem 在windows上安装有问题，还不知道为啥，为啥呢。。。。
