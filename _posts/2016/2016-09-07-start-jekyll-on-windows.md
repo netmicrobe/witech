@@ -91,6 +91,15 @@ bundle exec jekyll serve
 
 然后浏览器打开 localhost:4000 ，就看到在本地服务器的博客了
 
+
+### markdown
+
+#### 使用反斜杠 \ 转义
+
+文档中 \< \> 成对出现时，markdown 会解释为html的tag，所以需要写成 \\\< content-in-angle-brackets \\\>
+
+尖括号单个出现是，markdown 解释器还比较智能，能很好处理。
+
 ### 为啥 textile 在windows上不支持
 
 使用 [*.textile](http://redcloth.org/textile) 需要 jekyll-textile-converter gem 在windows上安装有问题，还不知道为啥，为啥呢。。。。
