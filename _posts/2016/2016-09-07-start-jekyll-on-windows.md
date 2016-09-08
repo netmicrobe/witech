@@ -9,10 +9,13 @@ tags: [cm, jekyll, githubs]
 
 下载后解压即可，后面将执行路径配置到 path 环境变量就好了。
 
+* *注意*
+  * 目前命令都在windows command line 下执行的，没试过 Cygwin 啊
+
 ### ruby 1.9.3 & Devkit
 
 <div markdown="0"><a href="http://pan.baidu.com/s/1dFn0TRr" class="btn btn-success">ruby 1.9.3</a></div>
-<div markdown="0"><a href="http://pan.baidu.com/s/1nu9oYMl" class="btn btn-success">Devkit_for_1.8.7_and_1.9.3</a></div>
+<div markdown="0"><a href="https://pan.baidu.com/s/1dE3zIpj" class="btn btn-success">Devkit_for_1.8.7_and_1.9.3</a></div>
 
 
 ### ruby 2.0.0 & Devkit
