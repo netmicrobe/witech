@@ -95,17 +95,137 @@ bundle exec jekyll serve
 然后浏览器打开 localhost:4000 ，就看到在本地服务器的博客了
 
 
+
+### Liquid Template Language
+
+#### 显示博客索引
+
+{% raw %}
+```
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+```
+{% endraw %}
+
+
+
+#### 博客摘要
+
+{% raw %}
+```
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
+```
+{% endraw %}
+
+* 这样生成的“摘要”前后会有 \<p\> 标签，要删除p标签的话：
+
+{% raw %}
+```
+{{ post.excerpt | remove: '<p>' | remove: '</p>' }}
+```
+{% endraw %}
+
+* 自己定义“摘要”分隔符
+
+默认“摘要”分隔符是 \<!\-- more \--\>
+
+在 post 头的yaml定义区，添加自定义的设置
+
+excerpt_separator: \<!\-- end-of-summary \--\>
+
+
+
+#### 语法高亮
+
+highlight language [linenos]
+
+写了 linenos 可以显示行号，也可以不写。
+
+{% raw %}
+```
+{% highlight ruby linenos%}
+def show
+  @widget = Widget(params[:id])
+  respond_to do |format|
+    format.html # show.html.erb
+    format.json { render json: @widget }
+  end
+end
+{% endhighlight %}
+```
+{% endraw %}
+
+
 ### markdown
 
+
 #### 使用反斜杠 \ 转义
+
+
+* 转义 html tags
 
 文档中 \< \> 成对出现时，markdown 会解释为html的tag，所以需要写成 \\\< content-in-angle-brackets \\\>
 
 尖括号单个出现是，markdown 解释器还比较智能，能很好处理。
 
+* 转义 \--
+
+默认 \-- 会被转换为 -- ，这会导致技术文档很郁闷啊，拷贝个命令，参数都错误。。。
+
+使用 \\\-- 转义，就会显示为 \--
+
+
+
 #### 为url加链接
 
-\<url\> ，例如， \<http://www.google.com\>
+\<url\> ，例如，
+
+```
+\<http://www.google.com\>
+```
+
+{% raw %}
+```
+... you can [get the PDF]({{ site.url }}/assets/mydoc.pdf) directly.
+```
+{% endraw %}
+
+
+
+#### 添加图片
+
+{% raw %}
+```
+![My helpful screenshot]({{ site.url }}/assets/screenshot.jpg)
+```
+{% endraw %}
+
+
+
+
+#### 链接到当前页面的某个位置
+
+1. 添加锚点
+  ```<a name="your-anchor"></a>```
+2. 添加链接，跳转到锚点
+  ```[link text](#your-anchor)```
+
+* 参考： <http://stackoverflow.com/a/7015050>
+
+
+
 
 
 
