@@ -5,5 +5,6 @@ categories: [cm, git]
 tags: [cm, git]
 ---
 
+```
 git commit --amend --reset-author
-
+```
