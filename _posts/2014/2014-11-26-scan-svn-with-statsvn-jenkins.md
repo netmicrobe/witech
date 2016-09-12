@@ -2,8 +2,8 @@
 layout: post
 title: 如何使用Statsvn和Jenkins定期扫描代码
 description: 
-categories: [cm, svn]
-tags: [cm, svn, QA, code-statistic]
+categories: [cm, subversion]
+tags: [cm, subversion, QA, code-statistic]
 ---
 
 ## Statsvn简介
