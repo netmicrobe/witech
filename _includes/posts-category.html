@@ -3,6 +3,8 @@
     <div class="panel-heading">
       <h4><span class="hidden-xs">{{ page.caption }}</span> <span class="pull-right"> {{ page.category | upcase }}</span></h4>
     </div>
+    
+    <!--
     <div class="panel-body">
       {% for post in site.categories[page.category] %}
           <div class="row news">
@@ -14,6 +16,20 @@
             </div>
           </div>
       {% endfor %}
-    </div>
+    </div-->
+    
+    <ul id='timeline'>
+      {% for post in site.categories[page.category] %}
+      <li class='work'>
+        <div class="relative">
+          <label class='timeline_label' title="{{ post.title }}"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></label>
+          <span class='timeline_date'>{{ post.date | date: "%b %-d, %Y" }}</span>
+          <span class='timeline_circle'></span>
+        </div>
+        <div class='timeline_content'>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
