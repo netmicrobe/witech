@@ -155,8 +155,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  github-pages (= 95)
-  json
+  github-pages
   kramdown
   octopress (~> 3.0.0.rc.12)
   rouge
