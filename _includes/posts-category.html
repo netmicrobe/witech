@@ -23,7 +23,7 @@
       <li class='work'>
         <div class="relative">
           <label class='timeline_label' title="{{ post.title }}"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></label>
-          <span class='timeline_date'>{{ post.date | date: "%b %-d, %Y" }}</span>
+          <span class='timeline_date'>{{ post.date | date: "%Y-%m-%d" }}</span>
           <span class='timeline_circle'></span>
         </div>
         <div class='timeline_content'>
