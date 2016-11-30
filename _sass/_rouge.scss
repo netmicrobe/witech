@@ -1,5 +1,6 @@
 .highlight {
 	margin-bottom: 1.5em;
+  overflow-x: auto;
 	@include font(12);
 	color: #d0d0d0;
 	border: 1px solid darken($body-color, 5);
@@ -9,10 +10,7 @@
 		position: relative;
 		margin: 0;
 		padding: 1em;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
+    white-space: pre;
     word-wrap: break-word;
 	}
 	.lineno { padding-right: 24px; color: #8f908a;}
