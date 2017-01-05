@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Gitlab 在 CentOS 安装
-categories: [cm, git]
+title: Gitlab 8 在 CentOS 安装
+categories: [cm, git, gitlab]
 tags: [cm, git, gitlab]
 ---
 
@@ -751,8 +751,24 @@ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
 
 默认管理员是 root 用户， 首次登陆设置密码。
 
+root 用户登录 》 右上角 Admin Area 图标 》 Overview
+
+例如，本次安装完成后，Overview 页面显示组件情况：
+
+```
+GitLab       8.9.11
+GitLab Shell 3.0.0
+GitLab API v3
+Git          2.9.0
+Ruby         2.1.10p492
+Rails        4.2.7.1
+PostgreSQL   9.3.15
+```
 
 
+#### Health Check
+
+root 用户登录 》 右上角 Admin Area 图标 》 Monitoring 》 Health Check
 
 
 
