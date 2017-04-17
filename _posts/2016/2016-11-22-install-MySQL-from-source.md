@@ -48,6 +48,49 @@ shell> bin/mysqld_safe --user=mysql &
 shell> cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 
+#### mysql 5.5.55 从源代码安装过程
+
+```
+
+# Preconfiguration setup
+shell> groupadd mysql
+shell> useradd -r -g mysql -s /bin/false mysql
+
+# Beginning of source-build specific instructions
+shell> tar zxvf mysql-VERSION.tar.gz
+shell> cd mysql-VERSION
+
+shell> cmake . -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_FEDERATED_STORAGE_ENGINE=1 \
+-DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DMYSQL_DATADIR=/opt/mysql-5.5.55/data/ \
+-DCMAKE_INSTALL_PREFIX=/opt/mysql-5.5.55 -DINSTALL_LAYOUT=STANDALONE -DENABLED_PROFILING=ON \
+-DMYSQL_MAINTAINER_MODE=OFF -DWITH_DEBUG=OFF \
+-DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DENABLED_LOCAL_INFILE=TRUE -DWITH_ZLIB=bundled \
+-DWITH_EXTRA_CHARSETS=all
+
+shell> make
+shell> make install
+
+# End of source-build specific instructions
+# Postinstallation setup
+shell> cd /opt/mysql-5.5.55
+shell> chown -R mysql .
+shell> chgrp -R mysql .
+shell> scripts/mysql_install_db --user=mysql
+shell> chown -R root .
+shell> chown -R mysql data
+
+# Next command is optional
+shell> cp support-files/my-medium.cnf /etc/my.cnf
+shell> bin/mysqld_safe --user=mysql &
+
+# Next command is optional
+shell> cp support-files/mysql.server /etc/init.d/mysql.server
+
+# use service
+shell> service mysql.server status 或 start 或 stop
+```
+
+
 ### 在 CentOS 6.8 上编辑的实际配置
 
 #### ./configure 在 centos 6.8 上执行的例子
@@ -64,6 +107,7 @@ CFLAGS="-O3" CXX=gcc CXXFLAGS="-O3 -felide-constructors \
        --with-plugins=csv,myisam,myisammrg,heap,innobase,archive,blackhole \
        --enable-local-infile --with-low-memory --without-geometry
 ```
+
 
 #### 安装后，无法启动
 
