@@ -3,7 +3,7 @@ layout: post
 title: LDAP 简述
 description: 
 categories: [cm, network, ldap]
-tags: [ldap, network]
+tags: [ldap, network, php]
 ---
 
 ### 名词
