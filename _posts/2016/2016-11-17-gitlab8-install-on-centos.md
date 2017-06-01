@@ -400,6 +400,9 @@ cd /home/git
 
 # Clone GitLab repository
 sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-ce.git -b 8-9-stable gitlab
+# 2017-04 9-1-stable 能用了
+# sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-ce.git -b 9-1-stable gitlab
+
 
 # Go to GitLab installation folder
 cd /home/git/gitlab
@@ -869,16 +872,469 @@ usermod -a -G git nginx
 chmod g+rx /home/git/
 ```
 
+## Gitlab 9.1.0
+
+### 修改 unicorn 端口
+
+默认 unicorn 端口是 8080，容易和其他app冲突
+
+* 修改方法
+
+/home/git/gitlab/config/unicorn.rb
+
+```
+listen "127.0.0.1:8080", :tcp_nopush => true
+改为
+listen "127.0.0.1:8888", :tcp_nopush => true
+```
+
+## 附录
+
+### LDAP 设置
+
+* 参见： [GitLab Community Edition Authentication and Authorization LDAP](https://docs.gitlab.com/ce/administration/auth/ldap.html)
+
+
+### 使用IP作为服务器地址，需要修改host配置
+
+* 修改 nginx 的 server_name 配置为IP值
+
+* 修改 config/gitlab.yml 中 host 为 IP值
+
+
+### 发送通知的邮箱设置
+
+默认已经安装mail服务器，可以向外发送邮件。
+
+config/gitlab.yml
+
+```
+email_from: example@example.com
+email_display_name: GitLab
+email_reply_to: noreply@example.com
+email_subject_suffix: ''
+```
+
+用户收到的邮件显示发件人为：Gitlab<example@example.com>
+
+
+#### 配置外部smtp服务
+
+* gitlab 9.1.0 , 8.x 试过，可用
+
+修改 config/gitlab.yml
+
+``` yml
+email_from: your_mail@126.com
+email_display_name: your_mail@126.com
+email_reply_to: your_mail@126.com
+```
+
+拷贝 config/intializers/smtp_settings.rb.sample 为 smtp_settings.rb 后修改
+
+``` ruby
+if Rails.env.production?
+  Rails.application.config.action_mailer.delivery_method = :smtp
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    address: "smtp.126.com",
+    port: 25,
+    user_name: "your_mail@126.com",
+    password: "your_mail_password",
+    domain: "126.com",
+    authentication: :login,
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
+  }
+end
+```
+
+配置完，root 用户登录 》 右上角 Admin Area 图标 》 Monitoring 》 Health Check
+看看有没错误。
+
+### 检查Gitlab状态
+
+```
+sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+
+sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+```
+
+### 使用 ssh 来 clone 代码库的时候，提示输入 git 用户的密码
+
+* 前提
+正确配置了 ssh 的公钥， 右上角用户图标 > settings > SSH Keys
+
+* 原因
+  * 服务器上sshd没配置好，或者，
+  * git 的 HOME 目录或者 .ssh 目录的读写权限没配置好
+  ```
+  chmod 700 /home/git/.ssh
+  chmod 600 /home/git/.ssh/authorized_keys
+  chmod go-w /home/git
+  ```
+
+
+
+### Gitlab Pages 配置
+
+
+#### 从源码安装 Gitlab Pages
+
+##### 安装&配置 Go
+
+Go-lang 安装好，$GOPATH 配置好
+
+例如
+
+```
+vim /etc/profile.d/custom.sh
+
+# 添加
+export PATH=$PATH:/usr/local/go/bin:/opt/go/bin
+export GOPATH=/opt/go
+```
+
+
+
+##### 下载&编译 Gitlab Pages 源码
+
+```
+# go get gitlab.com/gitlab-org/gitlab-pages
+# cd $GOPATH/src/gitlab.com/gitlab-org/gitlab-pages/
+
+# git checkout tag-your-want
+# git describe --tags --abbrev=0
+v0.4.2
+
+# git rev-parse --short HEAD
+dccd0f2
+
+# go build -o gitlab-pages --ldflags="-X main.VERSION=v0.4.2 -X main.REVISION=dccd0f2"
+
+# 编译完成，试一下
+# ./gitlab-pages -version
+```
+
+
+
+##### 安装 Gitlab Pages
+
+```
+cp $GOPATH/src/gitlab.com/gitlab-org/gitlab-pages/ /home/git
+chown -R git.git /home/git/gitlab-pages/
+```
+
+* 【注】 service gitlab start 启动时，会在 gitlab 的同一目录中找 gitlab-pages
+```
+/home/git/source/gitlab-ce/lib/support/init.d/gitlab
+  Line 46: gitlab_pages_dir=$(cd $app_root/../gitlab-pages 2> /dev/null && pwd)
+```
+
+
+##### 配置 Gitlab Pages 完成， 重启 Gitlab
+
+```
+$ service gitlab restart
+Shutting down GitLab Unicorn
+Shutting down GitLab Sidekiq
+Shutting down GitLab Workhorse
+Shutting down gitlab-pages
+.
+GitLab is not running.
+Starting GitLab Unicorn
+Starting GitLab Sidekiq
+Starting GitLab Workhorse
+Starting GitLab Pages
+.
+The GitLab Unicorn web server with pid 6414 is running.
+The GitLab Sidekiq job dispatcher with pid 6485 is running.
+The GitLab Workhorse with pid 6447 is running.
+The GitLab Pages with pid  is running.
+GitLab and all its components are up and running.
+```
+
+##### TODO... 虽然 Gitlab-pages 启动了，仍然无法访问到
+
+要将  /home/git/gitlab/lib/support/nginx/gitlab-pages 配置到 nginx
+
+用 nginx 反向代理到 gitlab-pages 这个 Go http 服务器。
+
+只是在局域网中使用，没有配置 domain，gitlab-pages 的 domain 逻辑反而成了麻烦，无法访问的项目页面。
+
+
+#### 使用 nginx 代替 Gitlab-pages
+
+在局域网中应为domain不熟悉，gitlab-pages 没配置起来。
+
+不讲究，就先用nginx代替了。
+
+##### 1） gitlab启动时，不再启动 gitlab-pages
+
+```
+# /etc/default/gitlab
+gitlab_pages_enabled=false
+```
+
+service gitlab start 启动的时候，就不会把 gitlab-pages deamon 运行起来了
+
+##### 2） 配置 nginx
+
+```
+## GitLab
+##
+
+## Pages serving host
+server {
+  listen 8091;
+  #listen 0.0.0.0:80;
+  #listen [::]:80 ipv6only=on;
+
+  ## Replace this with something like pages.gitlab.com
+  server_name 192.168.251.72;
+  #server_name ~^.*\.YOUR_GITLAB_PAGES\.DOMAIN$;
+
+  ## Individual nginx logs for GitLab pages
+  access_log  /var/log/nginx/gitlab_pages_access.log;
+  error_log   /var/log/nginx/gitlab_pages_error.log;
+
+  # WI: DO NOT USE gitlab-org/gitlab-pages , no idea about how to config this Go Server
+  #location / {
+  #  proxy_set_header    Host                $http_host;
+  #  proxy_set_header    X-Real-IP           $remote_addr;
+  #  proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+  #  proxy_set_header    X-Forwarded-Proto   $scheme;
+  #  # The same address as passed to GitLab Pages: `-listen-proxy`
+  #  proxy_pass          http://localhost:8090/;
+  #}
+
+  location / {
+    root /home/git/gitlab/shared/pages;
+    index  index.html index.htm;
+  }
+
+  # Define custom error pages
+  error_page 403 /403.html;
+  error_page 404 /404.html;
+}
+```
+
+##### 3） 配置 gitlab
+
+/home/git/gitlab/config/gitlab.yml
+
+```yml
+  ## GitLab Pages
+  pages:
+    enabled: true
+    # The location where pages are stored (default: shared/pages).
+    # path: shared/pages
+
+    # The domain under which the pages are served:
+    # http://group.example.com/project
+    # or project path can be a group page: group.example.com
+    host: 192.168.1.101
+    port: 8091
+    #host: example.com
+    #port: 80 # Set to 443 if you serve the pages with HTTPS
+    https: false # Set to true if you serve the pages with HTTPS
+
+```
+
+##### 4） 修改 gitlab 代码
+
+* app/models/project.rb
+```ruby
+  def pages_url
+    subdomain, _, url_path = full_path.partition('/')
+
+    # 直接返回nginx上配置的地址，<githost>/<group>/<project>/pages 页面上显示如下地址
+    return "#{Gitlab.config.pages.url}/#{subdomain}/#{url_path}/public/"
+    
+    ...
+  end
+```
+
+
+##### 5） 重启 gitlab
+
+```shell
+service gitlab restart
+```
 
 
 
 
 
 
+### Gitlab Runner
+
+* [gitlab-runner project](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner)
+* [Install GitLab Runner using the official GitLab repositories](https://docs.gitlab.com/runner/install/linux-repository.html)
+* [GitLab Runner](https://docs.gitlab.com/runner/)
+* [GitLab Runner Commands](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/commands/README.md)
+* <http://blog.csdn.net/lusyoe/article/details/52714121>
+
+要使用 Gitlab-ci ，必须安装 Gitlab Runner
 
 
 
 
+#### 从源码安装 Gitlab-Runner
+
+##### 安装&配置 Go
+
+Go-lang 安装好，$GOPATH 配置好
+
+例如
+
+```
+vim /etc/profile.d/custom.sh
+
+# 添加
+export PATH=$PATH:/usr/local/go/bin:/opt/go/bin
+export GOPATH=/opt/go
+```
+
+
+
+
+##### 下载 Gitlab-Runner 源码
+
+```
+go get gitlab.com/gitlab-org/gitlab-ci-multi-runner
+cd $GOPATH/src/gitlab.com/gitlab-org/gitlab-ci-multi-runner/
+
+# 使用 gitlab-ci 的 9-1-stable 来配合 Gitlab 的 9-1-stable
+git checkout 9-1-stable
+```
+
+
+
+##### 编译&安装 Gitlab-Runner
+
+```
+make deps
+make install
+```
+
+  * 注：make 过程中可能要下载 https://gitlab-ci-multi-runner-downloads.s3.amazonaws.com/master/docker/prebuilt-x86_64.tar.xz ，可能要翻墙
+
+
+
+
+##### 前台方式启动 gitlab-runner
+
+```
+gitlab-ci-multi-runner run
+```
+
+
+
+
+
+#### Gitlab-Runner 安装为后台 service
+
+参考： <https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/commands/README.md#service-related-commands>
+
+```shell
+gitlab-ci-multi-runner install --user=root --working-directory=/home/git
+```
+
+效果：
+1. 生成 /etc/rc.d/init.d/gitlab-runner ，可以使用 service gitlab-runner start/stop/restart/status
+2. 设置为系统启动就运行，可以用  chkconfig --list gitlab-runner  看看
+3. 在 Gitlab 网站 运行 pipeline，会在 /home/git/builds 目录中checkout代码并编译，类似 jenkins 的 jobs 目录。
+
+
+* 【注】： 如果要调整配置，或者 install 错了，可以执行 gitlab-ci-multi-runner uninstall 来删除service
+
+
+
+
+
+#### 在 Gitlab 中使用 Gitlab-runner shared runner
+
+
+##### 创建 runner 实例
+
+参照如下例子，配置信息创建后保存在 /etc/gitlab-runner/config.toml 【root 用户 run】 或者， $HOME/.gitlab-runner/config.toml 【非 root 用户 run】
+
+```shell
+shell> gitlab-ci-multi-runner register
+
+WARNING: Running in user-mode.
+WARNING: The user-mode requires you to manually start builds processing:
+WARNING: $ gitlab-runner run
+WARNING: Use sudo for system-mode:
+WARNING: $ sudo gitlab-runner...
+
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+http://192.168.1.101:9088
+
+Please enter the gitlab-ci token for this runner:
+6WtTi51kQ1ExP4y-JB80d   # 在 Gitlab admin area > Overview > Runners > Registration token
+
+Please enter the gitlab-ci description for this runner:
+[127.0.0.1]: shared-runner
+
+Please enter the gitlab-ci tags for this runner (comma separated):
+shared
+
+Whether to run untagged builds [true/false]:
+[false]: true
+
+Whether to lock Runner to current project [true/false]:
+[false]:
+Registering runner... succeeded                     runner=6WtTi51k
+
+Please enter the executor: docker, docker-ssh, shell, ssh, docker+machine, parallels, virtualbox, docker-ssh+machine, kubernetes:
+shell
+
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+
+```
+
+* 另外一个例子
+
+```shell
+Running in system-mode.
+
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/ci):
+http://192.168.1.2/ci   // 在这里输入gitlab安装的服务器ip/ci 即可
+Please enter the gitlab-ci token for this runner:
+eaYyokc57xxZbzAsoshT    // 这里的token可通过Gitlab上的项目Runners选项查看，在下面贴一张截图
+Please enter the gitlab-ci description for this runner:
+[E5]: spring-demo       // 这里填写一个描述信息，不太重要，看着填吧
+Please enter the gitlab-ci tags for this runner (comma separated):
+demo                    // 在这里填写tag信息，多个tag可通过逗号,分割。
+Registering runner... succeeded                     runner=eaYyokc5
+Please enter the executor: docker, docker-ssh, parallels, shell, ssh, virtualbox, docker+machine, docker-ssh+machine:
+shell                   // 在这里需要输入runner的执行方式，因为我的Gitlab和runner是安装在同一台服务器上的，直接输入shell
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+// 出现这样信息表示服务端的配置就已经成功结束了，如果需要使用到自动构建，还需要再添加一个配置文件，下面说说这个。
+```
+
+
+
+##### 启动 runner 服务
+
+```
+gitlab-ci-multi-runner run
+```
+
+
+
+##### 在项目中创建 .gitlab-ci.yml
+
+项目首页 > Project > CI configuration
+
+
+
+##### 手动执行 CI
+
+项目首页 > Pipelines
 
 
 
