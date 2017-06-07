@@ -12,6 +12,8 @@ tags: [cm, git, gitlab]
     * [gitlab-recipes install on centos](https://gitlab.com/gitlab-org/gitlab-recipes/tree/master/install/centos)
     * [gitlab-recipes install on centos - github](https://github.com/gitlabhq/gitlab-recipes/tree/master/install/centos)
     * [Installation from source](https://docs.gitlab.com/ce/install/installation.html)
+  * [GitLab Community Edition Official Documents](https://docs.gitlab.com/ce/README.html)
+  * [GitLab Community Edition - Workflow](https://docs.gitlab.com/ce/workflow/README.html)
 
 * 注意
   * 无特别说明，文档中的命令都以 root 执行
@@ -892,7 +894,117 @@ listen "127.0.0.1:8888", :tcp_nopush => true
 
 ### LDAP 设置
 
-* 参见： [GitLab Community Edition Authentication and Authorization LDAP](https://docs.gitlab.com/ce/administration/auth/ldap.html)
+* 参见： 
+  * [GitLab Community Edition Authentication and Authorization LDAP](https://docs.gitlab.com/ce/administration/auth/ldap.html)
+  * [How to debug Gitlab LDAP authentication?](https://stackoverflow.com/questions/18984198/how-to-debug-gitlab-ldap-authentication)
+  * [Debugging LDAP ](https://about.gitlab.com/handbook/support/workflows/ldap/debugging_ldap.html)
+  * [Gitlab-EE-Admin-LDAP ](https://docs.gitlab.com/ee/administration/auth/ldap.html)
+  * [Gitlab Active Directory LDAP Authentication](https://raymii.org/s/tutorials/Gitlab_and_Active_Directory_LDAP_Authentication.html)
+  * [gitlab&fengoffice的ldap配置](http://www.cnblogs.com/silenceli/p/3459234.html)
+
+1. 在 config/gitlab.yml 中配置 ldap 部分
+2. 重启 Gitlab
+
+#### gitlab.yml 中 openldap 配置示例
+
+```yml
+  ## LDAP settings
+  # You can inspect a sample of the LDAP users with login access by running:
+  #   bundle exec rake gitlab:ldap:check RAILS_ENV=production
+  ldap:
+    enabled: true
+    servers:
+      ##########################################################################
+      #
+      # Since GitLab 7.4, LDAP servers get ID's (below the ID is 'main'). GitLab
+      # Enterprise Edition now supports connecting to multiple LDAP servers.
+      #
+      # If you are updating from the old (pre-7.4) syntax, you MUST give your
+      # old server the ID 'main'.
+      #
+      ##########################################################################
+      main: # 'main' is the GitLab 'provider ID' of this LDAP server
+        ## label
+        #
+        # A human-friendly name for your LDAP server. It is OK to change the label later,
+        # for instance if you find out it is too large to fit on the web page.
+        #
+        # Example: 'Paris' or 'Acme, Ltd.'
+        label: 'LDAP'
+
+        host: 'localhost'
+        port: 389
+        uid: 'uid'
+        #uid: 'sAMAccountName'
+        method: 'plain' # "tls" or "ssl" or "plain"
+        bind_dn: 'cn=Manager,dc=duzzle,dc=com'
+        password: 'your-pass'
+
+        # Set a timeout, in seconds, for LDAP queries. This helps avoid blocking
+        # a request if the LDAP server becomes unresponsive.
+        # A value of 0 means there is no timeout.
+        timeout: 10
+
+        # This setting specifies if LDAP server is Active Directory LDAP server.
+        # For non AD servers it skips the AD specific queries.
+        # If your LDAP server is not AD, set this to false.
+        active_directory: false
+
+        # If allow_username_or_email_login is enabled, GitLab will ignore everything
+        # after the first '@' in the LDAP username submitted by the user on login.
+        #
+        # Example:
+        # - the user enters 'jane.doe@example.com' and 'p@ssw0rd' as LDAP credentials;
+        # - GitLab queries the LDAP server with 'jane.doe' and 'p@ssw0rd'.
+        #
+        # If you are using "uid: 'userPrincipalName'" on ActiveDirectory you need to
+        # disable this setting, because the userPrincipalName contains an '@'.
+        allow_username_or_email_login: false
+
+        # To maintain tight control over the number of active users on your GitLab installation,
+        # enable this setting to keep new users blocked until they have been cleared by the admin
+        # (default: false).
+        block_auto_created_users: false
+
+        # Base where we can search for users
+        #
+        #   Ex. ou=People,dc=gitlab,dc=example
+        #
+        base: 'ou=people,dc=your-corp,dc=com'
+
+        # Filter LDAP users
+        #
+        #   Format: RFC 4515 http://tools.ietf.org/search/rfc4515
+        #   Ex. (employeeType=developer)
+        #
+        #   Note: GitLab does not support omniauth-ldap's custom filter syntax.
+        #
+        user_filter: 'objectClass=inetOrgPerson'
+
+        # LDAP attributes that GitLab will use to create an account for the LDAP user.
+        # The specified attribute can either be the attribute name as a string (e.g. 'mail'),
+        # or an array of attribute names to try in order (e.g. ['mail', 'email']).
+        # Note that the user's LDAP login will always be the attribute specified as `uid` above.
+        attributes:
+          # The username will be used in paths for the user's own projects
+          # (like `gitlab.example.com/username/project`) and when mentioning
+          # them in issues, merge request and comments (like `@username`).
+          # If the attribute specified for `username` contains an email address,
+          # the GitLab username will be the part of the email address before the '@'.
+          username: ['uid', 'userid', 'sAMAccountName']
+          email:    ['mail', 'email', 'userPrincipalName']
+
+          # If no full name could be found at the attribute specified for `name`,
+          # the full name is determined using the attributes specified for
+          # `first_name` and `last_name`.
+          name:       'cn'
+          first_name: 'givenName'
+          last_name:  'sn'
+
+```
+
+
+
 
 
 ### 使用IP作为服务器地址，需要修改host配置
@@ -979,6 +1091,12 @@ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
 
 ### Gitlab Pages 配置
 
+* 参考：
+  * [Gitlab Pages Project](https://gitlab.com/gitlab-org/gitlab-pages)
+  * <https://docs.gitlab.com/ce/administration/pages/>
+  * <https://docs.gitlab.com/ee/user/project/pages/>
+  * <https://docs.gitlab.com/ee/administration/pages/>
+  * <https://docs.gitlab.com/ee/user/project/pages/index.html>
 
 #### 从源码安装 Gitlab Pages
 
@@ -1335,6 +1453,71 @@ gitlab-ci-multi-runner run
 ##### 手动执行 CI
 
 项目首页 > Pipelines
+
+
+
+### Ghost User
+
+如果Gitlab 管理员删除掉一个用户，系统会创建一个幽灵用户（Ghost User）（如果之前没有），将所有被删用户的issue都只给Ghost 用户。
+
+该用户很牛，无法登陆，无法被root用户删除。
+
+幽灵用户的自述：
+
+```
+This is a "Ghost User", created to hold all issues authored by users that have since been deleted. This user cannot be removed.
+```
+
+
+### 关闭注册
+
+1. 访问 admin/application_settings
+2. Sign-up Restrictions > Sign-up Enable 勾掉
+3. Save
+
+* **注意** 关闭注册之后， 之前没登录过度ldap用户也是不能登入。
+
+
+
+### Gitlab 汉化
+
+参见 [GitLab 中文社区版 ](https://gitlab.com/larryli/gitlab/)
+
+
+
+
+### 关闭用户创建Group的权限
+
+* 参考：
+  * <https://docs.gitlab.com/ce/workflow/groups.html#allowing-only-admins-to-create-groups>
+  * <https://stackoverflow.com/a/38601118>
+
+Gitlab 默认所有用户都有创建 Group 的权限，关闭方法如下：
+
+修改 gitlab/config/gitlab.yml
+
+```yml
+gitlab:
+  default_can_create_group: false  # default: true
+```
+
+重启之后，再创建新用户，就不再有 CREATE GROUP 的权限了。
+
+<font color="red">但是，之前的老用户仍然有 CREATE GROUP 的权限。</font>
+
+#### 去除现有用户的 CREATE GROUP 的权限
+
+* 参考：
+  * <https://stackoverflow.com/a/33278917>
+
+1. Enter the Admin control panel
+2. Select 'Users'
+3. Select the user(s) in question and click 'Edit'
+4. Scroll down to 'Access' and un-tick 'Can Create Group'
+
+
+
+
 
 
 

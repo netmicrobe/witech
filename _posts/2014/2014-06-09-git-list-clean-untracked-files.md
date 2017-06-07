@@ -1,6 +1,6 @@
 ---
 layout: post
-title: git： list or clean untracked files
+title: git： list or clean untracked files，清理未入库的文件
 categories: [cm, git]
 tags: [cm, git]
 ---
