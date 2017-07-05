@@ -8,8 +8,8 @@ tags: [cm, mysql]
 * 参考
   * [Running Multiple MySQL Instances on One Machine](http://dev.mysql.com/doc/refman/5.7/en/multiple-servers.html)
   * [A Quick Guide to Using the MySQL Yum Repository](http://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/)
-  * [Installing MySQL from Source](https://dev.mysql.com/doc/refman/5.5/en/source-installation.html)
-  * [Installing MySQL from Source](http://dev.mysql.com/doc/refman/5.7/en/problems-with-mysql-sock.html)
+  * [Installing MySQL from Source - MySQL 5.5](https://dev.mysql.com/doc/refman/5.5/en/source-installation.html)
+  * [Installing MySQL from Source - MySQL 5.7](http://dev.mysql.com/doc/refman/5.7/en/problems-with-mysql-sock.html)
   * [with-plugins 编译参数说明](https://dev.mysql.com/doc/internals/en/storage-engine-options.html)
   * [Running Multiple MySQL Instances on CentOS 6 / RHEL 6](https://nacko.net/running-multiple-mysql-instances-on-centos-6-rhel-6/)
 
@@ -89,6 +89,66 @@ shell> cp support-files/mysql.server /etc/init.d/mysql.server
 # use service
 shell> service mysql.server status 或 start 或 stop
 ```
+
+
+#### mysql 5.7.18 从源代码安装过程
+
+* 这个例子使用的是带 boost 的版本， **mysql-boost-5.7.18.tar.gz**
+
+```shell
+# Preconfiguration setup
+shell> groupadd mysql
+shell> useradd -r -g mysql -s /bin/false mysql
+
+# Beginning of source-build specific instructions
+shell> tar zxvf mysql-VERSION.tar.gz
+shell> cd mysql-VERSION
+
+shell> cmake . -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_FEDERATED_STORAGE_ENGINE=1 \
+-DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DMYSQL_DATADIR=/opt/mysql/mysql-5.7.18/data/ \
+-DCMAKE_INSTALL_PREFIX=/opt/mysql/mysql-5.7.18 -DINSTALL_LAYOUT=STANDALONE -DENABLED_PROFILING=ON \
+-DMYSQL_MAINTAINER_MODE=OFF -DWITH_DEBUG=OFF \
+-DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DENABLED_LOCAL_INFILE=TRUE -DWITH_ZLIB=bundled \
+-DWITH_BOOST=boost/boost_1_59_0/ \
+-DWITH_EXTRA_CHARSETS=all
+
+shell> make
+shell> make install
+
+# End of source-build specific instructions
+# Postinstallation setup
+shell> cd /opt/mysql/mysql-5.7.18
+shell> chown -R mysql .
+shell> chgrp -R mysql .
+shell> vim /etc/my.cnf
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+shell> ./bin/mysql_install_db --defaults-file=/etc/my.cnf --user=mysql --basedir=/var/lib/mysql 
+
+shell> chown -R mysql data
+
+# Next command is optional
+shell> cp support-files/my-medium.cnf /etc/my.cnf
+shell> bin/mysqld_safe --user=mysql &
+
+# Next command is optional
+shell> cp support-files/mysql.server /etc/init.d/mysql.server
+
+# use service
+shell> service mysql.server status 或 start 或 stop
+```
+
+
 
 
 ### 在 CentOS 6.8 上编辑的实际配置

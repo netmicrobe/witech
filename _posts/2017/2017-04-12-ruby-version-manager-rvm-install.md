@@ -55,6 +55,11 @@ usermod -a -G rvm root redmine
 $ sed -i -e 's/ftp\.ruby-lang\.org\/pub\/ruby/ruby\.taobao\.org\/mirrors\/ruby/g' ~/.rvm/config/db
 ```
 
+### 国内的下载镜像
+
+  * <https://ruby.taobao.org/mirrors/ruby/>
+  * <http://cache.ruby-lang.org/pub/ruby/>   [Ruby China 镜像说明](https://ruby-china.org/wiki/ruby-mirror)
+
 
 
 ## 使用 RVM
