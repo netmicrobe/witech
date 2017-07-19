@@ -46,8 +46,15 @@ logger.fatal "Terminating application, raised unrecoverable error!!!"
 
 
 
+## 字符编码
 
-
+~~~ ruby
+String#force_encoding("utf-8")    # 强制编码 UTF-8
+String#encode("utf-8")            # 当前编码转换为 UTF-8
+String#unpack("C*")               # 将字符串转换为 无符号整数数组
+String#unpack("C*").map {|b| b.to_s(16)} # 展示为十六进制
+Array.pack("C*")                  # 将无符号整数数组 转换为 字符串
+~~~
 
 
 
