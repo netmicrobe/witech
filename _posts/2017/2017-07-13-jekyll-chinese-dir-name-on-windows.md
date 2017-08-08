@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 在Windows上，Jekyll 将中文文件夹名生成为乱码
+title: 在Windows上中文环境下使用Jekyll
 categories: [dev, jekyll]
-tags: [jekyll, illegible-character, windows, encoding]
+tags: [jekyll, illegible-character, windows, encoding, webrick]
 ---
 
 
@@ -92,28 +92,88 @@ webrick\httpservlet\filehandler.rb 的 prevent_directory_traversal 函数中
   ### ### wi-end @ 2017-07-17
 ~~~
 
-### 其他可能的原因&解决方法
 
-#### 原因
 
-对 **带中文的url** 字符编码有问题。
 
-ruby-2.1.7-x64-mingw32\lib\ruby\2.1.0\webrick\httpservlet\filehandler.rb FileHandler#set_filename 中 File.directory? 无法正确处理 utf8 的中文。
 
-#### 解决方法
+## build 时，报错： Invalid GBK character
 
-File.directory? 是 ruby 内建函数，不好修改。
+~~~
+jekyll 3.5.1 | Error:  Liquid error (line 77): Invalid GBK character "\xE2" on line 108
+~~~
 
-故修改 set_filename
+### scssfiy 时出问题，utf-8 的 scss 文件被误认为 GBK
+
+**原因**
+
+sass 处理 “@import” 时读取文件，使用 File.read 是该方法默认使用 Windows 中文环境的 GBK 编码。
+
+改不了内建的 File.read ，就只能改 Sass 了，例如：
+
+* \sass-3.5.1\lib\sass\importers\filesystem.rb
+* Sass::Importers::_find
 
 ~~~ ruby
-  path_info = req.path_info.scan(%r|/[^/]*|)
-  ### ### 
-  # wi @ 2017-07-14 : Add this 
-  # after get path_info array, re-encode path element in it
-  path_info.each {|p| p.force_encoding("utf-8").encode("gbk") } ### ###
-  ### ###
+module Sass
+  module Importers
+    class Filesystem
+      def _find(dir, name, options)
+        full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
+        return unless full_filename && File.readable?(full_filename)
+
+        # TODO: this preserves historical behavior, but it's possible
+        # :filename should be either normalized to the native format
+        # or consistently URI-format.
+        full_filename = full_filename.tr("\\", "/") if Sass::Util.windows?
+
+        options[:syntax] = syntax
+        options[:filename] = full_filename
+        options[:importer] = self
+        ### ### 
+        # wi 2017-07-26 : remove
+        #Sass::Engine.new(File.read(full_filename), options)
+        # wi 2017-07-26 : add
+        Sass::Engine.new(File.read(full_filename, :encoding => "utf-8"), options)
+        ### ###
+      end
+    end
+  end
+end
 ~~~
+
+
+
+## Windows 上报错 “Missing dependency: RedCloth”
+
+~~~ shell
+>bundle exec jekyll build
+Configuration file: D:/documentation-theme-jekyll/_config.yml
+            Source: D:/documentation-theme-jekyll
+       Destination: D:/documentation-theme-jekyll/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating...
+You are missing a library required for Textile. Please run:
+  $ [sudo] gem install RedCloth
+  Conversion error: Jekyll::Converters::Textile encountered an error while converting 'hello.textile':
+                    Missing dependency: RedCloth
+             ERROR: YOUR SITE COULD NOT BE BUILT:
+                    ------------------------------------
+                    Missing dependency: RedCloth
+~~~
+
+### 解决方法
+
+~~~
+> bundle list RedCloth
+D:\ruby-2.1.7-x64-mingw32\lib\ruby\gems\2.1.0\gems\RedCloth-4.3.2\ext
+
+> cd D:\ruby-2.1.7-x64-mingw32\lib\ruby\gems\2.1.0\gems\RedCloth-4.3.2\ext
+
+> mkdir 2.1
+
+> xcopy /E redcloth_scan\* 2.1\
+~~~
+
 
 
 
