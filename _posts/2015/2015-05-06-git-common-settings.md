@@ -13,16 +13,15 @@ tags: [cm, git]
 git config --global user.name your-name
 git config --global user.email your-email@some-site.com
 git config --global alias.l "log --decorate --oneline --graph"
+git config --global alias.ll "log --oneline --decorate --graph -10"
 git config --global alias.st status
 git config --global alias.d diff
 git config --global alias.co checkout
-git config --global alias.ll "log --oneline --decorate --graph -10"
 git config --global core.quotepath false
 git config --global core.autocrlf true
-git config --global core.ui true
+git config --global color.ui true
 git config --global core.editor /cygdrive/d/noinstall/notepad_plusplus_git/npp.sh
 git config --global core.filemode false
-git config --global color.ui true
 git config --global http.sslverify false
 git config --global http.postbuffer 524288000
 git config --global diff.tool winmerge
@@ -59,5 +58,18 @@ echo Launching WinMergeU.exe: $LEFT $RIGHT
 ## Linux 下，设置
 
 ```
+git config --global user.name your-name
+git config --global user.email your-email@some-site.com
+
+git config --global alias.l "log --decorate --oneline --graph"
+git config --global alias.ll "log --oneline --decorate --graph -10"
+git config --global alias.st status
+git config --global alias.d diff
+git config --global alias.co checkout
+
 git config --global core.autocrlf input
+git config --global color.ui true
+git config --global core.filemode false
+git config --global http.sslverify false
+git config --global http.postbuffer 524288000
 ```
