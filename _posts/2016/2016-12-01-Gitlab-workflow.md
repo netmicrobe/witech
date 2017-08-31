@@ -103,6 +103,29 @@ created labels for "discussion", "backend", "frontend", "working on", "staging",
 
 
 
+### Issue closing pattern
+
+* 参考：
+  * [Automatic issue closing](https://docs.gitlab.com/ce/user/project/issues/automatic_issue_closing.html)
+  * [Admin: Issue closing pattern](https://docs.gitlab.com/ce/administration/issue_closing_pattern.html)
+
+
+默认可以使用的关键字，在 commmit message 中使用，可自动关闭 issue
+
+* Close, Closes, Closed, Closing, close, closes, closed, closing
+* Fix, Fixes, Fixed, Fixing, fix, fixes, fixed, fixing
+* Resolve, Resolves, Resolved, Resolving, resolve, resolves, resolved, resolving
+
+例子：
+
+~~~
+Awesome commit message
+
+Fix #20, Fixes #21 and Closes group/otherproject#22.
+This commit is also related to #17 and fixes #18, #19
+and https://gitlab.example.com/group/otherproject/issues/23.
+~~~
+
 
 
 
