@@ -577,11 +577,16 @@ ul.social-buttons li a:active {
 	border-top-width: 5px;
 	box-sizing: border-box;
 
-	a {
+	a, a:visited {
 		vertical-align: middle;
 		display: table-cell;
 		height: $menu-height - 2;
+    color: $white;
 	}
+  
+  a:hover, a:active, a:focus {
+    color: $header-margin;
+  }
 }
 ///sections
 .logo{
