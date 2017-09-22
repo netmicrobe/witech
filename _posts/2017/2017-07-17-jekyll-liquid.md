@@ -8,6 +8,7 @@ tags: [jekyll, liquid]
 * 参考
   * <http://jekyllrb.com/docs/templates/>
   * <http://www.howtobuildsoftware.com/index.php/how-do/blKV/jekyll-jekyll-display-collection-by-category>
+  * <https://shopify.github.io/liquid/>
 
 
 ## 根据属性过滤 page
