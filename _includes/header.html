@@ -3,7 +3,7 @@
 
 <div class="header-menu header-menu-top">
     <ul class="header-item-container">
-      <li class="header-item-title header-toggle "><a href="#menu"><h2><i class="fa fa-bars"></i></h2></a></li>
+      <li class="header-item-title header-toggle "><a href="#menu"><i class="fa fa-bars"></i></a></li>
       <li class="header-item-title">
         <a href="{{site.url}}/">
           {% if site.logo %}
@@ -18,11 +18,8 @@
           {% assign class = 'active' %}
         {% endif %}
 
-        {% if menu.type == 'categories' %}
-          <li class="header-item {{class}}"><a href="{{site.url}}{{menu.url}}"><h3>{{ menu.title }}</h3></a>
-            
-          </li>
-        {% elsif menu.submenu %}
+
+        {% if menu.submenu %}
           <li class="header-item {{class}}"><a href="{{site.url}}{{menu.url}}"><h3>{{ menu.title }}</h3></a>
             <ul class="header-submenu">
               {% for sub in menu.submenu %}
@@ -32,13 +29,13 @@
           </li>
         {% else %}
             {% if menu.url contains 'http://' or menu.url contains 'https://' %}
-                <li class="header-item {{class}}"><a href="{{menu.url}}" target="_blank"><h3>{{ menu.title }}</h3></a></li>
+                <li class="header-item {{class}}"><a href="{{menu.url}}" target="_blank">{{ menu.title }}</a></li>
             {% else %}
-                <li class="header-item {{class}}"><a href="{{site.url}}{{menu.url}}"><h3>{{ menu.title }}</h3></a></li>
+                <li class="header-item {{class}}"><a href="{{site.baseurl}}{{menu.url}}">{{ menu.title }}</a></li>
             {% endif %}
         {% endif %}
       {% endfor %}
-      <li class="header-item"><a href="{{site.url}}/search"><h3><i class="fa fa-search"></i></h3></a></li>
+      <li class="header-item"><a href="{{site.url}}/search"><i class="fa fa-search"></i></a></li>
     </ul>
   </div>
 

@@ -578,9 +578,10 @@ ul.social-buttons li a:active {
 	box-sizing: border-box;
 
 	a, a:visited {
+    font-size: 1.5rem;
 		vertical-align: middle;
 		display: table-cell;
-		//height: $menu-height - 2;
+		height: $menu-height - 2;
     color: $white;
 	}
   
@@ -612,7 +613,7 @@ ul.social-buttons li a:active {
 	a.title {
 		font-size: 1.5rem;
 	    padding-left: 5px;
-		display: none;
+		//display: none;
 		vertical-align: middle;
 		height: $menu-height - 2;
 		@media #{$medium}{
