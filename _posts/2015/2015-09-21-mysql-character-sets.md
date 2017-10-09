@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Mysql 字符集相关
+title: Mysql 字符集（character set）相关
 categories: [cm, mysql]
-tags: [cm, mysql]
+tags: [cm, mysql, charset, character-set, collate, collation]
 ---
 
 ## 字符集

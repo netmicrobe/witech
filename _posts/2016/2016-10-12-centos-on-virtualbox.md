@@ -2,7 +2,7 @@
 layout: post
 title: 在 virtualbox 中使用 centos 6
 categories: [cm, vm, virtual-box]
-tags: [cm, virtual-box, centos, vm]
+tags: [cm, virtual-box, centos, vm, kernel, virtualize, network]
 ---
 
 
@@ -10,11 +10,59 @@ tags: [cm, virtual-box, centos, vm]
 
 ## 安装 增强功能
 
-###　安装步骤
+* 参考
+  * [VirtualBox Guest Additions on Fedora 25/24, CentOS/RHEL 7.3/6.8/5.11](https://www.if-not-true-then-false.com/2010/install-virtualbox-guest-additions-on-fedora-centos-red-hat-rhel/)
 
-* “增强功能”要编译安装，so先安装 build essential ： yum groupinstall "Development Tools"
+
+### 安装步骤
+
+* “增强功能”要编译安装，so先安装 build essential ： `yum groupinstall "Development Tools"`
 * 菜单： 设备 》安装增强功能，会挂载安装光盘
-* 执行光盘下的 /media/VBOXADDITIONS_5.1.2_108956/VBoxLinuxAdditions.run
+* 执行光盘下的 `/media/VBOXADDITIONS_5.1.2_108956/VBoxLinuxAdditions.run`
+
+
+```
+yum groupinstall "Development Tools"
+
+KERN_DIR=/usr/src/kernels/`uname -r`
+export KERN_DIR
+
+cd /media/VirtualBoxGuestAdditions
+./VBoxLinuxAdditions.run
+```
+
+* 正确安装的提示
+
+```
+[root@localhost VBOXADDITIONS_5.1.18_114002]# ./VBoxLinuxAdditions.run 
+Verifying archive integrity... All good.
+Uncompressing VirtualBox 5.1.18 Guest Additions for Linux...........
+VirtualBox Guest Additions installer
+Removing installed version 5.1.18 of VirtualBox Guest Additions...
+vboxadd.sh: Stopping VirtualBox Additions.
+Copying additional installer modules ...
+Installing additional modules ...
+vboxadd.sh: Building Guest Additions kernel modules.
+Failed to set up service vboxadd, please check the log file
+/var/log/VBoxGuestAdditions.log for details.
+[root@localhost VBOXADDITIONS_5.1.18_114002]# rpm -ql kernel-devel-2.6.32-696.el6.i686 | less
+[root@localhost VBOXADDITIONS_5.1.18_114002]# export KERN_DIR
+[root@localhost VBOXADDITIONS_5.1.18_114002]# ./VBoxLinuxAdditions.run 
+Verifying archive integrity... All good.
+Uncompressing VirtualBox 5.1.18 Guest Additions for Linux...........
+VirtualBox Guest Additions installer
+Removing installed version 5.1.18 of VirtualBox Guest Additions...
+vboxadd.sh: Stopping VirtualBox Additions.
+Copying additional installer modules ...
+Installing additional modules ...
+vboxadd.sh: Building Guest Additions kernel modules.
+vboxadd.sh: Starting the VirtualBox Guest Additions.
+
+You may need to restart the Window System (or just restart the guest system)
+to enable the Guest Additions.
+
+```
+
 
 ### 问题：找不到 kernel source
 
@@ -28,7 +76,11 @@ KERN_DIR=/usr/src/kernels/2.6.32-642.6.1.el6.i686
 export KERN_DIR
 ```
 
-重新执行 VBoxLinuxAdditions.run
+重新执行 `VBoxLinuxAdditions.run`
+
+
+
+
 
 
 
