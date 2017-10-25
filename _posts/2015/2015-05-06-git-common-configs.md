@@ -2,7 +2,7 @@
 layout: post
 title: git 常用设置/config/配置
 categories: [cm, git]
-tags: [cm, git]
+tags: [cm, git, config, alias]
 ---
 
 ## Windows 上的 git 配置
@@ -12,11 +12,14 @@ tags: [cm, git]
 ```
 git config --global user.name your-name
 git config --global user.email your-email@some-site.com
+
 git config --global alias.l "log --decorate --oneline --graph"
 git config --global alias.ll "log --oneline --decorate --graph -10"
 git config --global alias.st status
 git config --global alias.d diff
 git config --global alias.co checkout
+git config --global alias.pushall '!git remote | xargs -L1 -I R git push R '
+
 git config --global core.quotepath false
 git config --global core.autocrlf true
 git config --global color.ui true
@@ -24,6 +27,7 @@ git config --global core.editor /cygdrive/d/noinstall/notepad_plusplus_git/npp.s
 git config --global core.filemode false
 git config --global http.sslverify false
 git config --global http.postbuffer 524288000
+
 git config --global diff.tool winmerge
 git config --global difftool.winmerge.cmd '/cygdrive/d/Program\(x86\)/WinMerge/git_diff.sh "$LOCAL" "$REMOTE"'
 git config --global difftool.winmerge.prompt false
@@ -66,6 +70,7 @@ git config --global alias.ll "log --oneline --decorate --graph -10"
 git config --global alias.st status
 git config --global alias.d diff
 git config --global alias.co checkout
+git config --global alias.pushall '!git remote | xargs -L1 -I R git push R '
 
 git config --global core.autocrlf input
 git config --global color.ui true

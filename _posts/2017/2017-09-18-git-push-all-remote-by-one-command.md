@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 使用 git alias 将branch 向所有 remote push
+title: 使用 git alias (pushall) 将branch 向所有 remote push
 categories: [cm, git]
-tags: [git, push, git-alias]
+tags: [git, push, alias]
 ---
 
 * 参考
