@@ -47,6 +47,27 @@ BOM
 
 
 
+## 嵌入HTML文档
+
+~~~ html
+<head>
+  <title>JS test</title>
+  <script src="somefile.js"></script>
+</head>
+~~~
+
+~~~ html
+<body>
+  <script>
+  var a = 1;
+  a++;
+  </script>
+</body>
+~~~
+
+
+
+
 ## 基本语法
 
 
@@ -1022,6 +1043,43 @@ true
 ~~~
 
 
+
+
+### secret link `__proto__`
+
+
+### 扩展 built-in 对象
+
+
+~~~ javascript
+// trim() method for strings, which is a method 
+//    that exists in ES5 but is missing in older browsers
+if (typeof String.prototype.trim !== 'function') {
+  String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g,'');
+  };
+}
+
+> " hello ".trim();
+"hello"
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+## inheritance 继承
+
+
+
+
 ### 设置 构造函数的 prototype 后，同时也要设置 prototype.constructor
 
 默认情况下 ，function 对象创建时，function的prototype对象同时创建，且prototype对象的constructor 属性指向自身。
@@ -1205,25 +1263,373 @@ true
 
 
 
-### secret link `__proto__`
 
+### 继承的语法，收拢到 `extend` 函数，以便 _复用_
 
-### 扩展 built-in 对象
-
+#### extend
 
 ~~~ javascript
-// trim() method for strings, which is a method 
-//    that exists in ES5 but is missing in older browsers
-if (typeof String.prototype.trim !== 'function') {
-  String.prototype.trim = function () {
-    return this.replace(/^\s+|\s+$/g,'');
-  };
+function extend(Child, Parent) {
+  var F = function () {};
+  F.prototype = Parent.prototype;
+  Child.prototype = new F();
+  Child.prototype.constructor = Child;
+  Child.uber = Parent.prototype;
 }
+~~~ 
 
-> " hello ".trim();
-"hello"
+>> 如下是使用了 extend 继承函数的例子
+>
+>~~~ javascript
+>// define -> augment
+>function Shape() {}
+>Shape.prototype.name = 'Shape';
+>Shape.prototype.toString = function () {
+>  return this.constructor.uber
+>  ? this.constructor.uber.toString() + ', ' + this.name
+>  : this.name;
+>};
+>// define -> inherit -> augment
+>function TwoDShape() {}
+>extend(TwoDShape, Shape); // 继承～～～
+>TwoDShape.prototype.name = '2D shape';
+>~~~
+
+
+
+#### extend2 , copy properties
+
+~~~ javascript
+function extend2(Child, Parent) {
+  var p = Parent.prototype;
+  var c = Child.prototype;
+  for (var i in p) {
+    c[i] = p[i];
+  }
+  c.uber = p;
+}
 ~~~
 
+
+### Extend Copy, Shallow Copy 不需要 prototype，对象之间直接继承
+
+~~~ javascript
+function extendCopy(p) {
+  var c = {};
+  for (vari in p) {
+    c[i] = p[i];
+  }
+  c.uber = p;
+  return c;
+}
+
+// 基础对象
+var shape = {
+  name: 'Shape',
+  toString: function () {
+    return this.name;
+  }
+};
+
+// 继承一次
+var twoDee = extendCopy(shape);
+twoDee.name = '2D shape';
+twoDee.toString = function () {
+  return this.uber.toString() + ', ' + this.name;
+};
+
+// 继承两次
+var triangle = extendCopy(twoDee);
+triangle.name = 'Triangle';
+triangle.getArea = function () {
+  return this.side * this.height / 2;
+};
+
+// 使用对象
+>triangle.side = 5;
+>triangle.height = 10;
+>triangle.getArea();
+25
+>triangle.toString();
+"Shape, 2D shape, Triangle"
+
+~~~
+
+
+
+### Deep Copy
+
+相对只拷贝 reference 的 _shallow copy_
+
+deep copy 是个迭代的过程。
+
+~~~ javascript
+function deepCopy(p, c) {
+  c = c || {};
+  for (var i in p) {
+    if (p.hasOwnProperty(i)) {
+      if (typeof p[i] === 'object') {
+        c[i] = Array.isArray(p[i]) ? [] : {};
+        deepCopy(p[i], c[i]);
+      } else {
+        c[i] = p[i];
+      }
+    }
+  }
+  return c;
+}
+
+~~~
+
+* 注意： `Array.isArray()` exists since ES5 ，要兼容 ES3的browser，使用如下自定义函数：
+
+    ~~~ javascript
+    if (Array.isArray !== "function") {
+      Array.isArray = function (candidate) {
+        return Object.prototype.toString.call(candidate) === '[object Array]';
+      };
+    }
+    ~~~
+
+
+
+### Object.create
+
+~~~ javascript
+>var square = Object.create(triangle);
+~~~
+
+`Object.create` 相当于 如下的 object()
+
+~~~ javascript
+function object(o) {
+  var n;
+  function F() {}
+  F.prototype = o;
+  n = new F();
+  n.uber = o;
+  return n;
+}
+
+// 使用
+var triangle = object(twoDee);
+triangle.name = 'Triangle';
+triangle.getArea = function () {
+  return this.side * this.height / 2;
+};
+
+>triangle.toString();
+"Shape, 2D shape, Triangle"
+
+~~~
+
+
+### prototype inheritence 和 copy properties 混合使用
+
+* Use prototypal inheritance to use an existing object as a prototype of a new one
+* Copy all of the properties of another object into the newly created one
+
+~~~ javascript
+function objectPlus(o, stuff) {
+  var n;
+  function F() {}
+  F.prototype = o;
+  n = new F();
+  n.uber = o;
+  for (var i in stuff) {
+    n[i] = stuff[i];
+  }
+  return n;
+}
+
+// Create a 2D object by inheriting shape and adding more properties. 
+var twoDee = objectPlus(shape, {
+  name: '2D shape',
+  toString: function () {
+    return this.uber.toString() + ', ' + this.name;
+  }
+});
+
+// create a triangle object that inherits from 2D and adds more properties.
+var triangle = objectPlus( twoDee, {
+  name: 'Triangle',
+  getArea: function () {
+    return this.side * this.height / 2;
+  },
+  side: 0,
+  height: 0
+});
+
+// creating a concrete triangle my with defined side and height
+var my = objectPlus(triangle, {
+  side: 4, height: 4
+});
+>my.getArea();
+8
+>my.toString();
+"Shape, 2D shape, Triangle, Triangle"
+
+~~~
+
+
+### 多重继承 multiple inheritence
+
+~~~ javascript
+function multi() {
+  var n = {}, stuff, j = 0, len = arguments.length;
+  for (j = 0; j <len; j++) {
+    stuff = arguments[j];
+    for (vari in stuff) {
+      if (stuff.hasOwnProperty(i)) {
+        n[i] = stuff[i];
+      }
+    }
+  }
+  return n;
+}
+
+var shape = {
+  name: 'Shape',
+  toString: function () { return this.name; }
+};
+
+vartwoDee = {
+  name: '2D shape',
+  dimensions: 2
+};
+
+var triangle = multi(shape, twoDee, {
+  name: 'Triangle',
+  getArea: function () {
+    return this.side * this.height / 2;
+  },
+  side: 5,
+  height: 10
+});
+
+>triangle.getArea();
+25
+>triangle.dimensions;
+2
+>triangle.toString();
+"Triangle"
+~~~
+
+#### Mixins
+
+需要某些 object 的方法，又不需要 这些object 进入 inheritence 序列，
+
+就可以使用上述 `multi()` ，将方法和参数 “mixin” 进来。
+
+
+
+### 寄生继承 Parasitic Inheritence
+
+~~~ javascript
+vartwoD = {
+  name: '2D shape',
+  dimensions: 2
+};
+
+function triangle(s, h) {
+  var that = object(twoD);
+  that.name ='Triangle';
+  that.getArea = function () {
+    return this.side * this.height / 2;
+  };
+  that.side = s;
+  that.height = h;
+  return that;
+}
+
+// Because triangle() is a normal function, not a constructor, it doesn't require the new
+operator. 
+>var t = triangle(5, 10);
+>t.dimensions;
+2
+
+// But because it returns an object, calling it with new by mistake works too.
+>vart2 = new triangle(5,5);
+>t2.getArea();
+12.5
+
+~~~
+
+
+
+
+### 借用父类构造器的继承 borrowing a constructor
+
+This can be called stealing a constructor, or inheritance by
+borrowing a constructor 
+
+~~~ javascript
+function Shape(id) {
+  this.id = id;
+}
+Shape.prototype.name = 'Shape';
+Shape.prototype.toString = function () {
+  return this.name;
+};
+
+function Triangle() {
+  // 利用 Object.apply 借用 Shape's constructor
+  Shape.apply(this, arguments);
+}
+Triangle.prototype.name = 'Triangle';
+
+>var t = new Triangle(101);
+>t.name;
+"Triangle"
+
+>t.id;
+101
+
+// The triangle failed to get the Shape function's prototype properties 
+// because there was never a new Shape() instance created, so the prototype was never used. 
+
+>t.toString();
+"[object Object]"
+
+// ---
+// 利用 prototype 继承
+function Triangle() {
+  Shape.apply(this, arguments);
+}
+Triangle.prototype = new Shape();
+Triangle.prototype.name = 'Triangle';
+~~~
+
+
+#### Borrow a constructor and copy its prototype
+
+~~~ javascript
+function Shape(id) {
+  this.id = id;
+}
+Shape.prototype.name = 'Shape';
+Shape.prototype.toString = function () {
+  return this.name;
+};
+function Triangle() {
+  Shape.apply(this, arguments);
+}
+extend2(Triangle, Shape);
+Triangle.prototype.name = 'Triangle';
+
+// Testing
+
+>var t = new Triangle(101);
+>t.toString();
+"Triangle"
+>t.id;
+101
+
+// No double inheritance:
+>typeof t.__proto__.id;
+"undefined"
+
+~~~
 
 
 
@@ -1243,7 +1649,17 @@ if (typeof String.prototype.trim !== 'function') {
 
 ## WebKit console
 
+* 参考
+  * <http://www.ruanyifeng.com/blog/2011/03/firebug_console_tutorial.html>
+  * [Firebug Tutorial - Logging, Profiling and CommandLine (Part I)](http://michaelsync.net/2007/09/09/firebug-tutorial-logging-profiling-and-commandline-part-i)
+  * [Firebug Tutorial - Logging, Profiling and CommandLine (Part II)](http://michaelsync.net/2007/09/10/firebug-tutorial-logging-profiling-and-commandline-part-ii)
+
 `WebKit console` 提供了 `console` 对象来向 console 输出内容。
+
+
+
+
+### console.log() , error(), debug(), warn()
 
 * console.log()
   * 输出日志
@@ -1254,6 +1670,157 @@ if (typeof String.prototype.trim !== 'function') {
 
 
 
+### 占位符
+
+console对象的上面5种方法，都可以使用printf风格的占位符。不过，占位符的种类比较少，只支持字符（%s）、整数（%d或%i）、浮点数（%f）和对象（%o）四种。
+
+~~~ javascript
+console.log("%d年%d月%d日",2011,3,26);
+console.log("圆周率是%f",3.1415926);
+~~~
+
+`%o` 占位符，可以用来查看一个对象内部情况。比如，有这样一个对象：
+
+~~~ javascript
+var dog = {} ;
+dog.name = "大毛" ;
+dog.color = "黄色";
+
+console.log("%o",dog);
+~~~
+
+
+### 分组显示， console.group() 和 console.groupEnd()
+
+如果信息太多，可以分组显示，用到的方法是console.group()和console.groupEnd()。
+
+~~~ javascript
+console.group("第一组信息");
+console.log("第一组第一条");
+console.log("第一组第二条");
+console.groupEnd();
+
+console.group("第二组信息");
+console.log("第二组第一条");
+console.log("第二组第二条");
+console.groupEnd();
+~~~
+
+![](console分组显示.png)
+
+
+### console.dir()
+
+`console.dir()` 可以显示一个对象所有的属性和方法。
+
+~~~ javascript
+// 例如，查看document对象的属性和方法
+console.dir(document)
+~~~
+
+
+
+
+
+### console.dirxml()
+
+`console.dirxml()` 用来显示网页的某个节点（node）所包含的html/xml 文档内容。
+
+~~~ javascript
+var table = document.getElementById("table1");
+console.dirxml(table);
+~~~
+
+
+
+### console.assert()
+
+`console.assert()` 用来判断一个表达式或变量是否为真。
+
+如果结果为否，则在控制台输出一条相应信息，并且抛出一个异常。
+
+~~~ javascript
+var result = 0;
+console.assert( result );
+var year = 2000;
+console.assert(year == 2011 );
+~~~
+
+![](console-assert断言.png)
+
+
+
+### console.trace()
+
+`console.trace()` 用来追踪函数的调用轨迹。
+
+~~~ javascript
+function add(a,b) {
+  console.trace();
+  return a+b;
+}
+
+var x = add3(1,1);
+function add3(a,b){return add2(a,b);}
+function add2(a,b){return add1(a,b);}
+function add1(a,b){return add(a,b);}
+~~~
+
+运行后，会显示add()的调用轨迹，从上到下依次为add()、add1()、add2()、add3()。
+
+![](console-trace效果示意.png)
+
+
+
+
+### 计时功能 `console.time()` 和 `console.timeEnd()`
+
+`console.time()` 和 `console.timeEnd()` ，用来显示代码的运行时间。
+
+~~~ javascript
+console.time("计时器一");
+for(var i=0;i<1000;i++){
+  for(var j=0;j<1000;j++){}
+}
+console.timeEnd("计时器一");
+~~~
+
+![](console计时器示意.png)
+
+
+### 性能分析 console.profile()
+
+性能分析（Profiler）就是分析程序各个部分的运行时间，找出瓶颈所在，使用的方法是console.profile()。
+
+假定有一个函数Foo()，里面调用了另外两个函数funcA()和funcB()，其中funcA()调用10次，funcB()调用1次。
+
+
+~~~ javascript
+function Foo(){
+  for(var i=0;i<10;i++) { funcA(1000); }
+  funcB(10000);
+}
+function funcA(count){
+  for(var i=0;i<count;i++){}
+}
+function funcB(count){
+  for(var i=0;i<count;i++){}
+}
+~~~
+
+然后，就可以分析Foo()的运行性能了。
+
+~~~ javascript
+console.profile('性能分析器一');
+Foo();
+console.profileEnd();
+~~~
+
+控制台会显示一张性能分析表，如下图。
+
+![](console性能分析示例.png)
+
+除了使用console.profile()方法，firebug还提供了一个"概况"（Profiler）按钮。第一次点击该按钮，"性能分析"开始，你可以对网页进行某种操作（比如ajax操作），然后第二次点击该按钮，"性能分析"结束，该操作引发的所有运算就会进行性能分析。
 
 
 
