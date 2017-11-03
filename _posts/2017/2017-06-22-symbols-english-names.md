@@ -2,7 +2,7 @@
 layout: post
 title: 标点符号的英文名称
 categories: [doc, tech]
-tags: [symbol, English]
+tags: [symbol, English, punctuation]
 ---
 
 * <https://answers.yahoo.com/question/index?qid=20080930224101AAEtpav>
@@ -48,3 +48,22 @@ _ Underscore
 . Period, dot or Full Stop
 ? Question Mark
 ~~~
+
+* punctuation 标点符号（总称）
+
+    You need to put a **punctuation mark** at the end of every sentence.
+    你得在每个句子的结尾打上标点符号
+
+
+
+
+
+
+
+
+
+
+
+
+
+

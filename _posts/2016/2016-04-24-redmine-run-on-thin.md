@@ -39,21 +39,26 @@ $ thin install
 
 ### 设置 thin 随系统启动
 
+```
 $ chkconfig --list thin
+```
 
 可能会提醒找不到文件，将启动脚本拷贝到init.d下面
 
+```
 $ mv /etc/rc.d/thin /etc/rc.d/init.d/thin
+```
 
 再设置下启动的run-level
 
-```
+``` shell
+$ chkconfig --list thin
 $ chkconfig --level 345 thin on
 $ chkconfig --list thin
 ```
 
 
-## 配置thin，运行redmine
+## 配置thin
 
 ```
 $ thin config -C /etc/thin/redmine-2.4.2.yml -c /opt/server/redmine-2.4.2 --servers 2 --port 3000 -e production --log log/thin.log
@@ -77,6 +82,8 @@ threadpool_size: 20
 servers: 2
 daemonize: true
 {% endhighlight %}
+
+
 
 
 ## 在redmine项目中引用thin
@@ -104,11 +111,26 @@ $ /etc/init.d/thin start
 $ ps -ef | grep thin
 ```
 
+或者，
+
+```
+service thin start
+```
+
+
 如果没启动，到redmine-home/log/ 下面查下日志
 
 按照之前配置，thin将启动2个实例，分别在端口 3000， 3001。下面用apache或者nigix做个负载均衡就好。
 
 
+### 报错：/usr/bin/env: ruby_executable_hooks: No such file or directory
+
+* 参考： <https://stackoverflow.com/a/19673677>
+
+```
+$ ln -s `which ruby_executable_hooks` /usr/bin/ruby_executable_hooks
+$ ln -s `which ruby` /usr/bin/ruby
+```
 
 
 ## 设置相对路径
