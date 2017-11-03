@@ -43,20 +43,46 @@
     var level = get_level(headers[0]),
       this_level,
       html = settings.title + " <"+settings.listType+">";
+    
+    // 初始化标题的层级序号，用数组描述
+    var header_index = [1];
+    var init_gap = level - highest_level;
+    for(var i=init_gap; i>0; --i) {
+      header_index.push(1);
+    }
+    
     headers.on('click', function() {
       if (!settings.noBackToTopLinks) {
         window.location.hash = this.id;
       }
     })
     .addClass('clickable-header')
-    .each(function(_, header) {
+    .each(function(index, header) {
       this_level = get_level(header);
+      
+      if( index > 0 ) {
+        // 更新标题的序号
+        if (this_level === level) {
+          ++ header_index[header_index.length-1];
+        } else if (this_level <= level) {
+          gap = level - this_level;
+          for(var i=gap; i>0; --i)
+            header_index.pop();
+          ++ header_index[header_index.length-1];
+        } else if (this_level > level) {
+          gap = this_level - level;
+          for(var i=gap; i>0; --i)
+            header_index.push(1);
+        }
+      }
+      $(header).text( header_index.join('.') + '. ' + $(header).text() );
+      
       if (!settings.noBackToTopLinks && this_level === highest_level) {
         $(header).addClass('top-level-header').after(return_to_top);
       }
-      if (this_level === level) // same level as before; same indenting
+      if (this_level === level) { // same level as before; same indenting
         html += "<li><a href='#" + header.id + "'>" + header.innerHTML + "</a>";
-      else if (this_level <= level){ // higher level than before; end parent ol
+      } else if (this_level <= level){ // higher level than before; end parent ol
         for(i = this_level; i < level; i++) {
           html += "</li></"+settings.listType+">"
         }
