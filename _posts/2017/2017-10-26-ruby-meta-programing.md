@@ -46,6 +46,41 @@ end
 ~~~
 
 
+### Module#const_missing
+
+When you reference a constant that doesn’t exist, Ruby passes the name of
+the constant to `const_missing` as a symbol. 
+
+~~~ ruby
+# Class names are just constants, so
+#   a reference to an unknown Rake class such as 
+#   Task was routed to Module#const_missing.
+#
+# gems/rake-0.9.2.2/lib/rake/ext/module.rb
+class Module
+  def const_missing(const_name)
+    case const_name
+    when :Task
+      Rake.application.const_warning(const_name)
+      Rake::Task
+    when :FileTask
+      Rake.application.const_warning(const_name)
+      Rake::FileTask
+    when :FileCreationTask
+      # ...
+    end
+  end
+end
+~~~
+
+
+
+
+
+
+
+
+
 ## Class 
 
 ### classes themselves are nothing but objects.
@@ -654,9 +689,159 @@ end
 
 
 
+### Blank Slate
+
+you might want to remove most methods from the class,
+preventing such name clashes from ever happening again. A skinny class
+Spell: Blank Slate with a minimal number of methods is called a **Blank Slate**.
+
+<u>Inheriting from BasicObject</u> is the quicker way to define a Blank Slate in Ruby.
 
 
 
+#### Removing Methods , `Module#undef_method` or `Module#remove_method`
+
+You can remove a method from a class by using either `Module#undef_method` or
+`Module#remove_method`.
+
+`undef_method` removes any method, including the inherited ones.
+
+~~~ ruby
+# keeps instance_eval and all the “reserved methods”,
+#     -- methods that are used internally by Ruby
+
+# gems/builder-3.2.2/lib/blankslate.rb
+class BlankSlate
+# Hide the method named +name+ in the BlankSlate class. Don't
+# hide +instance_eval+ or any method beginning with "__".
+def self.hide(name)
+# ...
+if instance_methods.include?(name._blankslate_as_name) &&
+name !~ /^(__|instance_eval$)/
+undef_method name
+end
+end
+# ...
+instance_methods.each { |m| hide(m) }
+end
+~~~
+
+
+
+
+
+
+## Block
+
+
+### 定义一个类似C#的 using 关键字
+
+~~~ ruby
+module Kernel
+  def using(resource)
+    begin
+      yield
+    ensure
+      resource.dispose
+    end
+  end
+end
+
+class Resource
+  def dispose
+    @disposed = true
+  end
+  def disposed?
+    @disposed
+  end
+end
+
+# testing
+def test_disposes_of_resources
+  r = Resource.new
+  using(r) {}
+  assert r.disposed?
+end
+~~~
+
+
+### Flattening the Scope
+
+~~~ ruby
+my_var = "Success"
+
+MyClass = Class.new do
+  "#{my_var} in the class definition"
+  
+  define_method :my_method do
+    "#{my_var} in the method"
+  end
+end
+~~~
+
+### Sharing the Scope
+
+~~~ ruby
+def define_methods
+  shared = 0
+  
+  Kernel.send :define_method, :counter do
+    shared
+  end
+  Kernel.send :define_method, :inc do |x|
+    shared += x
+  end
+end
+
+define_methods
+counter # => 0
+inc(4)
+counter # => 4
+~~~
+
+
+### instance_eval()
+
+~~~ ruby
+class MyClass
+  def initialize
+    @v = 1
+  end
+end
+
+obj = MyClass.new
+obj.instance_eval do
+  self # => #<MyClass:0x3340dc @v=1>
+  @v # => 1
+end
+~~~
+
+
+### instance_exec
+
+~~~ ruby
+class C
+  def initialize
+    @x = 1
+  end
+end
+
+class D
+  def twisted_method
+    @y = 2
+    C.new.instance_eval { "@x: #{@x}, @y: #{@y}" }
+  end
+end
+D.new.twisted_method # => "@x: 1, @y: "
+
+class D2
+  def twisted_method
+    @y = 2
+➤   C.new.instance_exec(@y) {|y| "@x: #{@x}, @y: #{y}" }
+  end
+end
+D2.new.twisted_method # => "@x: 1, @y: 2"
+~~~
 
 
 
