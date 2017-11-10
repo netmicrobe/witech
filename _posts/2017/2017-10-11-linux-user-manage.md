@@ -225,6 +225,27 @@ su - steve
 
 
 
+## usermod 修改用户
+
+### 修改登录后的shell
+
+~~~ shell
+usermod -s /bin/bash someone
+~~~
+
+### 禁止登录
+
+~~~ shell
+usermod -s /bin/nologin someone
+~~~
+
+
+
+
+
+
+
+
 
 ## 用户管理设置
 
