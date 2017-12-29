@@ -8,7 +8,100 @@ tags:
 ---
 
 参考：
-  * <https://about.gitlab.com/2016/07/19/markdown-kramdown-tips-and-tricks/>
+  * [Daring Fireball - Markdown Official Site](https://daringfireball.net/projects/markdown/)
+  * [Gitlab - Markdown Kramdown Tips & Tricks](https://about.gitlab.com/2016/07/19/markdown-kramdown-tips-and-tricks/)
+  * [Markdown 语法说明 (简体中文版)](http://wowubuntu.com/markdown/)
+  * [kramdown Syntax](https://kramdown.gettalong.org/syntax.html)
+  * [github - adam-p/markdown-here - Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+
+
+### 链接
+
+2中链接方法： inline 和 reference.
+
+#### inline
+
+~~~
+This is [an example](http://example.com/ "Title") inline link.
+
+[This link](http://example.net/) has no title attribute.
+~~~
+
+#### Reference-style
+
+* 例子
+  ~~~
+  This is [an example][id] reference-style link.
+
+  也可以加一个空格
+  This is [an example] [id] reference-style link.
+  ~~~
+
+  文档的任意地方在定义下引用名指向的实际链接
+
+  ~~~
+  [id]: http://example.com/  "Optional Title Here"
+  ~~~
+
+* 另一个例子
+
+  ~~~
+  I get 10 times more traffic from [Google] [1] than from
+  [Yahoo] [2] or [MSN] [3].
+
+    [1]: http://google.com/        "Google"
+    [2]: http://search.yahoo.com/  "Yahoo Search"
+    [3]: http://search.msn.com/    "MSN Search"
+  ~~~
+  
+  ~~~
+  I get 10 times more traffic from [Google][] than from
+  [Yahoo][] or [MSN][].
+
+    [google]: http://google.com/        "Google"
+    [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
+    [msn]:    http://search.msn.com/    "MSN Search"
+  ~~~
+  
+* 省略引用名时，链接文本即引用名
+
+  ~~~
+  [Google][]
+
+  [Google]: http://google.com/
+  ~~~
+  
+* 引用名可以包含空格
+
+  ~~~
+  Visit [Daring Fireball][] for more information.
+  [Daring Fireball]: http://daringfireball.net/
+  ~~~
+
+
+* 引用名的title支持多种界定符号：
+
+  ~~~
+  [foo]: http://example.com/  "Optional Title Here"
+  [foo]: http://example.com/  'Optional Title Here'
+  [foo]: http://example.com/  (Optional Title Here)
+  ~~~
+
+* 链接也可以用尖括号括起来
+
+  ~~~
+  [id]: <http://example.com/>  "Optional Title Here"
+  ~~~
+
+* title 属性可以写到下一行，只要在属性之前添加空格或制表符，url很长的时候，这样写会清楚些。
+
+  ~~~
+  [id]: http://example.com/longish/path/to/resource/here
+      "Optional Title Here"
+  ~~~
+
+
 
 
 ### 字体格式

@@ -845,6 +845,30 @@ D2.new.twisted_method # => "@x: 1, @y: 2"
 
 
 
+### Unbound Methods ，将方法从一个类撕下来，贴到另一个类上
+
+~~~ ruby
+# 撕下来
+module MyModule
+  def my_method
+    42
+  end
+end
+
+unbound = MyModule.instance_method(:my_method)
+unbound.class   # => UnboundMethod
+
+# 贴上去
+# 1. UnboundMethod#bind
+# 2. define_method
+String.class_eval do
+  define_method :another_method, unbound
+end
+
+"abc".another_method    # => 42
+~~~
+
+
 
 
 
