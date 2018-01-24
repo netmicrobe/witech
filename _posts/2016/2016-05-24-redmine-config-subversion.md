@@ -96,7 +96,7 @@ httpd.conf 或者 其include的配置文件中有证书文件位置定义。找�
 openssl x509 -in certificate.crt -text -noout
 
 
-例如，如下域名为 egame.svn
+例如，如下域名为 your-company.svn
 
 ```
 openssl x509 -in server.crt -text -noout
@@ -113,7 +113,7 @@ Certificate:
 
         Signature Algorithm: sha1WithRSAEncryption
 
-        Issuer: C=CN, ST=Jiangsu, L=Nanjing, O=CT, CN=egame.svn
+        Issuer: C=CN, ST=Jiangsu, L=Nanjing, O=CT, CN=your-company.svn
 
         Validity
 
@@ -121,7 +121,7 @@ Certificate:
 
             Not After : Jan 11 00:40:45 2014 GMT
 
-        Subject: C=CN, ST=Jiangsu, L=Nanjing, O=CT, CN=egame.svn
+        Subject: C=CN, ST=Jiangsu, L=Nanjing, O=CT, CN=your-company.svn
 
         Subject Public Key Info:
 
@@ -173,7 +173,7 @@ Certificate:
 
 ##### 知道域名后，在redmine运行的机器上设置的下hosts（linux的hosts在/etc/hosts）
 
-127.0.0.1 egame.svn
+127.0.0.1 your-company.svn
 
 #### 最后，在redmine上创建新的版本库，host使用刚刚证书中发现的域名。
         
