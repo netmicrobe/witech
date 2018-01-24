@@ -23,7 +23,7 @@ a {
 	text-decoration: none;
 	color: $link-color; 
 	&:visited { 
-		color: lighten($link-color, 20); 
+		color: desaturate($link-color, 20%); 
 	}
 	&:hover { 
 		color: darken($link-color, 20); 
