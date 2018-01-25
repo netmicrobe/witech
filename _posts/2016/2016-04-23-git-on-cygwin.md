@@ -57,12 +57,12 @@ Cygwin 的安装非常简单，先在其官方网站 http://www.cygwin.com/下�
 
 cygcheck -c cygwin
 
-![](/images/cm/git/cygwin/cygcheck_cygwin.png)
+![](cygcheck_cygwin.png)
 
 
 Cygwin 中访问 Windows 的各个磁盘目录。首先，我们在Cygwin中执行mount这个命令，
 
-![](/images/cm/git/cygwin/cygwin_mount.png)
+![](cygwin_mount.png)
 
 也就是说，在 Cygwin 中以路径 /cygdrive/c/Windows来访问Windows 下的 C:\Windows 目录。
 
