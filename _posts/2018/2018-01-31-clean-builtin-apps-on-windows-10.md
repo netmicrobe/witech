@@ -138,3 +138,16 @@ Get-AppxPackage -AllUsers| Foreach {Add-AppxPackage -DisableDevelopmentMode -Reg
 
 
 
+
+## 关闭Cortana（小娜）
+
+
+1. Type Start button/ Click on Start icon.
+2. Select Settings.
+3. Type Cortana and select Cortana and search settings.
+4. Click on the button to disable.
+
+
+
+
+

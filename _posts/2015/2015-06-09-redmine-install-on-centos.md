@@ -44,17 +44,21 @@ production:
 
 先用 gem --version 看看有没有，用rvm装1.9，自带bundler。
 
+~~~
 gem install bundler
+~~~
 
 只安装production要求的依赖包，具体依赖包信息参见redmine根目录下的Gemfile
 
+~~~
 bundle install --without development test
+~~~
 
 注意：安装前还是看下Gemfile里边source指向的哪儿，https://rubygems.org，未必能顺利下载，GFW啊，擦！
 
 注意：安装需要比较长时间，下载的东西比较多：rails...   ， 另外还经常出错， 擦！
 
-可以改成淘宝的源 https://ruby.taobao.org
+可以改成ruby-china的源 http://gems.ruby-china.org/
 
 注意：Redmine automatically installs the adapter gems required by your database configuration by reading it from the config/database.yml file ，如果修改了adapter，重新要运行下bundle install
 
