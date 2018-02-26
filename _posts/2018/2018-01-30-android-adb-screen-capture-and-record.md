@@ -11,6 +11,34 @@ tags: [ android ]
   * <https://developer.android.com/studio/command-line/adb.html>
 
 
+
+## 快速截屏&录屏的 Windows 脚本
+
+### screencap.bat
+
+* 用法：`screencap your-filename`
+* 效果：命令执行目录生成截图文件：`your-filename.png`
+
+~~~ bat
+@echo off
+adb shell screenrecord /sdcard/%1.mp4 & adb pull /sdcard/%1.mp4 . & adb shell rm -f /sdcard/%1.mp4
+~~~
+
+### screenrecord.bat
+
+* 用法：`screenrecord your-filename`
+* 效果：命令执行目录生成截图文件：`your-filename.mp4`
+
+~~~ bat
+@echo off
+adb shell screencap /sdcard/%1.png & adb pull /sdcard/%1.png . & adb shell rm -f /sdcard/%1.png
+~~~
+
+
+
+
+
+
 ## 截屏
 
 ~~~
