@@ -1,0 +1,17 @@
+---
+title: 收藏夹
+permalink: ./favorites/
+---
+
+{% assign favorites = site.categories.favorites %}
+
+<ul>
+{% for fav in favorites %}
+{% if fav.permalink != "./favorites/" %}
+  <li>
+  <a href="{{ fav.url | prepend: site.baseurl }}">{{ fav.title }}</a>
+  </li>
+{% endif %}
+{% endfor %}
+</ul>
+
