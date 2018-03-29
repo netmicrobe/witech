@@ -17,7 +17,9 @@ title: 开发、设计
 * haima1998的专栏
   * <http://blog.csdn.net/haima1998/>
   * 多媒体编程、Android，网络编程、算法等
-
+* QA seven's blog
+  * <https://qaseven.github.io/archives/>
+  * QA、测试、前端技术
 
 
 ## Java
@@ -33,6 +35,18 @@ title: 开发、设计
   * <https://github.com/google/gson>
   * API REF: <http://www.javadoc.io/doc/com.google.code.gson/gson/2.8.2>
   * API REF: <https://google.github.io/gson/apidocs/index.html?overview-summary.html>
+
+
+## 测试
+
+### 接口测试
+
+* Hitchhiker
+  * a Restful Api test tool
+  * <http://www.hitchhiker-api.com>
+  * <https://github.com/brookshi/Hitchhiker>
+
+
 
 
 
