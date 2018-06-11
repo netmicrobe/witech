@@ -48,3 +48,18 @@ hostname
 vi /etc/hosts
 更新成新的hostname
 ```
+
+#### CentOS 7
+
+* 参考
+  * <https://www.cyberciti.biz/faq/rhel-redhat-centos-7-change-hostname-command/>
+  * <https://www.tecmint.com/set-change-hostname-in-centos-7/>
+
+~~~ shell
+hostnamectl status
+
+hostnamectl set-hostname your-host-name
+# 或者手动修改 /etc/hostname
+~~~
+
+

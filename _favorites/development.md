@@ -23,6 +23,12 @@ title: 开发、设计
 
 
 
+### 互联网
+
+* [腾讯大数据](http://bigdata.qq.com/reports)
+
+
+
 ## 技术博客
 
 * haima1998的专栏
@@ -31,6 +37,12 @@ title: 开发、设计
 * QA seven's blog
   * <https://qaseven.github.io/archives/>
   * QA、测试、前端技术
+* CSDN博客 - Android/Linux 系统和设备底层开发
+  * [kc58236582的CSDN博客](https://blog.csdn.net/kc58236582)
+  * [u013308744的CSDN专栏](https://blog.csdn.net/u013308744)
+  * [Tracy Mcgrady的专栏](https://blog.csdn.net/mcgrady_tracy)
+  * [Radia的专栏](https://blog.csdn.net/radianceblau)
+  * [UPON的博客](https://blog.csdn.net/u013491946)
 
 
 ## 公开课
@@ -108,7 +120,9 @@ title: 开发、设计
 * GameRes.com 游资网
   * <http://bbs.gameres.com/>
   * GameRes游资网成立于2001年5月7日，是一家面向游戏业从业者的一线行业媒体。
-
+* 腾讯GAD
+  * <http://gad.qq.com/>
+  * 最专业的游戏人一站式服务平台，是游戏从业者学习交流、经验分享的综合社区，是开发团队获得成员招募、专家指导及技术、资金、发行等全面扶持的孵化基地。
 
 ## Machine Learning
 
