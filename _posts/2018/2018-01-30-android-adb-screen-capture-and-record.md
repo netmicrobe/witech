@@ -21,7 +21,7 @@ tags: [ android ]
 
 ~~~ bat
 @echo off
-adb shell screenrecord /sdcard/%1.mp4 & adb pull /sdcard/%1.mp4 . & adb shell rm -f /sdcard/%1.mp4
+adb shell screencap /sdcard/%1.png & adb pull /sdcard/%1.png . & adb shell rm -f /sdcard/%1.png
 ~~~
 
 * 帮助
@@ -43,11 +43,11 @@ If FILENAME is not given, the results will be printed to stdout.
 * 用法：`screenrecord your-filename`
 * 效果：命令执行目录生成截图文件：`your-filename.mp4`
 
+
 ~~~ bat
 @echo off
-adb shell screencap /sdcard/%1.png & adb pull /sdcard/%1.png . & adb shell rm -f /sdcard/%1.png
+adb shell screenrecord /sdcard/%1.mp4 & adb pull /sdcard/%1.mp4 . & adb shell rm -f /sdcard/%1.mp4
 ~~~
-
 
 
 

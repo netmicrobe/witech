@@ -45,6 +45,10 @@ title: 开发、设计
   * [UPON的博客](https://blog.csdn.net/u013491946)
 
 
+
+
+
+
 ## 公开课
 
 * Microsoft Virtual Academy
@@ -83,8 +87,9 @@ title: 开发、设计
   * <https://python.swaroopch.com/>
 * Think Python (2nd edition)
   * <http://greenteapress.com/wp/think-python-2e/>
-* 
-  * <>
+* pymotw
+  * <https://pymotw.com/2/>
+  * <https://pymotw.com/3/>
 * 
   * <>
 * 
@@ -131,19 +136,37 @@ title: 开发、设计
 
 
 
+## 虚拟机提供商
+
+* RamNode (OpenVZ, KVM)
+* DigitalOcean (KVM)
+  * <https://www.digitalocean.com/>
+* CatalystHost (OpenVZ, KVM)
+* Linode (KVM)
+* Vultr (KVM)
+  * <https://www.vultr.com/>
+* SecureDragon (OpenVZ, KVM).
+
+
+## 技术电子书
+
+* BookDL
+  * <https://bookdl.com/>
+* AvaxHome
+  * <https://avxhm.se/ebooks/programming_development>
+* coderprog
+  * <https://coderprog.com/>
+* Fox eBook
+  * <http://www.foxebook.net/>
 
 
 
 
+## 小工具
 
-
-
-
-
-
-
-
-
+* Pastebin.com 
+  * <https://pastebin.com/>
+  * Pastebin is a website where you can store any text online for easy sharing. The website is mainly used by programmers to store pieces of sources code or configuration information, but anyone is more than welcome to paste any type of text. The idea behind the site is to make it more convenient for people to share large amounts of text online.
 
 
 

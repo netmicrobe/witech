@@ -153,21 +153,22 @@ export KERN_DIR
 
 
 
-### 即能访问网络、又能host ssh 客户端连接。需要设置2个网卡。
+### 双网卡模式
 
-* 前提：关闭虚拟机
+即能访问网络、又能固定IP连接VM 的sshd。需要设置2个网卡。
 
-1. 管理 》 网络 》 网卡1
-  1.1. check 启用网络连接
-  1.2. 连接方式：仅主机（host-only）网络
-  1.3. 界面名称：VirtualBox Host-Only Ehternet Adapter
-  1.4. 控制芯片：Intel PRO/1000 MT 桌面（82540EM）
-  1.5. 混杂模式：全部允许
-  1.6. MAC 地址，刷新一下
-2. 管理 》 网络 》 网卡2
-  2.1. check 启用网络连接
-  2.2. 连接方式：网络地址转换（NAT）
-  2.3. MAC 地址，刷新一下
+#### VirutalBox 启用2个网卡 （设置 - 网络）
+
+* 【网卡1】网络地址转换NAT：VM通过该网卡访问外网。
+* 【网卡2】仅主机（host-only）网络 ： 设置固定IP，来进行ssh连接。
+  1. 界面名称：VirtualBox Host-Only Ehternet Adapter
+  1. 控制芯片：Intel PRO/1000 MT 桌面（82540EM）
+  1. 混杂模式：全部允许
+  1. MAC 地址，刷新一下
+
+#### CentOS中设置
+
+图形界面方式进入CentOS。`ifconfig -a` 查看对应的网卡名称和信息。
 
 ```
 [root@localhost ~]# ifconfig -a
@@ -190,7 +191,7 @@ eth2      Link encap:Ethernet  HWaddr 08:00:27:48:07:46
           RX bytes:147746 (144.2 KiB)  TX bytes:36617 (35.7 KiB)
 ```
 
-#### 在 host-only 网卡上 设置固定IP
+##### 在 host-only 网卡上 设置固定IP
 
 1. 进入图形界面
 2. 系统菜单： System > Preferences > Network Connections
@@ -201,7 +202,7 @@ eth2      Link encap:Ethernet  HWaddr 08:00:27:48:07:46
   * Address : 192.168.56.101
   * Netmask : 255.255.255.0
   * Geteway : 0.0.0.0
-    * 网关写host地址（例如，196.168.56.1 ）时，ssh客户端连上VM会很慢，不明白为啥
+    * 注意：网关必须写 0.0.0.0 。写 host地址（例如，196.168.56.1 ）时，ssh客户端连上VM会很慢，VM也可能使用这个网卡访问外网，导致不能上网。
 7. 保存后，重启。
 
 
