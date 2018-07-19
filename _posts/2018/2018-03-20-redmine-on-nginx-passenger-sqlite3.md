@@ -68,6 +68,7 @@ passenger-install-nginx-module --prefix=/opt/nginx
 ~~~
 
 ### 【nginx 配置】 nginx.conf
+
 ~~~ conf
 user  root;
 pid        logs/nginx.pid;
@@ -78,6 +79,14 @@ http {
     passenger_default_user root;
     passenger_root /usr/local/rvm/gems/ruby-2.3.4/gems/passenger-5.2.0;
     passenger_ruby /usr/local/rvm/gems/ruby-2.3.4/wrappers/ruby;
+    passenger_app_env development;  # 以 development 配置启动 rails
+    
+    # 默认为on，如果是在 virtualbox 上，改为 off，
+    # 否则文件在文件系统中被覆盖，nginx还是读出原来的文件内容
+    # 参考：https://stackoverflow.com/a/13116771
+    # 参考：https://forums.virtualbox.org/viewtopic.php?f=3&t=33201
+    # 参考：https://www.cnblogs.com/zqifa/p/nginx-8.html
+    sendfile        off;
 
     server {
       listen 2280;
@@ -93,6 +102,23 @@ http {
 ...
 }
 ~~~
+
+
+#### passenger_app_env development; 设置运行环境为development
+
+* 参考： <https://stackoverflow.com/a/20845689/3316529>
+
+~~~ conf
+http {
+  passenger_root /home/user/.rvm/gems/ruby-2.1.0@app/gems/passenger-4.0.29;
+  passenger_ruby /home/user/.rvm/wrappers/ruby-2.1.0@app/ruby;
+  passenger_app_env development;
+}
+~~~
+
+
+
+
 
 
 ### nginx service 
@@ -296,6 +322,22 @@ service iptables restart
 chkconfig --add nginx
 chkconfig --list nginx
 ~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

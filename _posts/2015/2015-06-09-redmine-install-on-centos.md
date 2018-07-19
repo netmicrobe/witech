@@ -48,6 +48,13 @@ production:
 gem install bundler
 ~~~
 
+安装gem编译可能用到的package
+
+~~~ shell
+yum install -y mysql-devel ImageMagick ImageMagick-devel
+~~~
+
+
 只安装production要求的依赖包，具体依赖包信息参见redmine根目录下的Gemfile
 
 ~~~

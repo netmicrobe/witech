@@ -43,8 +43,10 @@ title: 开发、设计
   * [Tracy Mcgrady的专栏](https://blog.csdn.net/mcgrady_tracy)
   * [Radia的专栏](https://blog.csdn.net/radianceblau)
   * [UPON的博客](https://blog.csdn.net/u013491946)
-
-
+* vogella GmbH
+  * <http://www.vogella.com/tutorials/>
+  * Eclipse RCP 开发资料
+  * The vogella GmbH is a German company based in Hamburg and provides services ranging from technology development, production and development support, training and mentoring in the area of **Eclipse, Android and Git**.
 
 
 
