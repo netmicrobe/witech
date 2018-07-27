@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CentOS上安装 Shadowsocks 客户端
+title: Ubuntu上安装 Shadowsocks 客户端
 categories: [ cm, network ]
 tags: [ Shadowsocks, cnetos ]
 ---

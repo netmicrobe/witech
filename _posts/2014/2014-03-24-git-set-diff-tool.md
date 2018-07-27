@@ -5,7 +5,7 @@ categories: [cm, git]
 tags: [cm, git, diff]
 ---
 
-## 配置
+## Windows 下配置 WinMerge 作为 diff tool
 
 ### 下载安装winmerge（开源）
 
@@ -31,13 +31,39 @@ git config --global difftool.prompt false
 
 
 
-
-
-## 使用
+### 使用
 
 例如：
 
 ```
 git difftool HEAD^..HEAD
 ```
+
+
+
+
+
+## Linux 下配置 vimdiff
+
+* 参考： <https://stackoverflow.com/a/3713865>
+
+vimdiff 是vim带的一个diff
+
+~~~ shell
+git config --global diff.tool vimdiff
+git config --global difftool.prompt false
+git config --global alias.d difftool
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -12,7 +12,7 @@ tags: [symbol, English, punctuation]
 / Forward slash, Solidus, Virgule, or Whack
 : Colon
 ; Semicolon
-~ Tilde
+~ Tilde, Squiggle
 ` Acute, Back quote, grave, grave accent, left quote, open quote, or a push
 ! Exclamation mark, Exclamation point, or Bang
 @ Ampersat, Arobase, Asperand, At, or At symbol
@@ -35,12 +35,14 @@ $ Generic currency
 _ Underscore
 + Plus
 = Equals
-{ Open Brace, squiggly brackets, or curly bracket
-} Close Brace, squiggly brackets, or curly bracket
-[ Open bracket
-] Close bracket
+() braces, (curly) brackets 花括号
+  { Open Brace, squiggly brackets, or curly bracket
+  } Close Brace, squiggly brackets, or curly bracket
+[] (Square) brackets 方括号
+  [ Open bracket
+  ] Close bracket
 | Pipe, Or, or Vertical bar
-" Quote, Quotation mark, or Inverted commas
+" Quote, Double Quote, Quotation mark, or Inverted commas
 ' Apostrophe or Single Quote
 < Less Than or Angle brackets
 > Greater Than or Angle brackets  

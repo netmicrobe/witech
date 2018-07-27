@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CentOS上安装 Shadowsocks
+title: CentOS上安装 Shadowsocks 客户端
 categories: [ cm, network ]
 tags: [ Shadowsocks, cnetos ]
 ---
@@ -28,6 +28,7 @@ yum -y install epel-release
 ### 安装Shadowsocks客户端
 
 ~~~ shell
+yum install -y python python-pip
 pip install shadowsocks
 ~~~
 
@@ -175,6 +176,33 @@ Proxy-Connection: keep-alive
 while read var; do unset $var; done < <(env | grep -i proxy | awk -F= '{print $1}')
 ~~~
 
+### 配置shell
+
+编辑 .bashrc
+
+~~~ shell
+# git set / unset proxy
+function git-proxy() {
+  git config –-global http.proxy http://127.0.0.1:8118
+}
+function git-noproxy() {
+  git config --global --unset http.proxy
+}
+
+function ss-open() {
+  PROXY_HOST=127.0.0.1
+  export all_proxy=http://$PROXY_HOST:8118
+  export ftp_proxy=http://$PROXY_HOST:8118
+  export http_proxy=http://$PROXY_HOST:8118
+  export https_proxy=http://$PROXY_HOST:8118
+  export no_proxy=localhost,172.16.0.0/16,192.168.0.0/16.,127.0.0.1,10.10.0.0/16
+}
+
+function ss-close() {
+  while read var; do unset $var; done < <(env | grep -i proxy | awk -F= '{print $1}')
+}
+
+~~~
 
 
 ### 配置浏览器

@@ -73,7 +73,9 @@ title: 开发、设计
   * API REF: <http://www.javadoc.io/doc/com.google.code.gson/gson/2.8.2>
   * API REF: <https://google.github.io/gson/apidocs/index.html?overview-summary.html>
 
+## Ruby & Rails
 
+* [Ruby开发文档](http://doc.rubyfans.com/)
 
 ## Python
 
