@@ -1,10 +1,15 @@
 ---
 layout: post
-title: 添加新的查询过滤器到Redmine的issue查询界面
-date: 2018-07-23 11:40:18 +0800
+title: Redmine 开发
+date: 2018-07-31 08:55:18 +0800
 categories: [ dev, ruby ]
 tags: [redmine, rails]
 ---
+
+
+
+
+## 添加新的查询过滤器到Redmine的issue查询界面
 
 ### 在页面上能显示过滤器
 
@@ -134,6 +139,144 @@ tags: [redmine, rails]
       raise StatementInvalid.new(e.message)
     end
     ~~~
+
+
+## Redmine中使用ajax
+
+
+### view 代码
+
+~~~ erb
+<input class="xc_tags" type="checkbox" name="<%= cboxid %>" id="<%= cboxid %>" 
+ onchange="tagIssue('<%= escape_javascript tagissue_xc_tag_path( {:id => tag.id, :issue_id => @issue.id, :format => 'js'} )%>', this); return false;"/>
+
+<script>
+// 一般放在独立的js文件中
+function tagIssue(url, elem) {
+  return $.ajax({
+    url: url,
+    type: 'get'
+  });
+}
+</script>
+~~~
+
+
+### 目标 contorller
+
+~~~ ruby
+  # /xc_tag/1/tagissue/:issue_id
+  def tagissue
+    begin
+      @issue = Issue.find(params[:issue_id])
+    rescue ActiveRecord::RecordNotFound
+      #render plain: "no such issue", status: 404
+      head :no_content
+      return
+    end
+    
+    if @xc_tag.issues.exists?(@issue)
+      # take off the tag
+      @xc_tag.issues.delete(@issue)
+    else
+      # put the tag on
+      @xc_tag.issues << @issue
+    end
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+~~~
+
+
+#### 目标js
+
+* views\xc_tags\tagissue.js.erb
+
+~~~ erb
+alert("<%= @xc_tag.tagname %>");
+~~~
+
+
+
+
+## 添加新设置到Redmine管理界面
+
+
+修改 lib/redmine.rb
+
+~~~ ruby
+Redmine::MenuManager.map :admin_menu do |menu|
+  ... ...
+  menu.push :info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true
+  
+  # 添加新的连接到系统管理菜单
+  menu.push :your_new_feature, {:controller => 'your_new_feature', :action => 'index'}, :caption => '新的功能设置'
+end
+~~~
+
+* 效果如下：
+  * ![](settings.png)
+
+
+
+## 备注（journal）的访问控制
+
+### issue详情页上的备注可见控制
+
+修改 `app/controllers/issues_controller.rb` 的 show action
+
+~~~ ruby
+  def show
+    @journals = @issue.journals.includes(:user, :details).
+                    references(:user, :details).
+                    reorder(:created_on, :id).to_a
+    @journals.each_with_index {|j,i| j.indice = i+1}
+    
+    ... ...
+    
+    # 自定义备注tag的现实规则，目前tag过的备注，都是只给QA组看
+    @journals.reject! {|j| j.xc_jtags.size > 0 } unless User.current.is_qa_member?
+
+    ... ...
+end
+~~~
+
+
+### 限制备注更新时，邮件发送
+
+~~~ ruby
+# app/models/journal.rb
+
+  # 这个 journal 是否只能QA可见
+  def visible_only_qa
+    xc_jtags.size > 0 # 是否使用了自定义tag（目前自定义tag都是为QA的）
+  end
+
+  def each_notification(users, &block)
+    if users.any?
+    
+      # QA 备注，不发邮件给其他人
+      if visible_only_qa
+        users.select!(&:is_qa_member?)
+      end
+      
+      users_by_details_visibility = users.group_by do |user|
+        visible_details(user)
+      end
+      users_by_details_visibility.each do |visible_details, users|
+        if notes? || visible_details.any?
+          yield(users)
+        end
+      end
+    end
+  end
+~~~
+
+
+
 
 
 

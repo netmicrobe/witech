@@ -132,6 +132,10 @@ title: 开发、设计
 * 腾讯GAD
   * <http://gad.qq.com/>
   * 最专业的游戏人一站式服务平台，是游戏从业者学习交流、经验分享的综合社区，是开发团队获得成员招募、专家指导及技术、资金、发行等全面扶持的孵化基地。
+* 网易 Airtest IDE：Cross platform UI test automation IDE
+  * <http://airtest.netease.com/>
+
+
 
 ## Machine Learning
 

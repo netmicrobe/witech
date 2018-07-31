@@ -101,7 +101,23 @@ rails console
 
 ### 查看 route
 
-`app.entities_path` 打印 route path
+#### 命令行列出所有可用routes
+
+~~~ ruby
+bundle exec rake routes
+
+# 某个controller 的 routes
+CONTROLLER=users bundle exec rake routes
+~~~
+
+
+#### 开发模式直接网页查看 routes
+
+`http://localhost:3000/rails/info/routes`
+
+#### `app.entities_path` 打印 route path
+
+
 
 ### 在 controller 中调试
 

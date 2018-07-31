@@ -57,6 +57,7 @@ gem search STRING --remote
 
 ~~~
 gem install mygem
+gem install mygem -v 1.1.0
 ~~~
 
 ### 卸载
