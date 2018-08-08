@@ -91,6 +91,20 @@ body {
 	}
 }
 
+// Search
+// --------------------------------------------------
+.search-entry {
+  .tag {
+    display: inline-block;
+    margin: 4px;
+    color: $white;
+    @include rounded(3px);
+    background-color: lighten($base-color,50);
+    font-style: italic;
+    padding: 0px 6px;
+  }
+}
+
 // Single Post and Page
 // --------------------------------------------------
 .entry-meta {

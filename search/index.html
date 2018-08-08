@@ -21,9 +21,19 @@ comments: false
       searchInput: document.getElementById('search-input'),
       resultsContainer: document.getElementById('results-container'),
       json: '{{site.url}}/search.json',
-      searchResultTemplate: '<li class="entry-title"><a href="{url}" title="{title}">{title}</a></li>',
+      searchResultTemplate: '<li class="search-entry"><a href="{url}" title="{title}">{title}</a> <span class="tag">{category} {tags}</span></li>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'tags' && !value) {
+          return ""; // 没有tags，就返回空字符串，否则会显示{tags}
+        }
+        if (prop === 'category' && !value) {
+          return "";
+        }
+      },
       limit: 1000
     });
+    
+    $("#search-input").focus();
   }
 
 </script>
