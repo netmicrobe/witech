@@ -33,7 +33,7 @@ tags: [ wifi, 截包, wireshark, capture ]
 ![](QQ截图20180112115311.png)
 
 3. 将手机用wifi连接到这个热点
-若无法获取IP请参考 [ 手机连接wifi无法获取IP的解决方法 ]({{ site.baseurl }}{% link   _posts/2018/2018-03-05-手机连接wifi无法获取ip的解决方法.md %})
+若无法获取IP请参考 [ 手机连接wifi无法获取IP的解决方法 ](#phone-no-ip-in-wifi)
 
 ### 打开Wireshark，监控作为热点的接口
 
@@ -96,7 +96,7 @@ C:\WINDOWS\system32>netsh wlan stop hostednetwork
 
 
 
-
+<a name="phone-no-ip-in-wifi"></a>
 
 ### 手机连接wifi无法获取IP
 

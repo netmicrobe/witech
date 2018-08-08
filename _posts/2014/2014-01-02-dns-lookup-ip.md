@@ -1,11 +1,13 @@
 ---
 layout: post
-title: 查看DNS域名对应的IP
+title: 查看DNS域名对应的IP，清除DNS缓存
 categories: [cm, network, dns]
-tags: [cm, network]
+tags: [nslookup, windows, network]
 ---
 
 ## Windows7
+
+### 命令行检查dns解析信息
 
 ```
 C:\Users\ethan>nslookup open.play.cn
@@ -19,3 +21,31 @@ Addresses:  180.96.49.16
           180.96.49.15
           202.102.39.23
 ```
+
+### 清除DNS缓存
+
+~~~
+ipconfig /flushdns
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

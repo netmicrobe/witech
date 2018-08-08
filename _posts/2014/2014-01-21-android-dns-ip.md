@@ -1,13 +1,13 @@
 ---
 layout: post
-title: 查看域名的IP
+title: Android / Java 下如何获取域名的IP
 description: 
-categories: [java, dev]
-tags: [java]
+categories: [dev, android]
+tags: [java, android]
 ---
 
-{% highlight java %}
+~~~ java
 InetAddress address =InetAddress.getByName("www.example.com");
 System.out.println(address.getHostAddress());
-{% endhighlight %}
+~~~
 
