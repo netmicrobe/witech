@@ -164,8 +164,6 @@ header .entry-meta {
 			padding: 20px 30px;
 		}
 		@media #{$large} {
-			max-width: 800px;
-			margin: 50px auto 30px auto;
 			padding: 50px 80px;
 			> p:first-child {
 				@include font-size(20);
@@ -702,3 +700,27 @@ ul.social-buttons li a:active {
   padding: 4px;
   line-height: 1.2em;
 }
+
+
+
+// 代码演示用iframe
+// --------------------------------------------------
+
+iframe {
+  width: 100%;
+  border: 1px solid #dddddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
