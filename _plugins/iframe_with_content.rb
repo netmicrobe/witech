@@ -31,9 +31,6 @@ module Jekyll
         f.write("#{super.to_s}")
       end
       
-      puts "##### ##### filename: #{filepath}"
-      puts "##### ##### #####\n\n"
-      
       output_text = <<EOT
 <iframe class="embeded-iframe" src="#{filename}"></iframe>
 EOT
