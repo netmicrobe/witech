@@ -14,32 +14,49 @@ module Jekyll
     end
 
     def render(context)
+    
+      site = context.registers[:site]
+      page = context.registers[:page]
+      distdir = File.expand_path("../.", page.destination(''))
+      
+      if !Dir.exist?(distdir)
+        FileUtils.mkdir_p(distdir)
+        FileUtils.chmod("u=rwx,go=rx", distdir)
+      end
+      
+      filename = Time.now.strftime('%Y%m%d%H%M%S%L') << '.html';
+      filepath = File.expand_path(filename, distdir)
+      
+      File.open(filepath, 'w') do |f|
+        f.write("#{super.to_s}")
+      end
+      
+      puts "##### ##### filename: #{filepath}"
+      puts "##### ##### #####\n\n"
+      
       output_text = <<EOT
-<div id='#{@container_id}'></div>
-<script type="text/javascript">
-$( document ).ready(function() {
-  var iframe = document.createElement('iframe');
-  
-  //iframe.setAttribute('scrolling','no'); // 关闭滚动条
-  iframe.setAttribute('class','embeded-iframe');
-  
-  document.getElementById('#{@container_id}').appendChild(iframe);
-  var doc = iframe.document;
-  if(iframe.contentDocument)
-    doc = iframe.contentDocument; // For NS6
-  else if(iframe.contentWindow)
-    doc = iframe.contentWindow.document; // For IE5.5 and IE6
-  // Put the content in the iframe
-  doc.open();
-  doc.write(\"#{super.to_s.gsub(/[\n\r]/, ' ').gsub('"', '\\"')}\");
-  
-  // iframe 高度自适应内容
-  //iframe.width  = doc.body.scrollWidth;
-  iframe.height = doc.body.scrollHeight;
-  doc.close();
-});
-</script>
+<iframe class="embeded-iframe" src="#{filename}"></iframe>
 EOT
+    end
+  end
+  
+  module Drops
+    class DocumentDrop
+      def_delegators :@obj, :destination
+    end
+  end
+  
+  class Site
+    # cleanup 会把 render 阶段生成的文件给删掉，
+    # 所以将 clearup 提前到 render 前面
+    def process
+      reset
+      read
+      generate
+      cleanup
+      render
+      write
+      print_stats
     end
   end
 end
