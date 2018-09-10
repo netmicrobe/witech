@@ -31,9 +31,19 @@ ipconfig /flushdns
 
 
 
+## CentOS
 
+安装 `bind-utils` 后可以使用 `nslookup` 命令。
 
+~~~
+yum install bind-utils
+~~~
 
+you can search for what package provides a command using the yum provides command:
+
+~~~
+sudo yum provides '*bin/nslookup'
+~~~
 
 
 

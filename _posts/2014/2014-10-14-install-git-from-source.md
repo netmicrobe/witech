@@ -8,16 +8,21 @@ tags: [centos, git]
 ## 源码下载地址
 
 * <https://www.kernel.org/pub/software/scm/git/>
+* <https://mirrors.edge.kernel.org/pub/software/scm/git/>
+
 
 ## 安装步骤
 
-1、安装依赖
+源代码目录下的 `INSTALL` 文件会有编译安装说明。
+
+### 安装依赖
 
 ```
-yum -y install curl curl-devel zlib-devel openssl-devel perl cpio expat-devel gettext-devel autoconf
+yum -y install curl curl-devel zlib-devel openssl-devel perl cpio expat-devel gettext-devel autoconf perl-ExtUtils-MakeMaker
+yum install -y asciidoc xmlto
 ```
 
-2、开始安装
+### 编译&安装
 
 ```
 svn co https://github.com/git/git
@@ -26,7 +31,16 @@ autoconf
 make && make install
 ```
 
-3、查看版本
+或者
+
+~~~ shell
+make configure ;# as yourself
+./configure --prefix=/usr ;# as yourself
+make all doc ;# as yourself
+make install install-doc install-html;# as root
+~~~
+
+### 查看版本
 
 ```
 git --version

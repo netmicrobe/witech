@@ -50,9 +50,13 @@ Before looking at the code, let’s get ourselves elbow-deep in Volley and under
 
 ### Add Volley To Your Project Easily
 
-To use Volley, you must add the `android.permission.INTERNET` permission to your app’s manifest. Without this, your app won’t be able to connect to the network.
+#### 添加网络访问的permission `android.permission.INTERNET`
 
-#### 方法1
+~~~ xml
+<uses-permission android:name="android.permission.INTERNET" />
+~~~
+
+#### 方法1，通过gradle引用
 
 The easiest way to add Volley to your project is to add the following dependency to your app’s build.gradle file.
 
@@ -60,19 +64,19 @@ The easiest way to add Volley to your project is to add the following dependency
 
 ~~~ gradle
 dependencies {
-  compile 'com.android.volley:volley:x.y.z'
+  implementation 'com.android.volley:volley:x.y.z'
 }
 ~~~
 
 ~~~ gradle
 dependencies {
     ...
-    compile 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.1.0'
 }
 ~~~
 
 
-#### 方法2
+#### 方法2，直接下载volley源代码
 
 Another way to do this is by cloning the Volley repository. Build Volley with Ant, copy the built volley.jar file in the libs folder, and then create an entry in build.gradle to use the jar file. Here’s how:
 
@@ -92,11 +96,6 @@ You can find the generated volley.jar in Volley’s bin folder. Copy it to your 
   }
   ~~~
 
-
-
-### Add the INTERNET Permission
-
-To use Volley, you must add the `android.permission.INTERNET` permission
 
 
 

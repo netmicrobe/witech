@@ -212,6 +212,10 @@ true
 847
 ~~~
 
+### window.devicePixelRatio 缩放比例
+
+网页在浏览器中的缩放比例，不缩放，值为 1；放大到 150%，值为 1.5；缩小到 90%，值为 0.9
+
 ~~~ javascript
 // the difference (ratio) between physical pixels and device pixels in the
 // retina displays in mobile devices (for example, value 2 in iPhone).
