@@ -49,6 +49,11 @@ title: 开发、设计
   * The vogella GmbH is a German company based in Hamburg and provides services ranging from technology development, production and development support, training and mentoring in the area of **Eclipse, Android and Git**.
 
 
+### 文档工具
+
+* [jekyll](https://jekyllrb.com)
+
+
 
 ## UX 设计
 
@@ -59,6 +64,14 @@ title: 开发、设计
 ### CSS
 
 * [Learn to Code HTML & CSS](https://learn.shayhowe.com/html-css/)
+
+
+### 图片生成工具
+
+* [Trianglify.io 三角形拼接抽象图形在线生成](https://trianglify.io/)
+  * Trianglify.io is a tool Quinn Rohlf wrote to generate low-poly backgrounds, textures, and vectors. It's based on an open-source library, [Trianglify](https://github.com/qrohlf/trianglify), which Quinn Rohlf also wrote.
+* [waterpipe.js 抽象烟状图像在线生成工具](http://dragdropsite.github.io/waterpipe.js/)
+* [10 Free ‘Random Background Generators’ for Graphic and Web Designers](https://www.templatemonster.com/blog/free-background-generators/)
 
 
 
@@ -85,6 +98,10 @@ title: 开发、设计
   * <https://github.com/google/gson>
   * API REF: <http://www.javadoc.io/doc/com.google.code.gson/gson/2.8.2>
   * API REF: <https://google.github.io/gson/apidocs/index.html?overview-summary.html>
+* 适配
+  * [CSDN - Trilen - Android 机型适配问题整理](https://blog.csdn.net/u010019468/article/details/72853663)
+
+
 
 ## Ruby & Rails
 
@@ -179,7 +196,10 @@ title: 开发、设计
   * <https://coderprog.com/>
 * Fox eBook
   * <http://www.foxebook.net/>
-
+* Salttiger
+  * <https://salttiger.com/feed/>
+  * <http://weibo.com/u/2662583003?sudaref=www.verycd.com&retcode=6102&is_hot=1>
+  * <https://salttiger.com/>
 
 
 
@@ -188,7 +208,9 @@ title: 开发、设计
 * Pastebin.com 
   * <https://pastebin.com/>
   * Pastebin is a website where you can store any text online for easy sharing. The website is mainly used by programmers to store pieces of sources code or configuration information, but anyone is more than welcome to paste any type of text. The idea behind the site is to make it more convenient for people to share large amounts of text online.
-
+* asciinema
+  * <https://asciinema.org>
+  * asciinema (formerly ascii.io) is a free and open source solution for recording terminal sessions and sharing them on the web.
 
 
 
