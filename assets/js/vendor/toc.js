@@ -51,12 +51,14 @@
       header_index.push(1);
     }
     
+    /*
     headers.on('click', function() {
       if (!settings.noBackToTopLinks) {
         window.location.hash = this.id;
       }
     })
-    .addClass('clickable-header')
+    */
+    headers.addClass('clickable-header')
     .each(function(index, header) {
       this_level = get_level(header);
       
