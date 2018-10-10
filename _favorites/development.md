@@ -101,6 +101,15 @@ title: 开发、设计
 * 适配
   * [CSDN - Trilen - Android 机型适配问题整理](https://blog.csdn.net/u010019468/article/details/72853663)
 
+### Android 综合
+
+* [Github - francistao/LearningNotes](https://github.com/francistao/LearningNotes)
+
+### Android 玩机、刷机、root
+
+* [移动叔叔](http://bbs.ydss.cn/)
+
+
 
 
 ## Ruby & Rails

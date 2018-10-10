@@ -184,8 +184,16 @@ module Jekyll
         if Dir.exist?(assets_folder)
           files = Dir.entries(assets_folder).map {|f| f.encode("utf-8")};
           files = files.select do |f|
-            File.file?(File.expand_path(f, assets_folder))
+            # 使用join，而不是 expand_path。
+            # 因为 expand_path 发现第一个参数（文件名）以 tilde ~ 开头，
+            # 会将 ~xxx 解释为 xxx 用户的home目录。
+            # 所以，在windows上，出现office临时文件（以“~$xxx”）的时候，就会报错：
+            # Liquid Exception: can't find user $xxx
+            File.file?(File.join(assets_folder, f))
           end
+          # 删除office临时文件，Mac / Windows 的临时文件
+          macos_tempfiles = ['.DS_Store', '.AppleDouble', '.LSOverride', 'Desktop.ini', 'Thumbs.db', 'ehthumbs.db' ]
+          files.reject! {|f| f.start_with?("\~\$") || macos_tempfiles.include?(f)}
         end
         files
       end
