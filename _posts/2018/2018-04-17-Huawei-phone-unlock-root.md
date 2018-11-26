@@ -174,6 +174,8 @@ tags: [ adb, fastboot, bootloader, root, unlock ]
 
 ## 畅享6s 刷机
 
+同时按下【音量上】【开机键】，启动进入 TWRP
+
 * 用 TWRP recovery 刷入如下的zip包就好了。
   * [EMUI4.1 B163卡刷包，root +xposed](http://cn.ui.vmall.com/thread-12692073-1-1.html)
   * [EMUI4.1 B164卡刷包，root +xposed](http://cn.club.vmall.com/thread-12927426-1-1.html)

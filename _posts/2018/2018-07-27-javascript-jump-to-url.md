@@ -2,7 +2,7 @@
 layout: post
 title: 使用 JS 跳转到指定url
 categories: [ dev, javascript ]
-tags: [  ]
+tags: [ javascript ]
 ---
 
 ---
