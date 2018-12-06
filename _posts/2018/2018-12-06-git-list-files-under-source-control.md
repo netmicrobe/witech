@@ -7,6 +7,7 @@ tags: [git]
 
 * 参考
   * <https://superuser.com/a/429694>
+  * <https://stackoverflow.com/a/15606995/3316529>
 
 
 
@@ -32,6 +33,10 @@ git log --pretty=format: --name-status . | cut -f2- | sort -u
 
 ~~~
 git log --pretty=format: --name-status | cut -f2- | sort -u
+~~~
+
+~~~
+git log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'
 ~~~
 
 
