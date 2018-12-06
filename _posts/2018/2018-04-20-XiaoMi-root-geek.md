@@ -14,7 +14,8 @@ tags: [ adb, fastboot, bootloader, root, unlock ]
     * [Unlock Bootloader, Install TWRP Recovery and Root Xiaomi Mi 5X (Tiffany)](http://www.stechguide.com/install-twrp-recovery-and-root-xiaomi-mi-5x/)
     * [How To Install dotOS on Xiaomi Mi 5X based on Android 8.1 Oreo](https://www.getdroidtips.com/dotos-xiaomi-mi-5x/)
     * [Device configuration for Xiaomi Mi 5X](https://github.com/Mi5xDevs/android_device_xiaomi_tiffany)
-
+    * [Mi 5X Oxygen/Tiffany TWRP 3.1.1](http://en.miui.com/thread-1110001-1-1.html)
+    * [All about Mi 5X from AliExpress (fake firmware, bricks and etc)](http://en.miui.com/thread-840402-1-1.html)
 
 
 ## 解锁
