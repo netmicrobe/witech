@@ -1,0 +1,94 @@
+---
+layout: post
+title: VirtualBox VM/虚拟机 虚拟硬盘扩大容量，压缩磁盘上内容
+categories: [ cm, vm ]
+tags: [VirtualBox, vdi]
+---
+
+* 参考
+  * []()
+  * <https://forums.virtualbox.org/viewtopic.php?t=78744>
+  * <https://www.howtogeek.com/312883/how-to-shrink-a-virtualbox-virtual-machine-and-free-up-disk-space/>
+
+
+
+## VirtualBox 5.1
+
+### 扩大虚拟硬盘容量
+
+#### `VBoxManage modifymedium disk your-disk-file.vdi --resize your-new-size-MB`
+
+下面例子，原来50G（C:），执行命令很快，虚拟盘扩展到100G，
+再启动Windows，磁盘管理器看，多了50G未分配空间，在上面新建分区才能使用。
+
+~~~、
+>VBoxManage modifymedium disk win7x86.vdi --resize 102400
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+~~~
+
+### 压缩磁盘
+
+#### `VBoxManage modifymedium disk your-disk-file.vdi --compact`
+
+从40155 MB压缩到了 40124 MB，效果一般。
+
+~~~
+>VBoxManage modifymedium disk win7x86.vdi --compact
+~~~
+
+#### Windows 7 中压缩磁盘内容
+
+1. 资源管理器中右键点击磁盘（如C:），右键菜单选择属性
+1. “常规选”项卡 -》磁盘清理
+1. “工具选”项卡 -》碎片整理
+
+
+#### sdelete
+
+下载地址： <https://technet.microsoft.com/en-us/sysinternals/bb897443>
+
+删除的文件其实还在虚拟硬盘中，只有将内容全写0，VirtualBox才能真正压缩。
+`sdelete` 就是干写0的事情的。
+
+
+
+
+
+### VBoxManage 工具
+
+VBoxManage.exe 这个工具程序在VirtualBox安装目录下，可以设置到path中。
+
+
+~~~
+>VBoxManage -help | find "medium"
+  closemedium               [disk|dvd|floppy] <uuid|filename>
+                            [--medium none|emptydrive|additions|
+  showmediuminfo            [disk|dvd|floppy] <uuid|filename>
+  createmedium              [disk|dvd|floppy] --filename <filename>
+  modifymedium              [disk|dvd|floppy] <uuid|filename>
+  clonemedium               [disk|dvd|floppy] <uuid|inputfile> <uuid|outputfile>
+  mediumproperty            [disk|dvd|floppy] set <uuid|filename>
+  encryptmedium             <uuid|filename>
+  checkmediumpwd            <uuid|filename>
+~~~
+
+~~~
+>VBoxManage showmediuminfo disk win7x86.vdi
+UUID:           08b51f97-43b2-4b3b-964d-89c829988f19
+Parent UUID:    base
+State:          created
+Type:           normal (base)
+Location:       D:\VirtualBox_VMs\win7x86-32bit\win7x86\win7x86.vdi
+Storage format: VDI
+Format variant: dynamic default
+Capacity:       51200 MBytes
+Size on disk:   5385 MBytes
+Encryption:     disabled
+In use by VMs:  win7x86 (UUID: 3338da73-9c7d-415d-b91d-a2046810f79b) [win7x86 和 win7x86_tmqq 的链接基础 (UUID: 95beefd7-7132-496a-b89f-3c23e1b7688b)]
+Child UUIDs:    e33c82fb-8f81-4f65-a001-d3bc18569009
+                8c71e5fc-e760-4b65-a688-d65c026132dc
+~~~
+
+
+
+
