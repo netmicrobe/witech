@@ -36,13 +36,17 @@ tags: [VirtualBox, vdi]
 
 ### 压缩磁盘
 
-#### `VBoxManage modifymedium disk your-disk-file.vdi --compact`
 
-从40155 MB压缩到了 40124 MB，效果一般。
+#### 如何找到当前要压缩的vdi文件
+
+可以在菜单File -- Virtual Media Manager 中查看。
+
+或者，
 
 ~~~
->VBoxManage modifymedium disk win7x86.vdi --compact
+VBoxManage.exe list hdds
 ~~~
+
 
 #### Windows 7 中压缩磁盘内容
 
@@ -53,10 +57,46 @@ tags: [VirtualBox, vdi]
 
 #### sdelete
 
-下载地址： <https://technet.microsoft.com/en-us/sysinternals/bb897443>
+* <https://technet.microsoft.com/en-us/sysinternals/bb897443>
+* <https://docs.microsoft.com/zh-cn/sysinternals/downloads/sdelete>
 
 删除的文件其实还在虚拟硬盘中，只有将内容全写0，VirtualBox才能真正压缩。
 `sdelete` 就是干写0的事情的。
+
+
+This will write zeros to all the free disk space on drive C:.
+As the SDelete page on Microsoft’s website notes, the -z option is “good for virtual disk optimization”.
+
+~~~
+sdelete.exe c: -z
+~~~
+
+执行完上述操作然后关机。再运行 VBoxManage 来 compact disk 试试。
+
+
+#### `VBoxManage modifymedium disk your-disk-file.vdi --compact`
+
+从40155 MB压缩到了 40124 MB，效果一般。
+
+~~~
+>VBoxManage modifymedium disk win7x86.vdi --compact
+~~~
+
+
+
+
+
+
+### 考虑删除不用的snapshot来节约空间
+
+VirtualBox allows you to create snapshots for each virtual machine. These contain a full image of the virtual machine when you created the snapshot, allowing you to restore it to a previous state. These can take a lot of space.
+
+
+
+
+
+### snapshot 使用
+
 
 
 
