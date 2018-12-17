@@ -1,6 +1,6 @@
 ---
 layout: post
-title: VirtualBox VM/虚拟机 虚拟硬盘扩大容量，压缩磁盘上内容
+title: VirtualBox VM/虚拟机：Windows 系统虚拟硬盘扩大容量，压缩磁盘上内容
 categories: [ cm, vm ]
 tags: [VirtualBox, vdi]
 ---
@@ -9,6 +9,14 @@ tags: [VirtualBox, vdi]
   * []()
   * <https://forums.virtualbox.org/viewtopic.php?t=78744>
   * <https://www.howtogeek.com/312883/how-to-shrink-a-virtualbox-virtual-machine-and-free-up-disk-space/>
+
+
+## Windows 7
+
+### 删除补丁安装包
+
+`C:\Windows\SoftwareDistribution\DataStore` 和 `C:\Windows\SoftwareDistribution\Download` 下的所有文件。
+
 
 
 
