@@ -7,14 +7,49 @@ tags: [cm, xampp, windows, apache, msyql]
 ---
 
 ## 安装
- 
- 
+
+
 安装php运行环境（Windows）
 在Windows2003上执行php.exe需要“Microsoft C++ 2008 runtime package”。
 Microsoft Visual C++ 2008 Redistributable Package (x64)
 <http://www.microsoft.com/en-us/download/details.aspx?id=5582>
- 
+
 解压xampp面安装包，执行setup_xampp.bat
+
+
+
+### portable 版本
+
+1. 全文搜索配置文件中路径，改成相对路径
+    执行完 setup_xampp.bat ，还是要改配置文件中的路径，改的是错误的绝对路径。改成什么可以对照下 php.ini 中 `extension_dir` 。
+
+
+
+
+
+## 配置php
+
+将php的执行路径配置进 PATH
+
+#### 不能找到 extension 的问题
+
+* 现象
+
+~~~
+PHP Warning:  PHP Startup: Unable to load dynamic library '\xampp\php\ext\php_bz2.dll' - 找不到指定的模块。
+ in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library '\xampp\php\ext\php_bz2.dll' - 找不到指定的模块。
+ in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '\xampp\php\ext\php_curl.dll' - 找不到指定的模块。
+ in Unknown on line 0
+~~~
+
+* 解决
+
+编辑 php.ini 中 `extension_dir`
+
+
 
 
 
@@ -251,16 +286,55 @@ Alias /phpmyadmin "C:/server/xampp-win32-1.8.1-VC9/xampp/phpMyAdmin/"
 ### 如何查看apache启动失败的详细信息
 
 直接使用命令行启动apache
- 
+
+
+
 ### VMWare 8  的Shared功能与SSL端口冲突
 
 VMWare8的Shared VM功能用到SSL的443端口，和apache冲突。
 关闭Shared VM功能解决此问题：
 Preference  >>  Shared VMs  >>  Disable Sharing
- 
- 
+
+
+
 ### xampp 1.7.7在windows7下无法启动Service
 
 权限问题，直接运行xampp-control-panel 2.5无法注册Service成功。
 使用“xampp-control-3-beta.exe”来启动FTP吧！
+
+
+
+### php打开扩展组件
+
+1. 看下 xampp\php\ext 下面有没有对应的 dll，例如，`php_sockets.dll`
+2. 有的话，在 php.ini 设置，例如，`extension=php_sockets.dll`
+
+
+
+
+## 常见问题
+
+### Unable to load dynamic library '\xampp\php\ext\php_bz2.dll'
+
+php.ini 
+`extension_dir = "\xampp\php\ext"`
+改成 `extension_dir = "c:\where-is-xampp\php\ext"`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
