@@ -28,8 +28,9 @@ absolute value of     | 绝对值
 negative some-number  | 负数
 
 
-Additive Inverse Property   |  加法逆元 ， 
+Additive Inverse Property   |  加法逆元
 opposite number             |  相反数
+Multiplication Inverse Property | 乘法逆元
 
 
 
