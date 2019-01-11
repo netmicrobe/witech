@@ -6,7 +6,7 @@ tags: [VirtualBox, vdi]
 ---
 
 * 参考
-  * []()
+  * [VirtualBox – how to reduce virtual disk sizes](https://better-coding.com/solved-virtualbox-how-to-reduce-virtual-disk-size/)
   * <https://forums.virtualbox.org/viewtopic.php?t=78744>
   * <https://www.howtogeek.com/312883/how-to-shrink-a-virtualbox-virtual-machine-and-free-up-disk-space/>
 
@@ -17,6 +17,69 @@ tags: [VirtualBox, vdi]
 
 `C:\Windows\SoftwareDistribution\DataStore` 和 `C:\Windows\SoftwareDistribution\Download` 下的所有文件。
 
+### Windows 7 中压缩磁盘内容
+
+1. 资源管理器中右键点击磁盘（如C:），右键菜单选择属性
+1. “常规选”项卡 -》磁盘清理
+1. “工具选”项卡 -》碎片整理
+
+
+### sdelete
+
+* <https://technet.microsoft.com/en-us/sysinternals/bb897443>
+* <https://docs.microsoft.com/zh-cn/sysinternals/downloads/sdelete>
+
+删除的文件其实还在虚拟硬盘中，只有将内容全写0，VirtualBox才能真正压缩。
+`sdelete` 就是干写0的事情的。
+
+
+This will write zeros to all the free disk space on drive C:.
+As the SDelete page on Microsoft’s website notes, the -z option is “good for virtual disk optimization”.
+
+~~~
+sdelete.exe c: -z
+~~~
+
+执行完上述操作然后关机。再运行 VBoxManage 来 compact disk 试试。
+
+
+#### `VBoxManage modifymedium disk your-disk-file.vdi --compact`
+
+从40155 MB压缩到了 40124 MB，效果一般。
+
+~~~
+>VBoxManage modifymedium disk win7x86.vdi --compact
+~~~
+
+
+
+
+## Ubuntu 18.04
+
+### 使用 zerofree 工具
+
+* 参考： <http://manpages.ubuntu.com/manpages/trusty/man8/zerofree.8.html>
+
+1. 安装 zerofree
+    ~~~
+    sudo apt-get install zerofree
+    ~~~
+2. 重启系统，BIOS界面按`ESC`进入`recovery mode`
+    ![](zerofree.png)
+3. Zero unused space
+    ~~~
+    # 找到目标分区
+    df -h
+    # Zero unused space, -v 显示进度
+    zerofree -v /dev/sda1
+    ~~~
+
+
+### 压缩vdi
+
+1. 先使用 zerofree
+2. 再使用 VBoxManage
+    `VBoxManage modifymedium disk <DISK_LOCATION> --compact`
 
 
 
@@ -46,42 +109,6 @@ tags: [VirtualBox, vdi]
 ~~~
 VBoxManage.exe list hdds
 ~~~
-
-
-#### Windows 7 中压缩磁盘内容
-
-1. 资源管理器中右键点击磁盘（如C:），右键菜单选择属性
-1. “常规选”项卡 -》磁盘清理
-1. “工具选”项卡 -》碎片整理
-
-
-#### sdelete
-
-* <https://technet.microsoft.com/en-us/sysinternals/bb897443>
-* <https://docs.microsoft.com/zh-cn/sysinternals/downloads/sdelete>
-
-删除的文件其实还在虚拟硬盘中，只有将内容全写0，VirtualBox才能真正压缩。
-`sdelete` 就是干写0的事情的。
-
-
-This will write zeros to all the free disk space on drive C:.
-As the SDelete page on Microsoft’s website notes, the -z option is “good for virtual disk optimization”.
-
-~~~
-sdelete.exe c: -z
-~~~
-
-执行完上述操作然后关机。再运行 VBoxManage 来 compact disk 试试。
-
-
-#### `VBoxManage modifymedium disk your-disk-file.vdi --compact`
-
-从40155 MB压缩到了 40124 MB，效果一般。
-
-~~~
->VBoxManage modifymedium disk win7x86.vdi --compact
-~~~
-
 
 
 
