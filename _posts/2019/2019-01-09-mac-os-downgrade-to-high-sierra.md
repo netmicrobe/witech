@@ -48,11 +48,19 @@ tags: [operating-system, macintosh]
     Done.
     ~~~
 
-4. 通过 U 盘安装 high Sierra ，抹盘全新安装系统
+
+4. 设置允许外部U盘启动
+
+    1. 按下电源键开机，`Cmd + r` 进入 “macOS 实用工具”
+    2. “实用工具” 》启动安全性实用工具，设置“允许外部U盘启动”
+        ![](security-utility.jpg)
+
+
+5. 通过 U 盘安装 high Sierra ，抹盘全新安装系统
 
     1. 按下电源键开机，当听到“噹”的一声时，按住 Option 键不放，直到出现启动菜单选项，选择U盘启动。
     2. 选择【磁盘工具】格式化电脑硬盘
-        ![](format-harddisk.jpeg)
+        ![](disk-utility-udisk-os-recovery.jpg)
     3. 选择【安装macOS】按照新系统到硬盘。
         ![](install-to-harddisk.jpeg)
 
@@ -61,15 +69,18 @@ tags: [operating-system, macintosh]
 ## 使用macOS Recovery回退（电脑出厂就是High Sierra）
 
 1. 启动电脑，迅速按下组合键 `Shift-Option-⌘-R`，看到apple logo后松开，进入 macOS Recovery
-    ![](macos-high-sierra-recovery-mode-reinstall.jpg)
+    ![](enter-factory-os-recovery.jpg)
     组合键参考
-    | Command (⌘)-R    |     Install the latest macOS that was installed on your Mac.
-    | Option-⌘-R           |     Upgrade to the latest macOS compatible with your Mac.
-    | Shift-Option-⌘-R  |     Install the macOS that came with your Mac, or the closest version still available.
+    | Command -R    |     Install the latest macOS that was installed on your Mac.
+    | Option-Cmd-R           |     Upgrade to the latest macOS compatible with your Mac.
+    | Shift-Option-Cmd-R  |     Install the macOS that came with your Mac, or the closest version still available.
 
-2. 如果要格式化硬盘，就选择 “Disk Utility”
+2. 使用 “Disk Utility”格式化硬盘
+    必须要格式化原来硬盘，否则提示“不能升级MacOS，已经安装了更高的版本”
+    ![](disk-utility-factory-os-recovery.jpg)
 
 3. 选择：“Reinstall macOS”，点继续，期间可能重启几次。
+    ![](macos-high-sierra-recovery-mode-reinstall.jpg)
 
 
 
