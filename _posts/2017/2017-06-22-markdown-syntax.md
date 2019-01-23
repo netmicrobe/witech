@@ -8,6 +8,7 @@ tags:
 ---
 
 参考：
+  * [Markdown 语法整理大集合2017](https://www.jianshu.com/p/b03a8d7b1719)
   * [Daring Fireball - Markdown Official Site](https://daringfireball.net/projects/markdown/)
   * [Gitlab - Markdown Kramdown Tips & Tricks](https://about.gitlab.com/2016/07/19/markdown-kramdown-tips-and-tricks/)
   * [Markdown 语法说明 (简体中文版)](http://wowubuntu.com/markdown/)
