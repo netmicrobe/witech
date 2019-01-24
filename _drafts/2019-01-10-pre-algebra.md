@@ -33,8 +33,40 @@ opposite number             |  相反数
 Multiplication Inverse Property | 乘法逆元
 
 
+### 约数与倍数
 
+Prime Number
+: 质数，素数，只能被1和本身整除的自然数
 
+factor
+: 因子
+
+prime factorization
+: 质因数分解式，将一个自然数写成一系列质数的乘积
+
+exponential notation
+: 指数记数法
+
+least common multiple 简称 LCM
+: 最小公倍数
+
+multiple
+: 倍数
+
+greatest common divisor
+: 最大公约数
+
+divisible
+: 整除
+
+remainder
+: 余数
+
+even
+: 偶数
+
+odd
+: 奇数
 
 
 
