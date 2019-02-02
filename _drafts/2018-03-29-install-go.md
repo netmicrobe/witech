@@ -39,6 +39,15 @@ After downloading a binary release, visit <https://golang.org/doc/install> or lo
 下载msi（如，go1.11.5.windows-amd64.msi）直接安装，执行路径都自动添加到path配置，默认安装在 `c:\go`
 
 
+### Mac OS
+
+~~~
+brew install golang
+~~~
+
+
+
+
 ## Installing Go from source
 
 <https://golang.org/doc/install/source>
