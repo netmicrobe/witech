@@ -76,9 +76,9 @@ tags: [editor]
 
 
 
-## 设置实例
+### 设置实例
 
-### How to set indentation to always use space?
+#### How to set indentation to always use space?
 
 ~~~
 (progn
@@ -90,7 +90,7 @@ tags: [editor]
 ~~~
 
 
-### 如何配置Emacs，使得输入TAB时，用空格替代
+#### 如何配置Emacs，使得输入TAB时，用空格替代
 
 默认情况下，在Emacs中按一下TAB，就是输入TAB，如果我们想让它输入的是空格（并且可以指定按一下TAB输入几个空格），可以在.emacs中这样配置：
 
@@ -101,10 +101,44 @@ tags: [editor]
 ~~~
 
 
+#### 关闭：回车换行时，自动删除行末空格
+
+* [phils' answer](https://emacs.stackexchange.com/a/21887)
+  This is a feature of `electric-indent-mode` (which is on by default in recent versions of Emacs). The behaviour is hard-coded in `electric-indent-post-self-insert-function`.
+
+* [GDP2 的 hack方案](https://emacs.stackexchange.com/a/21913)
+
+* 其他参考
+  * <https://stackoverflow.com/questions/31135835/prevent-emacs-from-deleting-trailing-whitespace-when-return-key-is-pressed>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## White Space model
+
+* [Gnu manual - 14.16 Useless Whitespace](https://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html)
+* [EmacsWiki - WhiteSpace](https://www.emacswiki.org/emacs/WhiteSpace)
 
 
 
