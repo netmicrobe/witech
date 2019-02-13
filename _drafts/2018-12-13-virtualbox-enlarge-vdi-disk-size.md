@@ -69,7 +69,7 @@ sdelete.exe c: -z
 * apt/apt-get autoremove → removes orphaned packages which are not longer needed from the system, but not purges them, use the --purge option together with the command for that.
 
 ~~~
-sudo apt -y autoremove && sudo apt -y clean
+sudo apt autoremove && sudo apt clean
 ~~~
 
 

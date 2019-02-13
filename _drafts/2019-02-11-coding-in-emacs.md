@@ -110,9 +110,12 @@ tags: [editor]
 
 * 其他参考
   * <https://stackoverflow.com/questions/31135835/prevent-emacs-from-deleting-trailing-whitespace-when-return-key-is-pressed>
+  * <https://www.gnu.org/software/emacs/manual/html_node/emacs/Indent-Convenience.html>
 
-
-
+* Electric Indent mode
+  * `electric-indent-mode` 是一个全局minor模式，默认打开，决定了每次“回车”后的 indent 行为。
+  * To toggle this minor mode, type `M-x electric-indent-mode`.
+  * To toggle the mode in a single buffer, use `M-x electric-indent-local-mode`.
 
 
 
