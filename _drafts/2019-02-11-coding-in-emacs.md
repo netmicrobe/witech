@@ -19,7 +19,10 @@ tags: [editor]
 ## 缩进 intentation
 
 * [EmacsWiki - IndentationBasics](https://www.emacswiki.org/emacs/IndentationBasics)
+* [EmacsWiki - AutoIndentMode](https://www.emacswiki.org/emacs/AutoIndentMode)
 * [Emacs: Tabs, Space, Indentation Setup](http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html)
+* [EmacsWiki - SmartTabs](https://www.emacswiki.org/emacs/SmartTabs)
+* [The Ultimate Guide To Indentation in Emacs (Tabs and Spaces)](https://dougie.io/emacs/indentation/)
 
 ### Basic Intentation
 
@@ -144,8 +147,8 @@ tags: [editor]
 * [EmacsWiki - WhiteSpace](https://www.emacswiki.org/emacs/WhiteSpace)
 
 
-
-
+`(global-whitespace-mode 1)`
+: 默认打开 white space mode
 
 
 
