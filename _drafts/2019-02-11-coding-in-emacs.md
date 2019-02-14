@@ -23,6 +23,7 @@ tags: [editor]
 * [Emacs: Tabs, Space, Indentation Setup](http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html)
 * [EmacsWiki - SmartTabs](https://www.emacswiki.org/emacs/SmartTabs)
 * [The Ultimate Guide To Indentation in Emacs (Tabs and Spaces)](https://dougie.io/emacs/indentation/)
+* [Nice Emacs go-mode indenting and autoformat](https://coderwall.com/p/kpp6ta/nice-emacs-go-mode-indenting-and-autoformat)
 
 ### Basic Intentation
 
