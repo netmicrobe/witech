@@ -24,6 +24,65 @@ tags: [editor]
 * [EmacsWiki - SmartTabs](https://www.emacswiki.org/emacs/SmartTabs)
 * [The Ultimate Guide To Indentation in Emacs (Tabs and Spaces)](https://dougie.io/emacs/indentation/)
 * [Nice Emacs go-mode indenting and autoformat](https://coderwall.com/p/kpp6ta/nice-emacs-go-mode-indenting-and-autoformat)
+* [Gnu Emacs - Automatic Indentation of code](https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto_002dIndentation.html)
+
+
+### 快速设置
+
+~~~ lisp
+;; -------- 缩进设置 ----------------------
+
+;; 显示空格、tab、回车等控制字符
+(global-whitespace-mode 1)
+
+;; 一个TAB等于多少空格
+(setq custom-tab-width 2)
+
+;; 用TAB键时都用空格键space填充
+;; 回车，自动缩进，`M-\` 删除缩进
+(setq indent-tabs-mode nil)
+(setq tab-width custom-tab-width)
+;; (setq-default default-tab-width 'tab-width)
+
+
+;; 设置Golang
+(add-hook 'go-mode-hook
+    (lambda ()
+      (setq tab-width custom-tab-width)
+      (setq indent-tabs-mode nil)))
+
+
+~~~
+
+
+### 如何大段缩进代码
+
+* [How to Indent a Selection in Emacs](https://dougie.io/emacs/indent-selection/)
+
+
+1. emacs 26 默认有一个大段缩进的功能
+
+    `Control + x TAB` 然后，
+
+    * 方向键左右，控制移动以“空格”为单位。
+    * 方向键左右 + SHIFT ，控制移动以“缩进”为单位。
+
+
+2. 也可以自定义
+
+    ~~~
+    (global-set-key (kbd "C->") 'indent-rigidly-right-to-tab-stop)
+    (global-set-key (kbd "C-<") 'indent-rigidly-left-to-tab-stop)
+    ~~~
+
+    然后，
+    * Use `Control + >` to indent right
+    * Use `Control + <` to indent left
+
+
+
+
+
 
 ### Basic Intentation
 
@@ -81,6 +140,43 @@ tags: [editor]
 
 
 ### 设置实例
+
+
+#### 方便显示空格、TAB、回车等字符
+
+* 设置显示样式
+  * 默认的mapping，可通过 `C-h v whitespace-display-mappings` 查看
+    ~~~
+    (setq whitespace-display-mappings
+      '((space-mark 32 [183] [46]) ; 32 SPACE 「 」, 183 U+00B7 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+        (space-mark 160 [164] [95])
+        (newline-mark 10 [36 10]) ; 10 LINE FEED, 36 U+0024 “$”
+        (tab-mark 9 [187 9] [92 9]) ; 9 TAB , 187 U+00BB “»”
+      ))
+    ~~~
+
+  * 参考：<https://stackoverflow.com/q/15946178/3316529> 的例子
+    这个样式用到的字符导致中文环境下emacs卡顿！！
+    ~~~
+    (setq whitespace-display-mappings
+      ;; all numbers are Unicode codepoint in decimal. ⁖ (insert-char 182 1)
+      '(
+        (space-mark 32 [183] [46]) ; 32 SPACE 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+        (newline-mark 10 [182 10]) ; 10 LINE FEED
+        (tab-mark 9 [9655 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
+        ))
+    ~~~
+
+* Turn off whitespace-mode highlighting
+  * <https://emacs.stackexchange.com/a/34891>
+  
+  ~~~
+  ;; Remove spaces to disable highlighting and remove space-mark to disable marking spaces with the dot.
+  (setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark)))
+  ~~~
+
+
+
 
 #### How to set indentation to always use space?
 
