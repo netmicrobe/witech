@@ -110,7 +110,8 @@ tags: [editor]
 
 ### SmartTabs
 
-<https://www.emacswiki.org/emacs/SmartTabs>
+* <https://www.emacswiki.org/emacs/SmartTabs>
+* <https://github.com/jcsalomon/smarttabs>
 
 * 安装
   * 菜单栏 Options -- Manage Emacs Packages 中安装 MELPA package `smart-tabs-mode`

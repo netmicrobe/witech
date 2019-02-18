@@ -8,8 +8,9 @@ tags: [golang]
 * 参考： 
   * [Dominik Honnef - Writing Go in Emacs](http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/)
   * [github - dominikh/go-mode.el](https://github.com/dominikh/go-mode.el)
-  * []()
-  * []()
+  * [johnsogg - Set up Emacs for Golang from scratch - December 2016](https://johnsogg.github.io/emacs-golang)
+  * [tleyden - Configure Emacs as a Go Editor From Scratch](http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/)
+  * [Emacs for Go](http://yousefourabi.com/blog/2014/05/emacs-for-go/)
 
 
 ## 安装
