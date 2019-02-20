@@ -3,7 +3,7 @@ layout: post
 title: 使用am调用浏览器Goto指定URL
 description: 
 categories: [android, cm]
-tags: [android, am]
+tags: [android, am, adb]
 ---
 
 {% highlight shell %}
