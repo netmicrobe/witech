@@ -5,6 +5,9 @@ categories: [ cm, ide ]
 tags: [ intellij-idea, shortcuts ]
 ---
 
+* 参考
+  * [十大Intellij IDEA快捷键](https://blog.csdn.net/dc_726/article/details/42784275)
+
 ## 常用
 
 Ctrl+D 复制行
@@ -13,6 +16,8 @@ CTRL+Q   显示注释文档
 Press `SHIFT` TWO times and you can search anything
 Ctrl+Alt+左右箭头       光标的历史位置
 
+Shift+Shift
+: Search Everything, 即可在一个弹出框中搜索任何东西，包括类、资源、配置项、方法等等。
 
 ## 其他
 
