@@ -6,8 +6,8 @@ tags: [org-mode, LaTex]
 ---
 
 * 参考： 
-  * []()
-  * []()
+  * [Emacs AUCTeX and PDF Synchronization on Windows](https://www.barik.net/archive/2012/07/18/154432/)
+  * [Writing LaTeX with Emacs on Windows](http://juanjose.garciaripoll.com/blog/latex-with-emacs-on-windows)
   * []()
   * []()
 * Windows LaTex
