@@ -34,3 +34,24 @@ yum -y install p7zip
 ```shell
 7z a target-name.7z target-dir/
 ```
+
+### 对目录下的子文件逐个压缩
+
+* 参考
+  * <https://stackoverflow.com/a/17009555/3316529>
+
+~~~ shell
+for i in $(ls -1); do 7z a ${i%%/}.7z ${i%%/}; done
+~~~
+
+另外一种方法：
+
+~~~ shell
+\ls -1 | xargs -I% 7z a %.7z %
+~~~
+
+
+
+
+
+
