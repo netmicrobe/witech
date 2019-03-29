@@ -39,6 +39,123 @@ done
 ~~~
 
 
+#### 批量重命名
+
+
+~~~ shell
+# 文件夹批量重命名
+for f in */; do mv ${f%%/} ${f%%/}.git; done
+~~~
+
+
+#### Bash remove leading / trailing
+
+* 参考
+  * [Bash Shell: Remove (Trim) White Spaces From String or Variable](https://www.cyberciti.biz/faq/bash-remove-whitespace-from-string/)
+  * <https://unix.stackexchange.com/a/476504>
+  * [Advanced Bash-Scripting Guide - 10.1. Manipulating Strings](http://tldp.org/LDP/abs/html/string-manipulation.html)
+
+~~~ shell
+# The syntax is to remove leading whitespaces:
+${var##*( )}
+~~~
+
+~~~ shell
+# Just remove leading whiltespace
+#turn it on
+shopt -s extglob
+ 
+output="    This is a test"
+output="${output##*( )}"
+echo "=${output}="
+ 
+# turn it off
+shopt -u extglob
+~~~
+
+~~~ shell
+# To trim leading and trailing whitespace using bash
+#turn it on
+shopt -s extglob
+output="    This is a test    "
+ 
+### Trim leading whitespaces ###
+output="${output##*( )}"
+ 
+### trim trailing whitespaces  ##
+output="${output%%*( )}
+echo "=${output}="
+ 
+# turn it off
+shopt -u extglob
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
