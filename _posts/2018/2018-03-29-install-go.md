@@ -34,9 +34,77 @@ After downloading a binary release, visit <https://golang.org/doc/install> or lo
     ~~~
 
 
+### windows
+
+下载msi（如，go1.11.5.windows-amd64.msi）直接安装，执行路径都自动添加到path配置，默认安装在 `c:\go`
+
+
+### Mac OS
+
+~~~
+brew install golang
+~~~
+
+
+
+
 ## Installing Go from source
 
 <https://golang.org/doc/install/source>
+
+
+## 检查是否安装成功
+
+1. Create your workspace directory, `%USERPROFILE%\go`. 
+    (If you'd like to use a different directory, you will need to set the [GOPATH environment variable](https://golang.org/wiki/SettingGOPATH).)
+
+2. make the directory src/hello inside your workspace
+
+3.  in that directory create a file named `hello.go`
+    ~~~ go
+    package main
+
+    import "fmt"
+
+    func main() {
+      fmt.Printf("hello, world\n")
+    }
+    ~~~
+
+4. 编译
+    ~~~
+    C:\> cd %USERPROFILE%\go\src\hello
+    C:\Users\Gopher\go\src\hello> go build
+    ~~~
+
+5. 运行 `C:\Users\your-name\go\src\hello> hello`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
