@@ -34,6 +34,12 @@ git config --global difftool.winmerge.prompt false
 git config --global git_commit_template.txt
 ```
 
+提高`git status` 执行速度：
+
+~~~
+git config core.checkStat minimal
+~~~
+
 ### git_commit_template.txt
 
 ```
