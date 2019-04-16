@@ -54,7 +54,26 @@ sdelete.exe c: -z
 
 
 
+
+
+
+
 ## Ubuntu 18.04
+
+### 清理系统
+
+#### 清理安装包
+
+* apt/apt-get clean → cleans the packages and install script in /var/cache/apt/archives/
+* apt/apt-get autoclean → cleans obsolete deb-packages, less than clean
+* apt/apt-get autoremove → removes orphaned packages which are not longer needed from the system, but not purges them, use the --purge option together with the command for that.
+
+~~~
+sudo apt autoremove && sudo apt clean
+~~~
+
+
+
 
 ### 使用 zerofree 工具
 
@@ -80,6 +99,22 @@ sdelete.exe c: -z
 1. 先使用 zerofree
 2. 再使用 VBoxManage
     `VBoxManage modifymedium disk <DISK_LOCATION> --compact`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
