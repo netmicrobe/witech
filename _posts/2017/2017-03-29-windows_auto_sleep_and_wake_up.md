@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Windows 系统自动睡眠、自动唤醒
+title: Windows 系统自动睡眠、自动唤醒（开关休眠/Hibernate功能）
 categories: [cm, windows]
 tags: [windows, schedule]
 ---
@@ -55,6 +55,10 @@ tags: [windows, schedule]
   关闭休眠
   powercfg -h off
   ```
+
+打开休眠功能，会在`C:\`下面产生一个好几个G的文件 `hiberfil.sys`，关闭休眠功能后会被删除。
+
+
 
 ### 休眠 命令
 
