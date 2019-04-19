@@ -132,6 +132,10 @@ sudo apt autoremove && sudo apt clean
 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 ~~~
 
+
+
+
+
 ### 压缩磁盘
 
 
@@ -152,6 +156,7 @@ VBoxManage.exe list hdds
 ### 考虑删除不用的snapshot来节约空间
 
 VirtualBox allows you to create snapshots for each virtual machine. These contain a full image of the virtual machine when you created the snapshot, allowing you to restore it to a previous state. These can take a lot of space.
+
 
 
 
@@ -198,6 +203,57 @@ In use by VMs:  win7x86 (UUID: 3338da73-9c7d-415d-b91d-a2046810f79b) [win7x86 �
 Child UUIDs:    e33c82fb-8f81-4f65-a001-d3bc18569009
                 8c71e5fc-e760-4b65-a688-d65c026132dc
 ~~~
+
+
+
+
+### 导出和恢复虚拟机
+
+
+#### 从原有的virtualbox的VM目录vbox文件导入
+
+这个最快捷，直接从原来虚拟机目录拷贝过来就好了，但有可能vbox文件中有绝对路径问题。
+
+菜单 控制 》 注册 》 选中 vobx 文件
+
+
+#### 导出成 ova 文件，再导入
+
+* ref
+  * [Virtualbox: Howto import vmdk disk images from ova packages to the vdi format](https://www.frankmayer.info/blog/18-virtualbox-import-vmdk-disk-images-from-ova-files-to-the-vdi-format)
+
+* 优点
+  1. ova只有一个文件，方便传输
+  2. ova是开放格式，可以在VMWare使用。
+* 缺点
+  1. 导入和导出，时间比较长。
+
+
+* 导出虚拟机
+  1. 菜单 管理 》导出虚拟机 》 选中需要导出的虚拟机 》 选择ova和保存路径，不停下一步就好了
+  
+* 导入虚拟机
+  1. 菜单 管理 》导入虚拟机 》选择 ova 文件
+  1. 在确认导入前，按需要修改属性
+     1. 新的虚拟机名称，改成自己需要的，避免重名
+     1. 虚拟硬盘，后缀从 vmdk 改为 vdi。 （vdi是virtualbox的专有格式，VBoxManage的压缩命令只能对vdi格式）
+  1. 确认导入
+
+
+
+### 如何将 vmdk 转换为 vdi 格式
+
+* ref
+  * [How to Convert VMDK to VDI Disk using VirtualBox](https://tecadmin.net/vboxmanage-convert-vmdk-to-vdi-disk/)
+
+~~~
+VBoxManage clonehd --format VDI mydisk.vmdk mydisk.vdi
+~~~
+
+
+
+
+
 
 
 
