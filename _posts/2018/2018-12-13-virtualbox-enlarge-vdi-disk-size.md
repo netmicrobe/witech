@@ -13,18 +13,69 @@ tags: [VirtualBox, vdi]
 
 ## Windows 7
 
-### 删除补丁安装包
+### 删除无用文件
+
+#### 删除补丁安装包
 
 `C:\Windows\SoftwareDistribution\DataStore` 和 `C:\Windows\SoftwareDistribution\Download` 下的所有文件。
 
-### Windows 7 中压缩磁盘内容
+#### Windows磁盘清理
+
+右键菜单 C盘 》常规 》磁盘清理 》清理系统文件 》全选“要删除的文件” 》点击“确定”
+
+#### “System Volume Information” 文件夹
+
+* ref：
+  * [Fix: System Volume Information Folder is Large](https://appuals.com/fix-system-volume-information-folder-is-large/)
+
+`System Volume Information` 文件夹占用很大磁盘空间， contains your system restore points.
+
+* 关闭系统还原点功能
+1. 控制面板 》系统和安全 》系统 》系统保护 》弹出“系统保护”设置对话框
+1. 选择“C:”盘 》 配置
+1. 点按钮“删除” 》删除所有还原点
+1. 选择“关闭系统保护” 》 确定
+
+
+#### 删除temp文件夹内容
+
+Windows 下的temp目录：
+
+Windows Vista, 7, 8, 8.1, and 10: 
+C:\Users\<user>\AppData\Local\Temp 
+C:\Users\<user>\AppData\Local\Microsoft\Windows\Temporary Internet Files
+C:\Windows\Temp 
+C:\Temp 
+
+
+
+#### Chrome Cache
+
+~~~
+cd /cygdrive/c/Users/your-username
+du -sh AppData/Local/Google/Chrome; du -sh AppData/Roaming/Google/Chrome
+~~~
+
+设置 》更多工具 》清楚浏览数据 》勾选“缓存的图片和文件” 》点击清除
+
+#### Firefox Cache
+
+* ref : <https://support.mozilla.org/en-US/kb/how-clear-firefox-cache>
+
+Option -\> Privacy & Security -\> Cookies and Site Data -\> Clear Data...
+
+
+
+### 压缩和整理磁盘空间
+
+#### Windows 7 中压缩磁盘内容
 
 1. 资源管理器中右键点击磁盘（如C:），右键菜单选择属性
 1. “常规选”项卡 -》磁盘清理
 1. “工具选”项卡 -》碎片整理
 
 
-### sdelete
+#### sdelete
 
 * <https://technet.microsoft.com/en-us/sysinternals/bb897443>
 * <https://docs.microsoft.com/zh-cn/sysinternals/downloads/sdelete>
