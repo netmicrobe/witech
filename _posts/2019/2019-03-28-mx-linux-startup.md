@@ -214,7 +214,9 @@ Alt-F1
 
 随系统安装好了。
 
-
+~~~
+sudo apt-get install ntfs-3g
+~~~
 
 
 
