@@ -77,6 +77,30 @@ tags: [ssd, wtg]
 
 
 
+## partition 4k alignment  分区4K对齐
+
+
+
+
+Device       Start         End           Sectors       Size     Type
+/dev/sdd1    63            1953523088    1953523026    931.5G   NTFS
+/dev/sdd2    1953523089    1953524112       1024       512K     EFI
+
+
+/dev/sdd1    2048    1953521663    1953519616    931.5G    NTFS
+/dev/sdd2    1953523089     1953524112      1024        512K     EFI
+
+
+
+[ubuntu forum - Thread: Installers fdisk and 4k aligned SSD](https://ubuntuforums.org/showthread.php?t=2096128)
+
+The 4k alignment usually refers to the Start sector of the first partition, and it's usually 2048 (that means 1MiB if you calculate 2048 sectors of 512B each).
+The rule is more or less that the first sector has to be divisible by 8. Most commonly used value is 2048.
+
+Try listing the disks with parted using sectors as units:
+`sudo parted -l unit s`
+
+
 
 
 
