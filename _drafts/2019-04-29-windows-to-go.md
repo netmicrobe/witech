@@ -101,10 +101,31 @@ Try listing the disks with parted using sectors as units:
 `sudo parted -l unit s`
 
 
+[What Is Partition Alignment, and Why Should I Care?](https://www.howtogeek.com/270358/how-to-speed-up-your-solid-state-drive-by-re-aligning-its-partitions/)
 
 
+How to Check if Your Partitions Are Correctly Aligned
+
+1. Windows 运行 `msinfo32`
+1. Components -\> Storage -\> Disks
+1. Scroll down in the left pane, locate your SSD, and find the “Partition Starting Offset” value below it.
+1. Check if this number is evenly divisible by 4096.
+
+How to Fix Incorrectly Aligned Partitions
+
+1. use the free version of MiniTool Partition Wizard
+    <https://www.partitionwizard.com/free-partition-manager.html>
+1. launch the partition manager, right-click the partition you want to align, and select “Align”.
 
 
+[How do I check whether partitions on my SSD are properly aligned?
+](https://askubuntu.com/a/240006)
+
+Parted has an align-check build in.
+
+parted /dev/sda
+align-check opt n
+n is the partition you want to check.
 
 
 
