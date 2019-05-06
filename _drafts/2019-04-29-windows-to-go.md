@@ -118,14 +118,100 @@ How to Fix Incorrectly Aligned Partitions
 1. launch the partition manager, right-click the partition you want to align, and select “Align”.
 
 
-[How do I check whether partitions on my SSD are properly aligned?
-](https://askubuntu.com/a/240006)
+[How do I check whether partitions on my SSD are properly aligned?](https://askubuntu.com/a/240006)
 
 Parted has an align-check build in.
 
 parted /dev/sda
 align-check opt n
 n is the partition you want to check.
+
+
+[Partition Alignment](https://www.thomas-krenn.com/en/wiki/Partition_Alignment)
+
+fdisk
+
+The -S 32 -H 64 flags will however definitely align along the one megabyte boundary (32 sectors per track by 64 heads by 512 bytes equals 1,048,576 bytes or 1 megabyte). 
+
+
+With regard to util-linux-ng versions after 2.17.1, fdisk will align on the one megabyte boundary, if DOS compatibility mode has been disabled.
+
+The recommended settings for newer versions of fdisk are:[9]
+
+* Use the fdisk utility from util-linux-ng versions 2.17.2 or later
+* Read the fdsik warnings.
+* Deactivate DOS compatibility mode (the `-c` flag).
+* Use sectors as display units (the `-u` flag).
+* Use the `+size(M, G)` option in order to specify the end of a partition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
