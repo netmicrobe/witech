@@ -19,13 +19,21 @@ sudo smartctl -i /dev/sdX
 
 或者，用 `-a` 参数查看所有信息 `sudo smartctl -a /dev/sdX`
 
+或者，用 `-A` 参数SMART参数信息 `sudo smartctl -A /dev/sdX`
+
+
+
 ## 查看移动固态硬盘（pssd）信息
 
 ~~~
 sudo smartctl -d sat -i /dev/sdb
+
+sudo smartctl -d sat -A /dev/sdb
+
+sudo smartctl -d sat -a /dev/sdb
 ~~~
 
-### 三星固态硬盘的健康状态信息
+### 三星
 
 
 #### 已写数据量
@@ -133,8 +141,20 @@ $ ./samsung_ssd_get_lifetime_writes.bash
 ------------------------------
 ~~~
 
+### 西部数据
 
+~~~
+=== START OF READ SMART DATA SECTION ===
+SMART Attributes Data Structure revision number: 4
+Vendor Specific SMART Attributes with Thresholds:
 
+ID# ATTRIBUTE_NAME          FLAG     VALUE WORST THRESH TYPE      UPDATED  WHEN_FAILED RAW_VALUE
+233 Media_Wearout_Indicator 0x0032   100   100   ---    Old_age   Always       -       1204
+234 Unknown_Attribute       0x0032   100   100   ---    Old_age   Always       -       1717
+241 Total_LBAs_Written      0x0030   253   253   ---    Old_age   Offline      -       1482
+242 Total_LBAs_Read         0x0030   253   253   ---    Old_age   Offline      -       2528
+~~~
 
+这四个参数，都是以`G`为单位。写入在前3个参数 233,234,241 的值同步增加，读取在 242 参数值增加。
 
 
