@@ -11,7 +11,19 @@ tags: [ssd, wtg]
 
 
 
-1. rufus 制作 windows to go 
+1. rufus 制作 windows to go
+    * 勾选“显示USB外置硬盘”
+    * 设备：目标USB外置硬盘
+    * 镜像文件：选择1803及以前版本的windows（1809版本的WTG有问题，会蓝屏）
+    * 镜像选项：Windows To Go
+    * 分区类型：MBR
+    * 目标系统类型：BIOS 或 UEFI
+    * 不需要勾选：“添加对旧BIOS修正”、“使用Rufus MBR配合BIOS ID”
+    * 卷标：w10togo
+    * 文件系统：NTFS
+    * 簇大小：4096字节
+
+    设置好，点击“开始”，然后等一会。
 
 2. 调整分区
     
@@ -73,6 +85,30 @@ tags: [ssd, wtg]
     bunzip2 -dc /path/to/backup.img.bz2 | dd of=/dev/sda1 status=progress
     ~~~
 
+    ~~~
+    # 备份分区到镜像文件，并用 7za 压缩
+    dd if=/dev/sda1 bs=1048576 conv=sync,noerror status=progress | 7za a -si -t7z -mx=1 -m0=LZMA2 -mmt=8  /path/to/backup.img.7z
+
+    # 从镜像文件恢复
+    7za x /path/to/backup.img.7z -so | dd of=/dev/sda1 status=progress
+
+    # 7z 的多线程
+    # https://stackoverflow.com/a/39931605
+    -t7z -m0=LZMA2:d64k:fb32 -ms=8m -mmt=30 -mx=1       压缩级别1（最快），30个线程
+    # https://www.experts-exchange.com/questions/28727860/What-7zip-Command-Line-Enables-Multithreading.html
+    -t7z  -mx=9 -m0=LZMA2 -mmt14
+    ~~~
+
+
+
+## 在Mac上使用dd进行备份和恢复
+
+~~~
+diskutil ummountDisk /dev/disk2
+# status=progress 不支持
+# bs=1M 不支持，只能写成 bs=1048576
+sudo dd if=/dev/disk2s1 bs=1048576 count=分区实际使用多少兆+几兆的余量 conv=sync,noerror  | bzip2 -f > /Volumes/Lexar/t5w10_1803.img.bz2
+~~~
 
 
 
