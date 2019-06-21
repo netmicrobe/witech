@@ -142,6 +142,8 @@ airmon-ng stop wlan0mon
 
 ##### aircrack-ng
 
+* [aircrack-ng - FAQ](http://www.aircrack-ng.org/doku.php?id=faq#where_can_i_find_good_wordlists)
+
 ~~~
 aircrack-ng -w [字典-path] [破解的目标握手包-path]
 ~~~
@@ -158,6 +160,86 @@ aircrack-ng -a2 -b [router bssid] -w [path to wordlist] /root/Desktop/*.cap
 ~~~
 aircrack-ng –a2 –b 00:14:BF:E0:E8:D5 –w /root/wpa.txt  /root/Desktop/*.cap
 ~~~
+
+##### hashcat
+
+* [hashcat Official Site](https://hashcat.net/hashcat/)
+* [hccapx format description](https://hashcat.net/wiki/doku.php?id=hccapx)
+* [Syntax Example How to Brute Force with Hashcat without dictionary](http://blog.x1622.com/2016/01/syntax-example-to-brute-force-with.html)
+* [Mask Attack](https://hashcat.net/wiki/doku.php?id=mask_attack)
+* [HOW TO PERFORM A MASK ATTACK USING HASHCAT](https://www.4armed.com/blog/perform-mask-attack-hashcat/)
+* [Converting Aircrack-ng Hashes to .hccapx Format and Cracking with Hashcat](http://stuffjasondoes.com/2018/07/18/converting-aircrack-ng-hashes-to-hccapx-format-and-cracking-with-hashcat/)
+* [How to convert .cap file to .hccapx || Hashcat format](http://www.kalitut.com/2019/05/how-to-convert-cap-file-to-hccapx.html?m=0)
+* [Cracking WPA/WPA2 with hashcat](https://hashcat.net/wiki/doku.php?id=cracking_wpawpa2)
+* [Crack WPA/WPA2 Wi-Fi Routers with Aircrack-ng and Hashcat](https://medium.com/@brannondorsey/crack-wpa-wpa2-wi-fi-routers-with-aircrack-ng-and-hashcat-a5a5d3ffea46)
+* [Hashcat manual: how to use the program for cracking passwords](https://miloserdov.org/?p=953)
+* [How to crack passwords using a GUI on Windows 7 – Hashcat](https://uwnthesis.wordpress.com/2015/07/19/how-to-crack-passwords-hashcat/)
+* [Fluxion(Crack WPA/WPA2 无需字典，暴力)](https://www.jianshu.com/p/d16e86c41336)
+
+
+~~~
+# 将cap转换为hccap格式（老的格式，hashcat 4.0 之前）
+aircrack-ng input.cap -J output.hccap
+
+# -----------
+
+# use cap2hccapx from hashcat-utils to convert .cap files to .hccapx files
+# Downloading and Compiling the cap2hccapx Utility
+wget https://raw.githubusercontent.com/hashcat/hashcat-utils/master/src/cap2hccapx.c
+# 或 wget http://stuffjasondoes.com/tools/cap2hccapx.c
+
+gcc -o cap2hccapx cap2hccapx.c
+
+mv cap2hccapx /bin
+rm cap2hccapx.c
+
+cap2hccapx capture-01.cap capturefile-01.hccapx
+~~~
+
+
+
+* 暴力破解 brute force
+
+暴力破解有点扯，4块GTX1080Ti显卡 1秒种大概 1千万次尝试，对于万亿级别的工作量，要好多年啊。
+
+~~~
+hashcat -m 2400 -a 3 hash文件 ?1?1?1?1?1?1?1?1 --increment -1 ?l?d?u
+# 或
+hashcat-cli32.exe -m 0 <hashes.txt> -a  3  ?1?1?1?1?1?1?1?2  -1 ?l?u -2?d
+
+# -m hash-type, 2400 对应 WPA2
+
+# -a
+# 0 = Straight
+# 1 = Combination
+# 3 = Brute-force 暴力破解
+# 6 = Hybrid dict + mask
+# 7 = Hybrid mask + dict
+
+# ?1?1?1?1?1?1?1?1
+# 8 times a sign definend in custom charset 1
+
+# --increment
+# -Enable increment mode. Otherwise only passworts with length 8 would be checked. remebmer ?1?1?1?1?1?1?1?1
+#       
+# (also available: --increment-min=NUM   --increment-max=NUM)
+
+# -1 ?l?d?u
+# defined characterset #1 (used for all positions in this example)
+
+# predefined charsets
+#   ?l = abcdefghijklmnopqrstuvwxyz
+#   ?u = ABCDEFGHIJKLMNOPQRSTUVWXYZ
+#   ?d = 0123456789
+#   ?s = «space»!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+#   ?a = ?l?u?d?s
+#   ?b = 0x00 - 0xff
+
+# ?l?d?u is the same as 
+# ?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+~~~
+
+
 
 ## 技巧
 
