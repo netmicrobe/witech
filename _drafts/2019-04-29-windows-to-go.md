@@ -28,8 +28,14 @@ tags: [ssd, wtg]
 2. 调整分区
     
     `df -h` 查看ssd的kernal name
-    `sudo umount -f /dev/sdx`，否则在GParted中看到ntfs系统分区是锁定状态，无法操作
+    `sudo umount -f /dev/sdx`，或GParted红右键菜单选择unmount，否则在GParted中看到ntfs系统分区是锁定状态，无法操作
     启动GParted调整分区，我ssd有1T，缩小windows系统分区到200G，其他做data分区
+
+    或者，使用 Disk Utility
+    ~~~
+    sudo apt-get install gnome-disk-utility
+    gnome-disks  # 启动
+    ~~~
 
 3. ntfs分区读写问题
     
@@ -103,12 +109,52 @@ tags: [ssd, wtg]
 
 ## 在Mac上使用dd进行备份和恢复
 
+### 准备工作
+
+
 ~~~
-diskutil ummountDisk /dev/disk2
+# unmount 要备份的disk
+diskutil unmountDisk /dev/disk2
+
+# dd需要root权限
+sudo su
+~~~
+
+### 使用xz压缩和解压（推荐）
+
+
+~~~
+# 安装 xz
+brew install xz
+
+#
+# 备份， 用 xz 压缩
+date; dd if=/dev/disk2s1 bs=1048576 count=30271 conv=sync,noerror | pv -s 30271m |  xz -z -3ve --threads=0 > /Volumes/Lexar/t5w10_1803.img_30271m.xz; date
+
+
+# 恢复，用 xz 解压
+#
+# 恢复前保险起见，清楚分区信息
+# 使用mac的磁盘工具，对目标分区格式化下
+# 或
+# dd if=/dev/zero of=/dev/disk2s1 bs=1048576 count=当前磁盘多少M
+#
+
+date; xz -dc --threads=0 /Volumes/Lexar/t5w10_1803.img.xz | pv | dd of=/dev/disk2s1; date
+~~~
+
+### 使用 bzip2 备份和恢复
+
+bzip2 默认系统就有无需安装
+
+~~~
+# 
+# 备份，用 bzip2 压缩
 # status=progress 不支持
 # bs=1M 不支持，只能写成 bs=1048576
-sudo dd if=/dev/disk2s1 bs=1048576 count=分区实际使用多少兆+几兆的余量 conv=sync,noerror  | bzip2 -f > /Volumes/Lexar/t5w10_1803.img.bz2
+dd if=/dev/disk2s1 bs=1048576 count=分区实际使用多少兆+几兆的余量 conv=sync,noerror  | bzip2 -f > /Volumes/Lexar/t5w10_1803.img.bz2
 ~~~
+
 
 
 
