@@ -48,7 +48,7 @@ CPU_ABI: armeabi-v7a
 
     注意：unlock 会删除所有信息，重置手机。
 
-1. 安装TWRP Recovery： `fastboot flash recovery TWRP-recovery-new.img`
+1. 安装TWRP Recovery： `fastboot flash recovery TWRP-20171028-3.1.1.0-virgo.img`
 
 1. 重启 `fastboot reboot`
 
@@ -66,7 +66,6 @@ CPU_ABI: armeabi-v7a
         `adb push xposed-v89-sdk23-arm.zip /sdcard/xposed-v89-sdk23-arm.zip`
     1. 进入Recovery模式
         * 开机状态下：进入“系统更新”，点右上角“…”选择“重启到恢复模式（Recovery）”，点击“立即重启” 进入Recovery模式。
-          没用，进了小米的MI Recover 2.0.1
         * 关机状态下：同时按住`音量上+电源键开机`，屏幕亮起松开电源键保持长按音量键 进入Recovery模式。
 
 1. 下载 XposedInstaller_3.1.5.apk 并安装

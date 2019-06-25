@@ -2,7 +2,7 @@
 layout: post
 title: 小米5x 解锁、root、刷机、玩机
 categories: [ cm, android ]
-tags: [ adb, fastboot, bootloader, root, unlock ]
+tags: [ adb, fastboot, bootloader, root, unlock, twrp ]
 ---
 
 * 参考
