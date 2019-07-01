@@ -2,7 +2,7 @@
 layout: post
 title: Ubuntu 上用 scrcpy 将 Android 手机屏幕实时投射到电脑
 categories: [cm, android]
-tags: [scrcpy]
+tags: [scrcpy, mint]
 ---
 
 * 参考： 

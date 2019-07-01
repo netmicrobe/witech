@@ -18,9 +18,23 @@ tags: [ android, app-store ]
   * <https://www.apkmirror.com/apk/google-inc/google-play-services/>
   * <https://www.mediafire.com/file/qiqz6r0lhdw6c2v/Google_installer%282%29.apk>
   * <http://xiaomitips.com/guide/install-google-play-store-miui/>
+  * [Download Google Installer Apk for Android devices](https://www.digitbin.com/google-installer-apk/)
 
 ---
 
+## Google Installer / 谷歌安装器
+
+Google Installer App APK Download on your Android device and enjoy all the Google Apps in your Chinese Smartphone.
+
+Google Installer is a software App package which lets you install all the Google Apps on your Android phone if your device lacks GMS Suite which is possible in case if you have Chinese Local Smartphone which does not run on G-Apps Package. With G-Installer you can run all the G-Apps which otherwise would be impossible due to lack of there app suite.
+
+### 安装 Google Installer Apk
+
+1. 下载并安装 Google Installer [Google Installer_2.0.apk](Google Installer_2.0.apk)
+  * 或，从 <https://devfiles.co/download/mIQw7pYs/Google_Installer_2.0.apk> 下载。
+2. 开发者选项 -\> Allow Mock Location
+3. 打开Google Installer，点击 INSTALL 按钮。
+4. 推荐先安装 Goolge Play Services，再安装 Play Store
 
 ### 在小米上，如何安装Google全家桶
 
@@ -29,6 +43,9 @@ tags: [ android, app-store ]
 3. 安装“谷歌安装器” （ “Google installer” ）
 4. 打开“谷歌安装器”，点击一键安装，等下载安装，过程中要时不时看下，点击设置、安装等。
 
+* 其他可选安装包
+  * [GoogleInstaller_3.0.apk](GoogleInstaller_3.0.apk)
+  * [Google-Installer-MIUI+9+Technobuzz.net.zip](Google-Installer-MIUI+9+Technobuzz.net.zip)
 
 ### Google Play 下载失败，提示错误 490
 
