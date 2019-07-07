@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小米5x 解锁、root、刷机、玩机
+title: 小米5x/8se 解锁、root、刷机、玩机
 categories: [ cm, android ]
 tags: [ adb, fastboot, bootloader, root, unlock, twrp ]
 ---
@@ -41,13 +41,32 @@ tags: [ adb, fastboot, bootloader, root, unlock, twrp ]
 6. 解锁成功，重启进入 fastboot 模式，输入 `fastboot oem device-info` 查看是否unlock成功。
 
 
+### 小米8 SE 提示 "Current account is not bound to this device"
+
+1. 开机 》设置 》更多设置 》开发者选项
+2. OEM解锁，开启
+3. 设备解锁状态 》绑定帐号和设备
+
+
+
 ## 小米 fastboot oem 命令
+
+* ref
+  * [AskUbuntu - no permissions fastboot - fastboot and adb not working](https://askubuntu.com/a/705541)
 
 ~~~
 fastboot oem device-info
 fastboot oem lock
 fastboot oem unlock
 ~~~
+
+如果出现错误： `no permissions (user in plugdev group; are your udev rules wrong?); `，尝试如下方法：
+
+~~~
+sudo $(which fastboot) devices
+sudo $(which fastboot) reboot
+~~~
+
 
 
 
@@ -112,7 +131,7 @@ fastboot oem unlock
 6. 刷机工具，点击“加载设备”，刷机程序会自动识别手机；点击“刷机”后开始刷机。
 7. 然后等待，工具显示刷机成功，手机会自动开机。
 
-
+* **注意** 刷机工具最下方，不要选择“clean all and lock”，选择“Clean All”
 
 ## remount /system rewritable
 
