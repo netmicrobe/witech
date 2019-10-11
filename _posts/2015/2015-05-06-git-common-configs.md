@@ -18,6 +18,7 @@ git config --global alias.ll "log --oneline --decorate --graph -10"
 git config --global alias.st status
 git config --global alias.d diff
 git config --global alias.co checkout
+git config --global alias.rv 'remote -v'
 git config --global alias.pushall '!git remote | xargs -L1 -I R git push R '
 
 git config --global core.quotepath false
