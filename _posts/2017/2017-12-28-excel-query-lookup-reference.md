@@ -2,7 +2,7 @@
 layout: post
 title: excel 中利用 VLOOKUP & INDIRECT 查找信息表中的记录，并获取记录字段
 categories: [ cm, office ]
-tags: [ office, excel ]
+tags: [ office, excel, vlookup ]
 ---
 
 * 参考
@@ -41,6 +41,13 @@ tags: [ office, excel ]
 
 ~~~
 =VLOOKUP(INDIRECT(ADDRESS(ROW(),COLUMN()-1)),人员联系方式!$A$1:$B$4,2,FALSE)
+
+# 如果查找失败，可能是excel数值转换的问题，例如，是更加电话号码来检索，使用VALUE函数就好了
+# 原因目前还没搞清楚。。。
+=VLOOKUP(VALUE(INDIRECT(ADDRESS(ROW(),COLUMN()-1))),人员联系方式!$A$1:$B$4,2,FALSE)
+
+# 出现NA未找到的情况，excel显示NA，可以使用IFNA函数来转换为需要的值，例如，下面转换为空字符串
+=IFNA(VLOOKUP(VALUE(INDIRECT(ADDRESS(ROW(),COLUMN()-1))),人员联系方式!$A$1:$B$4,2,FALSE),"")
 ~~~
 
 

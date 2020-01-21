@@ -32,3 +32,13 @@ mysqldump -h <host> -u <username> -p <schema> --no-data > db-structure.sql
 ~~~shell
 mysqldump -u root -p mydatabase table1 > table1.sql
 ~~~
+
+
+## dump 后兼容sqlite3导入
+
+
+
+
+
+
+

@@ -28,6 +28,12 @@ label_xc_tags_title: 'Tags'
 
 ## model
 
+* 参考
+  * [ruby-china - Active Record 基础](https://ruby-china.github.io/rails-guides/active_record_basics.html)
+  * []()
+  * []()
+  * []()
+
 ### 设置多对多关系
 
 ~~~ ruby
@@ -90,6 +96,8 @@ bundle exec rails generate scaffold XcJtag name:string color:string
 
 
 ## database migration
+
+* [ruby-china - Active Record 迁移](https://ruby-china.github.io/rails-guides/active_record_migrations.html)
 
 ### 简单的例子
 

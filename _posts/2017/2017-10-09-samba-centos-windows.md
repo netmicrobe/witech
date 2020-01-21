@@ -7,7 +7,8 @@ tags: [linux, centos, samba, windows, smbd, samba-client ]
 
 * 参考
   * <https://lintut.com/easy-samba-server-installation-on-centos-6-5/n>
-  * 
+  * [CentOS - SAMBA Setup](https://wiki.centos.org/HowTos/SetUpSamba)
+  * []()
 
 ## CentOS 上 Samba Server 向 Windows 共享文件
 
@@ -45,6 +46,8 @@ export PATH
 umask 0000
 ~~~
 
+另外，如果从外部拷贝文件到 /home/winshare/ ，注意文件的权限。
+
 ### 配置 Samba
 
 #### 修改  `vi /etc/samba/smb.conf`
@@ -74,6 +77,25 @@ New SMB password:
 Retype new SMB password:
 ~~~
 
+
+#### iptables 配置
+
+~~~
+# 插到第7条，这个例子的第7条是reject all，所以rule要插到这条前面
+iptables -I INPUT 7 -m state --state NEW -m udp -p udp --dport 137 -j ACCEPT
+iptables -I INPUT 7 -m state --state NEW -m udp -p udp --dport 138 -j ACCEPT
+iptables -I INPUT 7 -m state --state NEW -m tcp -p tcp --dport 139 -j ACCEPT
+~~~
+
+#### selinux 配置
+
+可参考 `/etc/samba/smb.conf` 里面的注释说明
+
+这里使用的专有用户的home目录来共享，所以执行：
+
+~~~
+setsebool -P samba_enable_home_dirs on
+~~~
 
 
 ### 启动 Samba
@@ -129,6 +151,23 @@ smb: \> exit
 
 
 ## 问题排查
+
+* 参考
+  * [csdn/maxzero - win10不能访问samba共享问题的解决](https://blog.csdn.net/maxzero/article/details/81410620)
+
+
+### Windows无法连接
+
+* 可能时samba客户端没装好
+  1. 检查  设置》启动或关闭Windows功能
+  1. 勾选 SMB 1.0/CIFS 文件共享支持
+  1. 勾选 SMB 直通
+
+
+### windows上无法写文件
+
+* 可能是linux的权限问题（samba用户权限不能对目标文件操作）
+
 
 ### 安全设置问题
 

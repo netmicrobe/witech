@@ -37,21 +37,22 @@ tags: [cm, jekyll, githubs]
 
 ### 调整 ruby gem 源
 
-默认源：http://rubygems.org/
+~~~
+# 用的 ruby china 的国内镜像
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+~~~
 
-国外源速度奇慢，不知为何。。呵呵。。
 
-#### 国内源：
+* 默认源：http://rubygems.org/
+  国外源速度奇慢，不知为何。。呵呵。。
 
-* 淘宝 https://ruby.taobao.org
-* 中山大学  http://mirror.sysu.edu.cn/rubygems/
+* 其他国内源：
+  * 淘宝 https://ruby.taobao.org
+    淘宝的源用的 https ，可能有证书问题
+  * 中山大学  http://mirror.sysu.edu.cn/rubygems/
 
-淘宝的源用的 https ，老是有证书问题，至今没发现什么好的解决方法。
-
-#### 如何设置 Gem source
-
-查看目前的下载源： # gem sources
-添加下载源： # gem sources --add https://ruby.taobao.org --remove 不需要的源
+* 查看目前的下载源： # gem sources
+* 添加下载源： # gem sources --add https://ruby.taobao.org --remove 不需要的源
 
 
 ### 安装 jekyll等gems

@@ -29,6 +29,22 @@ rvm use 2.3 --default
 ruby --version
 ~~~
 
+## 创建sqlite3 db 文件
+
+CentOS 6.9 自带 sqlite3，不需要安装
+
+~~~
+cd redmine-home-dir
+sqlite3 db/redmine.sqlite3
+
+sqlite> .database
+seq  name             file
+---  ---------------  ----------------------------------------------------------
+0    main             /opt/redmine/redmine33xc/db/redmine.sqlite3
+sqlite> .quit
+
+
+~~~
 
 ## redmine config
 
