@@ -36,6 +36,24 @@ mysqldump -u root -p mydatabase table1 > table1.sql
 
 ## dump 后兼容sqlite3导入
 
+* refer
+  * [mysql2sqlite - github](https://github.com/dumblob/mysql2sqlite)
+
+
+~~~shell
+mysqldump --skip-extended-insert -u root -p --ignore-table=bitnami_redmine.changes --ignore-table=bitnami_redmine.changesets bitnami_redmine > redmine-without-chagnes.sql
+
+# 使用 mysql2sqlite 脚本生产sqlite3数据库
+./mysql2sqlite redmine-without-chagnes.sql | sqlite3 redmine.sqlite3
+~~~
+
+
+
+
+
+
+
+
 
 
 
