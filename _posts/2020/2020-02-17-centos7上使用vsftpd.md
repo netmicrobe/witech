@@ -59,6 +59,14 @@ tcp_wrappers=YES
 allow_writeable_chroot=YES  # 如果启用了限定用户在其主目录下需要添加这个配置，解决报错 500 OOPS: vsftpd: refusing to run with writable root inside chroot()
 ~~~
 
+### ftp vsftpd 530 login incorrect 解决
+
+检查 `/etc/pam.d/vsftpd`
+
+`vim /etc/pam.d/vsftpd`
+
+注释掉  `#auth    required pam_shells.so`
+
 
 
 ### 启动
@@ -67,14 +75,6 @@ allow_writeable_chroot=YES  # 如果启用了限定用户在其主目录下需�
 systemctl start vsftpd.service
 ~~~
 
-
-### ftp vsftpd 530 login incorrect 解决
-
-检查 `/etc/pam.d/vsftpd`
-
-`vim /etc/pam.d/vsftpd`
-
-注释掉  `#auth    required pam_shells.so`
 
 
 
