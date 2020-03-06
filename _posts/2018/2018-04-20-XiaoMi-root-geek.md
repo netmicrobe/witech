@@ -22,13 +22,19 @@ tags: [ adb, fastboot, bootloader, root, unlock, twrp ]
 
 * 参考
   * <https://www.romzhijia.net/shuaji/22013.html>
+  * <http://www.romleyuan.com/lec/read?id=83>
 
 
 1. 申请解锁
-
-    1. 小米账号登录手机 15 天之后才能解锁
-    2. 小米账号登录 <http://www.miui.com/unlock/index_en.html> 申请解锁
-    2. 大概半小时内会批准通过，收到一条短信提醒
+    到2020年情况变了，小米越来越。。。不打算再买小米了。
+    
+    1. 设置 -\> 更多设置 -\> 开发者选项 -\> 设备解锁状态 -\> 绑定帐号和设备
+        **注意** 小米账号绑定的手机号来上网，否则绑定不了。
+        如果还绑定不了，手机卡流量上网，重新再手机上登录下小米账号。再绑定“账号和设备”试试。
+        lj小米。。。
+    1. 需要登录小米账号后，到开发者选项将设备和账号绑定0-1000小时，一般默认为168小时，部分新机实际几百小时，具体绑定时间，我们解锁的时候会提示。
+    1. 访问 <https://unlock.update.miui.com> 去申请
+    1. 申请通过下载unlock工具 miflash_unlock-*.zip
 
 2. 小米账号登录 <http://en.miui.com/unlock/download_en.html> 下载unlock工具 miflash_unlock-en-2.3.803.10.zip
 
@@ -39,6 +45,13 @@ tags: [ adb, fastboot, bootloader, root, unlock, twrp ]
 5. 将手机连上电脑，点击 "Unlock".
 
 6. 解锁成功，重启进入 fastboot 模式，输入 `fastboot oem device-info` 查看是否unlock成功。
+
+
+* 2020年之前申请解锁的方法（留个纪念）
+  1. 小米账号登录手机 15 天之后才能解锁
+  1. 小米账号登录 <http://www.miui.com/unlock/index_en.html> 申请解锁
+  1. 大概半小时内会批准通过，收到一条短信提醒
+
 
 
 ### 小米8 SE 提示 "Current account is not bound to this device"
