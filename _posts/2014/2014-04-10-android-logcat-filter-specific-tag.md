@@ -25,7 +25,15 @@ adb logcat *:E
 
 
 
+## 根据包名过滤
 
+~~~
+adb logcat --pid=$(adb shell pidof -s pkg_name)
+
+# 使用 ::-1 截掉pid末尾的\t制表符，cygwin有这个问题
+adb logcat --pid=${`adb shell pidof -s pkg_name`::-1}
+target-pid=$(adb shell pidof -s cn.egame.terminal.cloud5g);adb logcat --pid=${target-pid::-1}
+~~~
 
 
 
