@@ -30,7 +30,7 @@ Google Installer is a software App package which lets you install all the Google
 
 ### 安装 Google Installer Apk
 
-1. 下载并安装 Google Installer [Google Installer_2.0.apk](Google Installer_2.0.apk)
+1. 下载并安装 Google Installer [Google Installer_2.0.apk](GoogleInstaller_2.0.apk.7z)
   * 或，从 <https://devfiles.co/download/mIQw7pYs/Google_Installer_2.0.apk> 下载。
 2. 开发者选项 -\> Allow Mock Location
 3. 打开Google Installer，点击 INSTALL 按钮。
@@ -44,7 +44,7 @@ Google Installer is a software App package which lets you install all the Google
 4. 打开“谷歌安装器”，点击一键安装，等下载安装，过程中要时不时看下，点击设置、安装等。
 
 * 其他可选安装包
-  * [GoogleInstaller_3.0.apk](GoogleInstaller_3.0.apk)
+  * [GoogleInstaller_3.0.apk](GoogleInstaller_3.0.apk.7z)
   * [Google-Installer-MIUI+9+Technobuzz.net.zip](Google-Installer-MIUI+9+Technobuzz.net.zip)
 
 ### Google Play 下载失败，提示错误 490
