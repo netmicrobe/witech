@@ -9,12 +9,13 @@ tags: []
   * [迁移win10的efi引导分区到系统固态硬盘](https://blog.csdn.net/Sebastien23/article/details/99691881)
   * [Windows 更换硬盘后通过 BCDBoot 命令修复 UEFI 启动引导](https://weiku.co/article/309/)
   * [Windows 和 GPT 常见问题解答(uefi、GPT、ESP、MSR概念扫盲贴)](https://www.chinafix.com/thread-967034-1-1.html)
-  * []()
+  * [microsoft.com - UEFI/GPT-based hard drive partitions](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions)
   * []()
   * []()
   * []()
 
 
+## Windows
 
 ### windows重装、升级导致grub失效
 
@@ -132,6 +133,35 @@ BCDboot 命令通常在 `%WINDIR%\System32` 文件夹内，它运行后从计算
 
 
 
+## Ubuntu
+
+`efibootmgr` 工具可以管理efi启动项
+
+
+
+
+
+
+
+## 设置硬盘分区表格式（GPT 还是 MBR）
+
+### 使用 diskpart
+
+1. 以管理员权限运行 cmd， 执行 `diskpart` 进入工具命令行界面
+1. 改成GPT分区表
+    ~~~
+    list volume
+    list disk
+    select disk your-disk-no
+    convert gpt
+    ~~~
+
+### 使用 DiskGenies 分区工具
+
+1. 启动winpe，使用DiskGenies分区工具
+1. 在 DiskGenies 中选中磁盘
+1. 菜单“硬盘” 》转换分区表类型为：MBR格式 / GPT
+1. 重启，开始windows安装。
 
 
 
