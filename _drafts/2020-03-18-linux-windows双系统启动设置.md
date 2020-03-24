@@ -10,7 +10,7 @@ tags: []
   * [Windows 更换硬盘后通过 BCDBoot 命令修复 UEFI 启动引导](https://weiku.co/article/309/)
   * [Windows 和 GPT 常见问题解答(uefi、GPT、ESP、MSR概念扫盲贴)](https://www.chinafix.com/thread-967034-1-1.html)
   * [microsoft.com - UEFI/GPT-based hard drive partitions](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions)
-  * []()
+  * [archlinux-wiki - EFI system partition](https://wiki.archlinux.org/index.php/EFI_system_partition)
   * []()
   * []()
 
@@ -145,7 +145,7 @@ BCDboot 命令通常在 `%WINDIR%\System32` 文件夹内，它运行后从计算
 
 ## 设置硬盘分区表格式（GPT 还是 MBR）
 
-### 使用 diskpart
+### 使用 Windows 的 diskpart 
 
 1. 以管理员权限运行 cmd， 执行 `diskpart` 进入工具命令行界面
 1. 改成GPT分区表
@@ -162,6 +162,113 @@ BCDboot 命令通常在 `%WINDIR%\System32` 文件夹内，它运行后从计算
 1. 在 DiskGenies 中选中磁盘
 1. 菜单“硬盘” 》转换分区表类型为：MBR格式 / GPT
 1. 重启，开始windows安装。
+
+
+### 使用 fdisk
+
+* 执行 `fdisk -l`，
+  * 如果 磁盘信息显示 `Disklabel type: gpt` 则是 GPT 分区；
+  * 如果 磁盘信息显示 `Disklabel type: dos` 则是 MBR 分区；
+
+
+进一步查是什么文件系统，使用：`minfo -i /dev/sdxY :: | grep 'disk type'`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
