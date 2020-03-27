@@ -27,6 +27,13 @@ tags: [kali, netdiscover]
 netdiscover -r 192.168.1.1/24 -PN
 ~~~
 
+* ubuntu 安装 netdiscover
+
+~~~
+sudo apt-get update
+sudo apt-get install netdiscover
+~~~
+
 ### nmap
 
 ~~~
@@ -45,6 +52,15 @@ nmap -v -O 192.168.1.101
 # 使用如下命令，能在fingerprint看到 pc-linux-gnu 字样。
 nmap -O -sV -T4 -d <target>
 ~~~
+
+* Ubuntu 安装 nmap
+
+~~~
+sudo apt-get update
+sudo apt-get install nmap
+~~~
+
+
 
 ### arp-scan
 
