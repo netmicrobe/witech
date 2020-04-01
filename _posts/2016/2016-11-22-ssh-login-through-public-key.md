@@ -2,7 +2,7 @@
 layout: post
 title: 利用 public key （公钥文件）进行免密码ssh登录
 categories: [cm, linux]
-tags: [ssh, authentication, ssh-keygen, openssh]
+tags: [ssh, authentication, ssh-keygen, openssh, openwrt, dropbear]
 ---
 
 ## 如何配置免密码登录
@@ -18,6 +18,24 @@ cat your-idid_rsa.pub >> authorized_keys
 ```
 3. 在《PC》上直接执行 ssh your-name@server-address 即可登录
   * 如果生成公钥密钥时指定了密码，此处要输入公钥密码
+
+
+
+
+## Openwrt 上免密登录
+
+* 参考：
+  * [Dropbear public-key authentication HowTo](https://openwrt.org/docs/guide-user/security/dropbear.public-key.auth)
+  * [openwrt - forum - SSH key authentification vs Dropbear](https://forum.openwrt.org/t/solved-ssh-key-authentification-vs-dropbear/17624)
+  * [How to Passwordless SSH to an OpenWrt Router?](https://www.systutorials.com/how-to-passwordless-ssh-to-an-openwrt-router/)
+
+openwrt 的 authorized_keys 文件位置为：`/etc/dropbear/authorized_keys`
+
+~~~
+cat your-idid_rsa.pub >> /etc/dropbear/authorized_keys
+chmod 600 /etc/dropbear/authorized_keys
+~~~
+
 
 
 ## 可能遇到的问题
