@@ -54,6 +54,50 @@ tags: [ adb, fastboot, bootloader, root, unlock, twrp ]
 
 
 
+### 小米8SE 在 fastboot 模式下，掉连接
+
+* 参考
+  * [进入fastboot模式后，一连接刷机助手就变成press any key to shutdown](https://blog.csdn.net/gmaaa123/article/details/102882838)
+  * []()
+
+
+* 问题描述
+
+  小米8SE 在 fastboot 模式下，Windows10 执行2次fastboot就找不到设备了，自然小米的 **unlock 程序也识别不到手机！！**
+
+  ~~~
+  C:\Users\wi>fastboot devices
+  c676c6b3        fastboot
+
+  C:\Users\wi>fastboot devices
+  ????????????    fastboot
+
+  C:\Users\wi>fastboot devices
+
+  C:\Users\wi>fastboot devices
+  ~~~
+
+* 解决方法：
+
+1. win10系统 连接的USB2.0接口（我感觉这一步没啥用）
+
+2. 修改注册表
+
+    以管理员权限执行如下bat批处理文件 [fix-win10-usb-drop.bat](fix-win10-usb-drop.bat)：
+
+    ~~~
+    @echo off
+    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D0100" /v "osvc" /t REG_BINARY /d "0000" /f
+    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D0100" /v "SkipContainerIdQuery" /t REG_BINARY /d "01000000" /f
+    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D0100" /v "SkipBOSDescriptorQuery" /t REG_BINARY /d "01000000" /f
+     
+    pause
+    ~~~
+
+
+
+
+
 ### 小米8 SE 提示 "Current account is not bound to this device"
 
 1. 开机 》设置 》更多设置 》开发者选项
