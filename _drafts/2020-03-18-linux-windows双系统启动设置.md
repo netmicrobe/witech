@@ -89,8 +89,8 @@ Explorer.exe 	| 文件资源管理器	数据		|
 
 
 
-* DiskGenies 的系统迁移工具
-  DiskGenies -\> 工具 -\> 系统迁移
+* DiskGenius 的系统迁移工具
+  DiskGenius -\> 工具 -\> 系统迁移
 
 
 
@@ -156,10 +156,10 @@ BCDboot 命令通常在 `%WINDIR%\System32` 文件夹内，它运行后从计算
     convert gpt
     ~~~
 
-### 使用 DiskGenies 分区工具
+### 使用 DiskGenius 分区工具
 
-1. 启动winpe，使用DiskGenies分区工具
-1. 在 DiskGenies 中选中磁盘
+1. 启动winpe，使用DiskGenius分区工具
+1. 在 DiskGenius 中选中磁盘
 1. 菜单“硬盘” 》转换分区表类型为：MBR格式 / GPT
 1. 重启，开始windows安装。
 
