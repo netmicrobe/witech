@@ -38,6 +38,8 @@ sudo apt-get install netdiscover
 
 ~~~
 # 不如 netdiscover 显示清晰
+# -sn (No port scan) host侦测之后，不要再进行端口扫描（非常耗时）
+# 用这个命令来找到网络中的主机，而不引起太多注意。
 nmap -sn 192.168.1.0/24
 ~~~
 
