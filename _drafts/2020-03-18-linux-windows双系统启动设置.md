@@ -15,6 +15,33 @@ tags: []
   * []()
 
 
+
+## 在 Windows 10 的基础上安装 linux mint
+
+* refer
+  * [Fix Grub Not Showing For Windows 10 Linux Dual Boot](https://itsfoss.com/no-grub-windows-linux/)
+  * []()
+  * []()
+
+
+No Linux boot options after installation
+
+1. Windows Command Line(Run as Administrator)
+1. `bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi`
+
+reverse
+
+~~~
+bcdedit /deletevalue {bootmgr} path \EFI\ubuntu\grubx64.efi
+
+# if the above command didn’t work, try the one below to set the boot back to Windows.
+
+bcdedit /set {bootmgr} path \EFI\Microsoft\Boot\bootmgfw.efi
+~~~
+
+
+
+
 ## Windows
 
 ### windows重装、升级导致grub失效
