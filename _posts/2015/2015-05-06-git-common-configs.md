@@ -78,10 +78,12 @@ git config --global alias.st status
 git config --global alias.d diff
 git config --global alias.co checkout
 git config --global alias.pushall '!git remote | xargs -L1 -I R git push R '
+git config --global alias.rv 'remote -v'
 
 git config --global core.autocrlf input
 git config --global color.ui true
 git config --global core.filemode false
 git config --global http.sslverify false
 git config --global http.postbuffer 524288000
+git config --global core.quotepath false
 ```
