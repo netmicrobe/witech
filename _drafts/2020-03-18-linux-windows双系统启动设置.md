@@ -20,24 +20,35 @@ tags: []
 
 * refer
   * [Fix Grub Not Showing For Windows 10 Linux Dual Boot](https://itsfoss.com/no-grub-windows-linux/)
+  * [ow to Install Ubuntu Alongside With Windows 10 or 8 in Dual-Boot](https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/)
   * []()
   * []()
 
 
-No Linux boot options after installation
+### 安装前准备
 
-1. Windows Command Line(Run as Administrator)
-1. `bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi`
+1. 在BIOS中关闭Secure Boot
+    * MSI B450 BIOS
+      1. 开机，狂按DEL键，进入BIOS界面
+      1. 点击BIOS右上角放大镜图标，搜索“Secure Boot”，设置为Disable
 
-reverse
+### 安装
 
-~~~
-bcdedit /deletevalue {bootmgr} path \EFI\ubuntu\grubx64.efi
+1. 创建UEFI的mint安装启动U盘
+1. 启动installer开始安装，下一步，直到选择安装类型（选择分区）
+1. 选择类型：Install mint alongside Windows 10
+    * 关于安装到哪一个分区？
+      点击下一步，installer自己选择分区，并弹出对话框，告诉你它选择了哪个分区。
+      很尴尬呀，并没有图形化界面让你自己选择哪个分区。
+      我的做法是，返回上一步，另外开gparted将ext4系统分区创建好，其他不想installer碰的分区，改成ntfs格式。
+1. 下一步，直到安装好
+1. 重启，F11进入启动菜单，选择linux mint
 
-# if the above command didn’t work, try the one below to set the boot back to Windows.
+### 安装后
 
-bcdedit /set {bootmgr} path \EFI\Microsoft\Boot\bootmgfw.efi
-~~~
+* MSI B450 BIOS 设置默认使用ubuntu boot
+  1. 开机，狂按DEL键，进入BIOS界面
+  1. 进入菜单 Settings -\> Boot -\> UEFI Hard Disk Drive BBS Priorities
 
 
 
