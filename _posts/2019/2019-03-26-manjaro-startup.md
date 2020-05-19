@@ -35,11 +35,33 @@ sudo pacman-mirrors -i -c China -m rank
 更换上新的国内源之后，可以刷新一下缓存，输入
 
 ~~~
+# -S: Sync packages
+# -yy: refresh package database, force refresh even if local database appears up-to-date
 sudo pacman -Syy
 ~~~
 
 
 ## VirutalBox 安装配置
+
+### install through command line
+
+1. To list what kernels is installed use mhwd 
+    ~~~
+    $ mhwd-kernel -li
+    Currently running: 5.6.11-1-MANJARO (linux56)
+    The following kernels are installed in your system:
+       * linux56
+    ~~~
+1. install the kernel modules for your installed kernels, here is **linux56**
+~~~
+sudo pacman -Syu virtualbox linux56-virtualbox-host-modules
+~~~
+1. 
+1. 
+1. 
+1. 
+
+### install through pamac-manager GUI
 
 1. `Super` + R 运行 `pamac-manager`  打开软件管理器
     或者， Application Menu -\> Preferences -\> Add\/Remove Software  
