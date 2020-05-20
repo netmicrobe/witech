@@ -21,6 +21,94 @@ Application menu -\> Preferences -\> Monitor Settings
 
 
 
+## 系统时间设置
+
+* ref
+  * [Adjusting Arch Linux time to local time ](https://dev.to/musale/adjusting-arch-linux-time-to-local-time-3ki1)
+  * [How to Sync Linux Time with NTP Server](https://www.maketecheasier.com/sync-linux-time-with-ntp-server/)
+  * [ArchLinux - System settings](https://paquier.xyz/manuals/archlinux/installation-2/system-settings/)
+  * [System time - ArchLinux Wiki](https://wiki.archlinux.org/index.php/System_time)
+  * []()
+  * []()
+
+
+* **NTP**: Network Time Protocol
+
+### **Hardware clock**
+
+The hardware clock (a.k.a. the Real Time Clock (`RTC`) or `CMOS clock)` stores the values of: Year, Month, Day, Hour, Minute, and Seconds. 
+Only 2016, or later, UEFI firmware has the ability to store the timezone, and whether DST is used. 
+
+~~~
+# Read hardware clock
+sudo hwclock --show
+
+# Set hardware clock from system clock
+hwclock --systohc
+~~~
+
+### **System clock**
+
+The system clock (a.k.a. the software clock) keeps track of: time, time zone, and DST if applicable. 
+It is calculated by the Linux kernel as the number of seconds since midnight January 1st 1970, UTC. 
+The initial value of the system clock is calculated from the hardware clock, dependent on the contents of `/etc/adjtime`. 
+After boot-up has completed, the system clock runs independently of the hardware clock. 
+The Linux kernel keeps track of the system clock by counting timer interrupts.
+
+~~~
+# To check the current system clock time (presented both in local time and UTC) as well as the RTC (hardware clock):
+timedatectl
+
+# To set the local time of the system clock directly:
+timedatectl set-time "yyyy-MM-dd hh:mm:ss"
+timedatectl set-time "2014-05-26 11:13:54"
+~~~
+
+The hardware clock can be queried and set with the `timedatectl` command. 
+
+~~~
+# To change the hardware clock time standard to localtime, use:
+timedatectl set-local-rtc 1
+
+# 检查下设置效果
+timedatectl | grep local
+
+# To revert to the hardware clock being in UTC, type:
+timedatectl set-local-rtc 0
+~~~
+
+* 设置时区
+
+~~~
+timedatectl set-timezone Asia/Shanghai
+~~~
+
+
+~~~
+# 激活 NTP Service
+timedatectl set-ntp true
+
+# 查看当前时间设置
+timedatectl status
+~~~
+
+
+### 如果是Windows多系统启动，将 Windows 的 hardware clock 设置也统一为 UTC
+
+创建 `some.reg` 文件，内容如下：
+
+如果是32位的Windows，Replace `qword` with `dword`
+
+~~~
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
+     "RealTimeIsUniversal"=qword:00000001
+~~~
+
+保存后双击执行。
+
+
 
 ## pacman
 
@@ -94,6 +182,66 @@ Application menu -\> Preferences -\> Monitor Settings
       cd [package name]
       makepkg -si
       ~~~
+
+
+
+### pcaman 常用命令
+
+* ref
+  * [pacman (简体中文) - arch wiki](https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+  * [Pacman常用命令](https://www.jianshu.com/p/ea651cdc5530)
+  * []()
+
+~~~
+# 更新系统
+# 在 Archlinux 中，使用一条命令即可对整个系统进行更新：
+pacman -Syyu
+
+# 安装包
+➔ pacman -S 包名：例如，执行 pacman -S firefox 将安装 Firefox。你也可以同时安装多个包，
+只需以空格分隔包名即可。
+➔ pacman -Sy 包名：与上面命令不同的是，该命令将在同步包数据库后再执行安装。
+➔ pacman -Sv 包名：在显示一些操作信息后执行安装。
+➔ pacman -U：安装本地包，其扩展名为 pkg.tar.gz。
+➔ pacman -U http://www.example.com/repo/example.pkg.tar.xz 安装一个远程包（不在 pacman 配置的源里面）
+
+# 删除包
+➔ pacman -R 包名：该命令将只删除包，保留其全部已经安装的依赖关系
+➔ pacman -Rs 包名：在删除包的同时，删除其所有没有被其他已安装软件包使用的依赖关系
+➔ pacman -Rsc 包名：在删除包的同时，删除所有依赖这个软件包的程序
+➔ pacman -Rd 包名：在删除包时不检查依赖。
+
+# 搜索包
+➔ pacman -Ss 关键字：在仓库中搜索含关键字的包。
+➔ pacman -Qs 关键字： 搜索已安装的包。
+➔ pacman -Qi 包名：查看有关包的详尽信息。
+➔ pacman -Ql 包名：列出该包的文件。
+
+# 其他用法
+➔ pacman -Sw 包名：只下载包，不安装。
+➔ pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg/ 目录。
+➔ pacman -Scc：清理所有的缓存文件。
+~~~
+
+
+
+
+
+
+
+
+## 系统基础功能
+
+### exfat
+
+* 使用 arter97/exfat-linux
+  <https://github.com/arter97/exfat-linux>
+
+~~~
+sudo pacman -Rs exfat-utils
+sudo pacman -S linux-headers
+yay -S exfat-linux-dkms
+~~~
 
 
 

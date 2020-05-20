@@ -25,6 +25,17 @@ rsync -av --progress root@nas01:/tmp/*Office* .
 ~~~
 
 
+### dd
+
+~~~
+dd if=/source/file/path of=/dest/file/path bs=1M status=progress
+~~~
+
+* Benchmark
+  * 操作系统： Manjaro    exfat 组件： exfat-linux-dkms
+    在 Intel P4600 Nvme 固态硬盘上测试，从 exfat 向 ext4 格式拷贝10G+文件，
+    “bs=1M” 或 “bs=4K” 效果都很好，达到 1GB/s ；但是 “bs=4M” 或者默认 512 bytes 就很慢，才 230MB/s。
+  
 
 
 
