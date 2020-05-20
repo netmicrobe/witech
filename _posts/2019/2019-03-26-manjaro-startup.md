@@ -100,6 +100,35 @@ Application menu -\> Preferences -\> Monitor Settings
 
 ## 常用软件
 
+### 基础开发工具
+
+~~~
+$ sudo pacman -S base-devel
+
+:: There are 24 members in group base-devel:
+:: Repository core
+   1) autoconf  2) automake  3) binutils  4) bison  5) fakeroot  6) file
+   7) findutils  8) flex  9) gawk  10) gcc  11) gettext  12) grep  13) groff
+   14) gzip  15) libtool  16) m4  17) make  18) pacman  19) patch  20) pkgconf
+   21) sed  22) sudo  23) texinfo  24) which
+~~~
+
+
+### google chrome
+
+1. 从 <https://aur.archlinux.org/packages/google-chrome/> 上查看git地址
+1. 编译安装
+    ~~~
+    git clone https://aur.archlinux.org/google-chrome.git
+    cd google-chrome
+    makepkg -si
+    ~~~
+
+
+
+
+### 其他
+
 ~~~
 # deepin 系的软件
 sudo pacman -S deepin-picker # 深度取色器
@@ -174,17 +203,6 @@ yay -S ncdu # 命令行下的磁盘分析器，支持Vim操作
 yay -S mosh # 一款速度更快的 ssh 工具，网络不稳定时使用有奇效
 ~~~
 
-~~~
-# 基础开发工具
-$ sudo pacman -S base-devel
-
-:: There are 24 members in group base-devel:
-:: Repository core
-   1) autoconf  2) automake  3) binutils  4) bison  5) fakeroot  6) file
-   7) findutils  8) flex  9) gawk  10) gcc  11) gettext  12) grep  13) groff
-   14) gzip  15) libtool  16) m4  17) make  18) pacman  19) patch  20) pkgconf
-   21) sed  22) sudo  23) texinfo  24) which
-~~~
 
 
 
