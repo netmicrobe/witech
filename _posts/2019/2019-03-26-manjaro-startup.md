@@ -185,6 +185,23 @@ Windows Registry Editor Version 5.00
 
 
 
+
+### 直接下载安装包
+
+* [Arch Linux Archive](https://wiki.archlinux.org/index.php/Arch_Linux_Archive)
+* []()
+* []()
+* []()
+* <https://archive.archlinux.org/packages>
+* <https://archive.org/download/archlinux_pkg_linux-headers>
+
+~~~
+# 例如：
+sudo pacman -U https://archive.org/download/archlinux_pkg_linux-headers
+~~~
+
+
+
 ### pcaman 常用命令
 
 * ref
@@ -464,6 +481,8 @@ sudo pacman -S adobe-source-han-serif-cn-fonts
 
 ## VirutalBox 安装配置
 
+* [virtualbox 的历史包](https://archive.org/download/archlinux_pkg_virtualbox)
+
 ### install through command line
 
 1. To list what kernels is installed use mhwd 
@@ -508,6 +527,7 @@ sudo pacman -Syu virtualbox linux56-virtualbox-host-modules
   * [ArchWiki - NTFS-3G (简体中文)](https://wiki.archlinux.org/index.php/NTFS-3G_\(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87\))
   * <https://community.linuxmint.com/tutorial/view/1513>
   * [CSDN - Archlinux下实现NTFS分区自动挂载](https://blog.csdn.net/baimaozi/article/details/3134267)
+  * [ExFAT with Arch Linux](https://topher1kenobe.com/exfat-with-arch-linux/)
 
 * 挂载ext4
   1. 注意提前挂载点：`sudo mkdir /your-mount-point`
