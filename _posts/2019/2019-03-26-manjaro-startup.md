@@ -232,16 +232,66 @@ pacman -Syyu
 
 ## 系统基础功能
 
+
+### 常用快捷键
+
+配置快捷键位置： Settings -\> Keyboard -\> Applications Shorcuts
+
+* terminal 打开快捷键：Ctrl + Alt + t
+  默认是： `xfce4-terminal --drop-down`
+
+
+
+
+
+### kernel
+
+* ref
+  * [Manjaro Kernels](https://wiki.manjaro.org/index.php/Manjaro_Kernels)
+  * []()
+  * []()
+
+* GUI Tool: `Manjaro Settings Manager` -\> kernel
+* Terminal Commands: `mhwd-kernel`
+
+~~~
+# 当前使用的kernel
+mhwd-kernel -li
+~~~
+
+
 ### exfat
 
 * 使用 arter97/exfat-linux
   <https://github.com/arter97/exfat-linux>
+* aur 上和exfat相关的包
+  <https://aur.archlinux.org/packages/?O=0&K=exfat>
 
 ~~~
 sudo pacman -Rs exfat-utils
 sudo pacman -S linux-headers
 yay -S exfat-linux-dkms
 ~~~
+
+
+### .bashrc
+
+~~~
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+	    . ~/.bash_aliases
+fi
+~~~
+
 
 
 
@@ -479,6 +529,18 @@ sudo pacman -Syu virtualbox linux56-virtualbox-host-modules
       ~~~
       # <file system>   <dir>		<type>    <options>             <dump>  <pass>
       /dev/NTFS-partition  /mnt/windows  ntfs-3g   defaults,noatime,uid=username,gid=users,umask=0022,locale=zh_CN.utf8    0 0
+      ~~~
+
+* 挂载exfat
+  1. 注意提前挂载点：
+      ~~~
+      sudo mkdir /Volumes/your-exfat-partition
+      sudo chown your-account:your-group /Volumes/your-exfat-partition
+      ~~~
+  1. 编辑 `/etc/fstab`，此处使用的是：  `aur/exfat-linux-dkms`
+      ~~~
+      # <file system>   <dir>		<type>    <options>             <dump>  <pass>
+      UUID=通过“lsblk -f”和“fdisk -l”来获得             /Volumes/your-exfat-partition   exfat    rw,nosuid,nodev,relatime,uid=1000,gid=1000,fmask=0022,dmask=0022,iocharset=utf8,errors=remount-ro  0  0
       ~~~
 
 
