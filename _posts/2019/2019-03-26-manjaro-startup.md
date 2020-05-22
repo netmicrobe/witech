@@ -234,14 +234,54 @@ pacman -Syyu
 ➔ pacman -Qi 包名：查看有关包的详尽信息。
 ➔ pacman -Ql 包名：列出该包的文件。
 
+# 搜索文件
+# To query the database to know which remote package a file belongs to:
+$ pacman -F /path/to/file_name
+# To retrieve a list of the files installed by a remote package:
+$ pacman -Fl package_name
+# To retrieve a list of the files installed by a package:
+$ pacman -Ql package_name
+
+
 # 其他用法
 ➔ pacman -Sw 包名：只下载包，不安装。
 ➔ pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg/ 目录。
 ➔ pacman -Scc：清理所有的缓存文件。
+
+
 ~~~
 
 
 
+
+
+## 如何安装 deb 包
+
+* [How to Install Deb Package in Arch Linux](https://www.maketecheasier.com/install-deb-package-in-arch-linux/)
+* [helixarch/debtap - github](https://github.com/helixarch/debtap)
+* []()
+* []()
+
+
+* 使用 debtap 工具
+
+  ~~~
+  sudo yay -S debtap
+  debtap packagetoconvert.deb
+  debtap -U *
+  ~~~
+
+* 手动安装 deb 包
+
+  1. 解压 deb 包
+  1. `cd` into the extracted Deb folder
+  1. 按照包里目录结构，向系统目录拷贝，例如：
+      ~~~
+      cd ~/Downloads/google-chrome-stable_current_amd64/etc
+      sudo mv * /etc/
+      cd ~/Downloads/google-chrome-stable_current_amd64/opt
+      sudo mv * /opt/
+      ~~~
 
 
 
