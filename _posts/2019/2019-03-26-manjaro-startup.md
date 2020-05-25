@@ -202,6 +202,14 @@ sudo pacman -U https://archive.org/download/archlinux_pkg_linux-headers
 
 
 
+### pacman 常用设置
+
+* 显示颜色
+  在`/etc/pacman.conf` 中开放Color设置：将 `#Color` 改为 `Color`
+
+
+
+
 ### pcaman 常用命令
 
 * ref
@@ -230,9 +238,11 @@ pacman -Syyu
 
 # 搜索包
 ➔ pacman -Ss 关键字：在仓库中搜索含关键字的包。
-➔ pacman -Qs 关键字： 搜索已安装的包。
+➔ pacman -Qs 关键字： 搜索已安装的包。关键字可以是正则表达式。
 ➔ pacman -Qi 包名：查看有关包的详尽信息。
 ➔ pacman -Ql 包名：列出该包的文件。
+# List packages by regex with custom output format
+expac -s "%-30n %v" regex
 
 # 搜索文件
 # To query the database to know which remote package a file belongs to:
@@ -248,7 +258,20 @@ $ pacman -Ql package_name
 ➔ pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg/ 目录。
 ➔ pacman -Scc：清理所有的缓存文件。
 
+~~~
 
+
+### pacman 其他相关工具
+
+#### pacgraph
+
+~~~
+sudo pacman -S pacgraph
+~~~
+
+~~~
+# Print summary to console, does not draw a graph.
+pacgraph -c | less
 ~~~
 
 
@@ -282,6 +305,10 @@ $ pacman -Ql package_name
       cd ~/Downloads/google-chrome-stable_current_amd64/opt
       sudo mv * /opt/
       ~~~
+
+
+
+
 
 
 
@@ -369,7 +396,17 @@ $ sudo pacman -S base-devel
 ~~~
 
 
-### google chrome
+### 浏览器
+
+#### vivaldi
+
+~~~
+yay -S vivaldi
+yay -S vivaldi-ffmpeg-codecs
+~~~
+
+
+#### google chrome
 
 1. 从 <https://aur.archlinux.org/packages/google-chrome/> 上查看git地址
 1. 编译安装
@@ -380,6 +417,39 @@ $ sudo pacman -S base-devel
     ~~~
 
 
+
+### 安装百度网盘
+
+~~~
+yay -S baidunetdisk-bin
+~~~
+
+也可以从deb包转化后安装。
+
+#### 安装百度网盘deb包
+
+* [ArchLinux安装最新百度网盘客户端](https://www.teaper.dev/2019/06/24/baidunetdiskarchlinux/)
+* [Archlinux安装百度网盘](https://www.moec.top/archives/599)
+* [在容器中运行Linux版百度云盘客户端](http://blog.lujun9972.win/blog/2019/07/23/%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E8%BF%90%E8%A1%8Clinux%E7%89%88%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html)
+* []()
+
+1. 下载官网的 baidunetdisk_linux_2.0.1.deb 安装包到本地
+1. deb 包转换成 ArchLinux 包需要借助 Debtap,所以需要先安装一下
+    ~~~
+    yay -S debtap
+    # 同步 pkgfile 和 debtap 数据源
+    sudo debtap -u
+    ~~~
+1. 转换包
+    ~~~
+    debtap baidunetdisk_linux_*.deb
+
+    Enter Packager name: #输入包名字
+    Enter package license (you can enter multiple licenses comma separated): #输入许可证，随便写（大写字母+数字组合），反正是自己用
+    ~~~
+1. 安装
+    转换成功之后，就可以看到本地多了 baidunetdisk-2.0.1-1-x86_64.pkg.tar.xz 包，使用 pacman 将其安装
+    `sudo pacman -U baidunetdisk-* .pkg.tar.xz`
 
 
 ### 其他
@@ -525,6 +595,13 @@ sudo pacman -S adobe-source-han-serif-cn-fonts
 
 ### install through command line
 
+#### 安装最新的Virtualbox
+
+* 最新的virtualbox 6.1 和 virtualbox 5 同时使用有问题，来回安装guest工具
+* 不如直接去装 virtualbox 5.2.x（2020年Oracle停止维护）
+* 还有bug，
+  * 比如，从锁屏唤醒，键盘没用，鼠标可以。解决方面，在host系统中使用下键盘，在回到virtualbox guest系统就可以使用键盘了。
+
 1. To list what kernels is installed use mhwd 
     ~~~
     $ mhwd-kernel -li
@@ -533,13 +610,25 @@ sudo pacman -S adobe-source-han-serif-cn-fonts
        * linux56
     ~~~
 1. install the kernel modules for your installed kernels, here is **linux56**
+    ~~~
+    sudo pacman -Syu virtualbox linux56-virtualbox-host-modules
+    ~~~
+
+
+#### 安装Virtualbox 5.2.x
+
+* [Package Details: virtualbox-bin-5](https://aur.archlinux.org/packages/virtualbox-bin-5/)
+* [virtualbox-ext-oracle-5](https://aur.archlinux.org/packages/virtualbox-ext-oracle-5/)
+
 ~~~
-sudo pacman -Syu virtualbox linux56-virtualbox-host-modules
+# 卸载 virtualbox 6
+sudo pacman -Rs virtualbox
+sudo pacman -Rs linux56-virtualbox-host-modules
+
+yay -S virtualbox-bin-5
+yay -S virtualbox-ext-oracle-5
 ~~~
-1. 
-1. 
-1. 
-1. 
+
 
 ### install through pamac-manager GUI
 
