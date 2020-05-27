@@ -20,6 +20,15 @@ tags: [manjaro]
 Application menu -\> Preferences -\> Monitor Settings
 
 
+## Grub
+
+### 菜单停留时间设置
+
+1. `sudo vim /etc/default/grub`
+  `GRUB_TIMEOUT=需要的秒数`
+1. `sudo update-grub`
+
+
 
 ## 系统时间设置
 
@@ -326,6 +335,18 @@ pacgraph -c | less
 
 
 
+### xfce4-terminal
+
+* 关闭：拷贝信息到命令行时，弹出安全提醒对话框
+  xfce4-terminal Edit 菜单 \-> Preferences... -> General 选项卡 -\> 勾掉 Show unsafe paste dialog
+
+
+
+### xfce panel
+
+* 添加“Show Desktop”按钮
+  右键系统状态栏 -\> Panel -\> Add New Items... -\> 搜索 Desktop ，添加 `Show Desktop`
+
 
 
 ### kernel
@@ -398,6 +419,19 @@ $ sudo pacman -S base-devel
 
 ### 浏览器
 
+
+#### firefox
+
+* 开机后第一次启动很慢
+
+  * 参考：
+    * <https://www.linuxquestions.org/questions/linux-general-1/firefox-takes-long-to-start-4175579278/#post5543712>
+
+1. `about:config`
+1. network.dns.disableIPv6: true
+
+
+
 #### vivaldi
 
 ~~~
@@ -415,6 +449,39 @@ yay -S vivaldi-ffmpeg-codecs
     cd google-chrome
     makepkg -si
     ~~~
+
+
+* How to enable logging
+  * [How to enable logging - The Chromium Projects](https://www.chromium.org/for-testers/enable-logging)
+  * [Chrome Browser debug logs - Goolge Chrome Support](https://support.google.com/chrome/a/answer/6271282?hl=en)
+
+  To enable logging, launch Chrome with these command line flags:
+
+  ~~~
+  google-chrome-stable --enable-logging=stderr --v=1                 # Output will be printed to standard error (eg. printed in the console)
+  google-chrome-stable --enable-logging=stderr --v=1 > log.txt 2>&1  # Capture stderr and stdout to a log file
+  google-chrome-stable --enable-logging=stderr --v=1 2>&1 | tee log.txt
+  ~~~
+
+* 启动很慢
+  * 方法1 [关闭硬件加速](#close-google-chrome-hardware-acceleration)
+  * 方法2 硬件加速使用Vulkan
+    ~~~
+    # 安装Vulkan
+    sudo pacman -S amdvlk
+    ~~~
+
+    进入chrome，`chrome://flags` 查找 Vulkan，选择 **Enable** __Use vulkan as the graphics backend. – Linux, Android__
+
+    重启系统，启动chrome速度就快啦，还可以  `chrome://gpu` 查看下相关设置：`Vulkan: Enabled`
+
+* 关闭硬件加速
+  <a name="close-google-chrome-hardware-acceleration"></a>
+  Settings -\> System -\> Use hardware acceleration when available
+
+
+
+
 
 
 

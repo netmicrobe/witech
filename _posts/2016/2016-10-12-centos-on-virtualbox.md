@@ -14,7 +14,7 @@ tags: [cm, virtual-box, centos, vm, kernel, virtualize, network, ssh]
   * [VirtualBox Guest Additions on Fedora 25/24, CentOS/RHEL 7.3/6.8/5.11](https://www.if-not-true-then-false.com/2010/install-virtualbox-guest-additions-on-fedora-centos-red-hat-rhel/)
 
 
-### 安装步骤
+### CentOS 上安装步骤
 
 * “增强功能”要编译安装，so先安装 build essential ： `yum groupinstall "Development Tools"`
 * 菜单： 设备 》安装增强功能，会挂载安装光盘
