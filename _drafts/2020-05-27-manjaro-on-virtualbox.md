@@ -13,7 +13,6 @@ tags: [cm, virtual-box, manjaro, vm, kernel, virtualize, network, ssh]
 * 参考
   * []()
   * []()
-  * []()
 
 
 ### Manjaro 20 上安装步骤
@@ -80,6 +79,26 @@ Graphics Controller:         VBoxVGA
 # 将 Graphic Controller 改为 vmsvga
 VBoxManage modifyvm ca8673a6-eb29-491c-9dc0-812423bbf927 --graphicscontroller vmsvga
 ~~~
+
+
+## Manjaro 20 Guest 启动慢的问题
+
+* 参考
+  * [VirtualBox 6 slow start/shutdown - forum.manjaro.org](https://forum.manjaro.org/t/virtualbox-6-slow-start-shutdown/70627/21)
+
+
+禁止了 vboxadd service 之后，关机/开机 速度是有提高。
+
+~~~
+sudo systemctl stop vboxadd
+sudo systemctl disable vboxadd
+~~~
+
+
+
+
+
+
 
 
 

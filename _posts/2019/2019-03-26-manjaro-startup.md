@@ -436,6 +436,7 @@ $ sudo pacman -S base-devel
 
 ~~~
 yay -S vivaldi
+# 编译了好长时间，cpu 100% 吃满
 yay -S vivaldi-ffmpeg-codecs
 ~~~
 
