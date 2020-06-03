@@ -398,6 +398,18 @@ fi
 ~~~
 
 
+### msi-rgb 微星主板灯光控制
+
+源码网站： <https://github.com/nagisa/msi-rgb>
+用 rust 语言开发。
+
+~~~
+yay -S msi-rgb
+
+# shut down led on motherboard
+sudo msi-rgb 00000000 ffffffff 00000000 -x
+~~~
+
 
 
 
