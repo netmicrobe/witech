@@ -411,6 +411,11 @@ sudo msi-rgb 00000000 ffffffff 00000000 -x
 ~~~
 
 
+### 显卡驱动
+
+* [Configure Graphics Cards - wiki.manjaro.org](https://wiki.manjaro.org/Configure_Graphics_Cards)
+
+
 
 
 ## 常用软件
@@ -530,6 +535,16 @@ yay -S baidunetdisk-bin
 1. 安装
     转换成功之后，就可以看到本地多了 baidunetdisk-2.0.1-1-x86_64.pkg.tar.xz 包，使用 pacman 将其安装
     `sudo pacman -U baidunetdisk-* .pkg.tar.xz`
+
+
+
+
+### 其他开放工具
+
+~~~
+yay -S heidisql
+~~~
+
 
 
 ### 其他
