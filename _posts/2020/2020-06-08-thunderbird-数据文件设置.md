@@ -12,6 +12,7 @@ tags: [mail, thunderbird]
   * []()
 
 
+## 移动 thunderbird 的 个人配置文件 / Profiles
 
 1. 安装thunderbird
 1. 移动thunderbird 的 个人配置文件（包含邮件数据）
@@ -26,5 +27,19 @@ tags: [mail, thunderbird]
       linux版本的配置文件位置： `~/.thunderbird/` ，其他步骤参照windows版本
 
 
+
+
+## 管理多个Profiles
+
+* Starting the Profile Manager
+  `thunderbird -ProfileManager`
+
+## 启动时指定 profiles 的位置
+
+`-profile "path" `
+
+~~~
+"F:\Mozilla Thunderbird\thunderbird.exe" -profile "F:\My TB profile"
+~~~
 
 
