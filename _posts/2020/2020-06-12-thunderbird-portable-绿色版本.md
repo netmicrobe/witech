@@ -22,4 +22,7 @@ tags: [mail, thunderbird]
   * []()
 
 
+Thunderbird 历史版本下载地址：  <https://archive.mozilla.org/pub/thunderbird/releases/>
+
+
 

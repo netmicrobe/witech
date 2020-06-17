@@ -499,7 +499,28 @@ yay -S vivaldi-ffmpeg-codecs
 
 
 
+### 压缩软件
 
+#### rar
+
+* [AUR - Package Details: rar](https://aur.archlinux.org/packages/rar/)
+* [Arch Wiki - rar](https://wiki.archlinux.org/index.php/Rar)
+
+`rar` 是在 AUR 库里面，执行 `yay -S rar` 安装，同时应为冲突，卸载系统自带的 `unrar`
+
+~~~
+# 典型压缩命令
+# -r 	recurse subdirectories (includes all dirs/files under the parent directory).
+# -rr10 	adds recovery records to the archive. This way up to 10% of the compressed archive can become corrupt or unusable, and it will be able to recover the data through parity. 
+
+$ rar a -r -rr10 /media/data/darkhorse-backup.rar /home/darkhorse
+
+# Mixed-mode archives
+# -m5 	Use the highest level of compression (m0 = store ... m3 = default ... m5 = maximal level of compression.
+# -msjpg;mp3;tar 	ignore the compression option and store all .jpg and .mp3 and .tar files. 
+
+$ rar a -r -rr10 -s -m5 -msjpg;mp3;tar /media/data/darkhorse-backup.rar /home/darkhorse
+~~~
 
 
 
