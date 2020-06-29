@@ -349,6 +349,16 @@ pacgraph -c | less
 
 
 
+### Windows Manager
+
+设置窗口摆放位置的快捷键
+
+Windows Manager \> Keyboard \> 设置各种 `Tile windows to xxx`
+
+
+
+
+
 ### kernel
 
 * ref

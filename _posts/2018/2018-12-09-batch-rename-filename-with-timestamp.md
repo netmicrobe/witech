@@ -17,3 +17,15 @@ for f in * ; do [ -f "$f" ] && mv -- "$f" "VIDEO_"$(date -r "$f" +%Y%m%d_%H%M%S)
 
 for f in * ; do [ -f "$f" ] && mv -- "$f" "IMG_"$(date -r "$f" +%Y%m%d_%H%M%S)"."$(echo "$f" | awk -F . '{if (NF>1) {print $NF}}'); done
 ~~~
+
+* 文件名加前缀
+
+~~~
+for f in * ; do [ -f "$f" ] && echo "我是前缀_""$f"; done
+for f in * ; do [ -f "$f" ] && mv -- "$f" "我是前缀_""$f"; done
+~~~
+
+
+
+
+
