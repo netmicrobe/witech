@@ -569,6 +569,13 @@ yay -S baidunetdisk-bin
 
 
 
+### 电子书工具
+
+~~~
+# 打开 chm
+sudo pacman -S kchmviewer
+~~~
+
 
 ### 其他开放工具
 
