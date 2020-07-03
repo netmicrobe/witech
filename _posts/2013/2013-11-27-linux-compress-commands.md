@@ -21,6 +21,9 @@ sudo apt-get install p7zip-full
 
 # CentOS
 yum -y install p7zip
+
+# arch
+sudo pacman -S p7zip
 ```
 
 ### 解压
@@ -35,7 +38,9 @@ yum -y install p7zip
 7z a target-name.7z target-dir/
 ```
 
-### 对目录下的子文件逐个压缩
+### 其他技巧
+
+#### 对目录下的子文件逐个压缩
 
 * 参考
   * <https://stackoverflow.com/a/17009555/3316529>
