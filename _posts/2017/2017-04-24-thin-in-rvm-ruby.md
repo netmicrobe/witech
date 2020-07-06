@@ -7,6 +7,7 @@ tags: [ruby, thin, rvm]
 
 * 参考
   * [mapopa/thin_init.sh](https://gist.github.com/mapopa/3944992)
+  * [RVM - official site](https://rvm.io/)
 
 ## 说明
 

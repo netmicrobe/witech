@@ -2,7 +2,7 @@
 layout: post
 title: 在 移动固态硬盘 pssd 上安装 windows to go
 categories: [cm, windows]
-tags: [ssd, wtg]
+tags: [ssd, wtg, windows-to-go]
 ---
 
 * 参考： 
@@ -24,6 +24,13 @@ tags: [ssd, wtg]
     * 簇大小：4096字节
 
     设置好，点击“开始”，然后等一会。
+
+1. 在Mac上启动windows to go，还有额外工作：
+
+    1. 下载对应mac电脑的驱动安装文件： 程序》辅助工具》启动转换助理》菜单“操作”》下载Windows支持软件》下载windows驱动》将驱动拷贝到外置硬盘
+    1. 在Mac启动Windows-to-go，在mac上连接外接普通鼠标和键盘
+    1. 在Windows点击刚下载的Windows驱动中的Setup.exe
+
 
 2. 调整分区
     

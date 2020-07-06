@@ -9,7 +9,8 @@ tags: [rvm, ruby]
 
 * 参考：
   * <https://ruby-china.org/wiki/rvm-guide>
-  * <https://rvm.io/>
+  * [RVM - official site](https://rvm.io/)
+
 ---
 
 ## 安装RVM
