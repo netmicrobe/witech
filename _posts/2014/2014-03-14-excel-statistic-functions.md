@@ -19,6 +19,16 @@ tags: [cm, office, excel]
 =COUNTIF(C:C, "=是")
 ```
 
+#### 包含 某个文字
+
+`=COUNTIF(Range,"*要包含的文字*")`
+
+
+#### 不包含 某个文字
+
+`=COUNTIF(Range,"<>*不要包含的文字*")`
+
+
 
 ### 统计“符合多个条件”的行数
 

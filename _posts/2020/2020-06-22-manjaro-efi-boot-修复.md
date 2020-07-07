@@ -1,8 +1,8 @@
 ---
 layout: post
-title: manjaro 入门使用
+title: manjaro efi boot 修复
 categories: [cm, linux]
-tags: [manjaro]
+tags: [manjaro, efi, boot]
 ---
 
 * 参考： 
