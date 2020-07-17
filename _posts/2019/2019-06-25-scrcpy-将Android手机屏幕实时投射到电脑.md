@@ -109,7 +109,16 @@ On old versions (like Ubuntu 16.04), meson is too old. In that case, install it 
 
 ~~~
 sudo apt install python3-pip
-pip3 install meson
+
+# 解决 ModuleNotFoundError: No module named 'setuptools' 报错
+pip3 install --upgrade setuptools
+
+# 解决 error: invalid command 'bdist_wheel' 报错
+pip3 install --upgrade wheel
+
+pip3 install --upgrade meson
+
+# meson 的安装位置 /home/wi/.local/bin/meson
 ~~~
 
 ## 编译 scrcpy 服务器（电脑端）
