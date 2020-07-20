@@ -37,6 +37,33 @@ tags: [manjaro, efi, boot]
     ~~~
 
 
+## ubuntu efi 修复
+
+ubuntu只能使用ubuntu的系统来进行 `chroot` 后， 用`grub-install`修复。
+
+chroot的挂载和manjaro一样。 `grub-install`命令比manjaro简单。
+
+~~~
+grub-install /dev/sdX
+grub-install --recheck /dev/sdX
+update-grub
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
