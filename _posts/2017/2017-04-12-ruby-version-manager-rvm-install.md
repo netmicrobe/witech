@@ -9,6 +9,7 @@ tags: [rvm, ruby]
 
 * 参考：
   * <https://ruby-china.org/wiki/rvm-guide>
+  * <https://ruby-china.org/wiki/ruby-mirror>
   * [RVM - official site](https://rvm.io/)
 
 ---
@@ -62,7 +63,7 @@ usermod -a -G rvm root redmine
 
 Ruby China源
 ~~~
-echo "ruby_url=https://cache.ruby-china.org/pub/ruby" > ~/.rvm/user/db
+echo "ruby_url=https://cache.ruby-china.com/pub/ruby" > ~/.rvm/user/db
 ~~~
 
 
