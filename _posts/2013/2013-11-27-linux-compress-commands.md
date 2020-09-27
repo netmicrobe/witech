@@ -18,10 +18,42 @@ tags: [linux, tar, 7z]
 解压：tar -xzf some.tar.gz
 
 
+`--ignore-failed-read` Do not exit with nonzero on unreadable files.
+
+--ignore-command-error
+
+       Ignore subprocess exit codes.
 
 
+显示压缩进度
+
+~~~
+tar cf - /folder-with-big-files -P | pv -s $(($(du -sk /folder-with-big-files | awk '{print $1}') * 1024)) | gzip > big-files.tar.gz
+~~~
 
 
+多线程压缩、解压
+~~~
+# 先安装pigz
+sudo pacman -S pigz
+tar -I pigz -cf tarball.tgz files
+
+tar -I pigz -xf tarball.tgz
+~~~
+
+323
+
+You can use pigz instead of gzip, which does gzip compression on multiple cores. Instead of using the -z option, you would pipe it through pigz:
+
+tar cf - paths-to-archive | pigz > archive.tar.gz
+
+By default, pigz uses the number of available cores, or eight if it could not query that. You can ask for more with -p n, e.g. -p 32. pigz has the same options as gzip, so you can request better compression with -9. E.g.
+
+tar cf - paths-to-archive | pigz -9 -p 32 > archive.tar.gz
+
+pigz -dc target.tar.gz | tar xf -
+
+pigz -p 8 -dc wechat2.tgz | tar xf -
 
 ## xz
 
@@ -188,7 +220,7 @@ sudo pacman -S p7zip
 7z a target-name.7z target-dir/
 
 # -mx=1 最快压缩
-7z a -mx=1 -mmt=6 target-name.7z target-file1 target-file2
+7z a -mx=1 -mmt=6  -m0=LZMA2 target-name.7z target-file1 target-file2
 ```
 
 ### 其他技巧

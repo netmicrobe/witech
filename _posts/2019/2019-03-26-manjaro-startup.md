@@ -232,8 +232,8 @@ sudo pacman -U https://archive.org/download/archlinux_pkg_linux-headers
 pacman -Syyu
 
 # 安装包
-➔ pacman -S 包名：例如，执行 pacman -S firefox 将安装 Firefox。你也可以同时安装多个包，
-只需以空格分隔包名即可。
+➔ pacman -S 包名：例如，执行 pacman -S firefox 将安装 Firefox。你也可以同时安装多个包，只需以空格分隔包名即可。
+➔ pacman -Si 精确包名：查询后现实对应包的详细信息。
 ➔ pacman -Sy 包名：与上面命令不同的是，该命令将在同步包数据库后再执行安装。
 ➔ pacman -Sv 包名：在显示一些操作信息后执行安装。
 ➔ pacman -U：安装本地包，其扩展名为 pkg.tar.gz。
@@ -519,6 +519,12 @@ yay -S vivaldi-ffmpeg-codecs
 `rar` 是在 AUR 库里面，执行 `yay -S rar` 安装，同时应为冲突，卸载系统自带的 `unrar`
 
 ~~~
+sudo pacman -Rs unrar
+yay -Si rar
+yay -S rar
+~~~
+
+~~~
 # 典型压缩命令
 # -r 	recurse subdirectories (includes all dirs/files under the parent directory).
 # -rr10 	adds recovery records to the archive. This way up to 10% of the compressed archive can become corrupt or unusable, and it will be able to recover the data through parity. 
@@ -728,7 +734,7 @@ sudo pacman -S adobe-source-han-serif-cn-fonts
 
 ### install through command line
 
-#### 安装最新的Virtualbox
+#### 安装最新的Virtualbox 6
 
 * 最新的virtualbox 6.1 和 virtualbox 5 同时使用有问题，来回安装guest工具
 * 不如直接去装 virtualbox 5.2.x（2020年Oracle停止维护）
@@ -758,9 +764,65 @@ sudo pacman -S adobe-source-han-serif-cn-fonts
 sudo pacman -Rs virtualbox
 sudo pacman -Rs linux56-virtualbox-host-modules
 
+# 5.2.44 在 kernel 5.8 用不起来，得用 kernel 5.7 
+# Manjaro Settings Manager \> Kernel 安装 5.7
+sudo pacman -S linux57-headers
+
+# 重启系统，选择 5.7 kernel
+
+# 安装 AUR 里面的virtualbox 5
 yay -S virtualbox-bin-5
 yay -S virtualbox-ext-oracle-5
 ~~~
+
+
+##### 删除 kernel 5.8
+
+~~~
+sudo pacman -Rcsnu linux-latest
+# 如果还有其他安装的模块，可用 sudo pacman -Rcsnu linux-latest linux-latest-nvidia-440xx linux-latest-virtualbox-host-modules linux-latest-bbswitch
+sudo pacman -R linux58-headers
+sudo mhwd-kernel -r linux58
+~~~
+
+图形界面操作位置： Manjaro Settings Manager \> Kernel ，似乎没啥用，不报错也不起效果。
+
+
+##### 无法启动 5.2.x，报错：kernel drvier not installed(rc=-1908)
+
+* 错误提示
+  The VirtualBox Linux kernel driver is either not loaded or not setup correctly.
+  Please try setting it up again by executing
+  `/sbin/vboxconfig`
+  as root.
+
+* 解决：
+
+~~~
+$ sudo /opt/VirtualBox/vboxdrv.sh setup
+
+vboxdrv.sh: Stopping VirtualBox services.
+vboxdrv.sh: Starting VirtualBox services.
+~~~
+
+~~~
+$ lsmod | grep vbox
+vboxpci                28672  0
+vboxnetadp             28672  0
+vboxnetflt             32768  0
+vboxdrv               516096  4 vboxpci,vboxnetadp,vboxnetflt
+~~~
+
+~~~
+$ mhwd-kernel -li
+Currently running: 5.7.19-2-MANJARO (linux57)
+The following kernels are installed in your system:
+   * linux57
+   * linux58
+   * linux56-rt
+~~~
+
+
 
 
 ### install through pamac-manager GUI
