@@ -11,7 +11,7 @@ tags: []
   * <https://github.com/moodle/moodle>
   * [Git for Administrators](https://docs.moodle.org/310/en/Git_for_Administrators)
     里面写了怎么安装模块的第三方git库
-  * []()
+  * [How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04)
   * []()
 
 
@@ -62,31 +62,121 @@ sudo mysql
 # 修改 mysql root 密码
 # mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 # mysql> FLUSH PRIVILEGES;
+~~~
+
+~~~
+# 创建数据库 moodle
+mysql> CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# 添加 app 的数据库用户
+mysql> CREATE USER moodleuser@'192.168.%.%' IDENTIFIED BY 'moodle';
+mysql> GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodle.* TO moodleuser@'192.168.%.%';
+mysql> FLUSH PRIVILEGES;
+~~~
+
+### 安装 Apache2
+
+~~~
+sudo apt install apache2
+sudo ufw app list
+sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
+~~~
+
+访问 `http://your_server_ip` 测试是否安装成功。
+
+`systemctl status apache2`
+
+默认 webroot 的位置：/var/www/html
 
 
+### 安装 PHP
 
-
+~~~
+sudo apt install php libapache2-mod-php php-mysql php-curl php-zip php-xml php-mbstring php-gd php-intl
+sudo systemctl restart apache2
 ~~~
 
 
 
 
+### 创建数据文件夹
+
+数据文件夹:
+* 不要和web文件夹放在一起，不能被通过web浏览器访问到。
+* 不要放在 root 目录
+* 不要放在 moodle 程序目录。
+
+~~~
+mkdir /path/to/moodledata
+chmod 0777 /path/to/moodledata
+~~~
+
+### 为 moodle 创建apache virtual host
+
+假设moodle 放在： `/opt/moodle/moodle-310/`
+
+`sudo vim /etc/apache2/sites-available/moodle.conf`
+
+~~~
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName your_domain
+    ServerAlias www.your_domain
+    DocumentRoot /opt/moodle/moodle-310
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+~~~
+
+~~~
+sudo a2ensite moodle.conf
+# disable default conf
+sudo a2dissite 000-default.conf
+
+# test config syntax
+sudo apache2ctl configtest
+
+# 重启apache2
+sudo systemctl restart apache2
+~~~
+
+#### 或者，使用子目录
+
+All aliases in Apache 2.4 have to be configured in the /etc/apache2/mods-enabled/alias.conf file.
+
+~~~
+# moodle
+Alias /moodle/ "/opt/moodle/moodle-310/"
+
+<Directory "/opt/moodle/moodle-310">
+	Options FollowSymlinks
+	AllowOverride None
+	Require all granted
+</Directory>
+~~~
 
 
 
+### 执行 moodle install
+
+~~~
+chown www-data /path/to/moodle
+cd /path/to/moodle/admin/cli
+sudo -u www-data /usr/bin/php install.php
+chown -R root /path/to/moodle
+~~~
 
 
+~~~
+PHP Fatal error:  cURL module must be enabled! in /opt/moodle/moodle-310/lib/filelib.php on line 3050
 
+Fatal error: cURL module must be enabled! in /opt/moodle/moodle-310/lib/filelib.php on line 3050
+~~~
 
-
-
-
-
-
-
-
-
-
+~~~
+PHP Fatal error:  Uncaught Error: Class 'ZipArchive' not found in /opt/moodle/moodle-310/lib/filestorage/zip_archive.php:90
+~~~
 
 
 
