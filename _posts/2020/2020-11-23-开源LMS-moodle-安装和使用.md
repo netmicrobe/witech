@@ -168,21 +168,27 @@ chown -R root /path/to/moodle
 ~~~
 
 
-~~~
-PHP Fatal error:  cURL module must be enabled! in /opt/moodle/moodle-310/lib/filelib.php on line 3050
-
-Fatal error: cURL module must be enabled! in /opt/moodle/moodle-310/lib/filelib.php on line 3050
-~~~
-
-~~~
-PHP Fatal error:  Uncaught Error: Class 'ZipArchive' not found in /opt/moodle/moodle-310/lib/filestorage/zip_archive.php:90
-~~~
 
 
+## moodle 作为试题库使用
+
+首页，有题库，单个course也有题库，2库试题不通用。可以通过导入和导出来交换试题数据。
+
+首页的题库位置： 
+  * 站点首页 》设置 菜单 》更多。。。》首页设置 》题库
+  * Site Home \> Setting icon \> More... > Question Bank \> Questions
+
+首页中创建quiz
+  * 站点首页 》设置 菜单 》更多。。。》首页设置 》打开编辑功能 》添加一个活动或资源 》测验
 
 
+某个course的题库位置：
+  * 某课程主页 》设置 菜单 》更多。。。》课程管理 》题库
+  * some course main page \> Setting icon \> More... > Question Bank \> Questions
 
-
+某个course中创建quiz
+  * 某课程主页 》打开编辑功能 》添加一个活动或资源 》测验
+  * some course main page \> Turn editing on \> Add an activity or resource \> Quiz
 
 
 
