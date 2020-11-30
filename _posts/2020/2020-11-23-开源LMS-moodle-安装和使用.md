@@ -145,6 +145,8 @@ sudo systemctl restart apache2
 
 All aliases in Apache 2.4 have to be configured in the /etc/apache2/mods-enabled/alias.conf file.
 
+* Apache >= 2.4
+
 ~~~
 # moodle
 Alias /moodle/ "/opt/moodle/moodle-310/"
@@ -155,6 +157,18 @@ Alias /moodle/ "/opt/moodle/moodle-310/"
 	Require all granted
 </Directory>
 ~~~
+
+* Apache 2.2
+
+~~~
+Alias /moodle "/opt/server/moodle/moodle-310"
+<Directory "/opt/server/moodle/moodle-310">
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+~~~
+
 
 
 
@@ -170,23 +184,28 @@ chown -R root /path/to/moodle
 
 
 
+
+
+
+
+
 ## moodle 作为试题库使用
 
 首页，有题库，单个course也有题库，2库试题不通用。可以通过导入和导出来交换试题数据。
 
-首页的题库位置： 
+* 首页的题库位置： 
   * 站点首页 》设置 菜单 》更多。。。》首页设置 》题库
   * Site Home \> Setting icon \> More... > Question Bank \> Questions
 
-首页中创建quiz
+* 首页中创建quiz
   * 站点首页 》设置 菜单 》更多。。。》首页设置 》打开编辑功能 》添加一个活动或资源 》测验
 
 
-某个course的题库位置：
+* 某个course的题库位置：
   * 某课程主页 》设置 菜单 》更多。。。》课程管理 》题库
   * some course main page \> Setting icon \> More... > Question Bank \> Questions
 
-某个course中创建quiz
+* 某个course中创建quiz
   * 某课程主页 》打开编辑功能 》添加一个活动或资源 》测验
   * some course main page \> Turn editing on \> Add an activity or resource \> Quiz
 

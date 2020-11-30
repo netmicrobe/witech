@@ -16,12 +16,22 @@ tags: [rvm, ruby]
 
 ## 安装RVM
 
-```
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | sudo bash -s stable
-```
+~~~
+sudo gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+# 连不上server，可参考如下的key server，参考： https://rvm.io/rvm/security
+# 或，
+# gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+# 或，
+# hkp://ipv4.pool.sks-keyservers.net
+# hkp://pgp.mit.edu
+# hkp://keyserver.pgp.com
+~~~
 
-https 如果连不上，tmd GFW，就改成http就可以了。
+~~~
+\curl -sSL https://get.rvm.io | bash -s stable
+~~~
+
+https 如果连不上，可能GFW，就改成http就可以了。
 
 sudo 方式会安装在 /usr/local/rvm ，供所有用户使用，否则只是安装在当前用户的HOME下。
 

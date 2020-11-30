@@ -2,7 +2,7 @@
 layout: post
 title: Mysql 数据库配置管理
 categories: [cm, mysql]
-tags: [cm, mysql]
+tags: [mysqladmin, iptables, LOAD-DATA, 导入数据, database, mysqldump]
 ---
 
 ## MySQL服务器
@@ -119,4 +119,25 @@ mysqldump -u root --opt  bugs | gzip > bugs.sql.gz
 restore
 gunzip < bugs.sql.gz | mysql -u root bugs
 ```
+
+
+
+
+## iptables 配置
+
+发开3306端口，示例：
+
+~~~
+iptables -I INPUT 7 -p tcp -s 192.168.0.0/16 --dport 3306 -j ACCEPT
+~~~
+
+
+
+
+
+
+
+
+
+
 

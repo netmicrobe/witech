@@ -575,102 +575,6 @@ yay -S baidunetdisk-bin
 
 
 
-### 电子书工具
-
-~~~
-# 打开 chm
-sudo pacman -S kchmviewer
-~~~
-
-
-### 其他开放工具
-
-~~~
-yay -S heidisql
-~~~
-
-
-
-### 其他
-
-~~~
-# deepin 系的软件
-sudo pacman -S deepin-picker # 深度取色器
-sudo pacman -S deepin-screen-recorder # 录屏软件，可以录制 Gif 或者 MP4 格式
-sudo pacman -S deepin-screenshot # 深度截图
-sudo pacman -S deepin-system-monitor # 系统状态监控
-yay -s deepin-wine-wechat
-yay -S deepin-wine-tim
-yay -S deepin-wine-baidupan
-yay -S deepin.com.thunderspeed
-
-# 开发软件
-sudo pacman -S jdk8-openjdk
-sudo pacman -S make
-sudo pacman -S cmake
-sudo pacman -S clang
-sudo pacman -S nodejs
-sudo pacman -S npm
-sudo pacman -S goland
-sudo pacman -S vim
-sudo pacman -S maven
-sudo pacman -S pycharm-professional # Python IDE
-sudo pacman -S intellij-idea-ultimate-edition # JAVA IDE
-sudo pacman -S goland # Go IDE
-sudo pacman -S visual-studio-code-bin # vscode
-sudo pacman -S qtcreator # 一款QT开发软件
-sudo pacman -S postman-bin
-sudo pacman -S insomnia # REST模拟工具
-sudo pacman -S gitkraken # GIT管理工具
-sudo pacman -S wireshark-qt # 抓包
-sudo pacman -S zeal
-sudo pacman -S gitkraken # Git 管理工具
-
-# 办公软件
-sudo pacman -S google-chrome
-sudo pacman -S foxitreader # pdf 阅读
-sudo pacman -S bookworm # 电子书阅读
-sudo pacman -S unrar unzip p7zip
-sudo pacman -S goldendict # 翻译、取词
-sudo pacman -S wps-office
-yay -S typora # markdown 编辑
-yay -S electron-ssr # 缺少我需要的加密算法
-yay -S xmind
-
-# 设计
-sudo pacman -S pencil # 免费开源界面原型图绘制工具
-
-# 娱乐软件
-sudo pacman -S netease-cloud-music
-
-# 下载软件
-sudo pacman -S aria2
-sudo pacman -S filezilla  # FTP/SFTP
-
-# 图形
-sudo pacman -S gimp # 修图
-
-# 系统工具
-sudo pacman -S albert #类似Mac Spotlight，另外一款https://cerebroapp.com/
-yay -S copyq #  剪贴板工具，类似 Windows 上的 Ditto
-
-# 终端
-sudo pacman -S screenfetch # 终端打印出你的系统信息，screenfetch -A 'Arch Linux'
-sudo pacman -S htop
-sudo pacman -S bat
-sudo pacman -S yakuake # 堪称 KDE 下的终端神器，KDE 已经自带，F12 可以唤醒
-sudo pacman -S net-tools # 这样可以使用 ifconfig 和 netstat
-yay -S tldr
-yay -S tig # 命令行下的 git 历史查看工具
-yay -S tree
-yay -S ncdu # 命令行下的磁盘分析器，支持Vim操作
-yay -S mosh # 一款速度更快的 ssh 工具，网络不稳定时使用有奇效
-~~~
-
-
-
-
-
 
 
 
@@ -902,6 +806,127 @@ pacman -S ntfs-3g
 
 
 
+
+
+
+## 其他软件
+
+
+
+### 开发工具
+
+
+#### mysql
+
+~~~
+# 这个 heidisql 版本是 wine 环境下运行的
+yay -S heidisql
+~~~
+
+~~~
+# An attempt to port a very useful GUI database client HeidiSQL to C++/Qt
+yay -S meowsql-git
+~~~
+
+~~~
+$ cat /usr/share/applications/meowsql.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=meowsql
+Comment=mysql tool
+Exec=/usr/bin/meow-sql
+Terminal=false
+Categories=Development;
+~~~
+
+
+
+### 电子书工具
+
+~~~
+# 打开 chm
+sudo pacman -S kchmviewer
+~~~
+
+
+
+
+### 其他
+
+~~~
+# deepin 系的软件
+sudo pacman -S deepin-picker # 深度取色器
+sudo pacman -S deepin-screen-recorder # 录屏软件，可以录制 Gif 或者 MP4 格式
+sudo pacman -S deepin-screenshot # 深度截图
+sudo pacman -S deepin-system-monitor # 系统状态监控
+yay -s deepin-wine-wechat
+yay -S deepin-wine-tim
+yay -S deepin-wine-baidupan
+yay -S deepin.com.thunderspeed
+
+# 开发软件
+sudo pacman -S jdk8-openjdk
+sudo pacman -S make
+sudo pacman -S cmake
+sudo pacman -S clang
+sudo pacman -S nodejs
+sudo pacman -S npm
+sudo pacman -S goland
+sudo pacman -S vim
+sudo pacman -S maven
+sudo pacman -S pycharm-professional # Python IDE
+sudo pacman -S intellij-idea-ultimate-edition # JAVA IDE
+sudo pacman -S goland # Go IDE
+sudo pacman -S visual-studio-code-bin # vscode
+sudo pacman -S qtcreator # 一款QT开发软件
+sudo pacman -S postman-bin
+sudo pacman -S insomnia # REST模拟工具
+sudo pacman -S gitkraken # GIT管理工具
+sudo pacman -S wireshark-qt # 抓包
+sudo pacman -S zeal
+sudo pacman -S gitkraken # Git 管理工具
+
+# 办公软件
+sudo pacman -S google-chrome
+sudo pacman -S foxitreader # pdf 阅读
+sudo pacman -S bookworm # 电子书阅读
+sudo pacman -S unrar unzip p7zip
+sudo pacman -S goldendict # 翻译、取词
+sudo pacman -S wps-office
+yay -S typora # markdown 编辑
+yay -S electron-ssr # 缺少我需要的加密算法
+yay -S xmind
+
+# 设计
+sudo pacman -S pencil # 免费开源界面原型图绘制工具
+
+# 娱乐软件
+sudo pacman -S netease-cloud-music
+
+# 下载软件
+sudo pacman -S aria2
+sudo pacman -S filezilla  # FTP/SFTP
+
+# 图形
+sudo pacman -S gimp # 修图
+
+# 系统工具
+sudo pacman -S albert #类似Mac Spotlight，另外一款https://cerebroapp.com/
+yay -S copyq #  剪贴板工具，类似 Windows 上的 Ditto
+
+# 终端
+sudo pacman -S screenfetch # 终端打印出你的系统信息，screenfetch -A 'Arch Linux'
+sudo pacman -S htop
+sudo pacman -S bat
+sudo pacman -S yakuake # 堪称 KDE 下的终端神器，KDE 已经自带，F12 可以唤醒
+sudo pacman -S net-tools # 这样可以使用 ifconfig 和 netstat
+yay -S tldr
+yay -S tig # 命令行下的 git 历史查看工具
+yay -S tree
+yay -S ncdu # 命令行下的磁盘分析器，支持Vim操作
+yay -S mosh # 一款速度更快的 ssh 工具，网络不稳定时使用有奇效
+~~~
 
 
 

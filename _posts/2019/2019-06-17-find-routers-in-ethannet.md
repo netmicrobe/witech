@@ -2,7 +2,7 @@
 layout: post
 title: 发现局域网中的路由器设备
 categories: [cm, network]
-tags: [kali, netdiscover]
+tags: [kali, netdiscover, nmap, arp-scan, aircrack-ng]
 ---
 
 * 参考： 

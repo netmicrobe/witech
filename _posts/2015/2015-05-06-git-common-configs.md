@@ -86,4 +86,6 @@ git config --global core.filemode false
 git config --global http.sslverify false
 git config --global http.postbuffer 524288000
 git config --global core.quotepath false
+
+git config --global core.editor vi
 ```
