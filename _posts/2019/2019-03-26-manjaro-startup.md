@@ -702,6 +702,8 @@ sudo mhwd-kernel -r linux58
 
 * 解决：
 
+re-install virtualbox: `yay -S virtualbox-bin-5`
+
 ~~~
 $ sudo /opt/VirtualBox/vboxdrv.sh setup
 
