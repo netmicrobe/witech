@@ -604,6 +604,8 @@ yay -S baidunetdisk-bin
 1. 安装fcitx
     ~~~
     sudo pacman -S fcitx fcitx-sunpinyin fcitx-configtool
+    # 如果是 KDE，还要安装 fcitx-qt5
+    sudo pacman -S fcitx-qt5
     ~~~
 1. 在 home 目录下创建 `.xprofile`
     ~~~
