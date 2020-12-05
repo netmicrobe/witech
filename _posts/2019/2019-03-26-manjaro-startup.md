@@ -853,6 +853,13 @@ Categories=Development;
 sudo pacman -S kchmviewer
 ~~~
 
+~~~
+# 打开epub
+sudo pacman -S calibre
+# 或
+sudo pacman -S fbreader
+~~~
+
 
 
 
