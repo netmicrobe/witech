@@ -269,6 +269,12 @@ $ pacman -Ql package_name
 
 ~~~
 
+~~~
+# 批量安装搜索到的包
+pacman -Ssq <regex> | sudo pacman -S -
+~~~
+
+
 
 ### pacman 其他相关工具
 
