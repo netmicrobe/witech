@@ -11,7 +11,159 @@ tags: [ android, ui-automator, espresso ]
 * [Android Develop - Espresso](https://developer.android.com/training/testing/espresso/index.html)
 * [Android Develop - Testing UI for Multiple Apps](https://developer.android.com/training/testing/ui-testing/uiautomator-testing.html)
 * [vogella.com - Android user interface testing with Espresso - Tutorial](http://www.vogella.com/tutorials/AndroidTestingEspresso/article.html)
+* 《腾讯Android自动化测试实战》
 * []()
+
+
+## 自动化测试介绍
+
+### Android 自动化测试框架
+
+* Monkey
+* MonkeyRunner
+* Instrumentation
+* MonkeyRunner
+* UIAutomator 【跨应用】
+* Robotium  __最后一次更新于2016年__
+    基于 Instrumentation。
+    <https://github.com/RobotiumTech/robotium>
+* Robolectric
+    主要支持单元测试。
+* Selendroid
+* Espresso
+* Calabash
+* Appium
+    使用 Selenium 的 WebDriver JSON 协议
+* Macaca（淘宝）
+    * <https://macacajs.com/zh/>
+    * 支持在移动端和PC端的Native, Hybrid, 移动端Web应用
+* Airtest（网易）
+    * <https://airtest.netease.com>
+* 
+
+
+
+![](android-auto-test-framework.png)
+
+![](android-auto-test-framework-02.png)
+
+
+
+### 自动化测试的基础知识
+
+![](android-auto-test-foundation.png)
+
+
+### 自动化测试基本步骤
+
+![](android-auto-test-process.png)
+
+
+### 自动化测试的使用场景
+
+![](android-auto-test-scenario.png)
+
+
+
+
+
+
+
+
+
+## Monkey
+
+* 参考：
+    * [Android 官方手册 - UI/Application Exerciser Monkey](https://developer.android.com/studio/test/monkey)
+    * []()
+
+
+启动脚本在 `/system/bin` 目录的 Monkey 文件。
+
+jar包在 `/system/framework/` 目录的 `Monkey.jar`
+
+~~~
+adb shell monkey [options] <event-count>
+~~~
+
+常规的monkey测试是，随机事件流。但也可以自定义脚本来执行指定事件流。
+
+
+
+
+### monkey 自定义脚本编写
+
+Monkey 脚本只能通过坐标的方式来定位点击、移动事件，需要提前获取坐标。
+
+__获取坐标信息的方法__ ： 开发人员选项 》显示指针位置
+
+~~~
+monkey -f some-test.script
+~~~
+
+* `some-test.script` :
+
+~~~
+# 进入应用宝，输入 yyb 进行搜索的例子
+
+# 启动测试
+
+type = user
+count = 49
+speed = 1.0
+start data >>
+
+# 启动应用宝
+LaunchActivity(com.tencent.qqdownloader, com.tencent.assistant.activity.SplashActivity)
+UserWait(2000)
+
+# 点击搜索
+Tap(463,150,1000)
+UserWait(2000)
+
+# 输入字母 yyb
+DispatchString(yyb)
+UserWait(2000)
+
+# 点击搜索
+Tap(960,150,1000)
+UserWait(2000)
+
+# 点击返回键返回首页
+DispatchPress(KEYCODE_BACK)
+~~~
+
+将执行文件push到手机后，执行
+~~~
+adb push some-test.script /sdcard/
+# 执行10次
+adb shell monkey -f /sdcard/some-test.script -v 10
+~~~
+
+
+### Monkey Script 的常见API
+
+![](monkey-script-apis.png)
+
+~~~
+DispatchPointer(long downTime,  long eventTime, int action,float x, float y, float pressure, float size, int metaState,float xPrecision, float yPrecision, int device, int edgeFlags) 
+DispatchTrackball same as DispatchPointer 
+DispatchKey(long downTime, long eventTime, int action, int code,int repeat, int metaState, int device, int scancode) 
+DispatchFlip(boolean keyboardOpen) 
+DispatchPress(int keyCode) 
+Tap(int x,int y) 
+LaunchActivity(String pkg_name, String cl_name) 
+UserWait(long sleeptime) 
+LongPress(long sleeptime)
+DispatchPointer:  This is used to perform task such as Dragging, tapping, clicking, even entering alphabet in target.
+DispatchTrackball: same as DispatchPointer
+Tap:  This is used tap Android Device.ex any icon, application etc. in given coordinate.
+~~~
+
+
+
+
+
 
 
 
@@ -21,11 +173,25 @@ tags: [ android, ui-automator, espresso ]
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Espresso
 
-Use Espresso to write concise, beautiful, and reliable Android UI tests.
-
-The following code snippet shows an example of an Espresso test:
+Espresso test 示例代码:
 
 ~~~ java
 @Test
