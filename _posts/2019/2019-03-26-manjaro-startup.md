@@ -852,6 +852,49 @@ Categories=Development;
 
 
 
+### Android
+
+#### Android Studio
+
+安装
+
+1. 下载tar.gz ： <https://developer.android.com/studio>
+    例如： android-studio-ide-183.5522156-linux.tar.gz
+1. 解压到目标文件夹 
+    例如：`/opt/android/android-studio`
+1. 创建sdk目录，注意，不要是android-studio 的子目录
+    例如：`/opt/android/android-sdk`
+1. 命令行启动： `{installation home}/bin/studio.sh`
+
+
+##### 配置成 desktop application
+
+* xfce 下配置
+
+~~~
+$ cat /usr/share/applications/android-studio.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=android-studio
+Comment=android IDE
+Icon=/opt/android/android-studio/bin/studio.png
+Exec=/opt/android/android-studio/bin/studio.sh
+Path=/opt/android/android-studio/bin
+Terminal=false
+Categories=Productivity;Development;
+~~~
+
+* KDE 下配置
+
+1. 执行 `kmenuedit &` \> 右键选择 Development 类别 \> New Item...
+1. 输入 Command: `/opt/android/android-studio/bin/studio.sh`
+1. 选择图标： 
+    `/opt/android/android-studio/bin/studio.svg` 或 `/usr/share/icons/breath2/apps/48/android-studio.svg`
+1. Save
+
+
+
 ### 电子书工具
 
 ~~~
