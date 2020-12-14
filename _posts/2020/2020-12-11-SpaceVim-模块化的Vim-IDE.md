@@ -26,6 +26,17 @@ curl -sLf https://spacevim.org/cn/install.sh | bash
 curl -sLf https://spacevim.org/install.sh | bash
 ~~~
 
+### 卸载
+
+~~~
+curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
+rm -fr ~/.SpaceVim
+~~~
+
+
+
+
+
 
 
 ## 配置
@@ -148,8 +159,65 @@ endfunction
 ~~~
 
 
+### UI 界面设置
+
+#### 颜色主题 colorscheme
+
+* 参考
+  * <https://spacevim.org/cn/layers/colorscheme/>
+
+默认的颜色主题采用的是 `gruvbox`。
+
+* **修改主题设置**
+
+`~/.SpaceVim.d/init.toml` 的 `[options]` 片段中修改 `colorscheme` 选项。例如，使用 Vim 自带的内置主题 desert：
+
+~~~
+[options]
+    colorscheme = "desert"
+    colorscheme_bg = "dark"
+~~~
 
 
+| 快捷键 |	功能描述 |
+| `SPC T n`	| 切换至下一个随机主题 |
+| `SPC T s` |	通过 Unite 选择主题 |
+
+
+
+
+#### 字体设置
+
+默认字体使用 `SourceCodePro Nerd Font Mono`
+
+如果需要修改 SpaceVim 的字体，可以在 `~/.SpaceVim.d/init.toml` 的 `[options]`片段中修改选项 `guifont`，默认值为：
+
+~~~
+[options]
+    guifont = "SourceCodePro Nerd Font Mono:h11"
+~~~
+
+
+
+
+#### 高亮
+
+快捷键	功能描述
+SPC t h h	高亮当前行
+SPC t h i	高亮代码对齐线
+SPC t h c	高亮光标所在列
+SPC t h s	启用/禁用语法高亮
+SPC t i	切换显示当前对齐(TODO)
+SPC t n	显示/隐藏行号
+SPC t b	切换背景色
+SPC t c	切换 conceal 模式
+SPC t p	切换 paste 模式
+SPC t t	打开 Tab 管理器
+SPC T ~	显示/隐藏 Buffer 结尾空行行首的 ~
+SPC T F	切换全屏(TODO)
+SPC T f	显示/隐藏 Vim 边框(GUI)
+SPC T m	显示/隐藏菜单栏
+SPC T t	显示/隐藏工具栏
 
 
 
@@ -159,20 +227,165 @@ endfunction
 
 ## 使用
 
-### `<leader>` 键
+### 快捷键导航 `<leader>` 键
 
 leader 键默认为： `\`
 
 `leader + 数字` ： 切换文件tab
 
+如果需要修改 `<Leader>` 键则需要使用启动函数修改 `g:mapleader` 的值， 比如使用逗号 , 作为 `<Leader>` 按键。
+
+~~~
+function! myspacevim#before() abort
+    let g:mapleader = ','
+endfunction
+~~~
+
+
+#### 快捷导航键 延迟设置
+
+默认情况下，快捷键导航将在输入延迟超过 1000ms 后打开，你可以通过修改 Vim 的 'timeoutlen' 选项来修改成适合自己的延迟时间长度。
+
+#### 快捷导航键 呼出的菜单操作
+
+按键	功能描述
+u	撤销按键
+n	向下翻页
+p	向上翻页
+
+
+
+### 文件树
+
+SpaceVim 使用 vimfiler 作为默认的文件树插件，
+
+~~~
+[options]
+    # 文件树插件可选值包括：
+    # - vimfiler （默认）
+    # - nerdtree
+    # - defx
+    filemanager = "defx"
+~~~
+
+
+打开 / 关闭 文件树  `F3` 或  `SPC f t` 或 `SPC f T`
+
+* **文件树内的快捷键**
+
+`<Left>` / `h`	移至父目录，并关闭文件夹
+`<Down>` / `j`	向下移动光标
+`<Up>` / `k`	向上移动光标
+`<Right>` / `l`	展开目录，或打开文件
+`N`	在光标位置新建文件
+`y y`	复制光标下文件路径至系统剪切板
+`y Y`	复制光标下文件至系统剪切板
+`P`	在光标位置黏贴文件
+`.`	切换显示隐藏文件
+`s v`	分屏编辑该文件
+`s g`	垂直分屏编辑该文件
+`p`	预览文件
+`i`	切换至文件夹历史
+`v`	快速查看
+`>`	放大文件树窗口宽度
+`<`	缩小文件树窗口宽度
+`g x`	使用相关程序执行该文件
+`'`	标记光标下的文件（夹）
+`V`	清除所有标记
+`Ctrl+r`	刷新页面
+
+* **文件树中打开文件**
+
+`l` / `<Enter>`	打开文件
+`sg`	分屏打开文件
+`sv`	垂直分屏打开文件
+
+
+### 移动光标以及滚屏的快捷键
+
+快捷键	功能描述
+`H`	移动光标至屏幕顶部
+`L`	移动光标至屏幕底部
+`<`	向左移动文本
+`>`	向右移动文本
+`}`	向前移动一个段落
+`{`	向后移动一个段落
+`Ctrl-f`	向下翻页 (`Ctrl-f` / `Ctrl-d`)
+`Ctrl-b`	向上翻页 (`C-b` / `C-u`)
+`Ctrl-e`	向下滚屏 (`3 Ctrl-e/j`)
+`Ctrl-y`	向上滚屏 (`3Ctrl-y/k`)
+`Ctrl-Shift-Up`	向上移动当前行
+`Ctrl-Shift-Down`	向下移动当前行
+
+
+按键	功能描述
+`<F2>`	打开、关闭语法树
+`<F3>`	打开、关闭文件树
+`Ctrl-<Down>`	切换至下方窗口
+`Ctrl-<Up>`	切换至上方窗口
+`Ctrl-<Left>`	切换至左边窗口
+`Ctrl-<Right>`	切换至右边窗口
 
 
 
 
 
+### 编辑
+
+#### 移动文本块
+
+快捷键	功能描述
+`<` / `Shift-Tab`	向左移动文本
+`>` / `Tab`	向右移动文本
+`Ctrl-Shift-Up`	向上移动选中行
+`Ctrl-Shift-Down`	向下移动选中行
 
 
+### 代码缩进
 
+默认的代码缩进值是 2，缩进的大小由选项 default_indent 设置， 如果希望使用 4 个空格作为缩进，只需要在 SpaceVim 配置文件中加入如下内容：
+
+~~~
+[options]
+    default_indent = 4
+~~~
+
+`default_indent` 这一选项的值，将被赋值到 Vim 的选项：`&tabstop`、`&softtabstop` 和 `&shiftwidth`。默认情况下，输入的 `<Tab>` 会被自动展开成对应缩进数量的空格， 可通过设置选项 expand_tab 的值为 false 来禁用这一特性：
+
+~~~
+[options]
+    default_indent = 4
+    expand_tab = true
+~~~
+
+
+### 复制粘贴
+
+如果 `has('unnamedplus')` 返回 1，那么快捷键 `<Leader> y` 使用的寄存器是 `+`， 否则，这个快捷键使用的寄存器是 `*`， 可以阅读 `:h registers` 获取更多关于寄存器相关的内容。
+
+快捷键	功能描述
+`<Leader> y`	复制文本至系统剪切板
+`<Leader> p`	粘贴系统剪切板文字至当前位置之后
+`<Leader> P`	粘贴系统剪切板文字至当前位置之前
+
+
+### 文本编码格式
+
+SpaceVim 默认使用 utf-8 码进行编码。下面是 utf-8 编码的四个设置：
+
+~~~
+fileencodings (fencs) : ucs-bom, utf-8, default, latin1
+fileencoding (fenc) : utf-8
+encoding (enc) : utf-8
+termencoding (tenc) : utf-8 (only supported in Vim)
+~~~
+
+修复混乱的显示：`SPC e a` 是自动选择文件编码的按键映射。在选择好文件编码方式后，你可以运行下面的代码来修复编码：
+
+~~~
+set enc=utf-8
+write
+~~~
 
 
 

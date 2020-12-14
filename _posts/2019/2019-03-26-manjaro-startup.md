@@ -825,6 +825,26 @@ pacman -S ntfs-3g
 
 ### 开发工具
 
+#### Editor
+
+~~~
+yay -S sublime-text
+# 启动
+subl
+~~~
+
+
+#### diff工具
+
+~~~
+sudo pacman -S meld
+# or
+sudo pacman -S kdiff3-qt
+# or beyond compare
+yay -S bcompare
+# or sublimerge  好用是好用，要80刀一个license
+yay -S sublime-merge
+~~~
 
 #### mysql
 
