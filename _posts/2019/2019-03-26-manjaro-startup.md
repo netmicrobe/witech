@@ -252,6 +252,9 @@ pacman -Syyu
 ➔ pacman -Ql 包名：列出该包的文件。
 # List packages by regex with custom output format
 expac -s "%-30n %v" regex
+# 搜索包信息
+yay -Ss font | grep -i -B 1 adobe
+
 
 # 搜索文件
 # To query the database to know which remote package a file belongs to:
@@ -824,6 +827,13 @@ pacman -S ntfs-3g
 
 
 ### 开发工具
+
+#### 开发字体
+
+~~~
+yay -S ttf-source-sans-pro-ibx ttf-source-code-pro-ibx ttf-adobe-source-fonts
+~~~
+
 
 #### Editor
 
