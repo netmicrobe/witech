@@ -452,6 +452,15 @@ $ sudo pacman -S base-devel
    21) sed  22) sudo  23) texinfo  24) which
 ~~~
 
+### 网络工具
+
+~~~
+# ifconfig,route在net-tools中，nslookup,dig在dnsutils中，ftp,telnet等在inetutils中,ip命令在iproute2中。
+sudo pacman -S net-tools dnsutils inetutils iproute2
+~~~
+
+
+
 
 ### 浏览器
 
