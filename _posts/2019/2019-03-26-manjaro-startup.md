@@ -437,6 +437,14 @@ sudo msi-rgb 00000000 ffffffff 00000000 -x
 
 
 
+## xfce4 桌面
+
+* [Xfce 4 Window Manager Keyboard Shortcuts](http://www.keyxl.com/aaac887/409/Xfce-Window-Manager-keyboard-shortcuts.htm)
+
+
+
+
+
 ## 常用软件
 
 ### 基础开发工具
