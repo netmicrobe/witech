@@ -43,3 +43,17 @@ tags: [synology, nas]
 
 
 
+## 命令行
+
+可以使用ssh远程登录，设置： 控制面板 》终端机和SNMP 》终端机 》 勾选“启动SSH功能”
+
+使用Synology上的帐号就可以登录。home目录为 `/volume1/homes/wi` ，等效路径为 `/var/services/homes/wi`
+
+bashrc 的位置为：
+* `/etc.defaults/profile `
+* `/etc.defaults/.bashrc_profile `
+* `~/.bashrc`
+
+
+
+
