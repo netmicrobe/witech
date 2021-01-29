@@ -157,16 +157,36 @@ Windows Registry Editor Version 5.00
 ### 使用AUR （Arch 用户仓库) ArchLinux User Repository
 
 * AUR 官网：  <https://aur.archlinux.org/>
+* [清华大学开源软件镜像站 - AUR 镜像使用帮助](https://mirrors.tuna.tsinghua.edu.cn/help/AUR/)
+* [Unofficial user repositories](https://wiki.archlinux.org/index.php/unofficial_user_repositories)
+
+#### 安装 yay
+
+~~~
+sudo pacman -S yay
+
+# 配置 yay 的 aur 源为清华源 AUR 镜像，修改的配置文件位于 ~/.config/yay/config.json
+yay --aururl "https://aur.tuna.tsinghua.edu.cn" --save
+~~~
 
 
-* 安装 yay
+yay: /usr/lib/libc.so.6: version `GLIBC_2.32' not found (required by yay)
+sudo pacman -S glibc
 
-  ~~~
-  sudo pacman -S yay
+#### 配置yay
 
-  # 配置 yay 的 aur 源为清华源 AUR 镜像，修改的配置文件位于 ~/.config/yay/config.json
-  yay --aururl "https://aur.tuna.tsinghua.edu.cn" --save
-  ~~~
+~~~
+# 配置 yay 的 aur 源为清华源 AUR 镜像，修改的配置文件位于 ~/.config/yay/config.json
+yay --aururl "https://aur.tuna.tsinghua.edu.cn" --save
+
+
+yay --aururl "https://aur.archlinux.org" --save
+~~~
+
+可以通过2个方式查看 yay 当前配置：
+* `cat ~/.config/yay/config.json`
+* `yay -P -g`
+
 
 
 * 使用 yay 按照 ARU 包
@@ -632,6 +652,10 @@ yay -S baidunetdisk-bin
     sudo pacman -S fcitx fcitx-sunpinyin fcitx-configtool
     # 如果是 KDE，还要安装 fcitx-qt5
     sudo pacman -S fcitx-qt5
+    ~~~
+    
+    ~~~
+    sudo pacman -S adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts fcitx kcm-fcitx fcitx-gtk2 fcitx-gtk3 fcitx-qt4 fcitx-qt5 fcitx-ui-light fcitx-table-other
     ~~~
 1. 在 home 目录下创建 `.xprofile`
     ~~~
