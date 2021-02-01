@@ -61,3 +61,54 @@ sudo ./target/release/msi-rgb 00000000 ffffffff 00000000 -x
 
 
 
+## 设置成开机自启动
+
+### systemd
+
+1. 创建脚本 `vi ~/bin/close-msi-motherboard-led.sh`
+~~~
+#!/bin/bash
+echo "关闭微星主板LED"
+msi-rgb 00000000 ffffffff 00000000 -x
+~~~
+1. 创建sevice 文件 `sudo vi /usr/lib/systemd/system/msi-led-close.service`
+~~~
+[Unit]
+Description=Close LED on MSI motherboard
+
+[Service]
+Type=simple
+Restart=no
+RemainAfterExit=false
+User=root
+ExecStart=/home/wi/bin/close-msi-motherboard-led.sh
+
+[Install]
+WantedBy=multi-user.target 
+~~~
+1. 设置开机自启动 `sudo systemctl enable msi-led-close.service`
+检查是否设置成功： 
+* `sudo systemctl enable msi-led-close.service`
+* `ll /etc/systemd/system/multi-user.target.wants/msi-led-close.service`
+1. 
+1. 
+1. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
