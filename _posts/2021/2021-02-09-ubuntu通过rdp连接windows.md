@@ -2,13 +2,17 @@
 layout: post
 title: ubuntu通过rdp连接windows
 categories: [cm, linux]
-tags: [rdp, remmina]
+tags: [rdp, remmina, remote-desktop]
 ---
 
 * 参考： 
-    * [How to install Remmina](https://remmina.org/how-to-install-remmina/)
-    * []()
-    * []()
+    * [remmina.org - How to install Remmina](https://remmina.org/how-to-install-remmina/)
+    * [Your libfreerdp does not support H264](https://gitlab.com/Remmina/Remmina/-/issues/1584)
+    * [Remmina can't remote into Windows Server](https://unix.stackexchange.com/a/440813)
+    * [Connect to a Windows PC from Ubuntu using Remote Desktop Connection](https://www.digitalcitizen.life/connecting-windows-remote-desktop-ubuntu/)
+    * [ArchLinux - Remmina](https://wiki.archlinux.org/index.php/Remmina)
+    * [How to connect to a remote desktop from Linux](https://opensource.com/article/18/6/linux-remote-desktop)
+    * [Best Linux remote desktop clients of 2021](https://www.techradar.com/best/best-linux-remote-desktop-clients)
 
 ## Remmina
 
