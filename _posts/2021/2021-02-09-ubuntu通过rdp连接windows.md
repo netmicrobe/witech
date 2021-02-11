@@ -40,7 +40,20 @@ Linux Mint 19.3 Tricia 上可以直接安装
 1. 点击save and run 就可以啦。
 
 
+### Arch Linux / Manjaro 上使用 Remmina
 
+* [wiki.archlinux.org - Remmina](https://wiki.archlinux.org/index.php/Remmina)
+* []()
+* []()
+* []()
+
+~~~
+# 如果freerdp存在问题，比如，经常自动断线，可以试试安装 rdesktop
+sudo pacman -S freerdp
+yay -S remmina remmina-plugin-rdesktop
+
+sudo killall remmina
+~~~
 
 
 
