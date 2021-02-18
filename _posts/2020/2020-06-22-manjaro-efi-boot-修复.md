@@ -21,20 +21,41 @@ tags: [manjaro, efi, boot]
     例如，我的manjaro 分区是 `/dev/nvme0n1p9` efi 分区是 `/dev/nvme0n1p2`
 1. 手动chroot
     ~~~
-    mount /dev/nvme0n1p9 /mnt
-    mount /dev/nvme0n1p2 /mnt/boot/efi
+    sudo mount /dev/nvme0n1p9 /mnt
+    sudo mount /dev/nvme0n1p2 /mnt/boot/efi
     cd /mnt
-    mount -t proc proc /mnt/proc
-    mount -t sysfs sys /mnt/sys
-    mount -o bind /dev /mnt/dev
-    mount -t devpts pts /mnt/dev/pts/
-    chroot /mnt
+    sudo mount -t proc proc /mnt/proc
+    sudo mount -t sysfs sys /mnt/sys
+    sudo mount -o bind /dev /mnt/dev
+    sudo mount -t devpts pts /mnt/dev/pts/
+    sudo chroot /mnt
     ~~~
 1. 执行grub命令修复
     ~~~
-    sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck -v
-    sudo update-grub
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck -v
+    update-grub
     ~~~
+
+
+### `grub-install` 是提醒错误：`EFI variables are not supported on this system.`
+
+* 现象：
+    ~~~
+    grub-install: info: copying `/boot/grub/x86_64-efi/core.efi' -> `/boot/efi/EFI/manjaro2/grubx64.efi'.
+    grub-install: info: Registering with EFI: distributor = `manjaro2', path = `\EFI\manjaro2\grubx64.efi', ESP at hostdisk//dev/nvme0n1,gpt1.
+    grub-install: info: executing efibootmgr --version </dev/null >/dev/null.
+    grub-install: info: executing modprobe -q efivarfs.
+    EFI variables are not supported on this system.
+    grub-install: info: executing efibootmgr -c -d /dev/nvme0n1 -p 1 -w -L manjaro2 -l \EFI\manjaro2\grubx64.efi.
+    EFI variables are not supported on this system.
+    grub-install: error: efibootmgr failed to register the boot entry: No such file or directory.
+    ~~~
+
+* 解决：
+  1. 可能是没有EFI方式启动，如果 host 系统运行 `sudo efivar-tester` 也报`EFI variables are not supported`错误。
+  2. 如果host 系统运行 `sudo efivar-tester`正常，`sudo modprobe efivarfs` 也能正常加载模块，但是进入 `chroot` 执行 `sudo efivar-tester` 还是报`EFI variables are not supported`错误。
+      返回 host系统，挂载 efivarfs： `sudo mount -t efivarfs efivarfs /mnt/sys/firmware/efi/efivars`
+
 
 
 ## ubuntu efi 修复
