@@ -6,8 +6,8 @@ tags: [realvnc]
 ---
 
 * 参考： 
-    * []()
-    * []()
+    * [Ubuntu 16.04 VMWare Install and Remote Desktop Setup](https://www.youtube.com/watch?v=NaI6lB87HM0)
+    * [How to Use Remote Desktop Connection in Ubuntu Linux: Complete Walkthrough](https://www.nakivo.com/blog/how-to-use-remote-desktop-connection-ubuntu-linux-walkthrough/)
     * []()
     * []()
 
