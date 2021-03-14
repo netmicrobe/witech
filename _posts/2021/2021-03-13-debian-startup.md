@@ -58,6 +58,7 @@ buzz is Debian 1.1
     ~~~
 
 1. 配置 `vsftpd.conf`
+    `vi /etc/vsftpd.conf`
     ~~~
     listen=NO
     listen_ipv6=YES
@@ -113,6 +114,8 @@ buzz is Debian 1.1
 
     # 创建 FTP用户
     sudo useradd newftpuser -d /home/newftpuser  -s /bin/ftponly
+    # 设置密码
+    passwd newftpuser
 
     # 允许 FTP用户使用 vsftpd
     echo "newftpuser" | sudo tee -a /etc/vsftpd.user_list
