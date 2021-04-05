@@ -143,9 +143,18 @@ buzz is Debian 1.1
 
 
 
+## Fix “sudo command not found”
 
+* [Ubuntu/Debian — Fix “sudo command not found”](https://futurestud.io/tutorials/ubuntu-debian-fix-sudo-command-not-found)
+* [debian中默认不存在sudo命令解决方法](https://blog.csdn.net/nierunjie/article/details/52435022)
+* []()
 
-
+~~~
+su
+apt-get install sudo
+vim /etc/sudoers
+# 添加 "your-username" ALL=(ALL) ALL
+~~~
 
 
 
