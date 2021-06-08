@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 在 CentOS 6 上安装 gcc 4.9
-categories: [cm, linux, cnetos]
+categories: [cm, linux, centos]
 tags: [cm, linux, centos, gcc]
 ---
 
