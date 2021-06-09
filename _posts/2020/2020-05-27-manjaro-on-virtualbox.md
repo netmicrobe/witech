@@ -87,7 +87,7 @@ VBoxManage modifyvm ca8673a6-eb29-491c-9dc0-812423bbf927 --graphicscontroller vm
   * [VirtualBox 6 slow start/shutdown - forum.manjaro.org](https://forum.manjaro.org/t/virtualbox-6-slow-start-shutdown/70627/21)
 
 
-禁止了 vboxadd service 之后，关机/开机 速度是有提高。
+禁止了 vboxadd service 之后，关机/开机 速度是有提高。 而且不影响**双向共享剪贴板**，神奇～～
 
 ~~~
 sudo systemctl stop vboxadd
