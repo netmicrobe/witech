@@ -79,7 +79,7 @@ sudo ./target/release/msi-rgb 00000000 ffffffff 00000000 -x
     Description=Close LED on MSI motherboard
 
     [Service]
-    Type=simple
+    Type=idle
     Restart=no
     RemainAfterExit=false
     User=root
@@ -88,6 +88,9 @@ sudo ./target/release/msi-rgb 00000000 ffffffff 00000000 -x
     [Install]
     WantedBy=multi-user.target 
     ~~~
+
+    * 在 Manjaro KDE 上遇到一次黑屏（桌面、状态条没有了），将 Service 的 Type 从 simple 改为 idle 就好了。
+
 
 1. 设置开机自启动 `sudo systemctl enable msi-led-close.service`
     检查是否设置成功： 
