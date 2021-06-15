@@ -5,6 +5,12 @@ categories: [cm, linux]
 tags: [xargs]
 ---
 
+* 参考
+    * [xargs原理剖析及用法详解](https://www.cnblogs.com/f-ck-need-u/p/5925923.html)
+    * [xargs命令_Linux xargs命令：一个给其他命令传递参数的过滤器](http://c.biancheng.net/linux/xargs.html)
+    * []()
+
+
 
 ## `-I` 参数，指定占位符字符串
 

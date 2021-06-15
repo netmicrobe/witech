@@ -10,6 +10,7 @@ tags: [ rails, rake, migration, database ]
 * 参考
   * [Ruby on Rails Guides (v4.2.10)](https://guides.rubyonrails.org/v4.2/)
   * [ruby-china - Active Record 迁移](https://ruby-china.github.io/rails-guides/active_record_migrations.html)
+  * []()
 ---
 
 
@@ -213,15 +214,33 @@ end
 
 ## 利用 migration 添加或修改数据
 
+对于不能删除和重建的数据库，如生产环境的数据库，这些功能非常有用。
 
+~~~ ruby
+class AddInitialProducts < ActiveRecord::Migration[5.0]
+  def up
+    5.times do |i|
+      Product.create(name: "Product ##{i}", description: "A product.")
+    end
+  end
+ 
+  def down
+    Product.delete_all
+  end
+end
+~~~
 
+### 种子数据
 
+在开发和测试环境中，经常需要重新加载数据库，这时“种子”特性就更有用了。使用“种子”特性很容易，只要用 Ruby 代码填充 db/seeds.rb 文件，然后执行 `rails db:seed` 命令即可：
 
+~~~
+5.times do |i|
+  Product.create(name: "Product ##{i}", description: "A product.")
+end
+~~~
 
-
-
-
-
+相比之下，这种设置新建应用数据库的方法更加干净利落。
 
 
 
