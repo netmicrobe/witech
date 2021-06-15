@@ -11,77 +11,86 @@ tags: [linux, centos, samba, windows, smbd, samba-client ]
   * [Setting Up Samba and Configure FirewallD and SELinux to Allow File Sharing on Linux/Windows Clients – Part 6](https://www.tecmint.com/setup-samba-file-sharing-for-linux-windows-clients/)
   * [Setting up a Samba Server with SELinux on RHEL 7](https://www.lisenet.com/2016/samba-server-on-rhel-7/)
   * [CentOS 7: Samba and SELinux](https://www.alteeve.com/w/CentOS_7:_Samba_and_SELinux)
-  * []()
-  * []()
-  * []()
+  * [CentOS7下Samba服务安装与配置](https://www.jianshu.com/p/cc9da3a154a0)
+  * [CentOS 7下Samba服务器的安装与配置](https://www.cnblogs.com/muscleape/p/6385583.html)
+  * [Centos7下Samba服务器配置（实战）](https://cloud.tencent.com/developer/article/1720995)
   * []()
 
 
 1. 安装&启动samba
-~~~
-sudo yum install samba samba-client
-sudo systemctl start smb.service 
-sudo systemctl enable smb.service
-~~~
+    ~~~
+    sudo yum install samba samba-client
+    sudo systemctl start smb.service 
+    sudo systemctl enable smb.service
+    ~~~
 
 1. 配置防火墙
-smbd服务提供文件共享和打印服务，并侦听TCP端口139和445。nmbd服务向客户端提供基于IP命名服务的NetBIOS，并侦听UDP端口137。
+    smbd服务提供文件共享和打印服务，并侦听TCP端口139和445。nmbd服务向客户端提供基于IP命名服务的NetBIOS，并侦听UDP端口137。
 
-~~~
-firewall-cmd --permanent --zone=public --add-service=samba
-firewall-cmd --zone=public --add-service=samba
-~~~
+    ~~~
+    firewall-cmd --permanent --zone=public --add-service=samba
+    firewall-cmd --zone=public --add-service=samba
+    ~~~
 1. 创建目录和用户组，存放samba共享文件
-~~~
-sudo mkdir /samba
-sudo groupadd sambashare
-sudo chgrp sambashare /samba
-~~~
+    ~~~
+    sudo mkdir /samba
+    sudo groupadd sambashare
+    sudo chgrp sambashare /samba
+    ~~~
 1. 创建samba管理帐号 `sadmin`
-~~~
-sudo useradd -M -d /samba/users -s /usr/sbin/nologin -G sambashare sadmin
-sudo smbpasswd -a sadmin
-sudo smbpasswd -e sadmin
-sudo mkdir /samba/users
-sudo chown sadmin:sambashare /samba/users
-sudo chmod 2770 /samba/users
-~~~
+    ~~~
+    sudo useradd -M -d /samba/users -s /usr/sbin/nologin -G sambashare sadmin
+    sudo smbpasswd -a sadmin
+    sudo smbpasswd -e sadmin
+    sudo mkdir /samba/users
+    sudo chown sadmin:sambashare /samba/users
+    sudo chmod 2770 /samba/users
+    ~~~
 1. 配置samba
-`vi /etc/samba/smb.conf`
+    `vi /etc/samba/smb.conf`
 
-~~~
-[users]
-  path = /samba/users
-  browseable = yes
-  read only = no
-  force create mode = 0660
-  force directory mode = 2770
-  valid users = @sambashare @sadmin
-~~~
+    ~~~
+    [users]
+      path = /samba/users
+      browseable = yes
+      read only = no
+      force create mode = 0660
+      force directory mode = 2770
+      valid users = @sambashare @sadmin
+    ~~~
 
 1. 重启 samba 服务
-~~~
-sudo systemctl restart smb.service
-sudo systemctl restart nmb.service
-~~~
+    ~~~
+    sudo systemctl restart smb.service
+    sudo systemctl restart nmb.service
+    ~~~
 
 1. 配置selinux
 
-selinux 没配置，可能报错： `NT_STATUS_ACCESS_DENIED`
+    selinux 没配置，可能报错： `NT_STATUS_ACCESS_DENIED`
 
-~~~
-setsebool -P samba_export_all_ro=1 samba_export_all_rw=1
-getsebool -a | grep samba_export
-semanage fcontext -at samba_share_t "/samba(/.*)?"
-restorecon /samba
-~~~
+    ~~~
+    setsebool -P samba_export_all_ro=1 samba_export_all_rw=1
+    getsebool -a | grep samba_export
+    semanage fcontext -at samba_share_t "/samba(/.*)?"
+    restorecon /samba
+    ~~~
 
 1. 从linux测试samba连接
-~~~
-sudo yum install samba-client
-smbclient //samba_hostname_or_server_ip/share_name -U username
-~~~
+    ~~~
+    sudo yum install samba-client
+    smbclient //samba_hostname_or_server_ip/share_name -U username
+    ~~~
 
+    如果出现报错 `protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED`，
+    处理方法如下，参考： <https://unix.stackexchange.com/a/585339>
+    ~~~
+    vi /etc/samba/smb.conf
+    ~~~
+    ~~~
+    client min protocol = CORE
+    client max protocol = SMB3
+    ~~~
 
 
 
