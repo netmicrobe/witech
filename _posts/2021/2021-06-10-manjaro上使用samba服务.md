@@ -48,6 +48,7 @@ smbclient -L 【IP地址】 -U 【用户名】
     ~~~
     mount -t cifs //SERVER/sharename /mnt/mountpoint -o username=username,password=password,workgroup=workgroup,iocharset=utf8,uid=username,gid=group
     ~~~
+    可以添加`forceuid,forcegid`来在mount强制所有者权限。
 
 1. 可能会mount失败，使用命令 `dmesg` 看看
 1. 可能samba协议问题，例如：
