@@ -922,6 +922,18 @@ Categories=Development;
 ~~~
 
 
+### Java
+
+~~~ shell
+# 安装java 8
+sudo pacman -S jdk8-openjdk
+
+# 切换 java 各个版本
+archlinux-java status
+sudo archlinux-java set java-8-openjdk
+~~~
+
+
 
 ### Android
 
