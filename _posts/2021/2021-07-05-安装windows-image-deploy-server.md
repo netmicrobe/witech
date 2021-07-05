@@ -7,11 +7,13 @@ tags: [  ]
 
 * 参考
   * [Youtube - Craft Computing - Install Windows like a PRO! Windows Deployment Services Tutorial](https://www.youtube.com/watch?v=ARDjb2UV3Nw)
+  * [kilObit – Learn Tips & Tricks, Discover Apps & Games](https://kil0bit.blogspot.com/2020/09/how-to-make-your-own-windows-10-lite.html)
+  * []()
   * []()
   * []()
 ---
 
-
+## 部署 Windows Deployment Services
 
 1. 
 1. 安装Windows Server 2019
@@ -47,6 +49,51 @@ tags: [  ]
 
 
 
+## 创建自定义的 windows 安装文件
+
+1. 使用 `Windows System Image Manager` 创建 answerfile （应答文件），answer file 包含了windows 10安装过程中的配置。
+1. 下载 Windows ADK 工具集合，其中包含工具 Windows System Image Manager
+    [ADK download for Windows 10](https://support.microsoft.com/en-us/windows/adk-download-for-windows-10-2a0b7ff2-79b7-b989-f727-43ae506e36ad)
+1. 安装 ADK 工具集合，启动 `Windows System Image Manager`
+1. 文件 菜单 》新建应答文件
+1. Windows 映像 》Components 》amd64_Microsoft-Windows-Setup_10.0.19041.1_neutral
+1. UserData 》 右键菜单 》添加设置以传送1 WindowsPE（1）
+1. 
+1. 创建的应答文件 unattend.xml，拷贝到当前运行的Windows 10 的 `C:\WIndows\System32\Sysprep` 下面
+
+1. Sysprep
+1. 双击启动Sysprep
+    1. System Cleanup Action: Enter System Out-of-Box Experience(OOBE)
+    1. 勾选 Generalize
+    1. Shutdown Options: Shutdown
+    1. 确定后会运行一段时间，然后关机
+1. VM 设置从Network 启动，启动到Image Deploy Server
+1. 看到 Windows Setup 界面后，按下 `Shift + F10` 进入命令行界面
+    ~~~
+    net use z: \\ip-of-deploy-server\REMINST /user:Administrator your-password
+
+    # 进入 z 盘
+    z:
+
+    # 生成wim文件
+    dism /Capture-Image /ImageFile:Win10-Pro-20H2.wim /CaptureDir:C:\ /Name:"Windows 10 Pro 20H2"
+    ~~~
+1. 生成wim文件存放在 deploy server 的 `C:\RemoteInstall` 目录下
+1. 将生成的 wim 文件导入 deploy server
+1. 设置应答文件
+    1. 双击这个Image，勾选 `Allow image to install in unattended mode`
+    1. 选择 Select File... ，在弹出的文件对话框中选择目标 `unattend.xml`
+1. 
+1. 
+1. 
+1. 
+
+
+
+
+
+
+## 附录
 
 ### install.esd 与 install.wim 文件转换
 
