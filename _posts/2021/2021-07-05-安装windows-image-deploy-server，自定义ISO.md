@@ -1,13 +1,17 @@
 ---
 layout: post
-title: 安装windows-image-deploy-server
+title: 安装windows-image-deploy-server，自定义ISO
 categories: [ cm, windows ]
 tags: [  ]
 ---
 
 * 参考
   * [Youtube - Craft Computing - Install Windows like a PRO! Windows Deployment Services Tutorial](https://www.youtube.com/watch?v=ARDjb2UV3Nw)
+  * [Youtube - Craft Computing - THIS is what Windows 10 should look like! - Custom Windows Image Tutorial](https://www.youtube.com/watch?v=PdKMiFKGQuc&t=1542s)
+      * [Youtube - Craft Computing - Decrapify Script](https://drive.google.com/file/d/1p5kzaeLoBzUDKqH1p4cgvi2sNShFHU5i/edit)
+          * [2020-DeCrapify.ps1](2020-DeCrapify.ps1)
   * [kilObit – Learn Tips & Tricks, Discover Apps & Games](https://kil0bit.blogspot.com/2020/09/how-to-make-your-own-windows-10-lite.html)
+  * []()
   * []()
   * []()
   * []()
@@ -57,16 +61,42 @@ tags: [  ]
 1. 安装 ADK 工具集合，启动 `Windows System Image Manager`
 1. 文件 菜单 》新建应答文件
 1. Windows 映像 》Components 》amd64_Microsoft-Windows-Setup_10.0.19041.1_neutral
-1. UserData 》 右键菜单 》添加设置以传送1 WindowsPE（1）
+    1. UserData 》 右键菜单 》添加设置以传送1 WindowsPE（1）
+    1. UserData - AcceptEula: true
+    1. UserData - ProductKey - Key : 产品序列号
+1. amd64_Microsoft-Windows-Shell-Setup_10.0.19041.1_neutral
+    1. OOBE - 右键菜单 - Add Setting to Pass 7 oobeSystem
+        1. HideEULAPage : true
+        1. HideOEMREgistrationScreen : true
+        1. HideOnlineAccountScreen : true
+        1. HideWirelessSetupInOOBE : true
+        1. NetworkLocation: Work
+        1. SkipMachineOOBE: true
+        1. SkipUserOOBE: true
+        1. 删除 OOBE - VMModeOptimizations
+    1. UserAccounts - 右键菜单 - Add Setting to Pass 7 oobeSystem
+        1. AdministratorPassword - value : 设置管理员密码
+        1. 删除 DomainAccounts
+        1. LocalAccounts - 右键菜单 - 插入新建 LocalAccount
+            1. Group: Administrator
+            1. Name: your-account-name
+            1. DisplayName: your-name
+            1. LocalAccount - Password 设置密码
+1. FirstLogonCommands - SynchronousCommands
+    1. CommandLine: `reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "disabledmwappushservice" /t REG_SZ /d "sc config dmwappushservice start= disabled"`
+    1. description: Disable DM WAP Push Service
+    1. Order: 1
+    1. RequireUserInput: false
 1. 
 1. 创建的应答文件 unattend.xml，拷贝到当前运行的Windows 10 的 `C:\WIndows\System32\Sysprep` 下面
 
 1. Sysprep
-1. 双击启动Sysprep
-    1. System Cleanup Action: Enter System Out-of-Box Experience(OOBE)
-    1. 勾选 Generalize
-    1. Shutdown Options: Shutdown
-    1. 确定后会运行一段时间，然后关机
+    1. 双击启动Sysprep
+        1. System Cleanup Action: Enter System Out-of-Box Experience(OOBE)
+        1. 勾选 Generalize
+        1. Shutdown Options: Shutdown
+        1. 确定后会运行一段时间，然后关机
+    1. 如果报错，可查看 `C:\WIndows\System32\Sysprep\setupact.log`
 1. VM 设置从Network 启动，启动到Image Deploy Server
 1. 看到 Windows Setup 界面后，按下 `Shift + F10` 进入命令行界面
     ~~~
@@ -76,8 +106,11 @@ tags: [  ]
     z:
 
     # 生成wim文件
+    # 命令中的C:\ 是指windows系统盘，实际可能不一定是C盘，也可能D盘或者其他盘，执行前，用dir先查查看
     dism /Capture-Image /ImageFile:Win10-Pro-20H2.wim /CaptureDir:C:\ /Name:"Windows 10 Pro 20H2"
     ~~~
+    
+    
 1. 生成wim文件存放在 deploy server 的 `C:\RemoteInstall` 目录下
 1. 将生成的 wim 文件导入 deploy server
 1. 设置应答文件
@@ -110,11 +143,29 @@ tags: [  ]
 1. 
 
 
+### 运行 Sysprep 报错 Package Microsoft.LanguageExperiencePackzh-CN_19041.26.68.0_neutral__8wekyb3d8bbwe was installed for a user
 
+* 参考
+  * <https://www.itsk.com/thread-412125-1-1.html>
 
+~~~
+2021-07-06 13:53:57, Error                 SYSPRP Package Microsoft.LanguageExperiencePackzh-CN_19041.26.68.0_neutral__8wekyb3d8bbwe was installed for a user, but not provisioned for all users. This package will not function properly in the sysprep image.
+2021-07-06 13:53:57, Error                 SYSPRP Failed to remove apps for the current user: 0x80073cf2.
+2021-07-06 13:53:57, Error                 SYSPRP Exit code of RemoveAllApps thread was 0x3cf2.
+2021-07-06 13:53:57, Error                 SYSPRP ActionPlatform::LaunchModule: Failure occurred while executing 'SysprepGeneralizeValidate' from C:\Windows\System32\AppxSysprep.dll; dwRet = 0x3cf2
+2021-07-06 13:53:57, Error                 SYSPRP SysprepSession::Validate: Error in validating actions from C:\Windows\System32\Sysprep\ActionFiles\Generalize.xml; dwRet = 0x3cf2
+2021-07-06 13:53:57, Error                 SYSPRP RunPlatformActions:Failed while validating Sysprep session actions; dwRet = 0x3cf2
+2021-07-06 13:53:57, Error      [0x0f0070] SYSPRP RunDlls:An error occurred while running registry sysprep DLLs, halting sysprep execution. dwRet = 0x3cf2
+2021-07-06 13:53:57, Error      [0x0f00d8] SYSPRP WinMain:Hit failure while pre-validate sysprep generalize internal providers; hr = 0x80073cf2
+~~~
 
+解决方法：
 
+删除这个包
 
+~~~
+PowerShell -Command "Get-AppxPackage Microsoft.LanguageExperiencePackzh-CN* | Remove-AppxPackage"
+~~~
 
 
 
