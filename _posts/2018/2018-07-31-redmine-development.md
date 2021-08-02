@@ -8,6 +8,55 @@ tags: [redmine, rails]
 
 
 
+## 打印日志
+
+~~~ruby
+logger.debug "xxx"
+logger.info "xxx"
+logger.error "xxx"
+~~~
+
+
+
+* 在 helper 中直接使用 `logger` 报错 `undefined local variable or method `logger' `
+  * 参考
+    * <https://stackoverflow.com/a/7919034>
+  * 解决：
+    ~~~ruby
+    Rails.logger.info "..."
+    ~~~
+
+
+## issue 相关
+
+### 代码中创建issue
+
+* 参考：
+  * <https://www.redmine.org/boards/2/topics/17257>
+
+~~~ruby
+project = Project.find_by_identifier("myproject")
+user = User.find_by_mail("user@server.com")
+tracker = project.trackers.find_by_name("Bug")
+category = project.issue_categories.find_by_name("some")
+priority = IssuePriority.find_by_name("Urgent")
+status = IssueStatus.find_by_name("New")
+issue = Issue.new(
+  :author => user,
+  :project => project,
+  :tracker => tracker,
+  :category => category,
+  :priority => priority,
+  :assigned_to => user
+)
+issue.subject = "Night build has failed" 
+issue.description = "Issue body" 
+issue.save
+~~~
+
+
+
+
 
 ## 添加新的查询过滤器到Redmine的issue查询界面
 
