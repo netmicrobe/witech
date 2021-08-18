@@ -1,8 +1,8 @@
 ---
 layout: post
-title: ubuntu通过rdp连接windows
+title: linux 通过rdp连接windows
 categories: [cm, linux]
-tags: [rdp, remmina, remote-desktop]
+tags: [rdp, remmina, remote-desktop, rdesktop, freerdp]
 ---
 
 * 参考： 
@@ -54,6 +54,70 @@ yay -S remmina remmina-plugin-rdesktop
 
 sudo killall remmina
 ~~~
+
+
+## rdesktop
+
+~~~
+rdesktop -r sound:local -r disk:nameOnHost=/home/your-name/Downloads -P 192.168.0.103
+~~~
+
+登陆成功后，在目标windows 我的电脑下面，会出现`重定向的驱动程序和文件夹`分组下能看到设置的共享文件夹 `/home/your-name/Downloads`
+
+
+### 报错： CredSSP required by server
+
+* 报错信息
+  ~~~
+  Failed to initialize NLA, do you have correct Kerberos TGT initialized ?
+  Failed to connect, CredSSP required by server (check if server has disabled old TLS versions, if yes use -V option).
+  ~~~
+
+* 解决方法：
+
+  在目标Windows上设置： 此电脑 》右键菜单 》属性 》高级系统设置 》系统属性 》远程 tab 页 》取消勾选`仅允许运行使用网络级别身份验证的远程桌面的计算机连接（建议）`
+
+* 参考：
+  * [rdesktop连接Windows远程桌面因CredSSP 报错解决办法](https://zhuanlan.zhihu.com/p/371497627)
+  * []()
+  * []()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
