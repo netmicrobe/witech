@@ -14,7 +14,7 @@ tags: [  ]
   * [Microsoft - Download Windows 10 Disc Image (ISO File)](https://www.microsoft.com/en-au/software-download/windows10ISO)
   * [Microsoft - Microsoft Update Catalog](https://www.catalog.update.microsoft.com/Home.aspx)
   * [MSMG Toolkit](https://msmgtoolkit.in/?i=2)
-  * []()
+  * [Microsoft - Download and install the Windows ADK](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install)
   * []()
   * []()
 ---
@@ -123,8 +123,45 @@ tags: [  ]
 1. 
 1. 
 
+这个方法生成install.wim 打包进 iso，安装时到专业版、教育版选项的时候，没有选项了。。。。
 
 
+
+
+
+## 将当前运行的 Windows 10 生成 iso 安装文件
+
+1. 删除当前用户，此电脑 》管理 》用户
+1. 运行 `cleanmgr` ，进行临时文件清理
+1. `%windir%\System32\Sysprep\sysprep.exe /audit /reboot`
+    1. 重启后，弹出“系统准备工具 3.14”对话框，上面2个选项：
+    1. 系统清理操作：进入系统全新体验（OOBE）
+    1. 勾选“通用”
+    1. 关机选项：关机
+1. 确定关机
+1. 启动这个windows就进入了 欢迎设置界面。一通安装windows配置。。。
+1. 在C盘另外的盘，例如D盘，创建文件夹 `Scratch`
+1. 从windows安装U盘启动
+1. 启动到Windows安装的第一个界面时，按 `Shift + F10` 进入命令行
+1. `diskpart` 进入 diskpart 软件
+1. `list vol` 看看各个分区的盘符，例如，系统盘C现在是F，D盘现在是E
+1. `dism /capture-image /imagefile:E:\install.wim /captureDir:F:\ /ScratchDir:E:\Scratch /name:"windoes10Prox64" /compress:maximum /checkintegrity /verify /bootable`
+1. 执行完成，重启进入Windows之后，D盘就可以看到 `install.wim` 文件
+1. mount windows 原来iso文件，进入mount的光盘，把文件都拷贝出来，例如，新建个名叫 myiso 文件夹放着。
+1. 用生成的 `install.wim` 替换 `myiso/sources/install.wim`
+1. 下载 Windows ADK 工具 `adksetup`
+    <https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install>
+1. 已管理员身份运行 `adksetup`
+    1. Select the Features you want to install 页面选择： 只选 Deployment Tools
+1. 安装完成后，在开始菜单找到 `Deployment and Imaging Tools`，这是个命令行工具，已管理员身份运行
+1. 运行
+`oscdimg.exe -m -o -u2 -udfver102 -bootdata:2#p0,e,bd:\myiso\boot\etfsboot.com#pEF,e,bd:\myiso\efi\microsoft\boot\efisys.bin d:\myiso d:\Windows10Prox64.iso`
+1. 
+1. 
+1. 
+1. 
+1. 
+1. 
 
 
 

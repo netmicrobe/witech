@@ -56,6 +56,19 @@ sudo killall remmina
 ~~~
 
 
+### 文件共享
+
+* 参考
+  * [File Sharing through RDP from Linux](https://cat.pdx.edu/platforms/linux/remote-access/file-sharing-rdp-from-linux/)
+  * <https://askubuntu.com/a/516862>
+  * []()
+  * []()
+
+1. RDP配置 》Share folder 设置目录
+1. RDP配置 》Advanced 》Audio output mode 》Local
+
+
+
 ## rdesktop
 
 ~~~
