@@ -16,9 +16,10 @@ tags: [gfw, shadowsocks, koolshare, merlin, 梅林, netgear]
 
 ##【网件原厂】刷【koolshare改版固件】 380及之前版本  （测试可用，安全刷机）
 
-1. 在原厂固件升级页面下直接上传.chk后缀的过度固件，本帖下方提供；
+1. 在原厂固件升级页面（Advanced -\> Administration -\> Router Update）下直接上传.chk后缀的过度固件，本帖下方提供；
     .chk 刷机后重启有点慢，不行关闭电源再打开试试。
-1. 在过度固件里恢复一次出厂设置后，刷入.trx后缀的koolshare改版固件（如果chk版本和trx版本一致则不需要，跳到第三步）；
+1. 过渡固件刷好后，会停留在设置向导页面，点击“跳过设置向导”
+1. 在过度固件里恢复一次出厂设置后，在固件更新也没，上传 `.trx` 后缀的koolshare改版固件（如果chk版本和trx版本一致则不需要，跳到第三步）；
 1. 等待刷机完成后，在【系统管理】 – 【系统设置】内勾选：Format JFFS partition at next boot（下次重启格式化jffs分区） 和 Enable JFFS custom scripts and configs（开启jffs自定义脚本），点击应用本页面设置，成功应用后重启路由器；
 1. 重启完成后，确保路由器连上网络，然后进入软件中心，首先点击更新按钮，将更新软件中心到最新版本，然后即可安装并使用插件。
 
