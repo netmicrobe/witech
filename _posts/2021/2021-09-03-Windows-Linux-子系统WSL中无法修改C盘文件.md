@@ -1,12 +1,12 @@
 ---
 layout: post
-title: maya benchmark
+title: Windows-Linux-子系统WSL中无法修改C盘文件
 categories: [ cm, windows ]
-tags: []
+tags: [wsl]
 ---
 
 * 参考
-  * [Unable to change file permissions on Ubuntu Bash for Windows 10]()
+  * [Unable to change file permissions on Ubuntu Bash for Windows 10](https://stackoverflow.com/a/50856772)
   * []()
   * []()
 
