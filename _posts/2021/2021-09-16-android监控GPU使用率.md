@@ -31,6 +31,12 @@ tags: [adb]
 adb shell su -c  "cat /sys/class/kgsl/kgsl-3d0/gpubusy" | awk '{print $1/$2}'
 ~~~
 
+每隔1秒采集一次GPU使用情况
+
+~~~
+while true; do adb shell su -c  "cat /sys/class/kgsl/kgsl-3d0/gpubusy" >> cpu_usage.txt; sleep 1; done
+~~~
+
 Gpu使用率获取：会得到两个值，（前一个/后一个）*100%=使用率
 
 ~~~
