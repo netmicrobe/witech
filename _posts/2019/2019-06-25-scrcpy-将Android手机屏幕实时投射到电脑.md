@@ -153,6 +153,122 @@ sudo ninja uninstall
 ~~~
 
 
+### 在 Manjaro 上编译
+
+Manjaro 21.1.0 Pahvo
+
+~~~bash
+# install dependencies
+yay -S meson ffmpeg sdl2 gcc git pkgconf ninja jdk11-openjdk
+
+# config
+export ANDROID_SDK_ROOT=~/Android/Sdk
+meson x --buildtype release --strip -Db_lto=true
+
+# build
+ninja -Cx  # DO NOT RUN AS ROOT
+
+# Install
+sudo ninja -Cx install    # without sudo on Windows
+~~~
+
+~~~bash
+scrcpy --version
+
+scrcpy 1.13
+
+dependencies:
+ - SDL 2.0.16
+ - libavcodec 58.134.100
+ - libavformat 58.76.100
+ - libavutil 56.70.100
+~~~
+
+~~~bash
+# Uninstall
+sudo ninja -Cx uninstall  # without sudo on Windows
+~~~
+
+
+#### 在 Manjaro 上交叉编译 Windows上的版本
+
+1. 安装编译工具
+    ~~~bash
+    yay -S mingw-w64-binutils mingw-w64-headers mingw-w64-gcc mingw-w64-tools
+    ~~~
+
+1. 安装依赖包
+
+    ~~~bash
+    # 安装过程会不断出现下载失败，解决方法如下
+    yay -S mingw-w64-sdl2 mingw-w64-ffmpeg 
+
+    # mingw-w64-make mingw-w64-pkg-config mingw-w64-meson
+    ~~~
+
+    * 下载失败的解决办法
+
+        * 报错示例
+
+            ~~~
+            curl: (56) OpenSSL SSL_read: Connection reset by peer, errno 104
+            ==> ERROR: Failure while downloading https://static.rust-lang.org/dist/2021-07-29/rust-std-1.54.0-x86_64-unknown-linux-gnu.tar.xz
+                Aborting...
+            error downloading sources: mingw-w64-rust
+            ~~~
+
+        * 解决办法
+
+            1. 按照报错提示，使用迅雷下载对应的包
+            1. 在 `~/.cache/yay` 搜索对应的包（没下载完全，一般有个 part 后缀），用下载的包覆盖到对应目录
+            1. 在继续执行 `yay -S mingw-w64-sdl2 mingw-w64-ffmpeg`
+
+
+            列一些依赖包的下载链接：
+            
+            * <https://static.rust-lang.org/dist/rustc-1.55.0-src.tar.xz>
+            * <https://ftp.openbsd.org/pub/OpenBSD/distfiles/rust/rustc-1.55.0-src.tar.xz>
+            * <https://static.rust-lang.org/dist/2021-07-29/rust-std-1.54.0-x86_64-unknown-* linux-gnu.tar.xz>
+            * <https://static.rust-lang.org/dist/2021-07-29/rustc-1.54.0-x86_64-unknown-linux-gnu.tar.xz>
+
+~~~
+curl: (7) Failed to connect to cmocka.org port 443 after 594 ms: Connection refused
+==> ERROR: Failure while downloading https://cmocka.org/files/1.1/cmocka-1.1.5.tar.xz
+    Aborting...
+error downloading sources: mingw-w64-cmocka
+~~~
+
+            
+1. 生成windows执行文件
+
+    ~~~
+    ./release.sh
+    ~~~
+
+
+
+
+##### 报错： `gpg: keyserver receive failed`
+
+* 现象
+
+~~~
+:: PGP keys need importing:
+ -> 0E51E7F06EF719FBD072782A5F56E5AFA63CCD33, required by: mingw-w64-icu
+==> Import? [Y/n] 
+:: Importing keys with gpg...
+gpg: keyserver receive failed: No data
+problem importing keys
+~~~
+
+* 解决方法
+
+~~~
+wget https://raw.githubusercontent.com/unicode-org/icu/master/KEYS
+gpg --import KEYS
+~~~
+
+* 参考： <https://aur.archlinux.org/packages/mingw-w64-icu/#comment-758487>
 
 
 
@@ -162,24 +278,25 @@ sudo ninja uninstall
 
 
 
+## 支持中文输入
 
+* 参考
+  * [zhihu.com - 阅读源码，分析并解决scrcpy无法正常输入中文的问题](https://zhuanlan.zhihu.com/p/149014163)
+  * <https://github.com/Genymobile/scrcpy/tree/d613b10efcdf0d1cf76e30871e136ba0ff444e6e>
+  * [Genymobile/scrcpy - Inject UTF-8 text #1426](https://github.com/Genymobile/scrcpy/pull/1426)
+  * [Genymobile/scrcpy - Build scrcpy](https://github.com/Genymobile/scrcpy/blob/master/BUILD.md)
+  * []()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. 下载对应支持Unicode输入的源码
+    对应的分支：`origin/textpaste`   `d613b10efcdf0d1cf76e30871e136ba0ff444e6e`
+    
+    ~~~bash
+    https://github.com/Genymobile/scrcpy.git
+    git co d613b10efcdf0d1cf76e30871e136ba0ff444e6e
+    ~~~
+1. 编译安装
+1. 如果输入中文时出现: 字母也被输入的情况，启动时携带 `--prefer-text`
+    1. 我在Manjaro 21.1 上使用 fcitx ，不用 `--prefer-text` 参数也能正常输入中文。
 
 
 
