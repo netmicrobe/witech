@@ -59,6 +59,24 @@ tcp_wrappers=YES
 allow_writeable_chroot=YES  # 如果启用了限定用户在其主目录下需要添加这个配置，解决报错 500 OOPS: vsftpd: refusing to run with writable root inside chroot()
 ~~~
 
+#### 如果无法连接，可能被firewall挡住了
+
+* 参考
+  * [How to enable passive FTP connections in vsftpd](https://support.hostway.com/hc/en-us/articles/360000564410-How-to-enable-passive-FTP-connections-in-vsftpd)
+  * [How to configure vsftpd to work with passive mode](https://serverfault.com/a/421169)
+  * [vsftpd 425 Security: Bad IP connecting.解决方法](https://blog.csdn.net/qq_15127715/article/details/69055099)
+  * []()
+
+1. 在 `vsftpd.conf` 添加
+    ~~~
+    pasv_enable=Yes
+    pasv_max_port=20100
+    pasv_min_port=20090
+    pasv_promiscuous=YES
+    ~~~
+1. 在防火墙开放 20090-20100 端口
+
+
 ### ftp vsftpd 530 login incorrect 解决
 
 检查 `/etc/pam.d/vsftpd`
