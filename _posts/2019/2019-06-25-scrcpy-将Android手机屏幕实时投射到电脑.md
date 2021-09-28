@@ -60,7 +60,11 @@ Ctrl + h    | home键
 Ctrl + s    | app switch
 Ctrl + m    | menu键
 Ctrl + Up   | 音量上
-Ctrl + Down | 音量下
+Ctrl + Down | 音量下* d613b10 (HEAD, origin/textpaste) Add a new method for text injection
+* cc4e1e2 Add more convenience methods for injection
+* 4bbabfb Move injection methods to Device
+* ffc5751 Avoid clipboard synchronization loop
+
 Ctrl + p    | 关机键(turn screen on/off)
 Right-click | power on(when screen is off)
 Ctrl+o      | turn device screen off (keep mirroring)
@@ -301,7 +305,12 @@ gpg --import KEYS
 
 
 
-
+~~~bash
+* d613b10 (HEAD, origin/textpaste) Add a new method for text injection
+* cc4e1e2 Add more convenience methods for injection
+* 4bbabfb Move injection methods to Device            # 从这里都在主线
+* ffc5751 Avoid clipboard synchronization loop
+~~~
 
 
 
