@@ -32,6 +32,11 @@ service network restart
 
 ## Openwrt
 
+* 参考： 
+  * [CSDN - 鱼与羽 - OPENWRT修改MAC(亲测有效)](https://blog.csdn.net/winux123/article/details/50084521)
+  * []()
+
+
 方法一： 在 `/etc/config/network` 修改好后，重启 `/etc/init.d/network restart`
 
 ~~~
