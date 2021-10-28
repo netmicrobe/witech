@@ -13,18 +13,18 @@ tags: [rdp, remmina, remote-desktop]
     * []()
 
 1. 安装配置xrdp
-~~~
-sudo apt install xrdp 
+    ~~~
+    sudo apt install xrdp 
 
-# 一旦安装完成，Xrdp 服务将会自动启动。
-sudo systemctl status xrdp
+    # 一旦安装完成，Xrdp 服务将会自动启动。
+    sudo systemctl status xrdp
 
-# 默认情况下，Xrdp 使用/etc/ssl/private/ssl-cert-snakeoil.key,它仅仅对“ssl-cert” 用户组成语可读。运行下面的命令，将xrdp用户添加到这个用户组：
-sudo adduser your-account ssl-cert  
+    # 默认情况下，Xrdp 使用/etc/ssl/private/ssl-cert-snakeoil.key,它仅仅对“ssl-cert” 用户组成语可读。运行下面的命令，将xrdp用户添加到这个用户组：
+    sudo adduser your-account ssl-cert  
 
-# 重启 Xrdp 服务，使得修改生效：
-sudo systemctl restart xrdp
-~~~
+    # 重启 Xrdp 服务，使得修改生效：
+    sudo systemctl restart xrdp
+    ~~~
 
 1. 使用Remmina登录目标ubuntu
 
