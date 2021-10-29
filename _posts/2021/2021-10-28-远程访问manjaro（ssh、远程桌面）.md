@@ -7,7 +7,7 @@ tags: [rdp, remmina, remote-desktop]
 
 * 参考： 
     * [archlinux - xrdp](https://wiki.archlinux.org/title/xrdp)
-    * []()
+    * 针对CentOS [How to Setup Xrdp over Xorg in Linux with Multi Sessions](https://linuxways.net/centos/how-to-setup-xrdp-over-xorg-in-linux-with-multi-sessions/)
     * []()
     * []()
 

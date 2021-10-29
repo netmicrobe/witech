@@ -13,7 +13,8 @@ tags: [ manjaro, spoof, mac-address, network ]
   * []()
   * []()
 
-
+* ASUS AC68U
+  * 382C4A	ASUSTek COMPUTER INC.
 
 
 ~~~
