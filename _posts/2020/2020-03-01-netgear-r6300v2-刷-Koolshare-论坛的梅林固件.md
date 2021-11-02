@@ -9,6 +9,10 @@ tags: [koolshare, merlin, 梅林, netgear]
   * [coolshine - arm384梅林改版固件 - R6300v2重获新生！](https://koolshare.cn/thread-182286-1-1.html)
   * [R6300v2 386测试固件，V大版，无无软件中心](https://koolshare.cn/thread-190950-22-1.html)
   * [求解R7000和R6300V2组mesh问题](https://koolshare.cn/forum.php?mod=viewthread&tid=192754&highlight=r6300v2)
+  * [R6300V2 K大固件，及解决反复重启（蓝色版入手折腾小记）](https://koolshare.cn/thread-59854-1-1.html)
+  * [6300V2ASUS固件转刷DD-WRT流程](https://koolshare.cn/thread-46819-1-1.html)
+  * [R6300V2刷board_id刷梅林固件详细教程](https://www.yuoo.cn/R6300V2001.html)
+  * []()
   * []()
   * []()
   * **固件下载**
@@ -17,6 +21,51 @@ tags: [koolshare, merlin, 梅林, netgear]
   * [KoolShare 固件下载服务器 - Koolshare_RMerl_New_Gen_386 - NETGEAR R6300v2](https://firmware.koolshare.cn/Koolshare_RMerl_New_Gen_386/Netgear/R6300v2/)
   * []()
 
+## aimesh 可能可用的mac
+
+为aimesh可搜索到，假冒华硕的mac
+* 10:BF:48:xx:xx:xx
+* 9C:5C:8E:xx:xx:xx
+* E4:F4:C6:xx:xx:xx
+
+假冒 dlink
+* E4:6F:13:xx:xx:xx
+
+在koolshare成功的mac vendor
+* 00:90:4C:xx:xx:xx
+* D8:50:E6:xx:xx:xx
+
+### 组mesh成功案例
+
+* 6300v2 / RT-AC66U B1 / 386.1
+* 868L / RT-AC68U / 384.14
+
+
+
+
+## netgear 原厂固件刷 380固件
+
+* 参考
+  * [koolshare - 6300V2ASUS固件转刷DD-WRT流程 ](https://koolshare.cn/thread-46819-1-1.html)
+  * [koolshare - 小白教程，超级简单网件NETGEAR R6300v2刷ASUS固件](https://koolshare.cn/thread-44047-1-1.html)
+  * [dd-wrt.com - Netgear_R6300v2](https://wiki.dd-wrt.com/wiki/index.php/Netgear_R6300v2)
+  * []()
+
+1. 在 netgear 原厂固件下
+    1. 恢复出厂设置（通电的时候，捅reset 10秒以上）
+    1. 上传dd-wrt的固件 factory-to-dd-wrt.chk，刷新到ddwrt。
+        1. 这里用的DD-WRT v3.0-r27456(06/27/15)
+        1. 下载地址：
+            1. <http://www.desipro.de/ddwrt/K3-AC-Arm/dd-wrt.K3_R6300V2.chk>
+            1. <https://pan.baidu.com/s/1cbnNhiEn6T1AFmpAWEzAEA>   提取码: oxus
+        1. 
+1. 在 dd-wrt 下
+    1. Administration -\> Firmware Upgrade， 上传__过渡固件__ R6300V2_merlin_1.2.trx 
+1. 在过渡asus固件下（刷完，显示的版本是：378.55_alpha1）
+    1. 1. Administration -\> Firmware Upgrade， 上传__正式固件__ ，我这里用的，R6300V2_380.70_0-X7.9-koolshare.trx
+
+
+## 380 固件 升级 到 384固件
 
 R6300v2从arm380升级到arm384固件会失去什么
 1. WAN口变LAN 4口，LAN4口变WAN口，依次类推；

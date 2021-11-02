@@ -9,6 +9,7 @@ tags: [cm, redmine, textile]
 
 * 参考
   * <http://www.redmine.org/projects/redmine/wiki/RedmineWikis>
+  * [Redmine Guide » User Guide » Textile formatting](https://redmine.org/projects/redmine/wiki/RedmineTextFormattingTextile)
 
 ---
 

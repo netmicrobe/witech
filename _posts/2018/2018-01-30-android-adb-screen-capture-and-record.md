@@ -10,6 +10,13 @@ tags: [ android ]
 * 参考： 
   * <https://developer.android.com/studio/command-line/adb.html>
 
+## scrcpy 录像
+
+`scrcpy -r xxx.mp4`
+
+录屏结束，按CTRL + C，mp4 文件自动保存到当前执行命令的目录。
+
+
 
 
 ## 快速截屏&录屏的 Windows 脚本
