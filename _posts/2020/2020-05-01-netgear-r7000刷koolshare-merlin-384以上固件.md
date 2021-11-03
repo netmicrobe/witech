@@ -12,12 +12,17 @@ tags: [gfw, shadowsocks, koolshare, merlin, 梅林, netgear]
   * [【2021-02-14】Netgear R7000路由器的Asuswrt-ASUS固件更新R7000_386.1_2](https://koolshare.cn/thread-192540-1-1.html)
   * [Koolshare_RMerl_New_Gen_384 - RT-AC68U 固件 - 刷CFE之后的R7000可以用](http://firmware.koolshare.cn/Koolshare_RMerl_New_Gen_384/RT-AC68U/)
   * [Koolshare_RMerl_New_Gen_386 - RT-AC68U - 刷CFE之后的R7000可以用](http://firmware.koolshare.cn/Koolshare_RMerl_New_Gen_386/RT-AC68U/)
-  * []()
+  * [华硕官网-RT AC68U 固件下载](https://www.asus.com.cn/Networking-IoT-Servers/WiFi-Routers/ASUS-WiFi-Routers/RTAC68U/HelpDesk_BIOS/)
   * []()
   * []()
   * []()
 
+## 总结
 
+* 修改了CFE后，进入miniweb界面刷机界面，可以上传koolshare的固件，也可以上传华硕AC68U的官方固件。
+* 手上2台 R7000 很难组AiMesh。用比较新的固件（试过 386.2, 386.1, 384.18） 都不能组网成功。
+    * 有时候能进入一种类似mesh，类似ap 的模式。节点作为一个客户端连上主路由，也能上网，登陆主路由的管理页面；但是 主路由提示添加mesh节点失败，mesh管理界面看不到。网速就百兆左右。
+    * 主 384.13_1 Node 384.10_2 ，只发现这个组合可以组AiMesh，但是Node经常容易断流。网速就百兆左右。
 
 
 ## 刷 梅林 384、386 固件
@@ -41,7 +46,7 @@ tags: [gfw, shadowsocks, koolshare, merlin, 梅林, netgear]
 
 ### 相关工具
 
-链接： https://pan.baidu.com/s/1gRgljocNi1A6QO71X_dgeg
+链接： <https://pan.baidu.com/s/1gRgljocNi1A6QO71X_dgeg>
 提取码： dy94
 
 
@@ -50,16 +55,18 @@ tags: [gfw, shadowsocks, koolshare, merlin, 梅林, netgear]
 
 1. 将R7000先刷成梅林 380 版本，成功后，开启ssh服务
 1. 备份当前CFE
-    ssh登陆后执行 ` dd if=/dev/mtd0 of=/tmp/boot.bin`，将boot.bin 备份到本地。
+    ssh登陆后执行 `dd if=/dev/mtd0 of=/tmp/boot.bin`，将boot.bin 备份到本地。
 1. 修改CFE中的Mac地址
 1. 用CFEEDIT这个软件打开CFE_R7000_386.bin，需要修改里面的MAC地址和机器型号信息，如下：
 
-注意：这里不要修改这三个MAC地址的前6位，不然会导致AIMESH搜索不到节点！！！！！！
+    注意：这里不要修改这三个MAC地址的前6位，不然会导致AIMESH搜索不到节点！！！！！！
 
-        et0macaddr       --> 后六位替换成路由器的mac地址
-        0:macaddr        --> 后六位替换成路由器的mac地址
-        1:macaddr        --> 后六位替换成路由器mac地址+4
-        修改完后的CFE另存为一个，这里以CFE_R7000_386_0000.bin为例。
+    ~~~
+    et0macaddr       --> 后六位替换成路由器的mac地址
+    0:macaddr        --> 后六位替换成路由器的mac地址
+    1:macaddr        --> 后六位替换成路由器mac地址+4
+    修改完后的CFE另存为一个，这里以CFE_R7000_386_0000.bin为例。
+    ~~~
 1. SCP把mtd-write和CFE_R7000_386_0000.bin上传到路由器的/tmp目录下。
 1. 刷入新的CFE。
     ~~~
