@@ -28,6 +28,8 @@ tags: [ rom, adb, fastboot, bootloader, root, unlock, twrp ]
   * [Xiaomi Flash Tool](https://xiaomiflashtool.com/)
   * [Xiaomi Flash Tool - All Versions](https://androidmtk.com/download-xiaomi-mi-flash-tool)
   * [Download Xiaomi Flash Tool all versions](https://www.xiaomiflash.com/download/)
+  * [Mi Flash Unlock: The official bootloader unlocking tool](https://miui.blog/any-devices/mi-flash-unlock/)
+  * <http://www.miui.com/unlock/download.html>
   * []()
   * []()
 

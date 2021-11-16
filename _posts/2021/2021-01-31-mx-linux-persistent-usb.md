@@ -21,7 +21,7 @@ tags: [persistent, usb, boot]
 1. 启动进MX Linux系统。
 
 
-
+On live system, username login as `demo`, username password = `demo`. For root access, password = `root`.
 
 
 
