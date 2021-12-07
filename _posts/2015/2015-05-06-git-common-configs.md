@@ -35,6 +35,11 @@ git config --global difftool.winmerge.prompt false
 git config --global git_commit_template.txt
 ```
 
+使用notepad++，该文件结尾为Unix后（设置》首选项》新建》格式》Unix），就可以设置换行为：
+
+`git config --global core.autocrlf false`
+
+
 提高`git status` 执行速度：
 
 ~~~
