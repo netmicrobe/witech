@@ -90,6 +90,79 @@ deb http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-
 # deb-src http://mirrors.aliyun.com/debian-security buster/updates main
 ~~~
 
+## remmina 远程登录 windows
+
+1. apt直接安装
+    ~~~
+    sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret rdesktop
+
+    # Make sure Remmina is not running. 
+    sudo killall remmina
+    ~~~
+1. 系统菜单启动 Remmina
+1. Remmia Remote Desktop Client 界面打开后，点击左上角“+”添加 RDP连接
+    Protocol: RDP
+    Server: 要连接的Windows IP
+    User name: windows帐号
+    User password: windows密码
+    Resolution: 选小点的分辨率，桌面显示不下，比较尴尬
+    Color depth: 选 High color(16 bpp)
+        * 选16位色深比较保险。32位可能报错： 
+          your libfreerdp does not support H264. Please check Color Depth settings
+1. 点击save and run 就可以啦。
+
+
+* **如果连接不了**
+
+使用rdesktop命令行执行，看有没有错误信息：
+
+~~~
+rdesktop -r sound:local -r disk:nameOnHost=/home/your-name/Downloads -P 192.168.0.103
+~~~
+
+如果有错误提示`CredSSP required by server`，在目标windows进行如下设置：
+
+* 解决方法：
+
+  在目标Windows上设置： 此电脑 》右键菜单 》属性 》高级系统设置 》系统属性 》远程 tab 页 》取消勾选`仅允许运行使用网络级别身份验证的远程桌面的计算机连接（建议）`
+
+
+
+
+## 安装 Google Chrome
+
+* 参考
+  * [How to install Google Chrome on MX Linux](https://www.fosslinux.com/36130/how-to-install-google-chrome-on-mx-linux.htm)
+  * [How To Install Google Chrome on MX Linux 21,19](https://daylifetips.com/install-google-chrome-on-mx-linux/)
+  * [How to Install Latest Google Chrome on MX Linux 19.2 / Debian 10](https://gist.github.com/stardigits/e9f3e46c22639fc73a5be91871da0a5c)
+  * []()
+
+
+* 安装 Google Chrome
+~~~
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+~~~
+
+
+
+* 更新 Google Chrome
+
+~~~
+cat /etc/apt/sources.list.d/google-chrome.list
+
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+~~~
+
+~~~
+sudo apt update
+sudo apt upgrade
+~~~
+
+
+
 
 
 ## hibernate 休眠功能
