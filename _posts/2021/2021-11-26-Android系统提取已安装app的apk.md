@@ -2,7 +2,7 @@
 layout: post
 title: Android系统提取已安装app的apk
 categories: [cm, android]
-tags: []
+tags: [adb, android]
 ---
 
 * 参考
