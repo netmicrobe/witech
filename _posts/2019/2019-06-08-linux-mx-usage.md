@@ -12,8 +12,6 @@ tags: [fcitx, anti-linux]
 
 ## 弃坑理由
 
-1. 软件版本旧，虽然backports能解决
-1. fcitx 中文无法输入 Unicode，Ctrl + Alt + Shift + U ， Ctrl + Alt + U 都不行。
 1. 外接显示器，启动黑屏。
 1. 老提醒升级，也关闭不了。
 
@@ -28,6 +26,15 @@ tags: [fcitx, anti-linux]
 默认自动下升级包，点开系统状态栏上的升级提醒，只能选择升级、不升级，也不知道有哪些包升级了。。。
 
 
+## 查看当前版本信息
+
+~~~
+uname -a
+lsb_release -a
+cat /etc/antix-version
+~~~
+
+
 ## 更换国内源
 
 
@@ -35,25 +42,47 @@ tags: [fcitx, anti-linux]
   * [Debian 10 更换国内源 (中科大、网易源、阿里云)](https://www.jianshu.com/p/b4a792945d99)
   * [Debian 官方源换为国内的源的操作方法](https://developer.aliyun.com/article/765348)
   * [Aliyun - Debian 镜像](https://developer.aliyun.com/mirror/debian?spm=a2c6h.13651102.0.0.3e221b11QWjv7Z)
-  * [USTC - Debian 源使用帮助](https://mirrors.ustc.edu.cn/help/debian.html)
-  * []()
+  * [USTC - Debian 源使用帮助](https://mirrors.ustc.edu.cn/help/debian.html)
+  * [清华大学开源软件镜像站]https://mirrors.tuna.tsinghua.edu.cn()
+  * [MX社区源，对应 mx.list - MX and MEPIS Community Repository](http://mxrepo.com/)
+  * [antiX-19 Packages，对应 antix.list](https://antixlinux.com/antix-19-packages/)
+  * [Debian 官方源](https://wiki.debian.org/SourcesList)
+  * [Repos – MX-19](https://mxlinux.org/wiki/system/repos-mx-19/)
 
 `sudo vim /etc/apt/sources.list.d/debian.list`
 
 ~~~
 # Debian 10 buster
 
+### Official ###
+
+deb http://deb.debian.org/debian buster main contrib non-free
+deb-src http://deb.debian.org/debian buster main contrib non-free
+
+deb http://deb.debian.org/debian-security buster/updates main contrib non-free
+deb-src http://deb.debian.org/debian-security/ buster/updates main contrib non-free
+
+deb http://deb.debian.org/debian buster-updates main contrib non-free
+deb-src http://deb.debian.org/debian buster-updates main contrib non-free
+
+deb http://deb.debian.org/debian buster-backports main contrib non-free
+deb-src http://deb.debian.org/debian buster-backports main contrib non-free
+
+
+
 # 中科大源
 
-deb http://mirrors.ustc.edu.cn/debian buster main contrib non-free
-deb http://mirrors.ustc.edu.cn/debian buster-updates main contrib non-free
-deb http://mirrors.ustc.edu.cn/debian buster-backports main contrib non-free
-deb http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-free
+# deb http://mirrors.ustc.edu.cn/debian buster main contrib non-free
+# deb http://mirrors.ustc.edu.cn/debian buster-updates main contrib non-free
+# deb http://mirrors.ustc.edu.cn/debian buster-backports main contrib non-free
+# deb http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-free
 
 # deb-src http://mirrors.ustc.edu.cn/debian buster main contrib non-free
 # deb-src http://mirrors.ustc.edu.cn/debian buster-updates main contrib non-free
 # deb-src http://mirrors.ustc.edu.cn/debian buster-backports main contrib non-free
 # deb-src http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-free
+
+
 
 # 官方源
 
@@ -64,6 +93,8 @@ deb http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-
 # deb-src http://deb.debian.org/debian buster main contrib non-free
 # deb-src http://deb.debian.org/debian buster-updates main contrib non-free
 # deb-src http://deb.debian.org/debian-security/ buster/updates main contrib non-free
+
+
 
 # 网易源
 
@@ -89,6 +120,40 @@ deb http://mirrors.ustc.edu.cn/debian-security/ buster/updates main contrib non-
 # deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib
 # deb-src http://mirrors.aliyun.com/debian-security buster/updates main
 ~~~
+
+
+
+`sudo vim /etc/apt/sources.list.d/mx.list`
+
+~~~
+# MX Community Main and Test Repos
+
+### Official ###
+# For MX-19:
+#deb http://mxrepo.com/mx/repo/ buster main non-free  
+# MX-19 Testing repo
+#deb http://mxrepo.com/mx/testrepo/ buster test
+# ahs hardware stack repo
+#deb http://mxrepo.com/mx/repo/ buster ahs
+
+### 阿里云 ###
+#deb https://mirrors.aliyun.com/mxlinux/mx/repo/ buster main non-free
+
+#ahs hardware stack repo
+#deb https://mirrors.aliyun.com/mxlinux/mx/repo/ buster ahs
+
+### 华为云 ###
+#deb https://mirrors.huaweicloud.com/mxlinux/mx/repo/ buster main non-free
+
+### 清华 ###
+#deb https://mirrors.tuna.tsinghua.edu.cn/mxlinux/mx/repo/ buster main non-free
+#deb https://mirrors.tuna.tsinghua.edu.cn/mxlinux/mx/testrepo/ buster test
+
+#ahs hardware stack repo
+#deb https://mirrors.tuna.tsinghua.edu.cn/mxlinux/mx/repo/ buster ahs
+~~~
+
+
 
 ## remmina 远程登录 windows
 

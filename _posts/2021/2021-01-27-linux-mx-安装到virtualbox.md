@@ -21,6 +21,7 @@ tags: []
 `cd /etc/apt/sources.list.d/`
 
 * antix.list
+
 ~~~
 # Use with Debian Stable/buster repositories.
 deb https://mirrors.huaweicloud.com/mxlinux/antix/buster buster main
@@ -29,6 +30,7 @@ deb https://mirrors.huaweicloud.com/mxlinux/antix/buster buster main
 ~~~
 
 * debian.list
+
 ~~~
 # Debian Stable.
 deb https://mirrors.huaweicloud.com/debian buster main contrib non-free
@@ -43,6 +45,7 @@ deb https://mirrors.huaweicloud.com/debian-security buster/updates main contrib 
 ~~~
 
 * debian-stable-updates.list
+
 ~~~
 # Debian buster Updates
 deb https://mirrors.huaweicloud.com/debian/ buster-updates main contrib non-free
@@ -50,6 +53,7 @@ deb https://mirrors.huaweicloud.com/debian/ buster-updates main contrib non-free
 ~~~
 
 * mx.list
+
 ~~~
 # MX Community Main and Test Repos
 deb https://mirrors.huaweicloud.com/mxlinux/mx/repo buster main non-free
