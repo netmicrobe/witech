@@ -314,10 +314,26 @@ gpg --import KEYS
 
 
 
+## 屏幕隐私，设置快捷键，一键隐藏scrcpy窗口
 
-
-
-
+1. 创建shell文件 `mini-scrcpy.sh`，并将执行路径配置到PATH中
+    ~~~
+    #!/bin/bash
+    xdotool windowminimize $(xdotool search --class "scrcpy")
+    ~~~
+1. 并将`mini-scrcpy.sh`执行路径配置到PATH中
+    修改 .bashrc
+    ~~~
+    export PATH="$PATH:/your-scrpt-path"
+    ~~~
+1. 设置快捷键
+    * manjaro xfce4 上设置快捷键
+        1. 在开始菜单输入 `keyboard` 启动 Keyboard 设置程序
+        1. Application Shortcuts 添加快捷键，对应命令为 `/your-scrpt-path/mini-scrcpy.sh`
+    * 在 KDE 上设置快捷键
+        1. 开始菜单 》shortcuts 》Custom Shortcuts 》Edit 》 New 》 Global Shortcut 》 Command/URL
+        1. 选择sh文件地址
+        1. Apply
 
 
 
