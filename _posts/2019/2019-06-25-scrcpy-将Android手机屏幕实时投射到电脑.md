@@ -319,7 +319,21 @@ gpg --import KEYS
 1. 创建shell文件 `mini-scrcpy.sh`，并将执行路径配置到PATH中
     ~~~
     #!/bin/bash
-    xdotool windowminimize $(xdotool search --class "scrcpy")
+    WID_V=$(xdotool search --onlyvisible --class "scrcpy")
+    WID=$(xdotool search --class "scrcpy")
+
+    echo "V: $WID_V"
+    echo "WID: $WID"
+
+    if [[ -z $WID_V && -n $WID ]]; then
+      # already minimized, raise up it
+      echo 'already minimized, raise up it'
+      xdotool windowactivate $WID
+    elif [[ -n $WID_V && -n $WID ]]; then
+      # minimize it!
+      echo 'minimize it!'
+      xdotool windowminimize $WID
+    fi
     ~~~
 1. 并将`mini-scrcpy.sh`执行路径配置到PATH中
     修改 .bashrc
