@@ -2,7 +2,7 @@
 layout: post
 title: 在 Windows上使用 jekyll 写博客，发布到 Githubs
 categories: [cm, jekyll]
-tags: [cm, jekyll, githubs]
+tags: [cm, jekyll, githubs, markdown]
 ---
 
 ## 安装 ruby 环境

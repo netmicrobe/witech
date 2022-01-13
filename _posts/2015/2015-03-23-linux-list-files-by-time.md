@@ -32,7 +32,13 @@ OFS="$IFS";IFS=$'\n';stat --printf="%y %n\n" $(ls -tr $(find . -type f));IFS="$O
 
 ## 方法二 
 
-`ls -tl`
+~~~bash
+# 顺序
+ls -tl
+
+# 逆序
+ls -trl
+~~~
 
 
 
