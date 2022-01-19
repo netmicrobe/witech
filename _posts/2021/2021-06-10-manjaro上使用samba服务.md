@@ -27,6 +27,9 @@ sudo touch /etc/samba/smb.conf
 
 # 列出对应用户可以使用的共享目录
 smbclient -L 【IP地址】 -U 【用户名】
+
+# 进入smb提示符
+smbclient 【IP地址】 -U 【用户名】
 ~~~
 
 

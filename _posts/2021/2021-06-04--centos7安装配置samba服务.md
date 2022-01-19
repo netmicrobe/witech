@@ -39,8 +39,11 @@ tags: [linux, centos, samba, windows, smbd, samba-client ]
     ~~~
 1. 创建samba管理帐号 `sadmin`
     ~~~
+    # add user in linux
     sudo useradd -M -d /samba/users -s /usr/sbin/nologin -G sambashare sadmin
+    # add user in samba
     sudo smbpasswd -a sadmin
+    # enable user
     sudo smbpasswd -e sadmin
     sudo mkdir /samba/users
     sudo chown sadmin:sambashare /samba/users
@@ -75,6 +78,27 @@ tags: [linux, centos, samba, windows, smbd, samba-client ]
     semanage fcontext -at samba_share_t "/samba(/.*)?"
     restorecon /samba
     ~~~
+    
+    * 如果报错： `-bash: semanage: command not found`
+    ~~~bash
+    # 先查找 semanage 在哪个包
+    yum provides /usr/sbin/semanage
+    
+    # CentOS7.9 为例，输出： 
+    Loaded plugins: fastestmirror
+    Loading mirror speeds from cached hostfile
+     * base: mirrors.aliyun.com
+     * extras: mirrors.aliyun.com
+     * updates: mirrors.aliyun.com
+    policycoreutils-python-2.5-34.el7.x86_64 : SELinux policy core python utilities
+    Repo        : base
+    Matched from:
+    Filename    : /usr/sbin/semanage
+
+    # 安装对应的包
+    yum install policycoreutils-python-2.5-34.el7.x86_64
+    ~~~
+    
 
 1. 从linux测试samba连接
     ~~~
