@@ -14,7 +14,7 @@ tags: [mkpasswd]
   * [oci-learning - Creating Compute Instance](https://enabling-cloud.github.io/oci-learning/manual/CreatingComputeInstance.html)
   * [Martins Blog - Bootstrapping a VM image in Oracle Cloud Infrastructure using cloud-init](https://martincarstenbach.wordpress.com/2018/11/30/bootstrapping-a-vm-image-in-oracle-cloud-infrastructure-using-cloud-init/)
   * [github - AnykeyNL/OCI-Cloudinit-Backdoors - OCI-Cloudinit-Backdoors/linux-cloudinit.txt](https://github.com/AnykeyNL/OCI-Cloudinit-Backdoors/blob/main/linux-cloudinit.txt)
-  * []()
+  * [Troubleshooting Instances Using Instance Console Connections](https://docs.oracle.com/en-us/iaas/Content/Compute/References/serialconsole.htm)
   * []()
   * []()
 
