@@ -23,20 +23,22 @@ tags: [debian, stretch]
 
 ## Debian 各版本Codename
 
-| stretch | Debian 9 |
-jessie is Debian 8.0
-wheezy is Debian 7.0
-squeeze is Debian 6.0
-lenny is Debian 5.0
-etch is Debian 4.0
-sarge is Debian 3.1
-woody is Debian 3.0
-potato is Debian 2.2
-slink is Debian 2.1
-hamm is Debian 2.0
-bo is Debian 1.3
-rex is Debian 1.2
-buzz is Debian 1.1
+| Debian 11 | Bullseye |
+| Debian 10 | Buster |
+| Debian 9.0 | stretch |
+| Debian 8.0 | jessie |
+| Debian 7.0 | wheezy |
+| Debian 6.0 | squeeze |
+| Debian 5.0 | lenny |
+| Debian 4.0 | etch |
+| Debian 3.1 | sarge |
+| Debian 3.0 | woody |
+| Debian 2.2 | potato |
+| Debian 2.1 | slink |
+| Debian 2.0 | hamm |
+| Debian 1.3 | bo |
+| Debian 1.2 | rex |
+| Debian 1.1 | buzz |
 
 
 
