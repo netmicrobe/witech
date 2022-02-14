@@ -2,7 +2,7 @@
 layout: post
 title: ubuntu-apt-包管理常用命令
 categories: [cm, linux]
-tags: [mint, debian, ubuntu, apt]
+tags: [mint, debian, ubuntu, apt, dpkg-query, dpkg-deb, apt-file]
 ---
 
 * 参考： 
