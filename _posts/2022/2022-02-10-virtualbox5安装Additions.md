@@ -16,7 +16,7 @@ tags: [cm, virtual-box, manjaro, vm, kernel, virtualize, network, ssh]
 
 
 
-## VirtualBox 5.2.44 + Mint 20.3 una
+## 一般安装过程
 
 虚拟机挂载 Additions工具包iso
 
@@ -45,7 +45,10 @@ systemctl is-enabled vboxadd-service.service
 宿主机配置权限： `sudo usermod -aG vboxusers $(whoami)`
 
 
+### 测试可用的系统
 
+* VirtualBox 5.2.44 + Mint 20.3 una
+* VirtualBox 5.2.44 + Parrot 5
 
 
 
