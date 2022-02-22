@@ -11,10 +11,59 @@ tags: [exfat, nofuse]
   * []()
 
 
+## 安装 exfat-nofuse
 
+* 测试可用，三星T5 的 exfat 格式比 exfat-fuse 快，exfat-fuse上的虚拟机很慢：
+  * manjaro 21.2.3
+  * linux mx 19.4
 
+1. 卸载 exfat-fuse
+    ``
+1. 编译安装 https://github.com/relan/exfat
 
+    安装依赖包
 
+    ~~~
+    # linux mx 19.4
+    sudo apt install -y git autoconf automake pkg-config libfuse-dev gcc make
+    ~~~
+
+    下载&编译
+
+    ~~~
+    git clone https://github.com/relan/exfat.git
+    cd exfat
+    autoreconf --install
+    ./configure
+    make
+    ~~~
+    
+    安装
+    
+    ~~~
+    sudo make install
+    ~~~
+    
+1. 编译安装 https://github.com/arter97/exfat-linux/
+    ~~~bash
+    git clone https://github.com/arter97/exfat-linux
+    cd exfat-linux
+    make
+    sudo make install
+
+    # 5.4以上的kernel，重启下再执行下面
+
+    sudo modprobe exfat
+
+    # 检查module
+
+    lsmod | grep exfat
+    ~~~
+
+1. `/etc/fstab` 配置
+~~~
+UUID=C747-899C /Volumes/somedir exfat rw,nofail,nosuid,nodev,relatime,uid=1000,gid=1000,fmask=0022,dmask=0022,iocharset=utf8,errors=remount-ro  0  0
+~~~
 
 
 
