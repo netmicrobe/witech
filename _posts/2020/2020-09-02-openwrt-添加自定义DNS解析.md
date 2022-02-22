@@ -17,7 +17,7 @@ ssh到路由器上，修改 `/etc/hosts`，添加一行：
 
 `192.168.1.1 o.cn`
 
-之后再重启dnsmasq，通过浏览器输入 `o.cn` 就进入 192.168.1.1了。
+之后再重启dnsmasq `service dnsmasq restart`，通过浏览器输入 `o.cn` 就进入 192.168.1.1了。
 
 
 ### dnsmasq的解析流程
