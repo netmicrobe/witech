@@ -2,7 +2,7 @@
 layout: post
 title: manjaro 入门使用
 categories: [cm, linux]
-tags: [manjaro]
+tags: [manjaro, xfce4, vivaldi, google-chrome, arch-linux, aur, yay, pacman, exfat, ntfs, fcitx, virtualbox]
 ---
 
 * 参考： 
@@ -515,6 +515,10 @@ yay -S vivaldi-ffmpeg-codecs
 
 
 #### google chrome
+
+可以直接从 aur 安装，更新，都是一个命令 `yay -S google-chrome`
+
+也可以从aur下载源码编译安装：
 
 1. 从 <https://aur.archlinux.org/packages/google-chrome/> 上查看git地址
 1. 编译安装
