@@ -24,9 +24,6 @@ sudo apt-get --only-upgrade install nginx
 ~~~
 # To see all the files the package installed onto your system
 dpkg-query -L <package_name>
-
-# To see the files a .deb file will install
-dpkg-deb -c <package_name.deb>
 ~~~
 
 使用 `apt-file`
@@ -38,6 +35,15 @@ sudo apt-file update
 apt-file list <package_name>
 ~~~
 
+### deb 包文件操作
+
+~~~sh
+# To see the files a .deb file will install
+dpkg-deb -c <package_name.deb>
+
+# 查看deb包信息
+dpkg-deb -I some.deb
+~~~
 
 
 
