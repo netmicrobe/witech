@@ -8,7 +8,7 @@ tags: [linux, bash]
 * 参考
   * <http://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_01.html>
 
-```
+~~~sh
 [ -a FILE ]	True if FILE exists.
 [ -b FILE ]	True if FILE exists and is a block-special file.
 [ -c FILE ]	True if FILE exists and is a character-special file.
@@ -41,5 +41,29 @@ tags: [linux, bash]
 [ STRING1 < STRING2 ] 	True if "STRING1" sorts before "STRING2" lexicographically in the current locale.
 [ STRING1 > STRING2 ] 	True if "STRING1" sorts after "STRING2" lexicographically in the current locale.
 [ ARG1 OP ARG2 ]	"OP" is one of -eq, -ne, -lt, -le, -gt or -ge. These arithmetic binary operators return true if "ARG1" is equal to, not equal to, less than, less than or equal to, greater than, or greater than or equal to "ARG2", respectively. "ARG1" and "ARG2" are integers.
-```
+~~~
+
+
+Note that `[[` is actually a command/program that returns either 0 (true) or 1 (false). Any program that obeys the same logic (like all base utils, such as grep(1) or ping(1)) can be used as condition, see examples.
+
+~~~sh
+[[ -z STRING ]]	Empty string
+[[ -n STRING ]]	Not empty string
+[[ STRING == STRING ]]	Equal
+[[ STRING != STRING ]]	Not Equal
+[[ NUM -eq NUM ]]	Equal
+[[ NUM -ne NUM ]]	Not equal
+[[ NUM -lt NUM ]]	Less than
+[[ NUM -le NUM ]]	Less than or equal
+[[ NUM -gt NUM ]]	Greater than
+[[ NUM -ge NUM ]]	Greater than or equal
+[[ STRING =~ STRING ]]	Regexp
+(( NUM < NUM ))	Numeric conditions
+
+[[ -o noclobber ]]	If OPTIONNAME is enabled
+[[ ! EXPR ]]	Not
+[[ X && Y ]]	And
+[[ X || Y ]]	Or
+~~~
+
 

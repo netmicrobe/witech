@@ -5,6 +5,28 @@ categories: [ cm, ruby ]
 tags: [ ruby, rails, nginx, passenger, redmine ]
 ---
 
+
+## 安装的成功案例
+
+1. 案例一
+
+~~~sh
+iptables    开放nginx 80端口（Redmine)
+rvm 1.29.4         /usr/local/rvm
+ruby 2.3.7p456
+Imagemagick  /opt/_installer/Imagemagick/ImageMagick-6.9.10-86
+
+nginx-1.14.0       /opt/nginx        service nginx start/stop
+passenger 5.3.3
+
+mysql 5.1.73     service mysqld start/stop
+
+redmine 3.3.3.stable
+~~~
+
+
+
+
 ## rvm
 
 ~~~
@@ -80,6 +102,7 @@ bundle exec rails server webrick -e production -b 192.168.1.101
 ~~~
 gem install passenger --no-rdoc --no-ri
 yum install -y libcurl-devel
+# 利用 passenger 编译安装 nginx，因为要支持负载均衡的功能，重新编译nginx
 passenger-install-nginx-module --prefix=/opt/nginx
 ~~~
 
