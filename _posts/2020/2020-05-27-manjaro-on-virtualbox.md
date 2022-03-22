@@ -29,7 +29,7 @@ tags: [cm, virtual-box, manjaro, vm, kernel, virtualize, network, ssh]
 1. 安装依赖
     ~~~
     # 查看kernel版本，这里是linux56
-    mhwd-kenerl -li
+    mhwd-kernel -li
 
     # 安装依赖
     sudo pacman -S base-devel linux56-headers
