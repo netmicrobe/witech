@@ -70,20 +70,56 @@ sudo systemctl disable vboxadd
 
 
 parrot 5, kernel 5.14 都好好的，有问题的发行版：
-Ubuntu 20.04 - kernel 5.13
-Kali 2022.2
-Manjaro 21.2.5 - kernel 5.15
-
+* Ubuntu 20.04 - kernel 5.13
+* Kali 2022.2
+* Manjaro 21.2.5 - kernel 5.15
 
 * 现象
 
-进入配置的共享目录，内容为空，手动挂载，报错： `Invalid argument`
+    进入配置的共享目录，内容为空，手动挂载，报错： `Invalid argument`
 
-~~~sh
-$ mount.vboxsf -w -o rw,nodev _isolate /media/sf_myshare/
+    ~~~sh
+    $ mount.vboxsf -w -o rw,nodev _isolate /media/sf_myshare/
 
-mount.vboxsf: mounting failed with the error: Invalid argument
-~~~
+    mount.vboxsf: mounting failed with the error: Invalid argument
+    ~~~
+
+* 解决方法
+
+Ubuntu 20.04 将 kernel 5.13 降级到 5.4 就好了
+
+1. 安装 5.4 kernel
+    ~~~sh
+    sudo apt install linux-image-5.4.0-104-generic linux-headers-5.4.0-104-generic
+    ~~~
+1. 检查grub 菜单项
+    ~~~sh
+    sudo grep 'menuentry \|submenu ' /boot/grub/grub.cfg | cut -f2 -d "'"
+    ~~~
+1. 根据grub菜单结构，修改 `/etc/default/grub` 的启动项
+    `GRUB_DEFAULT=0` 改为
+    ~~~sh
+    GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 5.4.0-104-generic"
+    ~~~
+1. 更新grub并重启
+    ~~~sh
+    sudo update-grub
+    sudo reboot
+    ~~~
+1. 重启后，检查是否是 5.4 kernel ： `uname -r`
+1. 挂载 VBoxAdditions 光盘安装
+    ~~~sh
+    # 如果已安装，先卸载
+    sudo ./VBoxLinuxAdditions uninstall
+
+    # 安装
+    sudo ./VBoxLinuxAdditions
+    ~~~
+
+
+* 分析
+
+可能是 kernel 5.13 之后，mount 出现了不一样的参数要求，老的5.2.44 vbox addition 源码不支持这样的参数传递。所以报错： “Invalid argument”
 
 报错可能的源码位置：
 
