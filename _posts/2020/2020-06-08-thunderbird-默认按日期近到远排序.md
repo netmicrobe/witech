@@ -1,6 +1,6 @@
 ---
 layout: post
-title: thunderbird-数据文件设置，修改profile location
+title: thunderbird-默认按日期近到远排序
 categories: [cm, mail]
 tags: [mail, thunderbird]
 ---
@@ -12,6 +12,7 @@ tags: [mail, thunderbird]
 
 
 1. Tools \> Options \> Advanced \> General \> Config Editor
+    91.8.0 版本的位置： 菜单 \> Preference \> 搜索 Config Editor
 1. `mailnews.default_sort_type` : 18
 1. `mailnews.default_sort_order` 从 1（ascending）改为 2（descending）
 

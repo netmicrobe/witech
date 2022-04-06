@@ -12,6 +12,13 @@ tags: [mail, thunderbird]
   * []()
 
 
+
+## 找到当前使用的 Profile
+
+程序菜单 \> Help \> More Troubleshoot Information \> Profile Folder
+
+
+
 ## 移动 thunderbird 的 个人配置文件 / Profiles
 
 1. 安装thunderbird
