@@ -14,16 +14,24 @@ tags: [linux, tar, 7z]
 
 ## gz,tar
 
-压缩：tar -czf some.tar.gz file1 file2 folder1/*
-解压：tar -xzf some.tar.gz
+* 参考
+  * <https://askubuntu.com/questions/168795/how-do-i-extract-a-specific-file-from-a-tar-archive>
 
+~~~sh
+#压缩
+tar -czf some.tar.gz file1 file2 folder1/*
 
-`--ignore-failed-read` Do not exit with nonzero on unreadable files.
+#解压
+tar -xzf some.tar.gz
 
---ignore-command-error
+# 解压某个文件/文件夹
+tar -xzf some.tar.gz ./some/folder/or/file
+~~~
 
-       Ignore subprocess exit codes.
-
+~~~
+--ignore-failed-read           Do not exit with nonzero on unreadable files.
+--ignore-command-error         Ignore subprocess exit codes.
+~~~
 
 显示压缩进度
 
@@ -54,6 +62,12 @@ tar cf - paths-to-archive | pigz -9 -p 32 > archive.tar.gz
 pigz -dc target.tar.gz | tar xf -
 
 pigz -p 8 -dc wechat2.tgz | tar xf -
+
+
+
+
+
+
 
 ## xz
 
@@ -216,14 +230,27 @@ sudo pacman -S p7zip
 
 ### 压缩
 
-```shell
+~~~sh
 7z a target-name.7z target-dir/
 
-# -mx=1 最快压缩
+# -mx=1 最快压缩 -mmt=线程数
 7z a -mx=1 -mmt=6  -m0=LZMA2 target-name.7z target-file1 target-file2
-```
+~~~
 
 ### 其他技巧
+
+#### 使用密码
+
+* 参考
+  * <https://stackoverflow.com/a/28160425>
+
+~~~sh
+# 压缩
+7z a secure.7z * -pSECRET
+
+# 解压，按照提示输入密码即可
+7z x secure.7z
+~~~
 
 #### 对目录下的子文件逐个压缩
 
