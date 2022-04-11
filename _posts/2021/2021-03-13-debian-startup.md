@@ -18,8 +18,19 @@ tags: [debian, stretch]
 
 * [Debian CDs/DVDs archive](https://cdimage.debian.org/cdimage/archive/)
 * [Debian 9.13 - stretch](https://cdimage.debian.org/cdimage/archive/9.13.0/)
+* [Debian current live - amd64 - bt](https://cdimage.debian.org/debian-cd/current-live/amd64/bt-hybrid/)
 * []()
-* []()
+
+## Debian 当前版本查看
+
+
+* 参考： 
+    * [Check what Debian version you are running on your Linux system](https://www.hillhost.net/ua/knowledgebase/42/Check-what-Debian-version-you-are-running-on-your-Linux-system.html)
+    * []()
+
+~~~sh
+cat /etc/debian_version
+~~~
 
 ## Debian 各版本Codename
 
