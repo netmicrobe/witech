@@ -18,7 +18,7 @@ tags: []
 
 * [Debian CDs/DVDs archive](https://cdimage.debian.org/cdimage/archive/)
 * [debian-11.3.0-amd64-netinst.iso](https://laotzu.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso)
-* []()
+* [debian-11.3.0 bt 下载](https://cdimage.debian.org/debian-cd/current-live/amd64/bt-hybrid/)
 * [debian-live-11.2.0-amd64-xfce.iso](https://gemmei.ftp.acc.umu.se/cdimage/archive/11.2.0-live/amd64/iso-hybrid/debian-live-11.2.0-amd64-xfce.iso)
 * []()
 
