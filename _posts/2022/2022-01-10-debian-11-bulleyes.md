@@ -152,15 +152,55 @@ deb-src https://mirrors.ustc.edu.cn/debian-security/ bullseye-security main cont
 
 
 
+## As a Server
 
+### 安装 openssh
 
+~~~sh
+sudo apt install openssh-server
 
+sudo systemctl start ssh
+sudo systemctl enable ssh
+~~~
 
+### 安装 Oracle mysql
 
+去 Oracle 网站下载，下载要登录帐号， <https://dev.mysql.com/downloads/repo/apt/>
 
+~~~sh
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.18-1_all.deb
 
+# 出现图形界面后，选择 Server，不要选择 cluster
 
+# 安装
+sudo apt update
+sudo apt install mysql-common mysql-server
+~~~
 
+### 安装 rvm
+
+~~~sh
+sudo apt install gnupg gnupg2
+gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+
+\curl -sSL https://get.rvm.io | bash -s stable
+~~~
+
+* debian 11 无法 安装 2.3
+
+    ~~~
+    rvm install 2.3
+    ...
+    E: Package 'libssl1.0-dev' has no installation candidate
+    ~~~
+
+* 安装 2.4
+
+~~~sh
+rvm install 2.4
+rvm use 2.4 --default
+~~~
 
 
 
