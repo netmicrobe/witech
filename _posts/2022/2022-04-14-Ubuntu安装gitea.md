@@ -137,6 +137,34 @@ COMPRESSION_LEVEL = -1
 编辑 `custom/conf/app.ini`， `[service]` - `DISABLE_REGISTRATION` 设置为 true
 
 
+### LFS 支持
+
+* <https://docs.gitea.io/en-us/git-lfs-setup/>
+* <https://docs.gitea.io/en-us/config-cheat-sheet/#lfs-lfs>
+
+1. 修改 `app.ini`
+~~~
+[server]
+; Enables git-lfs support. true or false, default is false.
+LFS_START_SERVER = true
+
+[lfs]
+STORAGE_TYPE = local
+; Where your lfs files reside, default is data/lfs.
+PATH = /home/gitea/data/lfs
+~~~
+
+`[server]` - `LFS_CONTENT_PATH`: %(APP_DATA_PATH)/lfs: Default LFS content path. (if it is on local storage.) DEPRECATED use settings in `[lfs]`.
+
+`[lfs]` - `PATH`: ./data/lfs: Where to store LFS files, only available when STORAGE_TYPE is local. If not set it fall back to deprecated `LFS_CONTENT_PATH` value in `[server]` section.
+
+1. 重启 `sudo systemctl restart gitea.service`
+1. 
+1. 
+1. 
+1. 
+
+
 ## 问题
 
 ### 创建repo时候报错： exit status 128 - fatal: unsafe repository, directory is owned by someone else
@@ -165,11 +193,23 @@ To add an exception for this directory, call:
 
 
 
+### 报错： 
 
 
+~~~
+Remote "home" does not support the Git LFS locking API. Consider disabling it with:
+  $ git config lfs.https://192.168.1.88/myname/drug_instruction.git/info/lfs.locksverify false
+batch response: Post "http://192.168.1.88:12300/myname/drug_instruction.git/info/lfs/objects/batch": dial tcp 192.168.1.88:12300: connect: connection refused
+error: failed to push some refs to 'ssh://192.168.1.88:57112/myname/drug_instruction.git'
+~~~
 
-
-
+~~~
+$ git push -u home master
+Remote "home" does not support the Git LFS locking API. Consider disabling it with:
+  $ git config lfs.https://121.199.165.36/speedio/drug_instruction.git/info/lfs.locksverify false
+batch request: Gitea: Invalid repo name: exit status 1                                       
+error: failed to push some refs to 'ssh://121.199.165.36:57112/speedio/drug_instruction.git'
+~~~
 
 
 
