@@ -24,6 +24,11 @@ dpkg --info google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ~~~
 
+以root用户运行，会提示无法运行：
+~~~
+running as root without --no-sandbox is not supported. see https://crbug.com/638180
+~~~
+
 ## Windows
 
 Windows 系统下访问如下地址，可下载离线安装包
