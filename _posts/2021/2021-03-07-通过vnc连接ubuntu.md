@@ -73,6 +73,12 @@ tags: [realvnc]
 1. 
 1. 
 
+### ufw 开启 5901 端口
+
+~~~sh
+sudo ufw allow 5901
+sudo ufw status
+~~~
 
 ### vncserver 自启动
 
@@ -101,8 +107,15 @@ ExecStop=/usr/bin/vncserver -kill :%i
 WantedBy=multi-user.target
 ~~~
 
-1. 
-1. 
+1. 启动测试
+~~~sh
+sudo systemctl daemon-reload
+sudo systemctl start vncserver@1.service
+~~~
+1. 开机自启动
+~~~sh
+sudo systemctl enable vncserver@1.service
+~~~
 1. 
 1. 
 1. 
@@ -133,7 +146,13 @@ vnc 本身不支持安全连接，所以在本地做了一个ssh tunnel
 
 
 
+## google-chrome-stable 启动，整个窗口都是粉色
 
+~~~
+ERROR:sandbox_linux.cc InitializeSandbox() called with multiple threads in progress gpu-process
+ERROR:gpu_memory_buffer_support_x11.cc(44) dri3 extension not supported.
+Unsupported visual with rgb mask 0x7, 0x38, 0xc0. Please report this to https://crbug.com/1025266
+~~~
 
 
 
