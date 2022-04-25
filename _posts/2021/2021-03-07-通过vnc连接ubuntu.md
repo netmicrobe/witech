@@ -8,7 +8,7 @@ tags: [realvnc]
 * 参考： 
     * [Ubuntu 16.04 VMWare Install and Remote Desktop Setup](https://www.youtube.com/watch?v=NaI6lB87HM0)
     * [How to Use Remote Desktop Connection in Ubuntu Linux: Complete Walkthrough](https://www.nakivo.com/blog/how-to-use-remote-desktop-connection-ubuntu-linux-walkthrough/)
-    * []()
+    * [Ubuntu VPS配置轻量级图形桌面LXDE和VNC](https://www.lijiejie.com/ubuntu-vps-config-lxde-vnc/)
     * []()
 
 
@@ -95,7 +95,7 @@ tags: [realvnc]
 1. 安装
 
 ~~~sh
-sudo apt -y install tightvncserver xfonts-base xorg lxde-core autocutsel
+sudo apt -y install tightvncserver tigervnc-common xfonts-base xorg lxde-core autocutsel
 
 # Initialize VNC server for the first time to create the config file
 vncserver :1
@@ -112,6 +112,7 @@ xrdb $HOME/.Xresources
 xsetroot -solid grey
 export XKL_XMODMAP_DISABLE=1
 
+autocutsel -fork
 lxterminal &
 /usr/bin/lxsession -s LXDE &
 ~~~
@@ -238,6 +239,69 @@ sudo ufw status
 1. 
 1. 
 1. 
+
+
+### 支持剪贴板
+
+* 参考
+    * [autocutsel worked for me](https://askubuntu.com/a/754420)
+    * [How can I copy/paste data to and from the Windows clipboard to an OpenSuse clipboard using VNC?](https://unix.stackexchange.com/questions/35030/how-can-i-copy-paste-data-to-and-from-the-windows-clipboard-to-an-opensuse-clipb)
+    * []()
+
+
+#### 使用 autocutsel
+
+1. 安装
+    ~~~
+    sudo apt-get install autocutsel
+    ~~~
+
+1. 编辑 `~/.vnc/xstartup`
+
+    在session命令前面添加： `autocutsel -fork`
+
+    比如：
+
+    * for LXTE
+        ~~~
+        ... ...
+
+        autocutsel -fork
+        lxterminal &
+        /usr/bin/lxsession -s LXDE &
+        ~~~
+
+    * for Xfce4
+
+        ~~~
+        ... ...
+        autocutsel -fork  
+        startxfce4 & 
+        ~~~
+
+1. 重启 vncserver
+1. 在client 主机，例如，manjaro kde，Ctrl + Shift + c 拷贝
+1. 到 vnc viewer 中 Ctrl + Shift + v 粘帖
+
+
+**注意** 目前存在拷贝中文，变成乱码的问题。 暂时可以创建个包含中文的文件，然后vnc viewer里面打开。
+
+
+### 中文支持
+
+* 参考
+    * [Ubuntu配置图形桌面LXDE和VNC、中文语言包、中文输入法](https://www.cxyzjd.com/article/weixin_34289454/93689592)
+    * [Ubuntu VPS配置轻量级图形桌面LXDE和VNC](https://www.lijiejie.com/ubuntu-vps-config-lxde-vnc/)
+    * [Linux VPS Debian安装LXDE+VNC桌面 附配Firefox浏览器及简体中文](https://www.laozuo.org/2932.html#%E7%AC%AC%E4%B8%83%E3%80%81%E5%AE%89%E8%A3%85Firefox%E5%8F%8A%E6%94%AF%E6%8C%81%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+    * [Debian或Ubantu系统安装LXDE+VNC桌面环境教程](http://wp.jinxiart.com/post/52.html)
+    * [Ubuntu VPS配置轻量级图形桌面LXDE和VNC](https://www.lijiejie.com/ubuntu-vps-config-lxde-vnc/)
+    * []()
+    * []()
+
+
+
+
+
 
 
 
