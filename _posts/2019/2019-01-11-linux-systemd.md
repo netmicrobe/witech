@@ -1,6 +1,6 @@
 ---
 layout: post
-title: systemd manage deamon service， 使用systemd / systemctl 管理后台服务
+title: 使用systemd / systemctl 管理后台服务，关联 runlevel, service, daemon, init.d
 categories: [ cm, linux ]
 tags: []
 ---
@@ -65,6 +65,18 @@ ln -sf /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 # Switch to runlevel 5 by default
 ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 ~~~
+
+Ubuntu 20.04 上没找到文件 `/etc/systemd/system/default.target`
+
+~~~sh
+# 查看默认启动target
+root# systemctl get-default
+graphical.target
+
+# 查看默认启动target
+root# systemctl set-default multi-user.target
+~~~
+
 
 ### 切换当前运行的runlevel
 

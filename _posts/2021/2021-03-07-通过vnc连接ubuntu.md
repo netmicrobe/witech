@@ -17,19 +17,23 @@ tags: [realvnc]
 
 * 参考： 
     * [digitalocean.com - How to Install and Configure VNC on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-20-04)
+    * [Install and Configure VNC Server on Ubuntu 20.04|18.04](https://techviewleo.com/install-and-configure-vnc-server-on-ubuntu/)
+    * [VNC server on Ubuntu 20.04 Focal Fossa Linux](https://linuxconfig.org/vnc-server-on-ubuntu-20-04-focal-fossa-linux)
+    * [Ubuntu 20.04 Remote Desktop Access with VNC](https://www.answertopia.com/ubuntu/ubuntu-remote-desktop-access-with-vnc/)
+    * [How to Install TightVNC Server on Ubuntu 20.04](https://serverspace.io/support/help/install-tightvnc-server-on-ubuntu-20-04/)
     * []()
-    * []()
-    * []()
-    * []()
-    * []()
+
+### xfce4 desktop
 
 1. 安装 xfce4 desktop + vnc server
     ~~~sh
     sudo apt update
 
-    # 安装 xfce4 桌面，选择 gdm3? lightdm?
+    # 安装 xfce4 桌面，选择 lightdm
     sudo apt install xfce4 xfce4-goodies
+    ~~~
 
+    ~~~sh
     # 安装 vnc server
     sudo apt install tightvncserver
     ~~~
@@ -57,11 +61,12 @@ tags: [realvnc]
 
     然后，修改：
 
-    ~~~
-    #!/bin/bash
-    xrdb $HOME/.Xresources
-    startxfce4 &
-    ~~~
+    * For xfce4 desktop environment:
+        ~~~
+        #!/bin/bash
+        xrdb $HOME/.Xresources
+        startxfce4 &
+        ~~~
 
     * 第一行命令 `xrdb $HOME/.Xresources`, tells VNC’s GUI framework to read the server user’s .Xresources file. `.Xresources` is where a user can make changes to certain settings of the graphical desktop, like terminal colors, cursor themes, and font rendering. 
     * 第二行命令 `startxfce4 &` tells the server to launch Xfce. Whenever you start or restart the VNC server, these commands will execute automatically.
@@ -72,6 +77,120 @@ tags: [realvnc]
 1. 使用 vnc viewer 访问 server-ip:5901 ，输入密码就可以进入了
 1. 
 1. 
+
+
+### lxde desktop
+
+* 参考
+    * [Ubuntu 20.04 安装 Tigervncserver](https://bevisy.github.io/p/install-tigervncserver-on-ubuntu-20.04/)
+    * [Linux: Use Lubuntu 20.04, TightVNC Server, NoVNC, WebSockify to Create a Terminal Server Accessible via Any Browser!](https://kimconnect.com/linux-use-lubuntu-20-04-tightvnc-server-novnc-websockify-to-create-a-terminal-server-accessible-via-any-browser/)
+    * []()
+    * []()
+    * []()
+    * []()
+    * []()
+    * []()
+
+
+1. 安装
+
+~~~sh
+sudo apt -y install tightvncserver xfonts-base xorg lxde-core autocutsel
+
+# Initialize VNC server for the first time to create the config file
+vncserver :1
+vncserver -kill :1
+~~~~
+
+1. 配置 `vim /home/$(whoami)/.vnc/xstartup`
+
+~~~sh
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+export XKL_XMODMAP_DISABLE=1
+
+lxterminal &
+/usr/bin/lxsession -s LXDE &
+~~~
+
+~~~sh
+sudo chmod +x /home/$(whoami)/.vnc/xstartup
+  
+# Configure firewall to allow port 5901
+sudo ufw allow from any to any port 5901 proto tcp
+~~~
+
+1. 启动
+
+~~~sh
+# Restart session 1
+sessionId=1
+vncserver -kill :$sessionId
+rm -f /tmp/.X$sessionId-lock
+rm -f /tmp/.X11-unix/X$sessionId
+vncserver :$sessionId -geometry 1920x1080 -depth 16 -pixelformat rgb565
+~~~
+
+
+
+
+
+
+
+
+
+
+
+### gnome desktop
+
+* 参考： 
+    * [Install VNC Server on Ubuntu 20.04 | 18.04 LTS to access GNOME](https://www.how2shout.com/linux/install-vnc-server-on-ubuntu-20-04-18-04-lts-to-access-gnome/)
+    * [Using VNC to Operate a Desktop on Ubuntu 18.04](https://hustakin.github.io/bestpractice/setup-vncserver-for-ubuntu/)
+    * [Use VNC to build GUIs on Ubuntu 18.04 and 20.04](https://www.alibabacloud.com/help/en/simple-application-server/latest/use-vnc-to-build-guis-on-ubuntu-18-04-and-20-04)
+    * [How to Create a Virtual (Headless) TigerVNC Server on Ubuntu 20.04](https://www.sproutworkshop.com/2021/04/how-to-create-a-virtual-headless-tigervnc-server-on-ubuntu-20-04/)
+    * []()
+
+总结： gnome 的效果差，运行速度慢，不建议使用。
+
+1. 安装
+    ~~~sh
+    sudo apt update
+    sudo apt install tigervnc-standalone-server tigervnc-xorg-extension 
+    sudo apt install xserver-xorg-core
+    sudo apt install ubuntu-gnome-desktop
+    sudo systemctl start gdm
+
+    # 设置vnc passwd
+    vncpasswd
+
+    # 第一次运行 vnc server
+    vncserver
+    # 关闭
+    vncserver -kill :*
+    ~~~
+
+1. 配置
+
+    `cat ~/.vnc/xstartup`
+
+    ~~~
+    #!/bin/sh 
+    [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+    [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+    vncconfig -iconic &
+    dbus-launch --exit-with-session gnome-session &
+    ~~~
+
+    `sudo chmod +x ~/.vnc/xstartup`
+
+1. 启动
+
+    `vncserver -localhost no -geometry 800x600 -depth 24`
+    注意 `localhost no` 没加的话，默认就是 `localhost yes` ，无法被网络上其他主机访问，只能localhost访问。
+
 
 ### ufw 开启 5901 端口
 
@@ -84,38 +203,38 @@ sudo ufw status
 
 1. 创建 `/etc/systemd/system/vncserver@.service`
 
-* User, Group, WorkingDirectory,PIDFILE 都要改成你自己的用户名、用户组和用户目录
-* ExecStart 里面，如果不使用ssh tunnel ，那么，要删除掉 -localhost
+    * User, Group, WorkingDirectory,PIDFILE 都要改成你自己的用户名、用户组和用户目录
+    * ExecStart 里面，如果不使用ssh tunnel ，那么，要删除掉 -localhost
 
-~~~
-[Unit]
-Description=Start TightVNC server at startup
-After=syslog.target network.target
+    ~~~
+    [Unit]
+    Description=Start TightVNC server at startup
+    After=syslog.target network.target
 
-[Service]
-Type=forking
-User=sammy
-Group=sammy
-WorkingDirectory=/home/sammy
+    [Service]
+    Type=forking
+    User=sammy
+    Group=sammy
+    WorkingDirectory=/home/sammy
 
-PIDFile=/home/sammy/.vnc/%H:%i.pid
-ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
-ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 -localhost :%i
-ExecStop=/usr/bin/vncserver -kill :%i
+    PIDFile=/home/sammy/.vnc/%H:%i.pid
+    ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
+    ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 -localhost :%i
+    ExecStop=/usr/bin/vncserver -kill :%i
 
-[Install]
-WantedBy=multi-user.target
-~~~
+    [Install]
+    WantedBy=multi-user.target
+    ~~~
 
 1. 启动测试
-~~~sh
-sudo systemctl daemon-reload
-sudo systemctl start vncserver@1.service
-~~~
+    ~~~sh
+    sudo systemctl daemon-reload
+    sudo systemctl start vncserver@1.service
+    ~~~
 1. 开机自启动
-~~~sh
-sudo systemctl enable vncserver@1.service
-~~~
+    ~~~sh
+    sudo systemctl enable vncserver@1.service
+    ~~~
 1. 
 1. 
 1. 
