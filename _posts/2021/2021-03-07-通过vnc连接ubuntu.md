@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 通过vnc连接ubuntu
+title: 通过vnc连接linux，关联 ubuntu, debian, realvnc, tigervnc, vnc-viewer
 categories: [cm, linux]
-tags: [realvnc]
+tags: []
 ---
 
 * 参考： 
@@ -220,7 +220,7 @@ sudo ufw status
 
     PIDFile=/home/sammy/.vnc/%H:%i.pid
     ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
-    ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 -localhost :%i
+    ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 -localhost no :%i
     ExecStop=/usr/bin/vncserver -kill :%i
 
     [Install]
@@ -372,18 +372,64 @@ Unsupported visual with rgb mask 0x7, 0x38, 0xc0. Please report this to https://
 
 
 
+## Debian 上安装VNC Server
+
+* 参考
+    * [How To Install TigerVNC on Debian 11](https://atetux.com/how-to-install-tigervnc-on-debian-11)
+    * [How to Install VNC Server on Debian 11](https://www.howtoforge.com/how-to-install-vnc-server-on-debian-11/)
+    * [Install and Configure VNC server on Debian 11](https://itnixpro.com/install-and-configure-vnc-server-on-debian-11/)
+    * [How to Install and Configure VNC on Debian 9](https://linuxize.com/post/how-to-install-and-configure-vnc-on-debian-9/)
+    * [How to Install and Configure VNC on Debian 10](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-debian-10)
+    * [Desktop Environment : Configure VNC Server](https://www.server-world.info/en/note?os=Debian_11&p=desktop&f=6)
+    * [How To Install VNC Server on Debian 11](https://idroot.us/install-vnc-server-debian-11/)
+    * [Install and Configure TigerVNC VNC Server on Debian 11/10](https://computingforgeeks.com/install-and-configure-tigervnc-vnc-server-on-debian/)
+    * []()
+    * []()
+    * []()
+    * []()
 
 
+1. 安装
+    ~~~sh
+    # Install XFCE 4
+    sudo apt install xfce4 xfce4-goodies dbus-x11 -y
 
+    # Install TigerVNC Server
+    sudo apt install tigervnc-standalone-server -y
 
+    # VNC 配置密码
+    vncpasswd
 
+    # 首次启动、关闭，以生成 xstartup 配置文件
+    vncserver
+    vncserver -kill :1
+    ~~~
 
+1. 配置 ~/.vnc/xstartup
 
+    ~~~sh
+    #!/bin/sh
+    unset SESSION_MANAGER
+    unset DBUS_SESSION_BUS_ADDRESS
+    exec /bin/sh /etc/xdg/xfce4/xinitrc
+    ~~~
 
+1. 启动 vncserver
 
+    ~~~sh
+    # 命令行启动
+    vncserver -localhost no
 
+    # 检查开启的端口是否有 vnc 5901
+    ss -tunlp | grep vnc
+    ~~~
 
+1. vnc 客户端访问 ip:5901 来连接
 
+    ~~~
+    # tigervnc viewer
+    sudo apt install tigervnc-viewer -y
+    ~~~
 
 
 

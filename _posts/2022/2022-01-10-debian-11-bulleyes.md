@@ -1,6 +1,6 @@
 ---
 layout: post
-title: debian 10 / buster 使用
+title: debian 11 / bullseye 使用
 categories: [cm, linux]
 tags: []
 ---
