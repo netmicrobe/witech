@@ -1,6 +1,6 @@
 ---
 layout: post
-title: linux-permission-denied-问题
+title: linux-permission-denied-问题，关联 mount, remount, cdrom
 categories: [cm, linux]
 tags: []
 ---
