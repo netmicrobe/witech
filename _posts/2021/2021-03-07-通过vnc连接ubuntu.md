@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 通过vnc连接linux，关联 ubuntu, debian, realvnc, tigervnc, vnc-viewer
+title: 通过vnc连接linux，关联 ubuntu, debian, realvnc, tigervnc, vnc-viewer, vncserver
 categories: [cm, linux]
 tags: []
 ---
