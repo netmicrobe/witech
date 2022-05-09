@@ -41,6 +41,16 @@ efibootmgr -c -d /dev/sda -p 2 -L "Gentoo" -l '\efi\boot\bootx64.efi'
 ~~~
 
 
+* 删除 boot 项
+
+~~~sh
+# 找到 boot entry 编号
+efibootmgr
+
+# 删除对应编号的boot entry
+# 比如，sudo efibootmgr -b E -B to remove the Boot000E entry.
+efibootmgr -b 编号 -B
+~~~
 
 
 
