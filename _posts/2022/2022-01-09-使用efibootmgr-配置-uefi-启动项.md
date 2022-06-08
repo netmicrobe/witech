@@ -8,7 +8,7 @@ tags: []
 * 参考： 
     * [UEFI 与Linux基础：一_cgm88s的专栏-程序员宝宝_linux uefi](https://www.cxybb.com/article/cgm88s/91830509)
     * [Gentoo wiki - Efibootmgr](https://wiki.gentoo.org/wiki/Efibootmgr)
-    * []()
+    * [Efibootmgr + nvme: How to create entry with custom label](https://ask.fedoraproject.org/t/efibootmgr-nvme-how-to-create-entry-with-custom-label/19757/2)
     * []()
     * []()
     * []()
@@ -38,6 +38,9 @@ find . -type f -name "*.efi"
 # 创建启动项 -----------
 # 创建从 /dev/sda 第二个分区 启动，启动项lable 为 Gentoo
 efibootmgr -c -d /dev/sda -p 2 -L "Gentoo" -l '\efi\boot\bootx64.efi'
+
+# nvme 上创建启动项的例子
+efibootmgr -c -d /dev/nvme0n1p5 -p 1 -L "manjaro" -l '\efi\manjaro\grubx64.efi'
 ~~~
 
 
@@ -51,7 +54,6 @@ efibootmgr
 # 比如，sudo efibootmgr -b E -B to remove the Boot000E entry.
 efibootmgr -b 编号 -B
 ~~~
-
 
 
 
