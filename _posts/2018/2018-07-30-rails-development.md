@@ -88,6 +88,9 @@ CONTROLLER=users bundle exec rake routes
 
 ## 命令行工具
 
+* [rubyonrails.org - The Rails Command Line](https://guides.rubyonrails.org/command_line.html)
+
+
 ### 自动生成CRUD
 
 ~~~ shell
@@ -95,6 +98,19 @@ CONTROLLER=users bundle exec rake routes
 bundle exec rails generate scaffold XcJtag name:string color:string
 ~~~
 
+### 生成 controller
+
+* 语法
+
+~~~
+bin/rails generate controller NAME [action action] [options]
+~~~
+
+* 例子
+
+~~~
+bin/rails generate controller CreditCards open debit credit close
+~~~
 
 
 ## database migration
