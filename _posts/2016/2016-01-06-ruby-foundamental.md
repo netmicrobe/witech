@@ -138,6 +138,35 @@ produces:
 ["but", "i", "didn't", "inhale", "he", "said", "emphatically"]
 ```
 
+#### start_with?  字符串以什么开头
+
+~~~ruby
+puts 'abcdefg'.start_with?('abc')  #=> true
+
+# 可以接受多个参数
+'abcdefg'.start_with?( 'xyz', 'opq', 'ab')
+~~~
+
+#### 检查字符串是否为空？  - string.blank?
+
+~~~ruby
+a = nil
+b = []
+c = ""
+c1 = "   "
+
+a.blank? #=> true
+b.blank? #=> true
+c.blank? #=> true
+c1.blank? #=> true
+
+d = "1"
+e = ["1"]
+
+d.blank? #=> false
+e.blank? #=> false
+~~~
+
 
 ### here document
 
