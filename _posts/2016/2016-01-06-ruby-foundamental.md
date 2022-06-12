@@ -83,7 +83,7 @@ end
 50.step(80, 5) {|i| print i, " " }
 ```
 
-## 字符串
+## 字符串 String
 
 单引号和双引号都行： 'string-literals-in-single-quotation'  "string-literals-in-double-quotation"
 还可以用 %q , %Q或%
@@ -217,6 +217,25 @@ end
 produces:
 #<struct Song title="Wonderful World", name="Louis Armstrong", length=178>
 ```
+
+### 字符串中搜索 include?
+
+~~~ruby
+my_string = "abcdefg"
+if my_string.include? "cde"
+   puts "String includes 'cde'"
+end
+~~~
+
+
+
+
+
+
+
+
+
+
 
 ## 数组
 
@@ -544,6 +563,16 @@ newline = line.gsub( /Perl|Python/ , 'Ruby')
 
 
 
+## 时间
+
+* 获取时间戳
+
+~~~ruby
+require 'date'
+
+p DateTime.now.strftime('%s') # "1384526946" (seconds)
+p DateTime.now.strftime('%Q') # "1384526946523" (milliseconds)
+~~~
 
 
 
