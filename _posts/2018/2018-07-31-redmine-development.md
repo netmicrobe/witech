@@ -54,9 +54,16 @@ issue.description = "Issue body"
 issue.save
 ~~~
 
+### 访问issue的 自定义属性的值 / custom_field value
 
+可以在 models/issue.rb 里面添加一个方法：
 
-
+~~~ruby
+def get_custom_field_value_by_name(cvname)
+  cfv = self.custom_field_values.detect{ |c| c.custom_field.name == cvname }
+  cfv.value
+end
+~~~
 
 ## 添加新的查询过滤器到Redmine的issue查询界面
 

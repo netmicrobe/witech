@@ -10,6 +10,9 @@ tags: [ rails, rake, scaffold, command ]
 * 参考
   * [Ruby on Rails Guides (v4.2.10)](https://guides.rubyonrails.org/v4.2/)
   * [Active Record 基础](https://ruby-china.github.io/rails-guides/active_record_basics.html)
+  * []()
+  * []()
+  * []()
   
 ---
 
