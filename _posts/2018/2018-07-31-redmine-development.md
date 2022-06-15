@@ -65,6 +65,52 @@ def get_custom_field_value_by_name(cvname)
 end
 ~~~
 
+### 控制创建 issue 时，那些tracker 可选
+
+`helpers/issues_helper.rb` 中 `def trackers_options_for_select(issue)`
+
+
+
+
+## custom field 自定义属性
+
+### 给自定义属性添加更多的约束
+
+在 `models/custom_field.rb` 中的`def validate_custom_value(custom_value)`添加
+
+~~~ruby
+def validate_custom_value(custom_value)
+  # ... ...
+  # 假设自定义属性名字是 userGameId ，必须是唯一的
+  issue = custom_value.customized
+  if (issue.is_a? Issue) && (self.name == 'userGameId') && (issue.project.name == 'target-project-name') && (issue.tracker.name == 'target-tracker-name')
+
+    cv_exists = CustomValue.find_by(:custom_field_id => custom_value.custom_field.id, :value => value)
+
+    if cv_exists.present?
+      errs << "userGameId -- #{value} 已存在。"
+    end
+    
+  end
+  # ... ...
+end
+~~~
+
+### 依据自定义属性值查找Issue
+
+~~~ruby
+the_custom_field = IssueCustomField.find_by("name"=>"traker-name")
+cc_exists = Issue
+  .joins("INNER JOIN custom_values cv1 ON `cv1`.`customized_id` = issues.id and `cv1`.`customized_type` = 'Issue'")
+  .where("cv1.custom_field_id = #{the_custom_field.id} and cv1.value = '#{cc_issue.get_custom_field_value_by_name('traker-name')}'")
+  .take
+~~~
+
+
+
+
+
+
 ## 添加新的查询过滤器到Redmine的issue查询界面
 
 ### 在页面上能显示过滤器
