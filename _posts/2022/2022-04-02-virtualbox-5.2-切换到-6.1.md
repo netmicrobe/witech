@@ -16,7 +16,11 @@ tags: []
 1. 安装virtualbox
 
 ~~~sh
-sudo pacman -S virtualbox virtualbox-guest-iso virtualbox-host-dkms linux515-virtualbox-host-modules
+# 看下kernel 版本，下面选择 linux???-virtualbox-host-modules 要用
+uname -r
+
+# 安装
+sudo pacman -S virtualbox virtualbox-guest-iso linux515-virtualbox-host-modules
 yay -S virtualbox-ext-oracle
 ~~~
 
