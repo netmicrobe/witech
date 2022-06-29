@@ -167,6 +167,27 @@ d.blank? #=> false
 e.blank? #=> false
 ~~~
 
+#### 清除字符串中空格等不可见的格式字符 / strip / strip!
+
+* 参考
+    * <https://linuxhint.com/ruby-string-trim-whitespace/>
+
+~~~ruby
+puts "      \t \n first     ".strip # -> first
+puts " \r\n second\n ".strip # -> second
+puts "\f\v\r\n\t third".strip # - third
+~~~
+
+也可以用 `delete`
+
+~~~ruby
+str = " String ".delete(' ')
+puts str
+
+str = " \t \r \nString ".delete(" \t\r\n\ ")
+puts str
+~~~
+
 
 ### here document
 
@@ -529,6 +550,11 @@ end
 
 ## 正则表达式  Regular Expressions
 
+* 参考
+    * [Mastering Ruby Regular Expressions](https://www.rubyguides.com/2015/06/ruby-regex/)
+    * [Regexp](https://ruby-doc.org/core-2.4.0/Regexp.html)
+    * [Regular Expressions](http://ruby-for-beginners.rubymonstas.org/advanced/regular_expressions.html)
+
 /pattern/
 
 ### =~ 操作符
@@ -545,6 +571,21 @@ if line =~ /Perl|Python/
     puts "Scripting language mentioned: #{line}"
 end
 ```
+
+### match 方法
+
+~~~ruby
+2.3.7  > s = "202206"
+ => "202206" 
+2.3.7  > m = s.match(%r{(\d{4})(\d{2})})
+ => #<MatchData "202206" 1:"2022" 2:"06"> 
+2.3.7  > m[0]
+ => "202206" 
+2.3.7  > m[1]
+ => "2022" 
+2.3.7  > m[2]
+ => "06" 
+~~~
 
 ### 利用 regex 替换
 
@@ -574,9 +615,23 @@ p DateTime.now.strftime('%s') # "1384526946" (seconds)
 p DateTime.now.strftime('%Q') # "1384526946523" (milliseconds)
 ~~~
 
+* 从字符串生成 date 对象
 
+~~~ruby
+str = "Tue, 10 Aug 2010 01:20:19 +0400"
 
+# Date.parse 会忽略时间
+puts Date.parse str
 
+# Time.parse 是日期+时间
+puts Time.parse str
+~~~
+
+* 从时间生成字符串
+
+~~~ruby
+datetime.strftime('%Y-%m-%d %H:%M:%S')
+~~~
 
 
 

@@ -6,13 +6,13 @@ tags: []
 ---
 
 * 参考： 
+  * [github.com/rubyXL](https://github.com/weshatheleopard/rubyXL)
   * []()
   * []()
   * []()
-  * []()
-  * []()
-  * []()
-  * []()
+  * 各个Excel库评测对比
+    * [Parsing Excel Files with Ruby](https://spin.atomicobject.com/2017/03/22/parsing-excel-files-ruby/)
+    * [Faster Excel Parsing in Ruby](https://blog.schembri.me/post/faster-excel-parsing-in-ruby/)
   * []()
   * []()
   * []()
@@ -20,7 +20,7 @@ tags: []
   * []()
 
 
-### 遍历行 / row
+## 遍历行 / row
 
 * 从某行开始遍历，比如，ignore header line，即从第二行开始
 
@@ -39,7 +39,16 @@ end
 ~~~
 
 
-### 以列为数据对象的 excel ，生成 hash
+## 遍历 cell
+
+遍历一行中的cell，转换为数组
+
+~~~ruby
+sheet[0].cells.collect {|c| c.value}
+~~~
+
+
+## 以列为数据对象的 excel ，生成 hash
 
 ~~~ruby
 workbook = RubyXL::Parser.parse(xlsx_file_path)
