@@ -1,6 +1,6 @@
 ---
 layout: post
-title: endeavour-os-使用，关联 android 
+title: endeavour-os-使用，关联 android, fcitx5, virtualbox, remmina
 categories: [ cm, linux ]
 tags: []
 ---
@@ -36,11 +36,26 @@ tags: []
     udevadm trigger
     ~~~
 
+## Virtualbox
 
+~~~sh
+sudo pacman -S virtualbox virtualbox-ext-vnc virtualbox-guest-iso virtualbox-guest-utils virtualbox-host-dkms
+yay -S virtualbox-ext-oracle
+~~~
 
+## 中文输入法
 
+~~~sh
+sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-configtool fcitx5-gtk fcitx5-material-color fcitx5-nord fcitx5-qt
+~~~
 
+## 远程连接工具
 
+### remmina
+
+~~~sh
+yay -S remmina  remmina-plugin-rdesktop freerdp
+~~~
 
 
 

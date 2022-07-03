@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2021-10-28-远程访问manjaro（ssh、远程桌面）
+title: 远程访问manjaro（ssh、远程桌面）
 categories: [cm, linux]
 tags: [rdp, remmina, remote-desktop]
 ---
