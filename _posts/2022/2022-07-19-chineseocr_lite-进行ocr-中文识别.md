@@ -9,7 +9,7 @@ tags: []
   * [github.com - DayBreak-u/chineseocr_lite](https://github.com/DayBreak-u/chineseocr_lite)
   * [github.com - alisen39/TrWebOCR](https://github.com/alisen39/TrWebOCR)
   * [github.com - breezedeus/cnocr](https://github.com/breezedeus/cnocr)
-  * []()
+  * [6 个优秀的开源 OCR 光学字符识别工具](https://www.oschina.net/news/40027/6-opensource-ocr-tools)
   * []()
   * []()
 
