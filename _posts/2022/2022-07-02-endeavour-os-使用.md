@@ -131,8 +131,10 @@ sudo systemctl reboot
     ~~~
 
 
+### Kate
 
-
+* 字体设置 `Noto Mono`
+    Settings \> Configure Kate... \> Editor font
 
 
 
