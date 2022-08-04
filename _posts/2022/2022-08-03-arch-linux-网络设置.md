@@ -144,13 +144,40 @@ NetworkManager 是一个网络管理程序，用来侦测、自动配置链接�
 
 NetworkManager 开始是RedHat开发的，现在托管在 GNOME 项目。
 
+查看如何config： `man 5 NetworkManager.conf`
 
+config 文件： 
+* /etc/NetworkManager/NetworkManager.conf
+* /etc/NetworkManager/conf.d/name.conf
+* /run/NetworkManager/conf.d/name.conf
+* /usr/lib/NetworkManager/conf.d/name.conf
+* /var/lib/NetworkManager/NetworkManager-intern.conf
 
+`Wired connection 1.nmconnection` 文件在 `/etc/NetworkManager/system-connections/` 下找不到，有可能在 `/run/NetworkManager/system-connections/` 下。
 
+~~~
+[connection]
+id=Wired connection 1
+uuid=f3267ade-62ab-78cb-8430-a0cc625223e2
+type=ethernet
+autoconnect-priority=-999
+interface-name=eno1
+timestamp=1659577993
 
+[ethernet]
 
+[ipv4]
+method=auto
 
+[ipv6]
+addr-gen-mode=stable-privacy
+method=auto
 
+[proxy]
+
+[.nmmeta]
+nm-generated=true
+~~~
 
 
 
