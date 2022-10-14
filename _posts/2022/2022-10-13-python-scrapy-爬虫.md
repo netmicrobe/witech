@@ -38,14 +38,52 @@ tags: []
 * `[\u4E00-\u9FA5]` 中文字符
 
 
+## 深度优先和广度优先
+
+遍历网站的算法。
+
+深度优先，一般使用递归方法。
+
+~~~py
+def depth_tree(tree_node):
+    if tree_node is not None:
+      print(tree_note._data)
+      if tree_node._left is not None:
+         return depth_tree(tree_node._left)
+      if tree_node.right is not None:
+         return depth_tree(tree_node._right)
+~~~
+
+广度优先，使用队列的方法。
+
+~~~py
+def level_queue(root);
+    """利用队列实现树的广度优先遍历"""
+    if root is None:
+      return
+    my_queue = []
+    node = root
+    my_queue.append(node)
+    while my_queue:
+        node = my_queue.pop(0)
+        print(node.elem)
+    if node.lchild is not None:
+        my_queue.append(node.lchild)
+    if node.rchild is not None:
+        my_queue.append(node.rchild)
+~~~
 
 
+## url 去重的方法
 
-
-
-
-
-
+* url 保存到数据库中
+* url 保存到set 中
+    缺点： 太占内存
+* url 经过 md5 等方法哈希后保存到set 中
+    优点： 节省内存；scrapy 用的方法
+* 用 bitmap 方法，将url通过hash函数映射到某一位。
+* 
+* 
 
 
 
