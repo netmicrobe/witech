@@ -37,6 +37,21 @@ tags: []
 * `\W` 与 `\w` 相反
 * `[\u4E00-\u9FA5]` 中文字符
 
+~~~py
+import re
+match_re = re.match(r".*(\d+).*", target_str)
+if match_re:
+    print match_re.group(1)
+~~~
+
+
+## 常用字符串方法
+
+* replace(target, replacement)
+* strip() 清除空格、回车等字符。
+* 
+* 
+
 
 ## 深度优先和广度优先
 
@@ -82,18 +97,81 @@ def level_queue(root);
 * url 经过 md5 等方法哈希后保存到set 中
     优点： 节省内存；scrapy 用的方法
 * 用 bitmap 方法，将url通过hash函数映射到某一位。
-* 
-* 
 
 
+## xpath
+
+用来在 xml 和 html 中进行定位。
+
+* `article`   ： 选取所有 article 元素的所有子节点
+* `/article`  ： 选取根元素 article
+* `article/a` ： 选取所有属于 article 的子元素的 a 元素
+* `//div`     ： 选取所有div 子元素（不论出现在文档任何地方）
+* `article//div`  ： 选取所有属于 article 元素的后代的 div 元素，不管他在 article 之下的任何位置
+* `//@class`      ： 选取所有名为 class 的属性
+*  `/article/div[1]` ： 选取属于 article 子元素的第一个div 元素
+*  `/article/div[last()]`  ： 选取属于 article 子元素的最后一个 div元素
+*  `/article/div[last()-1]`： 选取属于 article 子元素的倒数第二个div 元素
+*  `//div[@lang]`          ： 选取所有拥有lang 属性的 div元素
+*  `//div[@lang='eng']`    ： 选取所有lang 属性为 eng 的 div 元素
+*  `//div[contains(@class, 'icon')]` ： 选取所有 div元素，它的class属性包含 icon 属性
+*  `/div/*` ： 选取属于 div 元素的所有子节点
+*  `//*` ： 选取所有元素
+*  `//div[@*]` ： 选取所有带属性的 div 元素
+*  `/div/a | //div/p` ： 选取所有div 元素的 a 和 p 元素
+*  `//span | //ul` ： 选取文档中的 span 和 url 元素
+*  `article/div/p | //span` ： 选取所有属于article 元素的div 元素的 p元素，以及文档中所有的span 元素。
 
 
+## scrapy 完成一个简单的爬虫项目
 
+安装scrapy：
 
+`pip install scrapy`
 
+创建scrapy 工程：
 
+`scrapy startproject YourSpiderProject`
 
+创建 spider 模板： 
 
+~~~
+cd YourSpiderProject
+scrapy genspider someblog www.someblog.com
+~~~
+
+* someblog.py
+
+~~~py
+import scrapy
+
+class SomeblogSpider(scrapy.Spider):
+    name = "someblog"
+    allowed_domains = ["www.someblog.com"]
+    start_urls = ["http://www.someblog.com"]
+    
+    def parse(self, response):
+        re_selector = response.xpath('/*[@id="1234"]/div[1]/h1/text()')
+        pass
+~~~
+
+## scrapy shell 模式
+
+~~~sh
+scrapy shell http://www.someblog.com
+~~~
+
+进入console后，可以使用 response
+
+~~~sh
+>>> title = response.xpath('/*[@id="1234"]/div[1]/h1/text()')
+
+>>> title.extract() # 将 selector 转换为一个数组
+
+>>> title.extract()[0]
+
+>>> title.xpath("//*")  # 继续搜索，下面所有的节点
+~~~
 
 
 
