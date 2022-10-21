@@ -123,6 +123,30 @@ def level_queue(root);
 *  `article/div/p | //span` ： 选取所有属于article 元素的div 元素的 p元素，以及文档中所有的span 元素。
 
 
+
+## CSS 选择器
+
+* `*` ： 所有节点
+* `#container` ： id 为 container 的节点
+* `.container` ： class 包含 container 的节点
+* `li a` ：  li 下的所有 a 节点
+* `ul + p` ： ul 后面的第一个 p 元素
+* `div#container > ul` ： id 为 container 的 div 的第一个 ul 子元素
+* `ul ~ p` ： 与 ul 相邻的所有 p 元素
+* `a[title]` ： 所有存在title 属性的 a 元素
+* `a[href="http://jobbole.com"]` ： 所有 href属性为 jobbole.com 的 a元素
+* `a[href*="jobbole"]` ： 所有href 属性包含 jobbole 的 a元素
+* `a[href^="http"]` ： 所有href 属性值以 http开头的 a元素
+* `a[href$=".jpg"]` ： 所有href 属性值以 .jpg 结尾的 a元素
+* `input[type=radio]:checked` ： 所有选中状态的radio 元素
+* `div:not(#container)` ： 所有id非container 的div元素
+* `li:nth-child(3)` ： 第三个li 元素
+* `tr:nth-child(2n)` ： 所有偶数序号的tr 元素
+* `` ： 
+* `` ： 
+
+
+
 ## scrapy 完成一个简单的爬虫项目
 
 安装scrapy：
