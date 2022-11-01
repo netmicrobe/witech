@@ -25,7 +25,11 @@ adb pull /data/app/com.sdu.didi.psnger-zSCS03i2itPZSSnYvVXlig==/base.apk .
 
 
 
+* 获取当前运行在前台的app 的 包名
 
+~~~sh
+adb shell dumpsys activity recents | grep 'Recent #0' | cut -d= -f2 | sed 's| .*||' | cut -d '/' -f1
+~~~
 
 
 
