@@ -11,7 +11,9 @@ tags: [manjaro, efi, boot]
   * []()
 
 
+## 查看下grub2信息
 
+查看grub2版本： `grub-install -V`
 
 ## 从 ubuntu 修复 manjaro
 
@@ -35,7 +37,10 @@ tags: [manjaro, efi, boot]
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck -v
     update-grub
     ~~~
-
+1. 如果报错 update-grub command not found，说明这个脚本在这个distro么有，直接使用实际命令：
+    ~~~sh
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+    ~~~
 
 ### `grub-install` 是提醒错误：`EFI variables are not supported on this system.`
 
