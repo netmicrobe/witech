@@ -7,6 +7,10 @@ tags: [ adb, fastboot, bootloader, root, unlock, twrp, xposed ]
 
 * 参考
   * [ OFFICIAL  Xposed for Lollipop/Marshmallow/Nougat/Oreo  v90-beta3, 2018/01/29  by rovo89](https://forum.xda-developers.com/showthread.php?t=3034811)
+  * [xda-developers.com - Xiaomi 机型专区](https://forum.xda-developers.com/c/xiaomi.12005/)
+  * []()
+  * []()
+  * []()
   * []()
 
 
@@ -73,10 +77,23 @@ CPU_ABI: armeabi-v7a
 
 
 
+## os ROM
 
+* [mokee - virgo](https://download.mokeedev.com/?device=virgo)
 
+### 刷机成功的例子
 
+#### mokee 7.1（Android 7.1.2） + OpenGApp Arm 7.1
 
+1. 进入 TWRP，依次刷入：
+    1. MK71.2-virgo-190228-HISTORY.zip
+    1. open_gapps-arm-7.1-pico-20220215.zip
+1. 重启，等好一会就进去了（中途不要联网检查更新，很慢）
+
+### 刷机失败的例子
+
+* mokee 10 + OpenGApp Arm 10
+    刷到OpenGapp的时候，提示存储空间不足。
 
 
 
