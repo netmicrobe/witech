@@ -1,8 +1,8 @@
 ---
 layout: post
-title: ubuntu-apt-包管理常用命令
+title: ubuntu-apt-包管理常用命令，关联 mint, debian, ubuntu, apt, dpkg-query, dpkg-deb, apt-file
 categories: [cm, linux]
-tags: [mint, debian, ubuntu, apt, dpkg-query, dpkg-deb, apt-file]
+tags: []
 ---
 
 * 参考： 
@@ -43,6 +43,8 @@ dpkg-deb -c <package_name.deb>
 
 # 查看deb包信息
 dpkg-deb -I some.deb
+# or
+dpkg-deb --info some.deb
 ~~~
 
 
