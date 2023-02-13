@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MX Linux 18.3/19.4 使用
+title: exfat-nofuse 安装使用
 categories: [cm, linux]
 tags: [fcitx, anti-linux]
 ---

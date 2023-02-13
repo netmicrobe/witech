@@ -93,7 +93,9 @@ tags: []
             See Help:[antiX Boot Parameters](https://antixlinuxfan.miraheze.org/wiki/Help:AntiX_Boot_Parameters) for a more complete list of Boot Parameters.
 
 
+### 19.4_ahs (patito feo)
 
+`/live/boot-dev/boot/grub/config/theme.cfg` 中 `set timeout=xx` 来设置grub启动菜单的timeout时间xx秒。
 
 
 
