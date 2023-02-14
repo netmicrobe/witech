@@ -10,8 +10,8 @@ tags: []
   * [github.com - alisen39/TrWebOCR](https://github.com/alisen39/TrWebOCR)
   * [github.com - breezedeus/cnocr](https://github.com/breezedeus/cnocr)
   * [6 个优秀的开源 OCR 光学字符识别工具](https://www.oschina.net/news/40027/6-opensource-ocr-tools)
-  * []()
-  * []()
+  * [docker部署chineseocr_lite实现图片文字识别](https://www.cuiwei.net/p/1052444754#/)
+  * [基于Ubuntu环境使用docker搭建对于中文识别的chineseocr_lite项目](https://blog.csdn.net/CHYabc123456hh/article/details/105891762)
 
 
 ## Windows 10 上使用
