@@ -8,7 +8,7 @@ tags: [ adb, fastboot, bootloader, root, unlock, twrp, xposed ]
 * 参考
   * [ OFFICIAL  Xposed for Lollipop/Marshmallow/Nougat/Oreo  v90-beta3, 2018/01/29  by rovo89](https://forum.xda-developers.com/showthread.php?t=3034811)
   * [xda-developers.com - Xiaomi 机型专区](https://forum.xda-developers.com/c/xiaomi.12005/)
-  * []()
+  * [8.1.0  Mi Note LTE/Pro  (Virgo/Leo) LineageOS15.1 Project  2017.12.14 ](https://forum.xda-developers.com/t/8-1-0-mi-note-lte-pro-virgo-leo-lineageos15-1-project-2017-12-14.3719175/)
   * []()
   * []()
   * []()
@@ -85,10 +85,37 @@ CPU_ABI: armeabi-v7a
 
 #### mokee 7.1（Android 7.1.2） + OpenGApp Arm 7.1
 
-1. 进入 TWRP，依次刷入：
+1. 进入 TWRP 3.1.1.0，依次刷入：
     1. MK71.2-virgo-190228-HISTORY.zip
     1. open_gapps-arm-7.1-pico-20220215.zip
 1. 重启，等好一会就进去了（中途不要联网检查更新，很慢）
+
+**注意！！！！** `不要恢复出厂设置，会线刷救砖收场`。
+
+
+#### mokee 8.1.0（Android 8.1.0） + OpenGApp Arm 8.1.0
+
+1. 进入 TWRP 3.1.1.0，依次刷入：
+    1. MK81.0-virgo-200215-HISTORY.zip
+    1. open_gapps-arm-8.1-pico-20220215.zip
+
+
+刷好进入系统，提示“Goolge语言服务停止”，确定后也没啥影响。
+
+要输入中文，得先联网，提示正在下载语言包。一会就能输入中文了。
+
+**注意！！！！** `adb connect 上去过会就断掉了`。
+
+#### lineage-15.1-20171212_100912-UNOFFICIAL-virgo.zip
+
+1. 进入 TWRP 3.1.1.0，依次刷入：
+    1. lineage-15.1-20171212_100912-UNOFFICIAL-virgo.zip
+
+没法安装Google 拼音输入法，不知道是不是应为没装 GApp和框架的原因。
+
+刷好进入系统，提示“Speech Services by Google has stopped”，确定后也没啥影响。
+
+lineage 15 based on Android 8.1
 
 ### 刷机失败的例子
 
