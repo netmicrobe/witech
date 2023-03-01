@@ -7,6 +7,7 @@ tags: []
 
 * 参考
   * [How to install KVM on CentOS 7 / RHEL 7 Headless Server](https://www.cyberciti.biz/faq/how-to-install-kvm-on-centos-7-rhel-7-headless-server/)
+  * [Linux Hypervisor Setup (libvirt/qemu/kvm)](https://joshrosso.com/c/linux-hypervisor-setup/)
   * []()
   * []()
   * []()
@@ -16,94 +17,93 @@ tags: []
   * []()
   * []()
   * []()
-  * []()
 
 
 
-检查是否支持虚拟化，不支持的话，重启去BIOS里面设置下
+1. 检查是否支持虚拟化，不支持的话，重启去BIOS里面设置下
 
-~~~sh
-lscpu | grep Virtualization
+    ~~~sh
+    lscpu | grep Virtualization
 
-Virtualization: VT-x
-~~~
+    Virtualization: VT-x
+    ~~~
 
-安装 KVM
+1. 安装 KVM
 
-~~~sh
-yum install qemu-kvm libvirt libvirt-python libguestfs-tools virt-install
-~~~
+    ~~~sh
+    yum install qemu-kvm libvirt libvirt-python libguestfs-tools virt-install
+    ~~~
 
-Start the libvirtd service:
+    Start the libvirtd service:
 
-~~~sh
-systemctl enable libvirtd
-systemctl start libvirtd
-~~~
+    ~~~sh
+    systemctl enable libvirtd
+    systemctl start libvirtd
+    ~~~
 
-Verify kvm installation
+    Verify kvm installation
 
-~~~sh
-# Make sure KVM module loaded
-lsmod | grep -i kvm
-~~~~
+    ~~~sh
+    # Make sure KVM module loaded
+    lsmod | grep -i kvm
+    ~~~~
 
-Configure bridged networking
+1. Configure bridged networking
 
-By default dhcpd based network bridge configured by libvirtd. 
+    By default dhcpd based network bridge configured by libvirtd. 
 
 
-`brctl show`
+    `brctl show`
 
-~~~
-bridge name     bridge id               STP enabled     interfaces
-virbr0          8000.525500b8fe2c       yes             virbr0-nic
-~~~
+    ~~~
+    bridge name     bridge id               STP enabled     interfaces
+    virbr0          8000.525500b8fe2c       yes             virbr0-nic
+    ~~~
 
-`virsh net-list`
+    `virsh net-list`
 
-~~~
- Name                 State      Autostart     Persistent
-----------------------------------------------------------
- default              active     yes           yes
-~~~
+    ~~~
+     Name                 State      Autostart     Persistent
+    ----------------------------------------------------------
+     default              active     yes           yes
+    ~~~
 
-All VMs (guest machine) only have network access to other VMs on the same server. A private network 192.168.122.0/24 created 
+    All VMs (guest machine) only have network access to other VMs on the same server. A private network 192.168.122.0/24 created 
 
-~~~sh
-virsh net-dumpxml default
-~~~
+    ~~~sh
+    virsh net-dumpxml default
+    ~~~
 
-If you want your VMs avilable to other servers on your LAN, setup a a network bridge on the server that connected to the your LAN. Update your nic config file such as ifcfg-enp3s0 or em1:
+    If you want your VMs avilable to other servers on your LAN, setup a a network bridge on the server that connected to the your LAN. Update your nic config file such as ifcfg-enp3s0 or em1:
 
-编辑 `/etc/sysconfig/network-scripts/enp3s0` ，添加 `BRIDGE=br0`
+    编辑 `/etc/sysconfig/network-scripts/enp3s0` ，添加 `BRIDGE=br0`
 
-编辑 `/etc/sysconfig/network-scripts/ifcfg-br0` ，添加：
+    编辑 `/etc/sysconfig/network-scripts/ifcfg-br0` ，添加：
 
-~~~
-DEVICE="br0"
-# I am getting ip from DHCP server #
-BOOTPROTO="dhcp"
-IPV6INIT="yes"
-IPV6_AUTOCONF="yes"
-ONBOOT="yes"
-TYPE="Bridge"
-DELAY="0"
-~~~
+    ~~~
+    DEVICE="br0"
+    # I am getting ip from DHCP server #
+    BOOTPROTO="dhcp"
+    IPV6INIT="yes"
+    IPV6_AUTOCONF="yes"
+    ONBOOT="yes"
+    TYPE="Bridge"
+    DELAY="0"
+    ~~~
 
-Restart the networking service (warning ssh command will disconnect, it is better to reboot
+    Restart the networking service (warning ssh command will disconnect, it is better to reboot
 
-~~~sh
-systemctl restart NetworkManager
-~~~
+    ~~~sh
+    systemctl restart NetworkManager
+    ~~~
 
-Verify it with brctl command: `brctl show`
+    Verify it with brctl command: `brctl show`
 
-~~~
-bridge name     bridge id               STP enabled     interfaces
-br0             8000.e0d55e4b60d1       no              enp0s31f6
-virbr0          8000.525500b8fe2c       yes             virbr0-nic
-~~~
+    ~~~
+    bridge name     bridge id               STP enabled     interfaces
+    br0             8000.e0d55e4b60d1       no              enp0s31f6
+    virbr0          8000.525500b8fe2c       yes             virbr0-nic
+    ~~~
 
 1. ======================================================
 
@@ -146,9 +146,31 @@ virbr0          8000.525500b8fe2c       yes             virbr0-nic
 1. vnc连上后，就会看到centos的安装UI界面，按照提示安装。
 1. centos安装完成后，重启完成，vnc可以连接上去，操作命令行登录，安装openssh后，使用ssh。
 1. qcow2 磁盘文件是逐步增长的，安装centos完成后，`/var/lib/libvirt/images/centos7-1.qcow2`的大小约 1.7G
-1. 
-1. 
-1. 
+
+1. ======================================================
+
+1. 列出所有虚拟机
+    ~~~sh
+    # virsh list --all
+     Id    Name                           State
+    ----------------------------------------------------
+     -     centos7-1                      shut off
+    ~~~
+
+1. 使用 `virsh start` 启动虚拟机
+    ~~~sh
+    virsh start centos7-1
+
+    virsh list --all
+     Id    Name                           State
+    ----------------------------------------------------
+     1     centos7-1                      running
+    ~~~
+
+1. 使用 `virsh shutdown` 关闭虚拟机
+    ~~~sh
+    virsh shutdown centos7-1
+    ~~~
 1. 
 1. 
 1. 
