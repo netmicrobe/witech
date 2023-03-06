@@ -217,7 +217,7 @@ tags: []
 1. 
 1. 
 1. 使用 virt-manager 安装 Windows 10 ==============================================
-
+    * [Spice 下载](https://www.spice-space.org/download.html)
 1. New VM
 1. Choose how you would like to install the operating system:
     勾选 Local install media(ISO image or CDROM)
@@ -270,8 +270,19 @@ tags: []
     硬盘驱动，`win10/amd64` 目录下
     网卡驱动， `NetKVM`目录下，我没装这个驱动，也正常的。
     显卡驱动， `qxldod`目录下，我没装这个驱动，也正常的。
+1. 接下来和不同安装 Windows 10 过程一样，直到安装完成，进入windows10
+1. 
+1. 安装 VirtIO guest tools ，会提高虚拟机Spice的性能和集成度。
+    包括qxl video driver and the SPICE guest agent (for copy and paste, automatic resolution switching, …)
+1. 进入 `virtio-win-0.1.229.iso` 挂载的盘符，运行根目录下的 `wirtio-win-guest-tools`
+1. 一路next，直到装好。
 1. 
 1. 
+1. 
+1. 
+1. 
+1. 
+
 
 
 
