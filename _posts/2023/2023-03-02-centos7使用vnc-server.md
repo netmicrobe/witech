@@ -98,7 +98,20 @@ tags: []
 
 
 
+## trouble shoting
 
+### vnc连接正常，但是显示蓝屏
+
+可能是 vnc server 桌面环境没装好。
+
+修复：
+1. vnc server 上安装 Gnome
+    ~~~
+    # 保险期间，2个命令都执行了一下
+    yum install gnome* --exclude=gnome-session-wayland-session
+    yum groupinstall "GNOME Desktop"
+    ~~~
+1. 重启宿主机
 
 
 

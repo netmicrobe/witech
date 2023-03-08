@@ -305,25 +305,35 @@ virt-clone \
 
 
 
+## 保存VM当前状态，host重启后也能恢复
+
+* refer
+    * <https://unix.stackexchange.com/a/533755>
 
 
+保存VM当前状态： `virsh managedsave <domain-name>`
+
+恢复： `virsh start <domain-name>`
+
+保存的状态文件位置： `/var/lib/libvirt/qemu/save/<domain-name>.save`
 
 
+* 执行 `managedsave` 的时候报错: `blocked by non-migratable device 0000:00:06.0/ich9_ahci`
 
+    ~~~
+    error: internal error: unable to execute QEMU command 'migrate': State blocked by non-migratable device '0000:00:06.0/ich9_ahci'
+    ~~~
 
+    据 proxmox 论坛的帖子 说： qemu 代码在 sata disk 的保存还是存在问题，不要缓存包含sata设备的VM。
 
+    解决方法： 删除 SATA 类型的硬盘，同时也要删除 SATA Controller
 
+    KVM 中一般使用 VirtIO 类型的硬盘，不用 SATA 也没啥关系。
 
-
-
-
-
-
-
-
-
-
-
+    * 参考：
+        * [proxmox 论坛的帖子 - State blocked by non-migratable device AHCI](https://forum.proxmox.com/threads/state-blocked-by-non-migratable-device-ahci.13480/)
+        * [Bug 1049259 - cannot migrate if SATA controller is present](https://bugzilla.redhat.com/show_bug.cgi?id=1049259)
+        * 
 
 
 
