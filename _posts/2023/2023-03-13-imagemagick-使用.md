@@ -6,8 +6,8 @@ tags: []
 ---
 
 * 参考
-  * []()
-  * []()
+  * [ImageMagick 与中文渲染问题](https://www.markjour.com/article/20190622-convert.html)
+  * [linux追加中文字库，解决imagemagick 中文乱码的问题。](https://www.cnblogs.com/dunkbird/p/5623209.html)
   * []()
   * []()
 
@@ -50,7 +50,7 @@ convert 1.pdf 2.pdf output.pdf
 
 
 
-## 批量操作
+### 批量操作
 
 ~~~sh
 # 将文件名生成第一个pdf
@@ -60,9 +60,19 @@ for f in * ; do [ -f "$f" ] && convert -font WenQuanYi-Zen-Hei -pointsize 12 lab
 ~~~
 
 
+### 压缩pdf
 
+用 convert 生成的 pdf 太大，要压缩下： 
 
+~~~sh
+# 安装
+sudo pacman -S ghostscript
 
+# 使用 ghostscript 压缩
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf
+~~~
+
+PS: Qt的pdf操作图形工具`qpdftools` ，也可以试试： `yay -S qpdftools`
 
 
 
