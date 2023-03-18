@@ -21,10 +21,86 @@ tags: []
     基带版本： Q_V1_p14,Q_V1_P14
     内核版本：  4.19.157-perf+
     硬件版本：  KB2005_11
-
+1. 确认DDR类型（是DDR4或DDR5）
+    1. 方法一： `adb shell getprop ro.boot.ddr_type` 或 `adb shell cat /proc/devinfo/ddr_type`
+        * On OOS 11 you can find the phone's DDR type using getprop ro.boot.ddr_type. A result of 0 means DDR4 and 1 means DDR5.
+        * On OOS 12 root之后，使用 `adb shell cat /proc/devinfo/ddr_type`
+            ~~~sh
+            cat /proc/devinfo/ddr_type
+            Device version:         DDR5
+            ~~~
+    1. 方法二： 
+        参考： <https://forum.xda-developers.com/t/ddr-type.4453647/post-86982049>
+        1. 拨号`*#800#` 打开 feedback app，选择 Other -\> Other general 
+        1. 按下开始搜集，提示是否重启时，选择继续（不重启）
+        1. 将sdcard上的日至拷贝出来
+        `adb pull /sdcard/Android/data/com.oplus.logkit/files/Log/<这个文件夹根据手机中实际情况>@other/recovery_log .`
+        1. 搜索ddr5 或 ddr4
+            `find . -type f | xargs grep --color -i 'ddr5\|ddr4'`
+        1. 出现如下字样估计是 ddr4
+            * `ddr_type is: Device version: DDR4`
+            * `ddr5 is false`
+            * `the ddr type of dev is ddr4`
+            * `is_ddr5 is 0 , partition name xbl_config_lp5 , target path /dev/null`
+            * `is_ddr5 is 0 , partition name xbl_lp5 , target path /dev/null`
+            * `is_ddr5 is 0 , partition name xbl_config , target path /dev/block/bootdevice/by-name/xbl_config_b`
+            * `is_ddr5 is 0 , partition name xbl , target path /dev/block/bootdevice/by-name/xbl_b`
+            * `Current system is non ddr5 and current partition is xbl_lp5, skip hash verification`
+            * `Current system is non ddr5 and current partition is xbl_config_lp5, skip hash verification`
+            * `update_attempter_android.cc(355)] ddr_type is: Device version: DDR4`
+    
+1. ==================================================================
 1. 确保使用 Android 13 Firmware
-1. 
+    1. 升级 firmware，参考： [Update firmware on kebab](https://wiki.lineageos.org/devices/kebab/fw_update)
+1. 获取最新OTA升级包
+    * 从 <https://t.me/OnePlusOTA> tg群中获取
+    * Google Play 下载 [Oxygen Updater](https://play.google.com/store/apps/details?id=com.arjanvlek.oxygenupdater&pli=1)
+        1. 安装到 Oneplus 8T 上，下载最新OTA升级包。
+        1. 下载好的升级包，就在 /sdcard/ 下面。
+1. 使用 [payload-dumper-go](https://github.com/ssut/payload-dumper-go) 提取OTA升级包中的文件。
+    参考： [How to extract img(boot.img, etc...) from payload.bin using payload-dumper-go](https://forum.xda-developers.com/t/guide-how-to-extract-img-boot-img-etc-from-payload-bin-using-payload-dumper-go.4468781/)
+    1. 从下载的OTA升级包（zip包）中解压出： payload.bin
+    1. 将 payload.bin 拷贝到 payload-dumper-go.exe 同目录
+    1. 执行： `payload-dumper-go.exe payload.bin`，会在目录上新建个目录，存放提取出来的img文件
+1. 进入 LineageOS recovery， “Advanced” -> “Enable ADB”
+1. Recovery -\> “Advanced” -\> “Enter fastboot”
+1. 电脑端使用命令刷img
+    ~~~sh
+    fastboot flash --slot=all abl abl.img
+    fastboot flash --slot=all aop aop.img
+    fastboot flash --slot=all bluetooth bluetooth.img
+    fastboot flash --slot=all cmnlib64 cmnlib64.img
+    fastboot flash --slot=all cmnlib cmnlib.img
+    fastboot flash --slot=all devcfg devcfg.img
+    fastboot flash --slot=all dsp dsp.img
+    fastboot flash --slot=all featenabler featenabler.img
+    fastboot flash --slot=all hyp hyp.img
+    fastboot flash --slot=all imagefv imagefv.img
+    fastboot flash --slot=all keymaster keymaster.img
+    fastboot flash --slot=all logo logo.img
+    fastboot flash --slot=all mdm_oem_stanvbk mdm_oem_stanvbk.img
+    fastboot flash --slot=all modem modem.img
+    fastboot flash --slot=all multiimgoem multiimgoem.img
+    fastboot flash --slot=all qupfw qupfw.img
+    fastboot flash --slot=all spunvm spunvm.img
+    fastboot flash --slot=all storsec storsec.img
+    fastboot flash --slot=all tz tz.img
+    fastboot flash --slot=all uefisecapp uefisecapp.img
+    ~~~
+1. 根据DDR类型，输入正确的 XBL 文件
+    For DDR type 0 (DDR4):
+    ~~~sh
+    fastboot flash --slot=all xbl_config xbl_config.img
+    fastboot flash --slot=all xbl xbl.img
+    ~~~
+    For DDR type 1 (DDR5):
+    ~~~sh
+    fastboot flash --slot=all xbl_config xbl_config_lp5.img
+    fastboot flash --slot=all xbl xbl_lp5.img
+    ~~~
 
+
+1. ==================================================================
 1. 解锁
     注意：解锁后所有数据丢失，系统重置！！
     ~~~sh
@@ -37,6 +113,7 @@ tags: []
     fastboot oem unlock
     ~~~
 
+1. ==================================================================
 1. 刷recovery之前，刷人 dtbo.img 、 vbmeta.img
   ~~~sh
   fastboot flash dtbo <dtbo>.img
@@ -57,6 +134,7 @@ tags: []
         1. On the host machine, sideload the package using: `adb sideload copy-partitions-20220613-signed.zip`
     1. 重启到recovery： tapping “Advanced”, then “Reboot to recovery”
 
+1. ==================================================================
 1. 刷入 LineageOS 20
 1. Recovery 中恢复下出厂设置： `Factory Reset` -\> `Format data / factory reset`
 1. 返回 main menu
