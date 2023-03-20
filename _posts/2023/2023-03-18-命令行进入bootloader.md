@@ -40,21 +40,6 @@ fastboot reboot recovery
 ~~~
 
 
-~~~sh
-
-~~~
-
-
-~~~sh
-
-~~~
-
-
-~~~sh
-
-~~~
-
-
 
 
 
