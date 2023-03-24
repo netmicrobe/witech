@@ -151,23 +151,67 @@ tags: []
 1. Sideload the MindTheGapps.zip package
     1. On the device, select “Apply Update”, then “Apply from ADB” to begin sideload.
     1. On the host machine, sideload the package using: `adb sideload MindTheGapps-13.0.0-arm64-20221025_100653.zip`
-    显示 `Signature verification failed` 是正常的，因为GApps没有使用lineageos官方签名，选择 continue 继续就行。
-1. 
+    显示 `Signature verification failed` 是正常的，因为GApps没有使用lineageos官方签名，选择 YES 继续就行。
+        有时候会输入失败，Recovery 中恢复下出厂设后，再试试。
+
+1. MindTheGapps 刷入成功，屏幕显示 `Install completed with status 0`
+    ~~~
+    MindTheGapps installer
+    ****************************
+    Extracting files
+    Mounting partitions
+    /mnt/system mounted
+    /product mounted
+    /system_ext mounted
+    Generating addon.d file
+    Preparing files for copying
+    Copying files
+    Cleaning up files
+    Unmounting partitions
+    Done!
+
+    Install completed with status 0
+    ~~~
 1. 重启进入 LineageOS 系统，第一次启动大约 15分钟左右，特别长时间进入不了系统，估计就什么地方有问题了。
+
+1. ==================================================================
+1. 安装其他App 
+1. lineageOS 和 MindTheGapps 都比较简练，还有些必须的app要安装下
+    MindTheGapps 只包含了必要Google Apps 框架和 Play Store
+1. 配置Google账号
+1. 进入 Play Store 安装中文输入法： GBoard
 1. 
-1. 
-1. 
-1. 
-1. 
 
 
+### 实例
 
+### lineage-20.0-20230302-nightly-kebab-signed.zip
 
+* lineage-20.0-20230302-nightly-kebab-signed.zip
+    版本号： lineage_kebab-userdebug 13 TQ1A.230205.002 3a48ea0afd
+    LineageOS 版本： 20-20230302-NIGHTLY-kebab
+    Android: 13
+* MindTheGapps-13.0.0-arm64-20221025_100653.zip
+    Play Store: 版本 30.4.17-21 [0] [PR] 445549118
+    Google: 版本 13.21.16.26.arm64
 
+~~~
+$ md5sum *
+e68c6e125b69509257c942d60179f99c  boot.img
+79f2f860830f023b7030c29bfbea7737  copy-partitions-20220613-signed.zip
+1165f6c5b2147e398150745422259ec7  dtbo.img
+ec9b154cbf41b1aebd9f4c01bc2a88d7  lineage-20.0-20230302-nightly-kebab-signed.zip
+d4b2b6dd8e5426cf7d4d9bd6ffe18e6b  recovery.img
+3abd2db7de98b1d1439afc50144fd70e  super_empty.img
+74d986bd809da327af26068604930c4c  vbmeta.img
+~~~~
 
+* 问题
+    * 屏幕自动调光，时灵时不灵
 
-
-
+* 优点
+    * 系统性能高，响应速度快
+    * Phone App 可录音
 
 
 

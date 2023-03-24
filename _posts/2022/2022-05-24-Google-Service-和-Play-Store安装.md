@@ -8,6 +8,8 @@ tags: []
 * 参考
   * [GApps free - microG is all you need!](https://forum.xda-developers.com/t/gapps-free-microg-is-all-you-need.3553620/page-4)
   * [Can I Flash Gapps over HydrogenOS to Replace the Chinese Incomplete GMS to Pure GMS？](https://forum.xda-developers.com/t/can-i-flash-gapps-over-hydrogenos-to-replace-the-chinese-incomplete-gms-to-pure-gms.4186247/#post-83961701)
+  * [Download and install the latest GApps: Open GApps, NikGApps, FlameGApps, and more](https://www.xda-developers.com/download-google-apps-gapps/?newsletter_popup=1)
+  * []()
   * []()
 
 
@@ -15,6 +17,62 @@ tags: []
 ## opengapps
 
 <https://opengapps.org>
+
+2023-03,目前只支持到 Android 12L。
+
+
+## NikGApps
+
+* <https://nikgapps.com>
+* <https://t.me/NikGapps>
+* [下载地址](https://nikgapps.com/downloads)
+    * <https://sourceforge.net/projects/nikgapps/files/>
+* [XDA discussion thread on NikGApps](https://forum.xda-developers.com/t/3915866/)
+
+由 XDA Senior Member [Nikhil](https://forum.xda-developers.com/m/nikhil.4867515/) 创建。
+
+需要使用 TWRP 安装。
+
+Android 版本支持：  10 - 13
+
+特点：
+* Android Go package for lower-end devices
+* 可以 dirty flash
+
+
+
+## FlameGApps
+
+* [Download FlameGApps](https://flamegapps.github.io/download)
+* [XDA discussion thread on FlameGApps](https://forum.xda-developers.com/t/4020917/)
+
+Formerly known as ExLiteGApps, the FlameGApps project is the brainchild of XDA Senior Member [ayandebnath](https://forum.xda-developers.com/m/ayandebnath.9661715/)
+
+Android Version Support: Android 10 to Android 12/12L.
+Platform Support: Arm64.
+
+
+## BiTGApps
+
+With less than 90MB size, BiTGApps from XDA Senior Member [TheHitMan](https://forum.xda-developers.com/m/thehitman.8569961/) is a distinctive minimalist distribution. 
+
+* [Download BiTGApps](https://bitgapps.github.io/)
+* [XDA discussion thread on BiTGApps](https://forum.xda-developers.com/t/4012165/)
+
+Android Version Support: Android Nougat (7.1) to Android 13.
+Platform Support: Arm, Arm64.
+
+
+
+## LiteGApps
+
+Founded by XDA Senior Member [Wahyu6070](https://forum.xda-developers.com/m/wahyu6070.9507265/), LiteGApps is a unique distribution that covers a wide variety of use cases. You can install it through recovery or as a Magisk module.
+
+* [Download LiteGApps](https://litegapps1.github.io/index.html)
+* [XDA discussion thread on LiteGApps](https://forum.xda-developers.com/t/4146013/)
+
+Android Version Support: Android 5.0 Lollipop to Android 13.
+Platform Support: Arm, Arm64.
 
 
 
@@ -28,16 +86,6 @@ tags: []
 
 
 
-## nik gapps
-
-* <https://nikgapps.com>
-* <https://t.me/NikGapps>
-* 下载链接： <https://sourceforge.net/projects/nikgapps/files/>
-
-A Custom Google Apps Package that Suits Everyone Needs! Supports Android 12L (SL), 12 (S), 11 (R), 10 (Q) and 9 (Pie) with Regular Updates
-
-需要使用 TWRP 安装。
-
 
 ## NanoDroid
 
@@ -45,6 +93,13 @@ A Custom Google Apps Package that Suits Everyone Needs! Supports Android 12L (SL
 
 ## MindTheGapps
 
+Maintained by LineageOS contributor Alessandro Astone, AKA XDA senior member [aleasto](https://forum.xda-developers.com/m/aleasto.4742143/), MindTheGapps is yet another compact GApps distribution. This one is particularly known in the community for being the officially recommended GApps solution by the LineageOS team for its custom ROM.
+
+* [Download MindTheGapps](http://downloads.codefi.re/jdcteam/javelinanddart/gapps)
+   * Mirror: <https://androidfilehost.com/?w=files&flid=322935>
+* Android Version Support: Android 10 to Android 13. You can also find separate packages for Android TV. Notably, it hosts legacy packages for Android 9 Pie and Android 8.1 Oreo as well.
+* Platform Support: Arm, Arm64 (x86 too, but only for legacy Android builds).
+* Variants: None. There's only a single variant with no customization options. It provides everything required to make use of Google systems and nothing more.
 
 
 ## microG
@@ -88,19 +143,14 @@ A Custom Google Apps Package that Suits Everyone Needs! Supports Android 12L (SL
 * [reddit.com - MagiskGApps - GApps for Magisk](https://www.reddit.com/r/Android/comments/kuy36f/magiskgapps_gapps_for_magisk/)
 
 
-MagiskGApps is an open source GApps package to be used with Magisk. 
+Originated as a fork of NikGApps, MagiskGapps by [wacko1805](https://github.com/wacko1805) is a completely systemless distribution of Google apps. 
 
-* Why MagiskGApps?
+* 特点
+  * open source
+  * 和Magisk配合使用，随用随装，随时可卸载，不需要清除系统分区
 
-MagiskGApps can be uninstalled, meaning it can be installed temporarily
-It can be used to change other GApps packages previously installed, meaning a device with core gapps can be changed to stock without wiping the data partition
-Super easy to flash and update
-
-* Requirements
-
-Android 11
-64-bit Architecture
-
+Android Version Support: Android 11 to Android 13.
+Platform Support: Arm64.
 
 
 
