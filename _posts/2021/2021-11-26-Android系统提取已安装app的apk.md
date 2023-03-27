@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Android系统提取已安装app的apk
+title: Android系统提取已安装app的apk，关联 adb, android, dumpsys, aapt
 categories: [cm, android]
-tags: [adb, android]
+tags: []
 ---
 
 * 参考
@@ -42,7 +42,7 @@ adb shell dumpsys activity recents | grep 'Recent #0' | cut -d= -f2 | sed 's| .*
 ~~~sh
 #!/bin/bash
 
-_TOOLS=/Volumes/wind/android/sdk/build-tools/34.0.0-rc2
+_TOOLS=/android-sdk-path/build-tools/34.0.0-rc2
 _AAPT=${_TOOLS}/aapt
 _PMLIST=packages_list.txt
 _DIST_DIR="packages_"$(date "+%Y-%m-%d_%H%M%S")
@@ -51,7 +51,7 @@ adb shell pm list packages | sed -e 's|^package:||' | sort > ./${_PMLIST}
 
 mkdir -p ${_DIST_DIR}
 
-#n=0
+n=0
 while read -u 9 _line; do
     #if (( n > 0 )); then break; fi
     _package=${_line##*:}
@@ -70,12 +70,19 @@ while read -u 9 _line; do
         
         _name=$(${_AAPT} dump badging "${_DIST_DIR}/${_apkfilename}" | sed -n 's|^application-label:\(.\)\(.*\)\1$|\2|p' )
         echo "APP NAME: ${_name}"
-        mv "${_DIST_DIR}/${_apkfilename}" "${_DIST_DIR}/${_package}-${_name}.apk"
+        
+        _version=$(${_AAPT} dump badging "${_DIST_DIR}/${_apkfilename}" | sed -n '/versionName=/p' | awk 'match($0, /versionName=\S+/) {print substr($0, RSTART+13, RLENGTH-14)}')
+        echo "APP VERSION: ${_version}"
+        
+        mv "${_DIST_DIR}/${_apkfilename}" "${_DIST_DIR}/${_package}-${_version}-${_name}.apk"
         
         echo ""
-        #n=$((n+1))
+        n=$((n+1))
     fi
 done 9< ${_PMLIST}
+
+echo ""
+echo "TOTAL $n apps are backed up."
 ~~~
 
 
