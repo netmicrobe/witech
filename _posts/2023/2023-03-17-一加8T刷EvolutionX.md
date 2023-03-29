@@ -80,12 +80,38 @@ FLASHING THE WRONG DDR TYPE WILL `SEMI BRICK` YOUR DEVICE. THE ONLY WAY TO RECOV
 3. Reboot to recovery and then sideload the ROM.
 
 
+## 实例
+
+### ProjectElixir_3.6_kebab-13.0-20230222-1307-OFFICIAL.zip
+
+* ProjectElixir_3.6_kebab-13.0-20230222-1307-OFFICIAL.zip
+    版本号： aosp_kebab-userdebug 13 TQ1A.230205.002 1677071239 release-keys
+    ProjectElixir 版本： 3.6
+    型号变成： KB2000
+    Android: 13
+    * 自带GApps
+        * Play Store: com.android.vending
+            版本 30.4.21-21 [0] [PR] 475636937
+        * Google: com.google.android.googlequicksearchbox
+            版本 13.21.17.29.arm64
+        * 电话： com.google.android.dialer
+            版本 86.2.468079596
+        * 通讯录： com.google.android.contacts
+            版本 3.68.0.449257315
+        * 短信： com.google.android.apps.messaging
+            版本 messages.android_20220809_01_RC02_alldpi.arm64-v8a.phone
+        * 相机： org.lineageos.aperture
+            版本 13  versionCode 33
+        * 拼音输入法
+            com.google.android.inputmethod.latin-11.9.06.452014594-preload-arm64-v8a-Gboard.apk
 
 
+* 问题
+    * Phone App `不可`录音
 
-
-
-
+* 优点
+    * 自带GApps
+    * 不用手动下载GBoard来支持拼音输入，自动识别中文环境，下载语言包，下载好就可以直接使用中文拼音输入了。
 
 
 

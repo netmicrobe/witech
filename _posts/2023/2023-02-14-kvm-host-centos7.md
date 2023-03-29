@@ -337,8 +337,20 @@ virt-clone \
 
 
 
+## 硬盘格式
+
+* 参考
+    * [Converting between image formats](https://docs.openstack.org/image-guide/convert-images.html)
+    * []()
+    * []()
+    * []()
 
 
+img 格式，转换为 qcow2
+
+~~~sh
+qemu-img convert -f raw -O qcow2 image.img image.qcow2
+~~~
 
 
 

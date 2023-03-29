@@ -6,34 +6,23 @@ tags: []
 ---
 
 * 参考
-  * [ProjectElixir 一加8T 刷机指南](https://github.com/ProjectElixir-Devices/Wiki/blob/tiramisu/kebab.md)
+    * [ProjectElixir 一加8T 刷机指南](https://github.com/ProjectElixir-Devices/Wiki/blob/tiramisu/kebab.md)
+    * [Official Site](https://projectelixiros.com)
+      * <https://github.com/Project-Elixir/docs>
+      * [Project Elixir • Devices](https://github.com/ProjectElixir-Devices)
+      * <https://github.com/ProjectElixir-Devices/Wiki>
+    * [Official Site - Oneplus8T - Download](https://projectelixiros.com/device/kebab)
+      * <https://www.pling.com/p/1962779/>
   * []()
   * []()
-  * []()
 
 
-### 从 OxygenOS KB2005_11_C.33 刷到 ProjectElixir 3.6
+### 从 evolution X 7.6.8c1 刷到 ProjectElixir 3.6
 
-1. 起点
-    型号： KB2005
-    版本号： OxygenOS KB2005_11_C.33
-    Android: 12
-    基带版本： Q_V1_p14,Q_V1_P14
-    内核版本：  4.19.157-perf+
-    硬件版本：  KB2005_11
 
-1. 解锁
-    注意：解锁后所有数据丢失，系统重置！！
-    ~~~sh
-    adb reboot bootloader
-    fastboot devices
-    fastboot oem device-info
-    fastboot oem unlock
-    ~~~
-1. 
-1. 
-1. 
-1. 
+1. 进入 evolution X 的 recovery
+1. Recovery 中恢复下出厂设置： `Factory Reset` -\> `Format data / factory reset`
+1. sideload the ProjectElixir 3.6 .zip package
 
 
 ### Installation Guide For Project Elixir on Kebab
@@ -82,6 +71,27 @@ Will only work for Oneplus 8T(9R builds are given seperately)
   可下载 Oneplus 6 - Oneplus 9 的 OOS.
 
 
+
+## 实例
+
+### evolution_kebab-ota-tq2a.230305.008.c1-03272133-unsigned.zip
+
+* evolution_kebab-ota-tq2a.230305.008.c1-03272133-unsigned.zip
+    版本号： evolution_kebab-userdebug 13 TQ2A.230305.008.C1 1679967184 release-keys
+    EvolutionX 版本： 7.6.8c1
+    型号变成： Pixel 7 Pro
+    Android: 13
+    * 自带GApps
+        Play Store: 版本 33.1.17-21 [0] [PR] 487561732
+        Google: 版本 13.37.11.29.arm64
+
+
+
+* 问题
+    * Phone App `不可`录音
+
+* 优点
+    * 自带GApps
 
 
 
