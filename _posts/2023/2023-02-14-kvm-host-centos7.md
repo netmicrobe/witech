@@ -284,7 +284,19 @@ tags: []
 1. 
 
 
+## 设置VM自动启动
 
+设置自动启动
+
+~~~sh
+virsh autostart vmName
+~~~
+
+关闭自动启动
+
+~~~sh
+virsh autostart VMNameHere --disable
+~~~
 
 
 ## 克隆VM
@@ -302,6 +314,7 @@ virt-clone \
 
 虚拟机image默认目录： `/var/lib/libvirt/images`
 系统iso光盘文件目录： `/var/lib/libvirt/isos`
+虚拟机的配置xml： `/etc/libvirt/qemu`
 
 
 

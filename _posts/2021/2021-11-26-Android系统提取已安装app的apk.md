@@ -86,7 +86,11 @@ echo "TOTAL $n apps are backed up."
 ~~~
 
 
+## 安装文件夹下的所有apk文件
 
+~~~sh
+for f in * ; do [ -f "$f" ] && [[ "$f" = *.apk ]] && echo "$f" && adb install "$f"; done
+~~~
 
 
 
