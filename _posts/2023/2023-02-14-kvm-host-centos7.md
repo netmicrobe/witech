@@ -14,7 +14,8 @@ tags: []
   * [Performance Tweaks](https://pve.proxmox.com/wiki/Performance_Tweaks)
   * [10 Easy Steps To Install Windows 10 on Linux KVM – KVM Windows](https://getlabsdone.com/10-easy-steps-to-install-windows-10-on-linux-kvm/)
   * [Solution | How To Extend Windows Storage in KVM ?](https://getlabsdone.com/how-to-extend-windows-storage-in-kvm/)
-  * []()
+  * [Virtualization Best Practices](https://documentation.suse.com/zh-cn/sles/15-SP1/html/SLES-all/article-vt-best-practices.html)
+      虽说是suse的文档，道理是相通的。
   * []()
   * []()
 
@@ -298,6 +299,12 @@ virsh autostart vmName
 virsh autostart VMNameHere --disable
 ~~~
 
+## 关闭VM
+
+~~~sh
+virsh shutdown your-vm-name
+~~~
+
 
 ## 克隆VM
 
@@ -315,7 +322,7 @@ virt-clone \
 虚拟机image默认目录： `/var/lib/libvirt/images`
 系统iso光盘文件目录： `/var/lib/libvirt/isos`
 虚拟机的配置xml： `/etc/libvirt/qemu`
-
+CPU型号信息： `/usr/share/libvirt/cpu_map.xml`
 
 
 ## 保存VM当前状态，host重启后也能恢复

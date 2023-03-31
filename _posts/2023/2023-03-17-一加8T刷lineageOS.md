@@ -216,5 +216,33 @@ d4b2b6dd8e5426cf7d4d9bd6ffe18e6b  recovery.img
     * Phone App 可录音
 
 
+### lineage-20.0-20230330-nightly-kebab-signed.zip
+
+版本号： lineage_kebab-userdebug 13 TQ2A.230305.008.C1 3ca88dfc77
+LineageOS 版本： 20-20230330-NIGHTLY-kebab
+Android: 13
+
+Play Store: 版本 35.0.15-21 [0] [PR] 519197268
+Phone Call： com.android.dialer： 版本 23.0
+Camera： org.lineageos.aperture ： 版本 13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
