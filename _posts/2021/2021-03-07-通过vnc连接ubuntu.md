@@ -380,6 +380,7 @@ Unsupported visual with rgb mask 0x7, 0x38, 0xc0. Please report this to https://
     * [Install and Configure VNC server on Debian 11](https://itnixpro.com/install-and-configure-vnc-server-on-debian-11/)
     * [How to Install and Configure VNC on Debian 9](https://linuxize.com/post/how-to-install-and-configure-vnc-on-debian-9/)
     * [How to Install and Configure VNC on Debian 10](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-debian-10)
+        digitalocean的文档就是很清晰。
     * [Desktop Environment : Configure VNC Server](https://www.server-world.info/en/note?os=Debian_11&p=desktop&f=6)
     * [How To Install VNC Server on Debian 11](https://idroot.us/install-vnc-server-debian-11/)
     * [Install and Configure TigerVNC VNC Server on Debian 11/10](https://computingforgeeks.com/install-and-configure-tigervnc-vnc-server-on-debian/)
@@ -432,9 +433,30 @@ Unsupported visual with rgb mask 0x7, 0x38, 0xc0. Please report this to https://
     ~~~
 
 
+1. 配置VNC service
 
+* `/etc/systemd/system/vncserver@.service`
+~~~
+[Unit]
+Description=Start TightVNC server at startup
+After=syslog.target network.target
 
+[Service]
+Type=forking
+User=wi
+Group=wi
+WorkingDirectory=/home/wi
 
+PIDFile=/home/wi/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1440x960 :%i -localhost no
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
+~~~
+
+启动 5901 端口上桌面： `sudo systemctl start vncserver@1.service`
 
 
 
